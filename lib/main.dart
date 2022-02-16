@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lets_accommodate/auth/login_landlord.dart';
-import 'package:lets_accommodate/auth/login_tenant.dart';
-import 'package:lets_accommodate/auth/signup_tenant.dart';
+
 import 'auth/decision.dart';
 
 void main() {

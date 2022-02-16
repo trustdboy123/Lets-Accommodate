@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lets_accommodate/auth/login_tenant.dart';
 
 class SignupTenant extends StatefulWidget {
   SignupTenant({Key? key}) : super(key: key);
@@ -86,6 +87,9 @@ class _SignupTenantState extends State<SignupTenant> {
                   ),
                 ),
               ),
+              SizedBox(
+                height: 10,
+              ),
               Text('Gender'),
               SizedBox(height: 5),
               Card(
@@ -113,6 +117,9 @@ class _SignupTenantState extends State<SignupTenant> {
                   );
                 }).toList(),
               )),
+              SizedBox(
+                height: 10,
+              ),
               Text('Location/Digital Address'),
               SizedBox(height: 5),
               Card(
@@ -131,11 +138,14 @@ class _SignupTenantState extends State<SignupTenant> {
                   ),
                 ),
               ),
+              SizedBox(
+                height: 10,
+              ),
               Text('Phone Number'),
               SizedBox(height: 5),
               Card(
                 child: TextFormField(
-                  keyboardType: TextInputType.text,
+                  keyboardType: TextInputType.number,
                   textCapitalization: TextCapitalization.sentences,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(
@@ -148,6 +158,9 @@ class _SignupTenantState extends State<SignupTenant> {
                         borderRadius: BorderRadius.all(Radius.circular(8.0))),
                   ),
                 ),
+              ),
+              SizedBox(
+                height: 10,
               ),
               Text('Nationality'),
               SizedBox(height: 5),
@@ -167,7 +180,27 @@ class _SignupTenantState extends State<SignupTenant> {
                   ),
                 ),
               ),
-              TextButton(onPressed: () {}, child: Text('Create Account'))
+              SizedBox(
+                height: 20,
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: TextButton(
+                    onPressed: () {
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(builder: (context) {
+                        return LoginTenant();
+                      }));
+                    },
+                    style: TextButton.styleFrom(backgroundColor: Colors.blue),
+                    child: Text(
+                      'Create Account',
+                      style: TextStyle(color: Colors.white, fontSize: 15),
+                    )),
+              ),
+              SizedBox(
+                height: 50,
+              )
             ],
           ),
         ),
