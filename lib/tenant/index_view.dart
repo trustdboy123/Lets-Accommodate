@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lets_accommodate/tenant/categories_tenant.dart';
 import 'package:lets_accommodate/tenant/favourite_tenant.dart';
-import 'package:lets_accommodate/tenant/settings_tenant.dart';
+import 'package:lets_accommodate/tenant/settings%20tenant/settings_tenant.dart';
 
 class IndexView extends StatefulWidget {
   const IndexView({Key? key}) : super(key: key);

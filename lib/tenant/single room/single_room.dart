@@ -42,7 +42,7 @@ class SingleRoom extends StatelessWidget {
                       child: Container(
                         padding: EdgeInsets.all(8),
                         decoration: const BoxDecoration(
-                          color: Colors.black45,
+                          color: Colors.black12,
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -57,7 +57,10 @@ class SingleRoom extends StatelessWidget {
                             ),
                             IconButton(
                                 onPressed: () {},
-                                icon: Icon(Icons.favorite_border_rounded))
+                                icon: Icon(
+                                  Icons.favorite_border_rounded,
+                                  color: Colors.white,
+                                ))
                           ],
                         ),
                       ),
