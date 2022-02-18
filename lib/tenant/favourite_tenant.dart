@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lets_accommodate/tenant/details.dart';
 
 class FavouriteTenant extends StatelessWidget {
   const FavouriteTenant({Key? key}) : super(key: key);
@@ -18,7 +19,12 @@ class FavouriteTenant extends StatelessWidget {
                   alignment: const Alignment(-1, -1),
                   children: [
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(builder: (context) {
+                          return Details();
+                        }));
+                      },
                       child: Card(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30)),

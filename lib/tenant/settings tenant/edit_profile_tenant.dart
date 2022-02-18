@@ -87,7 +87,7 @@ class EditProfileTenant extends StatelessWidget {
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey)),
-                  hintText: 'Enter your phone location',
+                  hintText: 'Enter your location',
                   hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
                   floatingLabelBehavior: FloatingLabelBehavior.never,
                   focusedBorder: OutlineInputBorder(

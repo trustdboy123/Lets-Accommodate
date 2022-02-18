@@ -67,7 +67,7 @@ class SettingsTenant extends StatelessWidget {
                           children: [
                             Icon(Icons.help),
                             Text(
-                              'Need help? Contact us',
+                              'Need help?  Contact us',
                               style: TextStyle(fontSize: 15),
                               textAlign: TextAlign.center,
                             ),
