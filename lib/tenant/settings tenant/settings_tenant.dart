@@ -57,7 +57,7 @@ class SettingsTenant extends StatelessWidget {
                 shadowColor: Color(0xFF322E2E),
                 color: Colors.white,
                 child: SizedBox(
-                  height: 80,
+                  height: 50,
                   width: MediaQuery.of(context).size.width,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),

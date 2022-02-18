@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lets_accommodate/landlord/categories_landlord.dart';
+import 'package:lets_accommodate/landlord/home_landlord.dart';
 import 'package:lets_accommodate/tenant/categories_tenant.dart';
 import 'package:lets_accommodate/auth/signup_landlord.dart';
 
@@ -110,7 +110,7 @@ class LoginLandlord extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
-                    return const CategoriesLandlord();
+                    return const HomeLandlord();
                   }));
                 },
                 style: TextButton.styleFrom(backgroundColor: Colors.blue),
