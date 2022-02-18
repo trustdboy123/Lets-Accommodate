@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:lets_accommodate/tenant/settings%20tenant/edit_profile_tenant.dart';
 
-class SettingsTenant extends StatelessWidget {
+class SettingsTenant extends StatefulWidget {
   const SettingsTenant({Key? key}) : super(key: key);
 
+  @override
+  State<SettingsTenant> createState() => _SettingsTenantState();
+}
+
+class _SettingsTenantState extends State<SettingsTenant> {
+  String dropdownValuemail = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +25,7 @@ class SettingsTenant extends StatelessWidget {
           ],
         ),
         body: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(16.0),
           child: ListView(
             children: [
               Column(
@@ -51,32 +57,49 @@ class SettingsTenant extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                height: 10,
+                height: 20,
               ),
-              Card(
-                shadowColor: Color(0xFF322E2E),
-                color: Colors.white,
-                child: SizedBox(
-                  height: 50,
-                  width: MediaQuery.of(context).size.width,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            Icon(Icons.help),
-                            Text(
-                              'Need help?  Contact us',
-                              style: TextStyle(fontSize: 15),
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+              Row(
+                children: [
+                  Icon(Icons.help),
+                  Text(
+                    'Need help?  Contact us',
+                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
                   ),
-                ),
+                ],
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                    child: DropdownButton<String>(
+                  alignment: AlignmentDirectional.centerStart,
+                  value: dropdownValuemail,
+                  icon: const Icon(Icons.arrow_drop_down),
+                  elevation: 16,
+                  style: const TextStyle(color: Colors.black),
+                  underline: Container(
+                    height: 2,
+                    color: Colors.black,
+                  ),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      dropdownValuemail = newValue!;
+                    });
+                  },
+                  items: <String>[
+                    '',
+                    'letsaccommodate@gmail.com',
+                    'Facebook page - Lets Accommodate'
+                  ].map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                )),
               ),
             ],
           ),
