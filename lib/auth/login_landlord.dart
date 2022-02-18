@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:lets_accommodate/landlord/home_landlord.dart';
+=======
+import 'package:lets_accommodate/landlord/categories_landlord.dart';
+import 'package:lets_accommodate/landlord/landlord_dashboard.dart';
+>>>>>>> 86edeac295aae48cd7564a3734f0d9df13b9b8f9
 import 'package:lets_accommodate/tenant/categories_tenant.dart';
 import 'package:lets_accommodate/auth/signup_landlord.dart';
 
@@ -110,7 +115,11 @@ class LoginLandlord extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
+<<<<<<< HEAD
                     return const HomeLandlord();
+=======
+                    return const DashboardView();
+>>>>>>> 86edeac295aae48cd7564a3734f0d9df13b9b8f9
                   }));
                 },
                 style: TextButton.styleFrom(backgroundColor: Colors.blue),
