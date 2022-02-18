@@ -40,12 +40,12 @@ class CategoriesTenant extends StatelessWidget {
               ),
               Container(
                 decoration: const BoxDecoration(
-                  color: Colors.black45,
+                  color: Colors.black12,
                 ),
                 child: const Text(
                   'Single Rooms',
                   style: TextStyle(
-                    fontSize: 30,
+                    fontSize: 25,
                     fontWeight: FontWeight.w600,
                     color: Colors.white,
                   ),
@@ -80,12 +80,12 @@ class CategoriesTenant extends StatelessWidget {
               ),
               Container(
                 decoration: const BoxDecoration(
-                  color: Colors.black45,
+                  color: Colors.black12,
                 ),
                 child: const Text(
                   'Chamber and Hall',
                   style: TextStyle(
-                    fontSize: 30,
+                    fontSize: 25,
                     fontWeight: FontWeight.w600,
                     color: Colors.white,
                   ),
@@ -120,12 +120,12 @@ class CategoriesTenant extends StatelessWidget {
               ),
               Container(
                 decoration: const BoxDecoration(
-                  color: Colors.black45,
+                  color: Colors.black12,
                 ),
                 child: const Text(
                   'Two Bedroom',
                   style: TextStyle(
-                    fontSize: 30,
+                    fontSize: 25,
                     fontWeight: FontWeight.w600,
                     color: Colors.white,
                   ),
@@ -160,12 +160,12 @@ class CategoriesTenant extends StatelessWidget {
               ),
               Container(
                 decoration: const BoxDecoration(
-                  color: Colors.black45,
+                  color: Colors.black12,
                 ),
                 child: const Text(
                   'Two Bedroom Plus',
                   style: TextStyle(
-                    fontSize: 30,
+                    fontSize: 25,
                     fontWeight: FontWeight.w600,
                     color: Colors.white,
                   ),
