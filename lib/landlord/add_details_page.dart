@@ -36,6 +36,7 @@ String dropdownValue = 'Single Room';
       ),
               SizedBox(
                 height: 10,
+                
               ),
               Text('Category'),
               Card(
