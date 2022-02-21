@@ -16,6 +16,7 @@ class AddDetailsView extends StatefulWidget {
 class _AddDetailsViewState extends State<AddDetailsView> {
 
   String dropdownValue = 'Select option';
+  
   String dropdownValueType = 'Select option';
   String dropdownValueKitchen = 'Select option';
   String dropdownValueToiletRoom = 'Select option';
