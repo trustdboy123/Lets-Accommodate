@@ -20,6 +20,7 @@ class _SignupTenantState extends State<SignupTenant> {
         ),
       ),
       body: SafeArea(
+        
         child: Form(
           child: ListView(
             padding: EdgeInsets.all(16.0),

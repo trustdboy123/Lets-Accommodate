@@ -26,6 +26,7 @@ class _IndexViewState extends State<IndexView> {
         bottomNavigationBar: BottomNavigationBar(
             backgroundColor: Colors.white,
             type: BottomNavigationBarType.fixed,
+            currentIndex: _currentIndex,
             onTap: (int index) {
               setState((() {
                 _currentIndex = index;

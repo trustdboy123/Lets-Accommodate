@@ -1,4 +1,6 @@
+
 import 'dart:io';
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,6 +14,7 @@ class AddDetailsView extends StatefulWidget {
 }
 
 class _AddDetailsViewState extends State<AddDetailsView> {
+
   String dropdownValue = 'Select option';
   String dropdownValueType = 'Select option';
   String dropdownValueKitchen = 'Select option';
@@ -54,6 +57,7 @@ class _AddDetailsViewState extends State<AddDetailsView> {
         title: Text("Add Details"),
       ),
       body: SafeArea(
+
         child: Form(
           key: _formKey,
           child: ListView(
@@ -547,7 +551,5 @@ class _AddDetailsViewState extends State<AddDetailsView> {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
+      ),);
+  }}
