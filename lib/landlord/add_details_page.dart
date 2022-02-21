@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:multi_image_picker2/multi_image_picker2.dart';
 
 class AddDetailsView extends StatefulWidget {
   AddDetailsView({Key? key}) : super(key: key);
@@ -11,6 +12,10 @@ class AddDetailsView extends StatefulWidget {
 }
 
 class _AddDetailsViewState extends State<AddDetailsView> {
+    List<Asset> images = <Asset>[];
+      String _error = 'No Error Dectected';
+
+
   String dropdownValue = 'Select option';
   
   String dropdownValueType = 'Select option';
@@ -39,18 +44,75 @@ class _AddDetailsViewState extends State<AddDetailsView> {
   //   _imageFileList = value == null ? null : <XFile>[value];
   // }
 
-  Future selectImage({ImageSource imageSource = ImageSource.gallery}) async {
-    final List<XFile>? _houseImages = await _imagePicker.pickMultiImage();
-    // File houseImages = File(_houseImages!.path)
 
-  Future selectImage({ImageSource imageSource = ImageSource.gallery}) async {
-    final List<XFile>? _houseImages = await _imagePicker.pickMultiImage();
- // _imageFileList!.addAll(_houseImages);
-    setState(() {
-      _imageFileList = _houseImages;
-    });
+
+  // Future selectImage({ImageSource imageSource = ImageSource.gallery}) async {
+  //   final List<XFile>? _houseImages = await _imagePicker.pickMultiImage();
+ 
+  //   setState(() {
+  //     _imageFileList = _houseImages;
+  //   });
+  // }
+// void selectImages() async{
+//   List <XFile>?selectedImages = await _imagePicker.pickMultiImage();
+//   if (selectedImages!.isNotEmpty) {
+//     _imageFileList!.addAll(selectedImages);
+//   }
+// }
+@override
+  void initState() {
+    super.initState();
   }
 
+ Widget buildGridView() {
+    return GridView.count(
+      crossAxisCount: 3,
+      children: List.generate(images.length, (index) {
+        Asset asset = images[index];
+        return AssetThumb(
+          asset: asset,
+          width: 300,
+          height: 300,
+        );
+      }),
+    );
+  } 
+
+   Future<void> loadAssets() async {
+    List<Asset> resultList = <Asset>[];
+    String error = 'No Error Detected';
+
+    try {
+      resultList = await MultiImagePicker.pickImages(
+        maxImages: 300,
+        enableCamera: true,
+        selectedAssets: images,
+        cupertinoOptions: CupertinoOptions(
+          takePhotoIcon: "chat",
+          doneButtonTitle: "Fatto",
+        ),
+        materialOptions: MaterialOptions(
+          actionBarColor: "#abcdef",
+          actionBarTitle: "Example App",
+          allViewTitle: "All Photos",
+          useDetailsView: false,
+          selectCircleStrokeColor: "#000000",
+        ),
+      );
+    } on Exception catch (e) {
+      error = e.toString();
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) return;
+
+    setState(() {
+      images = resultList;
+      _error = error;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,8 +126,7 @@ class _AddDetailsViewState extends State<AddDetailsView> {
           child: ListView(
             padding: const EdgeInsets.all(20),
             children: [
-              _imageFileList == null
-                  ? Container(
+               Container(
                       decoration: const BoxDecoration(
                           color: Colors.black12,
                           borderRadius: BorderRadius.all(Radius.circular(10))),
@@ -87,9 +148,10 @@ class _AddDetailsViewState extends State<AddDetailsView> {
                                         child: TextButton.icon(
                                             onPressed: () {
                                               Navigator.pop(context);
-                                              selectImage(
-                                                  imageSource:
-                                                      ImageSource.gallery);
+                                              loadAssets();
+                                              // selectImage(
+                                              //     imageSource:
+                                              //         ImageSource.gallery);
                                             },
                                             icon: Icon(Icons.photo_album),
                                             label: Text('Select from Gallery')),
@@ -103,17 +165,9 @@ class _AddDetailsViewState extends State<AddDetailsView> {
                               )),
                         ],
                       ),
-                    )
-                  : Expanded(
-                      child: GridView.builder(
-                        padding: const EdgeInsets.all(8),
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 3),
-                          itemBuilder: (context, index) {
-                            return Image.file(
-                                File(_imageFileList![index].path));
-                          })),
+                    ),
+                  //  Expanded(
+                  //     child: buildGridView()),
               SizedBox(
                 height: 10,
               ),
@@ -569,5 +623,3 @@ class _AddDetailsViewState extends State<AddDetailsView> {
         ),
       ),);
   }}
-
-                    
