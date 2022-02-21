@@ -2,14 +2,39 @@ import 'package:flutter/material.dart';
 import 'package:lets_accommodate/tenant/details.dart';
 
 class TwobedroomPlus extends StatelessWidget {
-  const TwobedroomPlus({Key? key}) : super(key: key);
-
+  TwobedroomPlus({Key? key}) : super(key: key);
+  TextEditingController? _textEditingController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Two Bedroom Plus'),
-      ),
+          title: Text('Two Bedroom Plus'),
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(60),
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Container(
+                height: 40,
+                decoration: BoxDecoration(
+                  color: Colors.white10,
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: TextField(
+                  onChanged: (value) {},
+                  controller: _textEditingController,
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30)),
+                      errorBorder: InputBorder.none,
+                      enabledBorder: InputBorder.none,
+                      focusedBorder: InputBorder.none,
+                      contentPadding: EdgeInsets.all(10),
+                      hintText: 'Search',
+                      hintStyle: TextStyle(color: Colors.white)),
+                ),
+              ),
+            ),
+          )),
       body: ListView(
         children: [
           Card(
