@@ -99,7 +99,8 @@ class _AddDetailsViewState extends State<AddDetailsView> {
                         ],
                       ),
                     )
-                  : Expanded(
+                  : SizedBox(
+                      height: 100,
                       child: GridView.builder(
                           padding: const EdgeInsets.all(8),
                           gridDelegate:
