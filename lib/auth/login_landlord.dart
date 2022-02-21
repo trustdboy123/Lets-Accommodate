@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lets_accommodate/landlord/categories_landlord.dart';
+
 import 'package:lets_accommodate/landlord/landlord_dashboard.dart';
 import 'package:lets_accommodate/tenant/categories_tenant.dart';
 import 'package:lets_accommodate/auth/signup_landlord.dart';
@@ -134,10 +134,10 @@ class LoginLandlord extends StatelessWidget {
               ),
               TextButton(
                   onPressed: () {
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (context) {
+                    Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(builder: (context) {
                       return const SignupLandlord();
-                    }));
+                    }), (route) => false);
                   },
                   child: Text(
                     'Sign Up',
