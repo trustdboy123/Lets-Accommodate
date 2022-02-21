@@ -12,8 +12,9 @@ class SingleRoom extends StatelessWidget {
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(60),
             child: Padding(
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.all(20),
               child: Container(
+                height: 40,
                 decoration: BoxDecoration(
                   color: Colors.white10,
                   borderRadius: BorderRadius.circular(30),
@@ -27,7 +28,7 @@ class SingleRoom extends StatelessWidget {
                       errorBorder: InputBorder.none,
                       enabledBorder: InputBorder.none,
                       focusedBorder: InputBorder.none,
-                      contentPadding: EdgeInsets.all(16),
+                      contentPadding: EdgeInsets.all(10),
                       hintText: 'Search',
                       hintStyle: TextStyle(color: Colors.white)),
                 ),
@@ -102,7 +103,26 @@ class SingleRoom extends StatelessWidget {
                       Icon(Icons.star_border_outlined),
                       Spacer(),
                       IconButton(
-                          onPressed: () {}, icon: Icon(Icons.comment_outlined)),
+                          onPressed: () {
+                            showModalBottomSheet(
+                                elevation: 12,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10)),
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                      child: Card(
+                                          child: Padding(
+                                    padding: EdgeInsets.all(16.0),
+                                    child: TextField(
+                                        keyboardType: TextInputType.text,
+                                        textCapitalization:
+                                            TextCapitalization.sentences,
+                                        decoration: InputDecoration()),
+                                  )));
+                                });
+                          },
+                          icon: Icon(Icons.comment_outlined)),
                       Spacer(),
                       Text('Koforidua, Adweso')
                     ],
