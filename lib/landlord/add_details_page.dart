@@ -32,25 +32,20 @@ class _AddDetailsViewState extends State<AddDetailsView> {
   final TextEditingController _houseNumberController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey();
 
-
   final ImagePicker _imagePicker = ImagePicker();
-  List<XFile>? _imageFileList;
+  List<XFile>? _imageFileList = [];
 
   //  set _imageFile(XFile? value) {
   //   _imageFileList = value == null ? null : <XFile>[value];
   // }
-  
-  Future selectImage({ImageSource imageSource = ImageSource.gallery})async {
-    final List<XFile>?_houseImages = await _imagePicker.pickMultiImage();
-   // File houseImages = File(_houseImages!.path)
 
+  Future selectImage({ImageSource imageSource = ImageSource.gallery}) async {
+    final List<XFile>? _houseImages = await _imagePicker.pickMultiImage();
+ // _imageFileList!.addAll(_houseImages);
     setState(() {
-            _imageFileList = _houseImages;
-          });
+      _imageFileList = _houseImages;
+    });
   }
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -64,34 +59,56 @@ class _AddDetailsViewState extends State<AddDetailsView> {
           child: ListView(
             padding: const EdgeInsets.all(20),
             children: [
-              Container(
-                decoration: const BoxDecoration(
-                    color: Colors.black12,
-                    borderRadius: BorderRadius.all(Radius.circular(10))),
-                height: 250,
-                child: Column(
-                  children:  [
-                    SizedBox(height: 65),
-                    Text("Upload photos here"),
-                    SizedBox(
-                      height: 7,
-                    ),
-                    IconButton(onPressed: (){
-                      showModalBottomSheet(context: context, builder: (context){
-                        return SizedBox(
-                          height:100,
-                          child: TextButton.icon(onPressed: (){
-                            Navigator.pop(context);
-                            selectImage(imageSource: ImageSource.gallery);
-                          }, icon: Icon(Icons.photo_album), label: Text('Select from Gallery')),
-                        );
-                      });
-                    }, icon: Icon(Icons.add_a_photo_outlined,
-                      size: 100,
-                      color: Colors.grey,)),
-                  ],
-                ),
-              ),
+              _imageFileList == null
+                  ? Container(
+                      decoration: const BoxDecoration(
+                          color: Colors.black12,
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
+                      height: 250,
+                      child: Column(
+                        children: [
+                          SizedBox(height: 65),
+                          Text("Upload photos here"),
+                          SizedBox(
+                            height: 7,
+                          ),
+                          IconButton(
+                              onPressed: () {
+                                showModalBottomSheet(
+                                    context: context,
+                                    builder: (context) {
+                                      return SizedBox(
+                                        height: 100,
+                                        child: TextButton.icon(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                              selectImage(
+                                                  imageSource:
+                                                      ImageSource.gallery);
+                                            },
+                                            icon: Icon(Icons.photo_album),
+                                            label: Text('Select from Gallery')),
+                                      );
+                                    });
+                              },
+                              icon: Icon(
+                                Icons.add_a_photo_outlined,
+                                size: 100,
+                                color: Colors.grey,
+                              )),
+                        ],
+                      ),
+                    )
+                  : Expanded(
+                      child: GridView.builder(
+                        padding: const EdgeInsets.all(8),
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 3),
+                          itemBuilder: (context, index) {
+                            return Image.file(
+                                File(_imageFileList![index].path));
+                          })),
               SizedBox(
                 height: 10,
               ),
