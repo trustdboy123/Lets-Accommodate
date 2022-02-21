@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:lets_accommodate/landlord/Settings%20landlord/setting_landlord.dart';
 import 'package:lets_accommodate/landlord/add_details_page.dart';
+import 'package:lets_accommodate/landlord/comments_landlord.dart';
 import 'package:lets_accommodate/landlord/view_uploads.dart';
 
 class DashboardView extends StatelessWidget {
@@ -85,10 +86,20 @@ class DashboardView extends StatelessWidget {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(Icons.star_border_outlined),
+                        Row(
+                          children: [
+                            Icon(Icons.star_border_outlined),
+                            Text('12')
+                          ],
+                        ),
                         Spacer(),
                         IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.of(context)
+                                  .push(MaterialPageRoute(builder: (context) {
+                                return CommentsLandlord();
+                              }));
+                            },
                             icon: Icon(Icons.comment_outlined)),
                         Spacer(),
                         Text('Koforidua, Adweso')
