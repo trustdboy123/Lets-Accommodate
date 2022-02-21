@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lets_accommodate/tenant/details.dart';
+import 'package:lets_accommodate/tenant/single%20room/comments_tenants.dart';
 
 class SingleRoom extends StatelessWidget {
   SingleRoom({Key? key}) : super(key: key);
@@ -100,27 +101,19 @@ class SingleRoom extends StatelessWidget {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(Icons.star_border_outlined),
+                      Row(
+                        children: [
+                          Icon(Icons.star_border_outlined),
+                          Text('12')
+                        ],
+                      ),
                       Spacer(),
                       IconButton(
                           onPressed: () {
-                            showModalBottomSheet(
-                                elevation: 12,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10)),
-                                context: context,
-                                builder: (context) {
-                                  return const Center(
-                                      child: Card(
-                                          child: Padding(
-                                    padding: EdgeInsets.all(16.0),
-                                    child: TextField(
-                                        keyboardType: TextInputType.text,
-                                        textCapitalization:
-                                            TextCapitalization.sentences,
-                                        decoration: InputDecoration()),
-                                  )));
-                                });
+                            Navigator.of(context)
+                                .push(MaterialPageRoute(builder: (context) {
+                              return TestMe();
+                            }));
                           },
                           icon: Icon(Icons.comment_outlined)),
                       Spacer(),

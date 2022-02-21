@@ -17,7 +17,7 @@ class _AddDetailsViewState extends State<AddDetailsView> {
 
 
   String dropdownValue = 'Select option';
-  
+
   String dropdownValueType = 'Select option';
   String dropdownValueKitchen = 'Select option';
   String dropdownValueToiletRoom = 'Select option';
@@ -43,6 +43,7 @@ class _AddDetailsViewState extends State<AddDetailsView> {
   //  set _imageFile(XFile? value) {
   //   _imageFileList = value == null ? null : <XFile>[value];
   // }
+
 
 
 
@@ -108,6 +109,11 @@ class _AddDetailsViewState extends State<AddDetailsView> {
     // setState to update our non-existent appearance.
     if (!mounted) return;
 
+
+  Future selectImage({ImageSource imageSource = ImageSource.gallery}) async {
+    final List<XFile>? _houseImages = await _imagePicker.pickMultiImage();
+    // _imageFileList!.addAll(_houseImages);
+
     setState(() {
       images = resultList;
       _error = error;
@@ -120,7 +126,6 @@ class _AddDetailsViewState extends State<AddDetailsView> {
         title: Text("Add Details"),
       ),
       body: SafeArea(
-
         child: Form(
           key: _formKey,
           child: ListView(
@@ -165,9 +170,24 @@ class _AddDetailsViewState extends State<AddDetailsView> {
                               )),
                         ],
                       ),
+
                     ),
                   //  Expanded(
                   //     child: buildGridView()),
+
+                    )
+                  : SizedBox(
+                      height: 100,
+                      child: GridView.builder(
+                          padding: const EdgeInsets.all(8),
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 3),
+                          itemBuilder: (context, index) {
+                            return Image.file(
+                                File(_imageFileList![index].path));
+                          })),
+
               SizedBox(
                 height: 10,
               ),
@@ -506,93 +526,90 @@ class _AddDetailsViewState extends State<AddDetailsView> {
               const SizedBox(
                 height: 5,
               ),
-
-                TextFormField(
-                    controller: _sizeController,
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        labelText: 'Size',
-                        hintText: 'Enter Size of Room')),
-                SizedBox(height: 5),
-                Card(
-                    child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Region'),
-                    DropdownButtonFormField(
-                      value: dropdownValueRegion,
-                      icon: const Icon(Icons.arrow_drop_down),
-                      elevation: 16,
-                      style: const TextStyle(color: Colors.black),
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          dropdownValueRegion = newValue!;
-                        });
-                      },
-                      items: <String>[
-                        'Select option',
-                        'Ashanti Region',
-                        'Ahafo Region',
-                        'Bono East',
-                        'Central Region',
-                        'Eastern Region',
-                        'Greater Accra',
-                        'Northern Region',
-                        'North East',
-                        'Oti Region',
-                        'Savannah Region',
-                        'Upper East Region',
-                        'Upper West Region',
-                        'Volta Region',
-                        'Western Region',
-                      ].map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
+              TextFormField(
+                  controller: _sizeController,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      labelText: 'Size',
+                      hintText: 'Enter Size of Room')),
+              SizedBox(height: 5),
+              Card(
+                  child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Region'),
+                  DropdownButtonFormField(
+                    value: dropdownValueRegion,
+                    icon: const Icon(Icons.arrow_drop_down),
+                    elevation: 16,
+                    style: const TextStyle(color: Colors.black),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        dropdownValueRegion = newValue!;
+                      });
+                    },
+                    items: <String>[
+                      'Select option',
+                      'Ashanti Region',
+                      'Ahafo Region',
+                      'Bono East',
+                      'Central Region',
+                      'Eastern Region',
+                      'Greater Accra',
+                      'Northern Region',
+                      'North East',
+                      'Oti Region',
+                      'Savannah Region',
+                      'Upper East Region',
+                      'Upper West Region',
+                      'Volta Region',
+                      'Western Region',
+                    ].map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  ),
+                ],
+              )),
+              const SizedBox(
+                height: 5,
+              ),
+              TextFormField(
+                  controller: _cityController,
+                  keyboardType: TextInputType.text,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                  ],
-                )),
-                const SizedBox(
-                  height: 5,
-                ),
-                TextFormField(
-                    controller: _cityController,
-                    keyboardType: TextInputType.text,
-                    decoration: InputDecoration(
-
+                    labelText: 'City/Town',
+                  )),
+              const SizedBox(
+                height: 5,
+              ),
+              TextFormField(
+                  controller: _digitalAddressController,
+                  keyboardType: TextInputType.text,
+                  decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      labelText: 'City/Town',
-                    )),
-                const SizedBox(
-                  height: 5,
-                ),
-                TextFormField(
-                    controller: _digitalAddressController,
-                    keyboardType: TextInputType.text,
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        labelText: 'Digital Address',
-                        hintText: 'GN-1234-5678')),
-                const SizedBox(
-                  height: 5,
-                ),
-                TextFormField(
-                    controller: _houseNumberController,
-                    keyboardType: TextInputType.text,
-                    decoration: InputDecoration(
+                      labelText: 'Digital Address',
+                      hintText: 'GN-1234-5678')),
+              const SizedBox(
+                height: 5,
+              ),
+              TextFormField(
+                  controller: _houseNumberController,
+                  keyboardType: TextInputType.text,
+                  decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
-
                       labelText: 'Digital Address',
                       hintText: 'GN-1234-5678')),
               const SizedBox(
@@ -621,5 +638,6 @@ class _AddDetailsViewState extends State<AddDetailsView> {
             ],
           ),
         ),
+
       ),);
   }}

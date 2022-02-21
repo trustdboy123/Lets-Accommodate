@@ -61,45 +61,66 @@ class _SettingLandlordState extends State<SettingLandlord> {
               ),
               Row(
                 children: [
-                  Icon(Icons.help),
-                  Text(
+                  Icon(
+                    Icons.help,
+                    color: Colors.blueAccent,
+                  ),
+                  const Text(
                     'Need help?  Contact us',
                     style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
                   ),
+                  IconButton(
+                      color: Colors.blueAccent,
+                      onPressed: () {
+                        showModalBottomSheet(
+                            context: context,
+                            builder: (context) {
+                              return ListView(
+                                padding: EdgeInsets.all(16),
+                                children: const [
+                                  Icon(
+                                    Icons.email,
+                                    size: 100,
+                                    color: Colors.lightBlue,
+                                  ),
+                                  SizedBox(
+                                    height: 50,
+                                    child: Padding(
+                                      padding: EdgeInsets.all(16.0),
+                                      child: Text(
+                                        'Email: letsaccommodateof4@gmail.com',
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.facebook_rounded,
+                                    size: 100,
+                                    color: Colors.blue,
+                                  ),
+                                  SizedBox(
+                                    height: 50,
+                                    child: Padding(
+                                      padding: EdgeInsets.all(16.0),
+                                      child: Text(
+                                        'Facebook: Lets Accomodate Mobile app',
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              );
+                            });
+                      },
+                      icon: Icon(Icons.arrow_drop_down_circle_rounded))
                 ],
               ),
               SizedBox(
                 height: 5,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                    child: DropdownButton<String>(
-                  alignment: AlignmentDirectional.centerStart,
-                  value: dropdownValuemail,
-                  icon: const Icon(Icons.arrow_drop_down),
-                  elevation: 16,
-                  style: const TextStyle(color: Colors.black),
-                  underline: Container(
-                    height: 2,
-                    color: Colors.black,
-                  ),
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      dropdownValuemail = newValue!;
-                    });
-                  },
-                  items: <String>[
-                    '',
-                    'letsaccommodate@gmail.com',
-                    'Facebook page - Lets Accommodate'
-                  ].map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
-                )),
               ),
             ],
           ),

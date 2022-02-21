@@ -18,7 +18,8 @@ class ViewUploads extends StatelessWidget {
               width: MediaQuery.of(context).size.width,
               height: 250,
               child: ListView.separated(
-                  controller: ScrollController(initialScrollOffset: 0),
+                  controller: ScrollController(
+                      initialScrollOffset: 5, keepScrollOffset: true),
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (contex, index) {
                     return Container(
@@ -43,8 +44,7 @@ class ViewUploads extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            ListView(
-              shrinkWrap: true,
+            Column(
               children: [
                 const Center(
                   child: Text(
