@@ -49,7 +49,7 @@ class DashboardView extends StatelessWidget {
                               borderRadius: BorderRadius.circular(30)),
                           color: Colors.black,
                           child: Image.network(
-                            'https://images.unsplash.com/photo-1589834390005-5d4fb9bf3d32?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80',
+                            'https://images.unsplash.com/photo-1644941979165-d94993fb9819?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1964&q=80',
                             fit: BoxFit.fill,
                             height: 250,
                             width: double.infinity,

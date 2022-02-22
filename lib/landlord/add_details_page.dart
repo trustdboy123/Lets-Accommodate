@@ -43,7 +43,9 @@ class _AddDetailsViewState extends State<AddDetailsView> {
     try {
       var pickedfiles = await _imagePicker.pickMultiImage();
       if (pickedfiles != null) {
-        imageFileList = pickedfiles;
+        setState(() {
+          imageFileList = pickedfiles;
+        });
       } else {
         print('No images selected');
       }
@@ -67,15 +69,19 @@ class _AddDetailsViewState extends State<AddDetailsView> {
 
   Widget buildGridView() {
     return GridView.count(
+      shrinkWrap: true,
+      scrollDirection: Axis.horizontal,
       crossAxisCount: 3,
-      children: List.generate(images.length, (index) {
-        Asset asset = images[index];
-        return AssetThumb(
-          asset: asset,
-          width: 300,
-          height: 300,
+      children: imageFileList!.map((imageone) {
+        return Container(
+          child: Card(
+              child: Image.file(
+            File(imageone.path),
+            width: double.infinity,
+            height: 250,
+          )),
         );
-      }),
+      }).toList(),
     );
   }
 
@@ -118,95 +124,128 @@ class _AddDetailsViewState extends State<AddDetailsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Add Details"),
-      ),
-      body: SafeArea(
-        child: Form(
-          key: _formKey,
-          child: ListView(
-            padding: const EdgeInsets.all(20),
-            children: [
-              Container(
-                decoration: const BoxDecoration(
-                    color: Colors.black12,
-                    borderRadius: BorderRadius.all(Radius.circular(10))),
-                height: 250,
-                child: Column(
-                  children: [
-                    SizedBox(height: 65),
-                    const Text("Upload photos here"),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    IconButton(
-                        onPressed: () {
-                          showModalBottomSheet(
-                              context: context,
-                              builder: (context) {
-                                return SizedBox(
-                                  height: 100,
-                                  child: TextButton.icon(
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                        openImages();
-                                        // selectImage(
-                                        //     imageSource:
-                                        //         ImageSource.gallery);
-                                      },
-                                      icon: Icon(Icons.photo_album),
-                                      label: Text('Select from Gallery')),
-                                );
-                              });
-                        },
-                        icon: const Icon(
-                          Icons.add_a_photo_outlined,
-                          size: 100,
-                          color: Colors.grey,
-                        )),
-                  ],
-                ),
-              ),
-              //  Expanded(
-              //     child: buildGridView()),
-
-              const SizedBox(
-                height: 10,
-              ),
-              imageFileList != null
-                  ? Wrap(
-                      children: imageFileList!.map((imageone) {
-                        return Container(
-                          child: Card(
-                              child: Container(
-                            height: 100,
-                            width: 100,
-                            child: Image.file(File(imageone.path)),
-                          )),
-                        );
-                      }).toList(),
-                    )
-                  : Card(
+        appBar: AppBar(
+          title: Text("Add Details"),
+        ),
+        body: SafeArea(
+            child: Form(
+                key: _formKey,
+                child: ListView(padding: const EdgeInsets.all(20), children: [
+                  imageFileList != null
+                      ? Wrap(
+                          children: imageFileList!.map((imageone) {
+                            return Container(
+                              child: Card(
+                                  child: Container(
+                                height: 100,
+                                width: 100,
+                                child: Image.file(File(imageone.path)),
+                              )),
+                            );
+                          }).toList(),
+                        )
+                      : Container(
+                          decoration: const BoxDecoration(
+                              color: Colors.black12,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          height: 250,
+                          child: Column(
+                            children: [
+                              SizedBox(height: 65),
+                              const Text("Upload photos here"),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              IconButton(
+                                  onPressed: () {},
+                                  icon: const Icon(
+                                    Icons.add_a_photo_outlined,
+                                    size: 100,
+                                    color: Colors.grey,
+                                  )),
+                            ],
+                          ),
+                        ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      IconButton(
+                          onPressed: () {
+                            showModalBottomSheet(
+                                context: context,
+                                builder: (context) {
+                                  return SizedBox(
+                                    height: 100,
+                                    child: TextButton.icon(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                          openImages();
+                                        },
+                                        icon: Icon(Icons.photo_album),
+                                        label: Text('Select from Gallery')),
+                                  );
+                                });
+                          },
+                          icon: Icon(Icons.camera_alt)),
+                      Text('Upload Photos')
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Card(
                       child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Category'),
+                      DropdownButtonFormField(
+                        value: dropdownValue,
+                        icon: const Icon(Icons.arrow_drop_down),
+                        elevation: 16,
+                        style: const TextStyle(color: Colors.black),
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            dropdownValue = newValue!;
+                          });
+                        },
+                        items: <String>[
+                          'Select option',
+                          'Single Room',
+                          'Chamber and Hall',
+                          'Two Bedroom',
+                          'Two Bedroom Plus',
+                        ].map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                      ),
+                    ],
+                  )),
+                  SizedBox(height: 5),
+                  Card(
+                    child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Category'),
+                        Text('Type'),
                         DropdownButtonFormField(
-                          value: dropdownValue,
+                          value: dropdownValueType,
                           icon: const Icon(Icons.arrow_drop_down),
                           elevation: 16,
                           style: const TextStyle(color: Colors.black),
                           onChanged: (String? newValue) {
                             setState(() {
-                              dropdownValue = newValue!;
+                              dropdownValueType = newValue!;
                             });
                           },
                           items: <String>[
                             'Select option',
-                            'Single Room',
-                            'Chamber and Hall',
-                            'Two Bedroom',
-                            'Two Bedroom Plus',
+                            'Apartment',
+                            'Flat',
+                            'Compound House',
+                            'Self Contained House',
                           ].map<DropdownMenuItem<String>>((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
@@ -214,500 +253,476 @@ class _AddDetailsViewState extends State<AddDetailsView> {
                             );
                           }).toList(),
                         ),
+                        Card(
+                            child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'Category',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              DropdownButtonFormField(
+                                value: dropdownValue,
+                                icon: const Icon(Icons.arrow_drop_down),
+                                elevation: 16,
+                                style: const TextStyle(color: Colors.black),
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    dropdownValue = newValue!;
+                                  });
+                                },
+                                items: <String>[
+                                  'Select option',
+                                  'Single Room',
+                                  'Chamber and Hall',
+                                  'Two Bedroom',
+                                  'Two Bedroom Plus',
+                                ].map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                              ),
+                            ],
+                          ),
+                        )),
+                        const SizedBox(height: 5),
+                        Card(
+                            child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text('Type',
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold)),
+                              DropdownButtonFormField(
+                                value: dropdownValueType,
+                                icon: const Icon(Icons.arrow_drop_down),
+                                elevation: 16,
+                                style: const TextStyle(color: Colors.black),
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    dropdownValueType = newValue!;
+                                  });
+                                },
+                                items: <String>[
+                                  'Select option',
+                                  'Apartment',
+                                  'Flat',
+                                  'Compound House',
+                                  'Self Contained',
+                                ].map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                              ),
+                            ],
+                          ),
+                        )),
+                        const SizedBox(height: 5),
+                        Card(
+                            child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text('Kitchen',
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold)),
+                              DropdownButtonFormField(
+                                value: dropdownValueKitchen,
+                                icon: const Icon(Icons.arrow_drop_down),
+                                elevation: 16,
+                                style: const TextStyle(color: Colors.black),
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    dropdownValueKitchen = newValue!;
+                                  });
+                                },
+                                items: <String>[
+                                  'Select option',
+                                  'Available',
+                                  'Unavailable',
+                                ].map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                              ),
+                            ],
+                          ),
+                        )),
+                        const SizedBox(height: 5),
+                        Card(
+                            child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text('Washroom',
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold)),
+                              DropdownButtonFormField(
+                                value: dropdownValueBathRoom,
+                                icon: const Icon(Icons.arrow_drop_down),
+                                elevation: 16,
+                                style: const TextStyle(color: Colors.black),
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    dropdownValueBathRoom = newValue!;
+                                  });
+                                },
+                                items: <String>[
+                                  'Select option',
+                                  'Available',
+                                  'Unavailable',
+                                ].map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                              ),
+                            ],
+                          ),
+                        )),
+                        const SizedBox(height: 5),
+                        Card(
+                            child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text('Store Room',
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold)),
+                              DropdownButtonFormField(
+                                value: dropdownValueStoreRoom,
+                                icon: const Icon(Icons.arrow_drop_down),
+                                elevation: 16,
+                                style: const TextStyle(color: Colors.black),
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    dropdownValueStoreRoom = newValue!;
+                                  });
+                                },
+                                items: <String>[
+                                  'Select option',
+                                  'Available',
+                                  'Unavailable',
+                                ].map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                              ),
+                            ],
+                          ),
+                        )),
+                        const SizedBox(height: 5),
+                        Card(
+                            child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text('Porch',
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold)),
+                              DropdownButtonFormField(
+                                value: dropdownValuePorch,
+                                icon: const Icon(Icons.arrow_drop_down),
+                                elevation: 16,
+                                style: const TextStyle(color: Colors.black),
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    dropdownValuePorch = newValue!;
+                                  });
+                                },
+                                items: <String>[
+                                  'Select option',
+                                  'Available',
+                                  'Unavailable',
+                                ].map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                              ),
+                            ],
+                          ),
+                        )),
+                        const SizedBox(height: 5),
+                        Card(
+                            child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text('Walled House',
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold)),
+                              DropdownButtonFormField(
+                                value: dropdownValueWaledHouse,
+                                icon: const Icon(Icons.arrow_drop_down),
+                                elevation: 16,
+                                style: const TextStyle(color: Colors.black),
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    dropdownValueWaledHouse = newValue!;
+                                  });
+                                },
+                                items: <String>[
+                                  'Select option',
+                                  'Yes',
+                                  'No',
+                                ].map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                              ),
+                            ],
+                          ),
+                        )),
+                        const SizedBox(height: 5),
+                        Card(
+                            child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text('Tiled House',
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold)),
+                              DropdownButtonFormField(
+                                value: dropdownValueTiledHouse,
+                                icon: const Icon(Icons.arrow_drop_down),
+                                elevation: 16,
+                                style: const TextStyle(color: Colors.black),
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    dropdownValueTiledHouse = newValue!;
+                                  });
+                                },
+                                items: <String>[
+                                  'Select option',
+                                  'Yes',
+                                  'No',
+                                ].map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                              ),
+                            ],
+                          ),
+                        )),
+                        const SizedBox(height: 5),
+                        Card(
+                            child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text('Electricity',
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold)),
+                              DropdownButtonFormField(
+                                value: dropdownValueElectricity,
+                                icon: const Icon(Icons.arrow_drop_down),
+                                elevation: 16,
+                                style: const TextStyle(color: Colors.black),
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    dropdownValueElectricity = newValue!;
+                                  });
+                                },
+                                items: <String>[
+                                  'Select option',
+                                  'Available, Shared meter',
+                                  'Available, Unshared meter',
+                                  'Unavailable',
+                                ].map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                              ),
+                            ],
+                          ),
+                        )),
+                        Card(
+                            child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text('Water Availability',
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold)),
+                              DropdownButtonFormField(
+                                value: dropdownValueWaterAvailability,
+                                icon: const Icon(Icons.arrow_drop_down),
+                                elevation: 16,
+                                style: const TextStyle(color: Colors.black),
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    dropdownValueWaterAvailability = newValue!;
+                                  });
+                                },
+                                items: <String>[
+                                  'Select option',
+                                  'Yes',
+                                  'No',
+                                ].map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                              ),
+                            ],
+                          ),
+                        )),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        TextFormField(
+                            controller: _priceController,
+                            decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                labelText: 'Price',
+                                hintText: 'Enter Price of Rent')),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        TextFormField(
+                            controller: _sizeController,
+                            keyboardType: TextInputType.text,
+                            decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                labelText: 'Size',
+                                hintText: 'Enter Size of Room')),
+                        const SizedBox(height: 10),
+                        Card(
+                            child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text('Region',
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold)),
+                              DropdownButtonFormField(
+                                value: dropdownValueRegion,
+                                icon: const Icon(Icons.arrow_drop_down),
+                                elevation: 16,
+                                style: const TextStyle(color: Colors.black),
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    dropdownValueRegion = newValue!;
+                                  });
+                                },
+                                items: <String>[
+                                  'Select option',
+                                  'Ashanti Region',
+                                  'Ahafo Region',
+                                  'Bono East',
+                                  'Central Region',
+                                  'Eastern Region',
+                                  'Greater Accra',
+                                  'Northern Region',
+                                  'North East',
+                                  'Oti Region',
+                                  'Savannah Region',
+                                  'Upper East Region',
+                                  'Upper West Region',
+                                  'Volta Region',
+                                  'Western Region',
+                                ].map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                              ),
+                            ],
+                          ),
+                        )),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        TextFormField(
+                            controller: _cityController,
+                            keyboardType: TextInputType.text,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              labelText: 'City/Town',
+                            )),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        TextFormField(
+                            controller: _digitalAddressController,
+                            keyboardType: TextInputType.text,
+                            decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                labelText: 'Digital Address',
+                                hintText: 'GN-1234-5678')),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        TextFormField(
+                            controller: _houseNumberController,
+                            keyboardType: TextInputType.text,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              labelText: 'House Number',
+                            )),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        TextButton(
+                          onPressed: () {},
+                          child: const Text(
+                            'Upload',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          style: TextButton.styleFrom(
+                              backgroundColor: Colors.blue),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        )
                       ],
-                    )),
-              SizedBox(height: 5),
-              Card(
-                  child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Type'),
-                  DropdownButtonFormField(
-                    value: dropdownValueType,
-                    icon: const Icon(Icons.arrow_drop_down),
-                    elevation: 16,
-                    style: const TextStyle(color: Colors.black),
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        dropdownValueType = newValue!;
-                      });
-                    },
-                    items: <String>[
-                      'Select option',
-                      'Apartment',
-                      'Flat',
-                      'Compound House',
-                      'Self Contained House',
-                    ].map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                  ),
-               
-              Card(
-                  child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Category',
-                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    DropdownButtonFormField(
-                      value: dropdownValue,
-                      icon: const Icon(Icons.arrow_drop_down),
-                      elevation: 16,
-                      style: const TextStyle(color: Colors.black),
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          dropdownValue = newValue!;
-                        });
-                      },
-                      items: <String>[
-                        'Select option',
-                        'Single Room',
-                        'Chamber and Hall',
-                        'Two Bedroom',
-                        'Two Bedroom Plus',
-                      ].map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                    ),
-                  ],
-                ),
-              )),
-              const SizedBox(height: 5),
-              Card(
-                  child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text('Type',
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                    DropdownButtonFormField(
-                      value: dropdownValueType,
-                      icon: const Icon(Icons.arrow_drop_down),
-                      elevation: 16,
-                      style: const TextStyle(color: Colors.black),
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          dropdownValueType = newValue!;
-                        });
-                      },
-                      items: <String>[
-                        'Select option',
-                        'Apartment',
-                        'Flat',
-                        'Compound House',
-                        'Self Contained',
-                      ].map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                    ),
-                  ],
-                ),
-              )),
-              const SizedBox(height: 5),
-              Card(
-                  child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text('Kitchen',
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                    DropdownButtonFormField(
-                      value: dropdownValueKitchen,
-                      icon: const Icon(Icons.arrow_drop_down),
-                      elevation: 16,
-                      style: const TextStyle(color: Colors.black),
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          dropdownValueKitchen = newValue!;
-                        });
-                      },
-                      items: <String>[
-                        'Select option',
-                        'Available',
-                        'Unavailable',
-                      ].map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                    ),
-                  ],
-                ),
-              )),
-
-              const SizedBox(height: 5),
-              Card(
-                  child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text('Washroom',
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                    DropdownButtonFormField(
-                      value: dropdownValueBathRoom,
-                      icon: const Icon(Icons.arrow_drop_down),
-                      elevation: 16,
-                      style: const TextStyle(color: Colors.black),
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          dropdownValueBathRoom = newValue!;
-                        });
-                      },
-                      items: <String>[
-                        'Select option',
-                        'Available',
-                        'Unavailable',
-                      ].map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                    ),
-                  ],
-                ),
-              )),
-              const SizedBox(height: 5),
-              Card(
-                  child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text('Store Room',
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                    DropdownButtonFormField(
-                      value: dropdownValueStoreRoom,
-                      icon: const Icon(Icons.arrow_drop_down),
-                      elevation: 16,
-                      style: const TextStyle(color: Colors.black),
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          dropdownValueStoreRoom = newValue!;
-                        });
-                      },
-                      items: <String>[
-                        'Select option',
-                        'Available',
-                        'Unavailable',
-                      ].map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                    ),
-                  ],
-                ),
-              )),
-              const SizedBox(height: 5),
-              Card(
-                  child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text('Porch',
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                    DropdownButtonFormField(
-                      value: dropdownValuePorch,
-                      icon: const Icon(Icons.arrow_drop_down),
-                      elevation: 16,
-                      style: const TextStyle(color: Colors.black),
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          dropdownValuePorch = newValue!;
-                        });
-                      },
-                      items: <String>[
-                        'Select option',
-                        'Available',
-                        'Unavailable',
-                      ].map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                    ),
-                  ],
-                ),
-              )),
-              const SizedBox(height: 5),
-              Card(
-                  child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text('Walled House',
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                    DropdownButtonFormField(
-                      value: dropdownValueWaledHouse,
-                      icon: const Icon(Icons.arrow_drop_down),
-                      elevation: 16,
-                      style: const TextStyle(color: Colors.black),
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          dropdownValueWaledHouse = newValue!;
-                        });
-                      },
-                      items: <String>[
-                        'Select option',
-                        'Yes',
-                        'No',
-                      ].map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                    ),
-                  ],
-                ),
-              )),
-              const SizedBox(height: 5),
-              Card(
-                  child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text('Tiled House',
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                    DropdownButtonFormField(
-                      value: dropdownValueTiledHouse,
-                      icon: const Icon(Icons.arrow_drop_down),
-                      elevation: 16,
-                      style: const TextStyle(color: Colors.black),
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          dropdownValueTiledHouse = newValue!;
-                        });
-                      },
-                      items: <String>[
-                        'Select option',
-                        'Yes',
-                        'No',
-                      ].map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                    ),
-                  ],
-                ),
-              )),
-              const SizedBox(height: 5),
-              Card(
-                  child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text('Electricity',
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                    DropdownButtonFormField(
-                      value: dropdownValueElectricity,
-                      icon: const Icon(Icons.arrow_drop_down),
-                      elevation: 16,
-                      style: const TextStyle(color: Colors.black),
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          dropdownValueElectricity = newValue!;
-                        });
-                      },
-                      items: <String>[
-                        'Select option',
-                        'Available, Shared meter',
-                        'Available, Unshared meter',
-                        'Unavailable',
-                      ].map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                    ),
-                  ],
-                ),
-              )),
-              Card(
-                  child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text('Water Availability',
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                    DropdownButtonFormField(
-                      value: dropdownValueWaterAvailability,
-                      icon: const Icon(Icons.arrow_drop_down),
-                      elevation: 16,
-                      style: const TextStyle(color: Colors.black),
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          dropdownValueWaterAvailability = newValue!;
-                        });
-                      },
-                      items: <String>[
-                        'Select option',
-                        'Yes',
-                        'No',
-                      ].map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                    ),
-                  ],
-                ),
-              )),
-              const SizedBox(
-                height: 10,
-              ),
-              TextFormField(
-                  controller: _priceController,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      labelText: 'Price',
-                      hintText: 'Enter Price of Rent')),
-              const SizedBox(
-                height: 10,
-              ),
-              TextFormField(
-                  controller: _sizeController,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      labelText: 'Size',
-                      hintText: 'Enter Size of Room')),
-              const SizedBox(height: 10),
-              Card(
-                  child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text('Region',
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                    DropdownButtonFormField(
-                      value: dropdownValueRegion,
-                      icon: const Icon(Icons.arrow_drop_down),
-                      elevation: 16,
-                      style: const TextStyle(color: Colors.black),
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          dropdownValueRegion = newValue!;
-                        });
-                      },
-                      items: <String>[
-                        'Select option',
-                        'Ashanti Region',
-                        'Ahafo Region',
-                        'Bono East',
-                        'Central Region',
-                        'Eastern Region',
-                        'Greater Accra',
-                        'Northern Region',
-                        'North East',
-                        'Oti Region',
-                        'Savannah Region',
-                        'Upper East Region',
-                        'Upper West Region',
-                        'Volta Region',
-                        'Western Region',
-                      ].map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                    ),
-                  ],
-                ),
-              )),
-              const SizedBox(
-                height: 10,
-              ),
-              TextFormField(
-                  controller: _cityController,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    labelText: 'City/Town',
-                  )),
-              const SizedBox(
-                height: 10,
-              ),
-              TextFormField(
-                  controller: _digitalAddressController,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      labelText: 'Digital Address',
-                      hintText: 'GN-1234-5678')),
-              const SizedBox(
-                height: 10,
-              ),
-
-              const SizedBox(
-                height: 10,
-              ),
-              TextFormField(
-                  controller: _houseNumberController,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    labelText: 'House Number',
-                  )),
-              const SizedBox(
-                height: 20,
-              ),
-              TextButton(
-                onPressed: () {},
-                child: const Text(
-                  'Upload',
-                  style: TextStyle(color: Colors.white),
-                ),
-                style: TextButton.styleFrom(backgroundColor: Colors.blue),
-              ),
-              const SizedBox(
-                height: 20,
-              )
-            ],
-          ),
-        )]))));
-      
-    
+                  )
+                ]))));
   }
 }
