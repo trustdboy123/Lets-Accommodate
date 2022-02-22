@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lets_accommodate/tenant/comments_tenants.dart';
 import 'package:lets_accommodate/tenant/details.dart';
 
 class TwoBedroom extends StatelessWidget {
@@ -97,10 +98,21 @@ class TwoBedroom extends StatelessWidget {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(Icons.star_border_outlined),
+                      Row(
+                        children: [
+                          Icon(Icons.star_border_outlined),
+                          Text('10')
+                        ],
+                      ),
                       Spacer(),
                       IconButton(
-                          onPressed: () {}, icon: Icon(Icons.comment_outlined)),
+                          onPressed: () {
+                            Navigator.of(context)
+                                .push(MaterialPageRoute(builder: (context) {
+                              return TestMe();
+                            }));
+                          },
+                          icon: Icon(Icons.comment_outlined)),
                       Spacer(),
                       Text('koforidua, Okorase')
                     ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lets_accommodate/tenant/details.dart';
+import 'package:lets_accommodate/tenant/comments_tenants.dart';
 
 class ChamberHall extends StatelessWidget {
   ChamberHall({Key? key}) : super(key: key);
@@ -8,7 +9,7 @@ class ChamberHall extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text('Chamber and Hall'),
+          title: const Text('Chamber and Hall'),
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(60),
             child: Padding(
@@ -97,10 +98,21 @@ class ChamberHall extends StatelessWidget {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(Icons.star_border_outlined),
+                      Row(
+                        children: [
+                          Icon(Icons.star_border_outlined),
+                          Text('14')
+                        ],
+                      ),
                       Spacer(),
                       IconButton(
-                          onPressed: () {}, icon: Icon(Icons.comment_outlined)),
+                          onPressed: () {
+                            Navigator.of(context)
+                                .push(MaterialPageRoute(builder: (context) {
+                              return TestMe();
+                            }));
+                          },
+                          icon: Icon(Icons.comment_outlined)),
                       Spacer(),
                       Text('Koforidua, Effiduase')
                     ],
