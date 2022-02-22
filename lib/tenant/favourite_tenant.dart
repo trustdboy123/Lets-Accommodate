@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lets_accommodate/tenant/comments_tenants.dart';
 import 'package:lets_accommodate/tenant/details.dart';
 
 class FavouriteTenant extends StatelessWidget {
@@ -75,7 +76,13 @@ class FavouriteTenant extends StatelessWidget {
                       Icon(Icons.star_border_outlined),
                       Spacer(),
                       IconButton(
-                          onPressed: () {}, icon: Icon(Icons.comment_outlined)),
+                          onPressed: () {
+                            Navigator.of(context)
+                                .push(MaterialPageRoute(builder: (context) {
+                              return TestMe();
+                            }));
+                          },
+                          icon: Icon(Icons.comment_outlined)),
                       Spacer(),
                       Text('Koforidua, Adweso')
                     ],

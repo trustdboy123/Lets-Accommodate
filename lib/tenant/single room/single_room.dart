@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lets_accommodate/tenant/details.dart';
-import 'package:lets_accommodate/tenant/single%20room/comments_tenants.dart';
+import 'package:lets_accommodate/tenant/comments_tenants.dart';
 
 class SingleRoom extends StatelessWidget {
   SingleRoom({Key? key}) : super(key: key);

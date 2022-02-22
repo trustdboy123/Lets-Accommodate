@@ -36,7 +36,7 @@ class _IndexViewState extends State<IndexView> {
               BottomNavigationBarItem(
                   icon: Icon(Icons.home), label: 'Categories'),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.favorite_outline), label: 'Favourite'),
+                  icon: Icon(Icons.favorite), label: 'Favourite'),
               BottomNavigationBarItem(
                   icon: Icon(Icons.settings), label: 'Settings'),
             ]));
