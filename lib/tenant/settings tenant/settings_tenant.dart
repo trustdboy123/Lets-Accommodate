@@ -105,7 +105,7 @@ class _SettingsTenantState extends State<SettingsTenant> {
                                     child: Padding(
                                       padding: EdgeInsets.all(16.0),
                                       child: Text(
-                                        'Facebook: Lets Accomodate Mobile app',
+                                        'Facebook: Letsaccommodate Mobile app',
                                         style: TextStyle(
                                             fontSize: 15,
                                             fontWeight: FontWeight.bold),
