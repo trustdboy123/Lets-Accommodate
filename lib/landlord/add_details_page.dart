@@ -37,11 +37,20 @@ class _AddDetailsViewState extends State<AddDetailsView> {
   final GlobalKey<FormState> _formKey = GlobalKey();
 
   final ImagePicker _imagePicker = ImagePicker();
-  List<XFile>? _imageFileList = [];
+  List<XFile>? imageFileList;
 
-  //  set _imageFile(XFile? value) {
-  //   _imageFileList = value == null ? null : <XFile>[value];
-  // }
+  openImages() async {
+    try {
+      var pickedfiles = await _imagePicker.pickMultiImage();
+      if (pickedfiles != null) {
+        imageFileList = pickedfiles;
+      } else {
+        print('No images selected');
+      }
+    } catch (e) {
+      print('essror wile picking file $e');
+    }
+  }
 
   // Future selectImage({ImageSource imageSource = ImageSource.gallery}) async {
   //   final List<XFile>? _houseImages = await _imagePicker.pickMultiImage();
@@ -50,12 +59,7 @@ class _AddDetailsViewState extends State<AddDetailsView> {
   //     _imageFileList = _houseImages;
   //   });
   // }
-// void selectImages() async{
-//   List <XFile>?selectedImages = await _imagePicker.pickMultiImage();
-//   if (selectedImages!.isNotEmpty) {
-//     _imageFileList!.addAll(selectedImages);
-//   }
-// }
+
   @override
   void initState() {
     super.initState();
@@ -145,7 +149,7 @@ class _AddDetailsViewState extends State<AddDetailsView> {
                                   child: TextButton.icon(
                                       onPressed: () {
                                         Navigator.pop(context);
-                                        loadAssets();
+                                        openImages();
                                         // selectImage(
                                         //     imageSource:
                                         //         ImageSource.gallery);
@@ -169,6 +173,79 @@ class _AddDetailsViewState extends State<AddDetailsView> {
               const SizedBox(
                 height: 10,
               ),
+              imageFileList != null
+                  ? Wrap(
+                      children: imageFileList!.map((imageone) {
+                        return Container(
+                          child: Card(
+                              child: Container(
+                            height: 100,
+                            width: 100,
+                            child: Image.file(File(imageone.path)),
+                          )),
+                        );
+                      }).toList(),
+                    )
+                  : Card(
+                      child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Category'),
+                        DropdownButtonFormField(
+                          value: dropdownValue,
+                          icon: const Icon(Icons.arrow_drop_down),
+                          elevation: 16,
+                          style: const TextStyle(color: Colors.black),
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              dropdownValue = newValue!;
+                            });
+                          },
+                          items: <String>[
+                            'Select option',
+                            'Single Room',
+                            'Chamber and Hall',
+                            'Two Bedroom',
+                            'Two Bedroom Plus',
+                          ].map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                        ),
+                      ],
+                    )),
+              SizedBox(height: 5),
+              Card(
+                  child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Type'),
+                  DropdownButtonFormField(
+                    value: dropdownValueType,
+                    icon: const Icon(Icons.arrow_drop_down),
+                    elevation: 16,
+                    style: const TextStyle(color: Colors.black),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        dropdownValueType = newValue!;
+                      });
+                    },
+                    items: <String>[
+                      'Select option',
+                      'Apartment',
+                      'Flat',
+                      'Compound House',
+                      'Self Contained House',
+                    ].map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  ),
+               
               Card(
                   child: Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -629,8 +706,8 @@ class _AddDetailsViewState extends State<AddDetailsView> {
               )
             ],
           ),
-        ),
-      ),
-    );
+        )]))));
+      
+    
   }
 }
