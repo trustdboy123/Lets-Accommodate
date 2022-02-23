@@ -6,7 +6,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.removeAfter(initialization);
-   runApp(const MyApp());
+  runApp(const MyApp());
 }
 
 Future initialization(BuildContext? context) async {

@@ -335,7 +335,7 @@ class ViewUploads extends StatelessWidget {
                     onPressed: () {
                       Navigator.of(context)
                           .push(MaterialPageRoute(builder: (context) {
-                        return const EditDescription();
+                        return EditDescription();
                       }));
                     },
                     style: TextButton.styleFrom(backgroundColor: Colors.blue),
