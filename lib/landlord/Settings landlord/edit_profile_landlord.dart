@@ -1,7 +1,27 @@
-import 'package:flutter/material.dart';
+import 'dart:io';
 
-class EditProfileLandlord extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+
+class EditProfileLandlord extends StatefulWidget {
   const EditProfileLandlord({Key? key}) : super(key: key);
+
+  @override
+  State<EditProfileLandlord> createState() => _EditProfileLandlordState();
+}
+
+class _EditProfileLandlordState extends State<EditProfileLandlord> {
+  File? _profilePic;
+  final ImagePicker _imagePicker = ImagePicker();
+
+  Future selectImage({ImageSource imageSource = ImageSource.camera}) async {
+    XFile? profilePic = await _imagePicker.pickImage(source: imageSource);
+    File profileImage = File(profilePic!.path);
+
+    setState(() {
+      _profilePic = profileImage;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,11 +35,60 @@ class EditProfileLandlord extends StatelessWidget {
           children: [
             Column(
               children: [
-                CircleAvatar(
-                    backgroundImage: NetworkImage(
-                        'https://images.unsplash.com/photo-1589317621382-0cbef7ffcc4c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80'),
-                    radius: 70),
-                TextButton(onPressed: () {}, child: Text('Edit Photo'))
+                Center(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(90),
+                    child: _profilePic == null
+                        ? Image.asset(
+                            'assets/Profile_avatar.png',
+                            width: 130,
+                            height: 130,
+                            fit: BoxFit.contain,
+                          )
+                        : InkWell(
+                            onTap: () => showModalBottomSheet(
+                                context: context,
+                                builder: (context) => SizedBox(
+                                      height: 100,
+                                    )),
+                            child: Image.file(
+                              _profilePic!,
+                              width: 130,
+                              height: 130,
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                  ),
+                ),
+                TextButton(
+                    onPressed: () {
+                      showModalBottomSheet(
+                          context: context,
+                          builder: (context) {
+                            return SizedBox(
+                              height: 100,
+                              child: Column(children: [
+                                TextButton.icon(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                      selectImage(
+                                          imageSource: ImageSource.camera);
+                                    },
+                                    icon: Icon(Icons.camera_alt),
+                                    label: Text('Select from camera')),
+                                TextButton.icon(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                      selectImage(
+                                          imageSource: ImageSource.gallery);
+                                    },
+                                    icon: Icon(Icons.browse_gallery),
+                                    label: Text('Select from gallery'))
+                              ]),
+                            );
+                          });
+                    },
+                    child: Text('Edit Photo'))
               ],
             ),
             SizedBox(
@@ -128,20 +197,21 @@ class EditProfileLandlord extends StatelessWidget {
               'Phone Number',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 5),
+            SizedBox(
+              height: 5,
+            ),
             Card(
-              child: TextFormField(
-                keyboardType: TextInputType.number,
-                textCapitalization: TextCapitalization.sentences,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey)),
-                  hintText: 'Enter your phone number',
-                  hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
-                  floatingLabelBehavior: FloatingLabelBehavior.never,
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue),
-                      borderRadius: BorderRadius.all(Radius.circular(8.0))),
+              shadowColor: Color(0xFF322E2E),
+              color: Colors.white,
+              child: SizedBox(
+                height: 40,
+                width: MediaQuery.of(context).size.width,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Ghanaian',
+                    style: TextStyle(fontSize: 15),
+                  ),
                 ),
               ),
             ),
