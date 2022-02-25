@@ -22,7 +22,7 @@ class AuthManager with ChangeNotifier {
     notifyListeners();
   }
 
-  SetIsLoading(bool message) {
+  setIsLoading(bool message) {
     _isloading = isLoading;
     notifyListeners();
   }
@@ -35,7 +35,7 @@ class AuthManager with ChangeNotifier {
       required String location,
       required String number,
       required String nationality}) async {
-    SetIsLoading(true);
+    setIsLoading(true);
     bool isCreated = false;
 
     await _firebaseAuth
@@ -56,8 +56,27 @@ class AuthManager with ChangeNotifier {
     }).timeout(const Duration(seconds: 60), onTimeout: () {
       setMesage('Check your internet connection');
       isCreated;
-      SetIsLoading(false);
+      setIsLoading(false);
     });
     return isCreated;
+  }
+
+  Future<bool> loginUser({required email, required password}) async {
+    bool isSucessful = false;
+    await _firebaseAuth
+        .signInWithEmailAndPassword(email: email, password: password)
+        .then((userCredential) {
+      if (userCredential.user != null) {
+        isSucessful = false;
+      }
+    }).catchError((onError) {
+      setMesage('$onError');
+      setIsLoading(false);
+    }).timeout(const Duration(seconds: 30), onTimeout: () {
+      setMesage('Please Check your internet connection');
+      isSucessful = false;
+      setIsLoading(false);
+    });
+    return isSucessful;
   }
 }
