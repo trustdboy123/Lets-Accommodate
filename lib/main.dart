@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'auth/decision.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   FlutterNativeSplash.removeAfter(initialization);
   runApp(const MyApp());
 }

@@ -40,6 +40,10 @@ dependencies:
 
   comment_box: ^0.0.17
   flutter_native_splash: ^2.0.5
+  firebase_auth: ^3.3.8
+  firebase_core: ^1.13.0
+  firebase_storage: ^10.2.8
+  cloud_firestore: ^3.1.9
   
 
 
