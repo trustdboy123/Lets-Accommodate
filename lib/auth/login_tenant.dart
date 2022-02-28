@@ -36,7 +36,7 @@ class _LoginTenantState extends State<LoginTenant> {
             ),
             const Center(
               child: Text(
-                'Welcome',
+                'Welcome to Lets Accommodate',
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 40,
@@ -46,75 +46,50 @@ class _LoginTenantState extends State<LoginTenant> {
             const SizedBox(
               height: 30,
             ),
-            const Text(
-              'E-mail',
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600),
-              textAlign: TextAlign.left,
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Card(
-              child: TextFormField(
-                controller: _emailController,
-                keyboardType: TextInputType.text,
-                textCapitalization: TextCapitalization.sentences,
-                decoration: const InputDecoration(
-                  label: Icon(Icons.email),
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey)),
-                  hintText: 'Enter your e-mail',
-                  floatingLabelBehavior: FloatingLabelBehavior.never,
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue),
-                      borderRadius: BorderRadius.all(Radius.circular(4.0))),
-                ),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'please enter your full name';
-                  }
-                  return null;
-                },
+            TextFormField(
+              controller: _emailController,
+              keyboardType: TextInputType.text,
+              textCapitalization: TextCapitalization.sentences,
+              decoration: InputDecoration(
+                labelText: 'E-mail',
+                label: Icon(Icons.email),
+                border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey)),
+                hintText: 'Enter your e-mail',
+                floatingLabelBehavior: FloatingLabelBehavior.never,
+                focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue),
+                    borderRadius: BorderRadius.all(Radius.circular(4.0))),
               ),
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'please enter your full name';
+                }
+              },
             ),
-            const SizedBox(
-              height: 5,
-            ),
-            const Text('Password',
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600)),
-            SizedBox(
-              height: 5,
-            ),
-            Card(
-              child: TextFormField(
-                controller: _passwordController,
-                keyboardType: TextInputType.visiblePassword,
-                textCapitalization: TextCapitalization.sentences,
-                decoration: const InputDecoration(
-                  label: Icon(Icons.lock),
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey)),
-                  hintText: 'Enter your password',
-                  floatingLabelBehavior: FloatingLabelBehavior.never,
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue),
-                      borderRadius: BorderRadius.all(Radius.circular(8.0))),
-                ),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'please enter your password';
-                  }
-                  if (value.length < 6) {
-                    return 'password could not be less than 6 character';
-                  }
-                },
+            TextFormField(
+              controller: _passwordController,
+              keyboardType: TextInputType.visiblePassword,
+              textCapitalization: TextCapitalization.sentences,
+              decoration: InputDecoration(
+                labelText: 'Password',
+                label: Icon(Icons.lock),
+                border: const OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey)),
+                hintText: 'Enter your password',
+                floatingLabelBehavior: FloatingLabelBehavior.never,
+                focusedBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue),
+                    borderRadius: BorderRadius.all(Radius.circular(8.0))),
               ),
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'please enter your password';
+                }
+                if (value.length < 6) {
+                  return 'password could not be less than 6 character';
+                }
+              },
             ),
             const SizedBox(
               height: 5,

@@ -30,7 +30,7 @@ class _SignupTenantState extends State<SignupTenant> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Create Your Account',
         ),
       ),
@@ -40,101 +40,93 @@ class _SignupTenantState extends State<SignupTenant> {
           child: ListView(
             padding: EdgeInsets.all(16.0),
             children: [
-              Text('Full name'),
-              SizedBox(height: 5),
-              Card(
-                child: TextFormField(
-                  controller: _nameController,
-                  keyboardType: TextInputType.text,
-                  textCapitalization: TextCapitalization.sentences,
-                  decoration: const InputDecoration(
-                    label: Icon(Icons.person),
-                    border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey)),
-                    hintText: 'Enter your full name',
-                    hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
-                    floatingLabelBehavior: FloatingLabelBehavior.never,
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.blue),
-                        borderRadius: BorderRadius.all(Radius.circular(8.0))),
-                  ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'please enter your full name';
-                    }
-                    return null;
-                  },
+              TextFormField(
+                controller: _nameController,
+                keyboardType: TextInputType.text,
+                textCapitalization: TextCapitalization.sentences,
+                decoration: InputDecoration(
+                  labelText: 'Full Name',
+                  labelStyle:
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                  label: Icon(Icons.person),
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey)),
+                  hintText: 'Enter your full name',
+                  hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
+                  floatingLabelBehavior: FloatingLabelBehavior.never,
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue),
+                      borderRadius: BorderRadius.all(Radius.circular(8.0))),
                 ),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'please enter your full name';
+                  }
+                  return null;
+                },
               ),
               SizedBox(
                 height: 10,
               ),
-              Text('E-mail'),
-              SizedBox(height: 5),
-              Card(
-                child: TextFormField(
-                  controller: _emailController,
-                  keyboardType: TextInputType.emailAddress,
-                  textCapitalization: TextCapitalization.sentences,
-                  decoration: const InputDecoration(
-                    label: Icon(Icons.email),
-                    border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey)),
-                    hintText: 'Enter your E-mail',
-                    hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
-                    floatingLabelBehavior: FloatingLabelBehavior.never,
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.blue),
-                        borderRadius: BorderRadius.all(Radius.circular(8.0))),
-                  ),
-                  validator: (value) {
-                    if (!emailRegExp.hasMatch(value!)) {
-                      return 'Enter a valid emanil!';
-                    }
-                    if (value.isEmpty) {
-                      return 'Please enter an email address';
-                    }
-                  },
+              TextFormField(
+                controller: _emailController,
+                keyboardType: TextInputType.emailAddress,
+                textCapitalization: TextCapitalization.sentences,
+                decoration: InputDecoration(
+                  labelText: 'E-mail',
+                  label: Icon(Icons.email),
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey)),
+                  hintText: 'Enter your E-mail',
+                  hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
+                  floatingLabelBehavior: FloatingLabelBehavior.never,
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue),
+                      borderRadius: BorderRadius.all(Radius.circular(8.0))),
                 ),
+                validator: (value) {
+                  if (!emailRegExp.hasMatch(value!)) {
+                    return 'Enter a valid emanil!';
+                  }
+                  if (value.isEmpty) {
+                    return 'Please enter an email address';
+                  }
+                },
               ),
               SizedBox(
                 height: 10,
               ),
-              Text('Password'),
-              SizedBox(height: 5),
-              Card(
-                child: TextFormField(
-                  controller: _passwordController,
-                  keyboardType: TextInputType.visiblePassword,
-                  textCapitalization: TextCapitalization.sentences,
-                  decoration: const InputDecoration(
-                    label: Icon(Icons.lock),
-                    border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey)),
-                    hintText: 'Enter your your location',
-                    hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
-                    floatingLabelBehavior: FloatingLabelBehavior.never,
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.blue),
-                        borderRadius: BorderRadius.all(Radius.circular(8.0))),
-                  ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please Enter Passward';
-                    }
-                    if (value.length < 6) {
-                      return 'Password should not be less than 6';
-                    }
-                  },
+              TextFormField(
+                controller: _passwordController,
+                keyboardType: TextInputType.visiblePassword,
+                textCapitalization: TextCapitalization.sentences,
+                decoration: InputDecoration(
+                  labelText: 'Password',
+                  label: Icon(Icons.lock),
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey)),
+                  hintText: 'Enter your your location',
+                  hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
+                  floatingLabelBehavior: FloatingLabelBehavior.never,
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue),
+                      borderRadius: BorderRadius.all(Radius.circular(8.0))),
                 ),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Please Enter Passward';
+                  }
+                  if (value.length < 6) {
+                    return 'Password should not be less than 6';
+                  }
+                },
               ),
               SizedBox(
                 height: 10,
               ),
               Text('Gender'),
               SizedBox(height: 5),
-              Card(
-                  child: DropdownButton<String>(
+              DropdownButton<String>(
                 value: dropdownValue,
                 icon: const Icon(Icons.arrow_drop_down),
                 elevation: 16,
@@ -157,91 +149,81 @@ class _SignupTenantState extends State<SignupTenant> {
                     child: Text(value),
                   );
                 }).toList(),
-              )),
-              SizedBox(
-                height: 10,
-              ),
-              Text('Location/Digital Address'),
-              SizedBox(height: 5),
-              Card(
-                child: TextFormField(
-                  controller: _locationController,
-                  keyboardType: TextInputType.text,
-                  textCapitalization: TextCapitalization.sentences,
-                  maxLines: 3,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey)),
-                    hintText: 'Enter your location/ Digital Address',
-                    hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
-                    floatingLabelBehavior: FloatingLabelBehavior.never,
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.blue),
-                        borderRadius: BorderRadius.all(Radius.circular(8.0))),
-                  ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please Enter your location';
-                    }
-                  },
-                ),
               ),
               SizedBox(
                 height: 10,
               ),
-              Text('Phone Number'),
-              SizedBox(height: 5),
-              Card(
-                child: TextFormField(
-                  controller: _numberController,
-                  keyboardType: TextInputType.number,
-                  textCapitalization: TextCapitalization.sentences,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey)),
-                    hintText: 'Enter your phone number',
-                    hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
-                    floatingLabelBehavior: FloatingLabelBehavior.never,
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.blue),
-                        borderRadius: BorderRadius.all(Radius.circular(8.0))),
-                  ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter your phone number';
-                    }
-                    if (value.length < 10) {
-                      return 'Please enter a complete number';
-                    }
-                  },
+              TextFormField(
+                controller: _locationController,
+                keyboardType: TextInputType.text,
+                textCapitalization: TextCapitalization.sentences,
+                maxLines: 3,
+                decoration: const InputDecoration(
+                  labelText: 'Location/ Digital Address',
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey)),
+                  hintText: 'Enter your location/ Digital Address',
+                  hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
+                  floatingLabelBehavior: FloatingLabelBehavior.never,
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue),
+                      borderRadius: BorderRadius.all(Radius.circular(8.0))),
                 ),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Please Enter your location';
+                  }
+                },
               ),
               SizedBox(
                 height: 10,
               ),
-              Text('Nationality'),
-              SizedBox(height: 5),
-              Card(
-                child: TextFormField(
-                  controller: _nationalityController,
-                  keyboardType: TextInputType.text,
-                  textCapitalization: TextCapitalization.sentences,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey)),
-                    hintText: 'Ghanaian',
-                    hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
-                    floatingLabelBehavior: FloatingLabelBehavior.never,
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.blue),
-                        borderRadius: BorderRadius.all(Radius.circular(8.0))),
-                  ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter your nationality';
-                    }
-                  },
+              TextFormField(
+                controller: _numberController,
+                keyboardType: TextInputType.number,
+                textCapitalization: TextCapitalization.sentences,
+                decoration: const InputDecoration(
+                  labelText: 'Phone Number',
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey)),
+                  hintText: 'Enter your phone number',
+                  hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
+                  floatingLabelBehavior: FloatingLabelBehavior.never,
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue),
+                      borderRadius: BorderRadius.all(Radius.circular(8.0))),
                 ),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Please enter your phone number';
+                  }
+                  if (value.length < 10) {
+                    return 'Please enter a complete number';
+                  }
+                },
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              TextFormField(
+                controller: _nationalityController,
+                keyboardType: TextInputType.text,
+                textCapitalization: TextCapitalization.sentences,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey)),
+                  hintText: 'Ghanaian',
+                  hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
+                  floatingLabelBehavior: FloatingLabelBehavior.never,
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue),
+                      borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                ),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Please enter your nationality';
+                  }
+                },
               ),
               SizedBox(
                 height: 20,
