@@ -45,6 +45,10 @@ dependencies:
   firebase_storage: ^10.2.8
   cloud_firestore: ^3.1.9
   fluttertoast: ^8.0.9
+<<<<<<< HEAD
+=======
+  flutter_screenutil: ^5.3.1
+>>>>>>> fc686cac7fd13f54923208655e86b8d23733df5b
   
 
 

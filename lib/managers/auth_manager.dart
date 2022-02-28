@@ -64,13 +64,19 @@ class AuthManager with ChangeNotifier {
     return isCreated;
   }
 
+<<<<<<< HEAD
   Future<bool> loginUser(
       {required String email, required String password}) async {
     bool isSuccessful = false;
+=======
+  Future<bool> loginUser({required email, required password}) async {
+    bool isSucessful = false;
+>>>>>>> fc686cac7fd13f54923208655e86b8d23733df5b
     await _firebaseAuth
         .signInWithEmailAndPassword(email: email, password: password)
         .then((userCredential) {
       if (userCredential.user != null) {
+<<<<<<< HEAD
         isSuccessful = true;
       } else {
         isSuccessful = false;
@@ -85,5 +91,18 @@ class AuthManager with ChangeNotifier {
       setIsLoading(false);
     });
     return isSuccessful;
+=======
+        isSucessful = false;
+      }
+    }).catchError((onError) {
+      setMesage('$onError');
+      setIsLoading(false);
+    }).timeout(const Duration(seconds: 30), onTimeout: () {
+      setMesage('Please Check your internet connection');
+      isSucessful = false;
+      setIsLoading(false);
+    });
+    return isSucessful;
+>>>>>>> fc686cac7fd13f54923208655e86b8d23733df5b
   }
 }
