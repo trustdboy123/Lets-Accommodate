@@ -3,11 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lets_accommodate/auth/login_tenant.dart';
 import 'package:lets_accommodate/managers/auth_manager.dart';
-<<<<<<< HEAD
 import 'package:lets_accommodate/tenant/categories_tenant.dart';
 import 'package:lets_accommodate/tenant/index_view.dart';
-=======
->>>>>>> fc686cac7fd13f54923208655e86b8d23733df5b
 
 class SignupTenant extends StatefulWidget {
   SignupTenant({Key? key}) : super(key: key);
@@ -24,7 +21,6 @@ class _SignupTenantState extends State<SignupTenant> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _locationController = TextEditingController();
-<<<<<<< HEAD
   final TextEditingController _nationalityController = TextEditingController();
   final TextEditingController _numberController = TextEditingController();
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey();
@@ -33,14 +29,6 @@ class _SignupTenantState extends State<SignupTenant> {
   final AuthManager _authManager = AuthManager();
 
   final emailRegExp = RegExp(r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+');
-=======
-  final TextEditingController _numberController = TextEditingController();
-  final TextEditingController _nationalityController = TextEditingController();
-  bool _isLoading = false;
-  final AuthManager _authManager = AuthManager();
-
-  final emailRegExp = RegExp(r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-z]+');
->>>>>>> fc686cac7fd13f54923208655e86b8d23733df5b
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +44,6 @@ class _SignupTenantState extends State<SignupTenant> {
           child: ListView(
             padding: EdgeInsets.all(16.0),
             children: [
-<<<<<<< HEAD
               Text('Full name'),
               SizedBox(height: 5),
               Card(
@@ -81,37 +68,12 @@ class _SignupTenantState extends State<SignupTenant> {
                     }
                     return null;
                   },
-=======
-              TextFormField(
-                controller: _nameController,
-                keyboardType: TextInputType.text,
-                textCapitalization: TextCapitalization.sentences,
-                decoration: InputDecoration(
-                  labelText: 'Full Name',
-                  labelStyle:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                  label: Icon(Icons.person),
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey)),
-                  hintText: 'Enter your full name',
-                  hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
-                  floatingLabelBehavior: FloatingLabelBehavior.never,
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue),
-                      borderRadius: BorderRadius.all(Radius.circular(8.0))),
->>>>>>> fc686cac7fd13f54923208655e86b8d23733df5b
                 ),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'please enter your full name';
-                  }
-                  return null;
-                },
+              
               ),
               SizedBox(
                 height: 10,
               ),
-<<<<<<< HEAD
               Text('E-mail'),
               SizedBox(height: 5),
               Card(
@@ -139,32 +101,8 @@ class _SignupTenantState extends State<SignupTenant> {
                       return 'Please enter an email address';
                     }
                   },
-=======
-              TextFormField(
-                controller: _emailController,
-                keyboardType: TextInputType.emailAddress,
-                textCapitalization: TextCapitalization.sentences,
-                decoration: InputDecoration(
-                  labelText: 'E-mail',
-                  label: Icon(Icons.email),
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey)),
-                  hintText: 'Enter your E-mail',
-                  hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
-                  floatingLabelBehavior: FloatingLabelBehavior.never,
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue),
-                      borderRadius: BorderRadius.all(Radius.circular(8.0))),
->>>>>>> fc686cac7fd13f54923208655e86b8d23733df5b
                 ),
-                validator: (value) {
-                  if (!emailRegExp.hasMatch(value!)) {
-                    return 'Enter a valid emanil!';
-                  }
-                  if (value.isEmpty) {
-                    return 'Please enter an email address';
-                  }
-                },
+               
               ),
               SizedBox(
                 height: 10,
@@ -196,14 +134,7 @@ class _SignupTenantState extends State<SignupTenant> {
                     }
                   },
                 ),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Please Enter Passward';
-                  }
-                  if (value.length < 6) {
-                    return 'Password should not be less than 6';
-                  }
-                },
+              
               ),
               SizedBox(
                 height: 10,
@@ -237,7 +168,6 @@ class _SignupTenantState extends State<SignupTenant> {
               SizedBox(
                 height: 10,
               ),
-<<<<<<< HEAD
               Text('Location/Digital Address'),
               SizedBox(height: 5),
               Card(
@@ -261,29 +191,8 @@ class _SignupTenantState extends State<SignupTenant> {
                       return 'Please enter your location';
                     }
                   },
-=======
-              TextFormField(
-                controller: _locationController,
-                keyboardType: TextInputType.text,
-                textCapitalization: TextCapitalization.sentences,
-                maxLines: 3,
-                decoration: const InputDecoration(
-                  labelText: 'Location/ Digital Address',
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey)),
-                  hintText: 'Enter your location/ Digital Address',
-                  hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
-                  floatingLabelBehavior: FloatingLabelBehavior.never,
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue),
-                      borderRadius: BorderRadius.all(Radius.circular(8.0))),
->>>>>>> fc686cac7fd13f54923208655e86b8d23733df5b
                 ),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Please Enter your location';
-                  }
-                },
+               
               ),
               SizedBox(
                 height: 10,
@@ -293,17 +202,10 @@ class _SignupTenantState extends State<SignupTenant> {
                 keyboardType: TextInputType.number,
                 textCapitalization: TextCapitalization.sentences,
                 decoration: const InputDecoration(
-<<<<<<< HEAD
                   border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey)),
                   hintText: 'Enter your phone number',
                   labelText: 'Phone Number',
-=======
-                  labelText: 'Phone Number',
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey)),
-                  hintText: 'Enter your phone number',
->>>>>>> fc686cac7fd13f54923208655e86b8d23733df5b
                   hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
                   floatingLabelBehavior: FloatingLabelBehavior.never,
                   focusedBorder: OutlineInputBorder(
@@ -312,11 +214,7 @@ class _SignupTenantState extends State<SignupTenant> {
                 ),
                 validator: (value) {
                   if (value!.isEmpty) {
-<<<<<<< HEAD
                     return "Please enter your Phonenumber";
-=======
-                    return 'Please enter your phone number';
->>>>>>> fc686cac7fd13f54923208655e86b8d23733df5b
                   }
                   if (value.length < 10) {
                     return 'Please enter a complete number';
@@ -326,7 +224,6 @@ class _SignupTenantState extends State<SignupTenant> {
               SizedBox(
                 height: 10,
               ),
-<<<<<<< HEAD
               Text('Nationality'),
               SizedBox(height: 5),
               Card(
@@ -348,28 +245,10 @@ class _SignupTenantState extends State<SignupTenant> {
                     if (value!.isEmpty) {
                       return 'Please enter your Nationality';
                     }
-                  },
-=======
-              TextFormField(
-                controller: _nationalityController,
-                keyboardType: TextInputType.text,
-                textCapitalization: TextCapitalization.sentences,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey)),
-                  hintText: 'Ghanaian',
-                  hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
-                  floatingLabelBehavior: FloatingLabelBehavior.never,
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue),
-                      borderRadius: BorderRadius.all(Radius.circular(8.0))),
->>>>>>> fc686cac7fd13f54923208655e86b8d23733df5b
-                ),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Please enter your nationality';
-                  }
+                  
                 },
+                ),
+                
               ),
               SizedBox(
                 height: 20,
@@ -383,7 +262,6 @@ class _SignupTenantState extends State<SignupTenant> {
                     : TextButton(
                         onPressed: () async {
                           if (_globalKey.currentState!.validate()) {
-<<<<<<< HEAD
                             String name = _nameController.text.trim();
                             String email = _emailController.text.trim();
                             String phone = _numberController.text.trim();
@@ -392,15 +270,6 @@ class _SignupTenantState extends State<SignupTenant> {
                             String nationality = _nationalityController.text;
                             String gender = dropdownValue.toString();
 
-=======
-                            String name = _nameController.text;
-                            String email = _emailController.text;
-                            String password = _passwordController.text;
-                            String location = _locationController.text;
-                            String number = _numberController.text;
-                            String nationality = _nationalityController.text;
-                            String gender = dropdownValue.toString();
->>>>>>> fc686cac7fd13f54923208655e86b8d23733df5b
                             setState(() {
                               _isLoading = true;
                             });
@@ -411,18 +280,13 @@ class _SignupTenantState extends State<SignupTenant> {
                                 password: password,
                                 gender: gender,
                                 location: location,
-<<<<<<< HEAD
                                 number: phone,
-=======
-                                number: number,
->>>>>>> fc686cac7fd13f54923208655e86b8d23733df5b
                                 nationality: nationality);
 
                             if (isCreated) {
                               setState(() {
                                 _isLoading = false;
                               });
-<<<<<<< HEAD
                               // navigatorKey.currentState!.pushAndRemoveUntil(
                               //     MaterialPageRoute(builder: (context) {
                               //   return CategoriesTenant();
@@ -434,15 +298,6 @@ class _SignupTenantState extends State<SignupTenant> {
 
                               Fluttertoast.showToast(
                                   msg: "$name, Welcome to Lets Accommodate",
-=======
-
-                              Navigator.pushAndRemoveUntil(context,
-                                  MaterialPageRoute(builder: (context) {
-                                return LoginTenant();
-                              }), (route) => false);
-                              Fluttertoast.showToast(
-                                  msg: "$name, Please Login Now",
->>>>>>> fc686cac7fd13f54923208655e86b8d23733df5b
                                   toastLength: Toast.LENGTH_SHORT,
                                   gravity: ToastGravity.CENTER,
                                   timeInSecForIosWeb: 1,
@@ -463,20 +318,11 @@ class _SignupTenantState extends State<SignupTenant> {
                           } else {
                             // validation failed
                             Fluttertoast.showToast(
-<<<<<<< HEAD
                                 msg: "Please check all fields",
                                 toastLength: Toast.LENGTH_SHORT,
                                 gravity: ToastGravity.CENTER,
                                 timeInSecForIosWeb: 1,
                                 backgroundColor: Colors.red,
-=======
-                                msg: " Please Check all fields",
-                                toastLength: Toast.LENGTH_SHORT,
-                                gravity: ToastGravity.CENTER,
-                                timeInSecForIosWeb: 1,
-                                backgroundColor:
-                                    Color.fromARGB(255, 94, 196, 97),
->>>>>>> fc686cac7fd13f54923208655e86b8d23733df5b
                                 textColor: Colors.white,
                                 fontSize: 16.0);
                           }

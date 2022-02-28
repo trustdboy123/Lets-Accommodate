@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-<<<<<<< HEAD
-=======
-
->>>>>>> fc686cac7fd13f54923208655e86b8d23733df5b
 import 'package:lets_accommodate/managers/auth_manager.dart';
 import 'package:lets_accommodate/tenant/categories_tenant.dart';
 import 'package:lets_accommodate/auth/forgot_password.dart';
@@ -19,21 +15,12 @@ class LoginTenant extends StatefulWidget {
 
 class _LoginTenantState extends State<LoginTenant> {
   final AuthManager _authManager = AuthManager();
-<<<<<<< HEAD
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final GlobalKey<FormState> _globalKey = GlobalKey();
   bool _isLoading = false;
   final emailRegExp = RegExp(r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+');
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey();
-=======
-
-  final GlobalKey<FormState> _globalKey = GlobalKey();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  bool _isLoading = false;
-  final emailRegExp = RegExp(r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-z]+');
->>>>>>> fc686cac7fd13f54923208655e86b8d23733df5b
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +32,6 @@ class _LoginTenantState extends State<LoginTenant> {
           children: [
             const SizedBox(
               height: 50,
-<<<<<<< HEAD
             ),
             const Center(
               child: Text(
@@ -131,65 +117,6 @@ class _LoginTenantState extends State<LoginTenant> {
                   }
                 },
               ),
-=======
-            ),
-            const Center(
-              child: Text(
-                'Welcome to Lets Accommodate',
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 40,
-                    fontWeight: FontWeight.w600),
-              ),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            TextFormField(
-              controller: _emailController,
-              keyboardType: TextInputType.text,
-              textCapitalization: TextCapitalization.sentences,
-              decoration: InputDecoration(
-                labelText: 'E-mail',
-                label: Icon(Icons.email),
-                border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey)),
-                hintText: 'Enter your e-mail',
-                floatingLabelBehavior: FloatingLabelBehavior.never,
-                focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue),
-                    borderRadius: BorderRadius.all(Radius.circular(4.0))),
-              ),
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return 'please enter your full name';
-                }
-              },
-            ),
-            TextFormField(
-              controller: _passwordController,
-              keyboardType: TextInputType.visiblePassword,
-              textCapitalization: TextCapitalization.sentences,
-              decoration: InputDecoration(
-                labelText: 'Password',
-                label: Icon(Icons.lock),
-                border: const OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey)),
-                hintText: 'Enter your password',
-                floatingLabelBehavior: FloatingLabelBehavior.never,
-                focusedBorder: const OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue),
-                    borderRadius: BorderRadius.all(Radius.circular(8.0))),
-              ),
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return 'please enter your password';
-                }
-                if (value.length < 6) {
-                  return 'password could not be less than 6 character';
-                }
-              },
->>>>>>> fc686cac7fd13f54923208655e86b8d23733df5b
             ),
             const SizedBox(
               height: 5,
@@ -215,11 +142,7 @@ class _LoginTenantState extends State<LoginTenant> {
             SizedBox(
               width: MediaQuery.of(context).size.width,
               child: _authManager.isLoading
-<<<<<<< HEAD
                   ? const Center(
-=======
-                  ? Center(
->>>>>>> fc686cac7fd13f54923208655e86b8d23733df5b
                       child: CircularProgressIndicator.adaptive(),
                     )
                   : TextButton(
@@ -234,15 +157,9 @@ class _LoginTenantState extends State<LoginTenant> {
                           bool isSuccessful = await _authManager.loginUser(
                               email: email, password: password);
                           if (isSuccessful) {
-<<<<<<< HEAD
                             //succcess
                             Fluttertoast.showToast(
                                 msg: "Welcome back to Lets Accommodate",
-=======
-                            //success
-                            Fluttertoast.showToast(
-                                msg: " Welcome back to Let's Accomodate",
->>>>>>> fc686cac7fd13f54923208655e86b8d23733df5b
                                 toastLength: Toast.LENGTH_SHORT,
                                 gravity: ToastGravity.BOTTOM,
                                 timeInSecForIosWeb: 1,
@@ -250,7 +167,6 @@ class _LoginTenantState extends State<LoginTenant> {
                                     Color.fromARGB(255, 94, 196, 97),
                                 textColor: Colors.white,
                                 fontSize: 16.0);
-<<<<<<< HEAD
 
                             Navigator.of(context).pushAndRemoveUntil(
                                 MaterialPageRoute(
@@ -263,18 +179,6 @@ class _LoginTenantState extends State<LoginTenant> {
                                 msg: _authManager.message,
                                 toastLength: Toast.LENGTH_SHORT,
                                 gravity: ToastGravity.BOTTOM,
-=======
-                            Navigator.of(context).pushAndRemoveUntil(
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const CategoriesTenant()),
-                                (route) => false);
-                          } else {
-                            Fluttertoast.showToast(
-                                msg: _authManager.message,
-                                toastLength: Toast.LENGTH_SHORT,
-                                gravity: ToastGravity.CENTER,
->>>>>>> fc686cac7fd13f54923208655e86b8d23733df5b
                                 timeInSecForIosWeb: 1,
                                 backgroundColor: Colors.red,
                                 textColor: Colors.white,
@@ -282,19 +186,11 @@ class _LoginTenantState extends State<LoginTenant> {
                           }
                         } else {
                           Fluttertoast.showToast(
-<<<<<<< HEAD
                               msg: "Email and password is required!",
                               toastLength: Toast.LENGTH_SHORT,
                               gravity: ToastGravity.BOTTOM,
                               timeInSecForIosWeb: 1,
                               backgroundColor: Colors.red,
-=======
-                              msg: " Email and Password is required",
-                              toastLength: Toast.LENGTH_SHORT,
-                              gravity: ToastGravity.CENTER,
-                              timeInSecForIosWeb: 1,
-                              backgroundColor: Color.fromARGB(255, 94, 196, 97),
->>>>>>> fc686cac7fd13f54923208655e86b8d23733df5b
                               textColor: Colors.white,
                               fontSize: 16.0);
                         }
