@@ -5,11 +5,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AuthManager with ChangeNotifier {
-  FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   static final FirebaseFirestore _firebaseFirestore =
       FirebaseFirestore.instance;
 
   CollectionReference userCollection = _firebaseFirestore.collection('tenants');
+  CollectionReference landlordCollection =
+      _firebaseFirestore.collection('landlord');
 
   String _message = '';
   bool _isloading = false;
@@ -22,7 +24,7 @@ class AuthManager with ChangeNotifier {
     notifyListeners();
   }
 
-  SetIsLoading(bool message) {
+  setIsLoading(bool message) {
     _isloading = isLoading;
     notifyListeners();
   }
@@ -35,12 +37,12 @@ class AuthManager with ChangeNotifier {
       required String location,
       required String number,
       required String nationality}) async {
-    SetIsLoading(true);
+    setIsLoading(true);
     bool isCreated = false;
 
     await _firebaseAuth
         .createUserWithEmailAndPassword(email: email, password: password)
-        .then((userCredential) async {
+        .then((userCredential) {
       userCollection.doc(userCredential.user!.uid).set({
         "name": name,
         " email": email,
@@ -51,13 +53,37 @@ class AuthManager with ChangeNotifier {
         "createdAt": FieldValue.serverTimestamp(),
         "uid": userCredential.user!.uid
       });
+      isCreated = true;
     }).catchError((onError) {
       setMesage('$onError');
     }).timeout(const Duration(seconds: 60), onTimeout: () {
       setMesage('Check your internet connection');
       isCreated;
-      SetIsLoading(false);
+      setIsLoading(false);
     });
     return isCreated;
+  }
+
+  Future<bool> loginUser(
+      {required String email, required String password}) async {
+    bool isSuccessful = false;
+    await _firebaseAuth
+        .signInWithEmailAndPassword(email: email, password: password)
+        .then((userCredential) {
+      if (userCredential.user != null) {
+        isSuccessful = true;
+      } else {
+        isSuccessful = false;
+      }
+    }).catchError((onError) {
+      setMesage('$onError');
+      isSuccessful = false;
+      setIsLoading(false);
+    }).timeout(const Duration(seconds: 30), onTimeout: () {
+      setMesage('please check your internet connection');
+      isSuccessful = false;
+      setIsLoading(false);
+    });
+    return isSuccessful;
   }
 }
