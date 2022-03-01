@@ -295,7 +295,7 @@ class _SignupLandlordState extends State<SignupLandlord> {
                                 location: location,
                                 number: phone,
                                 nationality: nationality,
-                                imagefile: imageFile!);
+                                imageFile: imageFile!);
                             if (isCreated) {
                               // success
                               Fluttertoast.showToast(

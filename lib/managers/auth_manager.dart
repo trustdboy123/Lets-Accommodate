@@ -93,7 +93,7 @@ class AuthManager with ChangeNotifier {
       required String location,
       required String number,
       required String nationality,
-      required File imagefile}) async {
+      required File imageFile}) async {
     setIsLoading(true);
     bool isCreated = false;
 
@@ -101,12 +101,12 @@ class AuthManager with ChangeNotifier {
         .createUserWithEmailAndPassword(email: email, password: password)
         .then((userCredential) async {
       String? photoUrl = await _fileUploadService.uploadFile(
-          file: imagefile, uid: userCredential.user!.uid);
+          file: imageFile, uid: userCredential.user!.uid);
 
       if (photoUrl != null) {
         landlordCollection.doc(userCredential.user!.uid).set({
           "name": name,
-          " email": email,
+          "email": email,
           "gender": gender,
           "location": location,
           "number": number,
@@ -117,16 +117,15 @@ class AuthManager with ChangeNotifier {
         });
         isCreated = true;
       } else {
-        setMesage('Image Upload falied');
+        setMesage('Image Upload failed');
         isCreated = false;
-        setIsLoading(false);
       }
-      isCreated = true;
     }).catchError((onError) {
       setMesage('$onError');
     }).timeout(const Duration(seconds: 60), onTimeout: () {
       setMesage('Check your internet connection');
       isCreated;
+
       setIsLoading(false);
     });
     return isCreated;
