@@ -81,9 +81,10 @@ class AuthManager with ChangeNotifier {
       }
     }).catchError((onError) {
       setMesage('$onError');
+      isSuccessful = false;
       setIsLoading(false);
     }).timeout(const Duration(seconds: 30), onTimeout: () {
-      setMesage('Please Check your internet connection');
+      setMesage('please check your internet connection');
       isSuccessful = false;
       setIsLoading(false);
     });
@@ -124,7 +125,6 @@ class AuthManager with ChangeNotifier {
       } else {
         setMesage('Image Upload failed');
         isCreated = false;
-        setIsLoading(false);
       }
       isCreated = true;
     }).catchError((onError) {
@@ -132,6 +132,7 @@ class AuthManager with ChangeNotifier {
     }).timeout(const Duration(seconds: 60), onTimeout: () {
       setMesage('Check your internet connection');
       isCreated;
+
       setIsLoading(false);
     });
     return isCreated;
