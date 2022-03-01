@@ -1,12 +1,11 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lets_accommodate/auth/login_landlord.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lets_accommodate/managers/auth_manager.dart';
-import 'package:path/path.dart';
 
 class SignupLandlord extends StatefulWidget {
   const SignupLandlord({Key? key}) : super(key: key);
@@ -27,9 +26,10 @@ class _SignupLandlordState extends State<SignupLandlord> {
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _nationalityController = TextEditingController();
   final GlobalKey<FormState> _globalKey = GlobalKey();
-  final emailRegExp = RegExp(r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-z]+');
+  final emailRegExp = RegExp(r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+');
   final AuthManager _authManager = AuthManager();
   bool _isLoading = false;
+
   Future selectedImage({ImageSource imageSource = ImageSource.camera}) async {
     XFile? profilePic = await _imagePicker.pickImage(source: imageSource);
     File profileImageFile = File(profilePic!.path);
@@ -57,13 +57,17 @@ class _SignupLandlordState extends State<SignupLandlord> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(90),
                   child: imageFile != null
-                      ? Image.file(imageFile!,
-                          height: 130, width: 130, fit: BoxFit.cover)
+                      ? Image.file(
+                          imageFile!,
+                          height: 130,
+                          width: 130,
+                          fit: BoxFit.cover,
+                        )
                       : Image.asset(
                           'assets/Profile_avatar.png',
                           height: 130,
                           width: 130,
-                          fit: BoxFit.cover,
+                          fit: BoxFit.contain,
                         ),
                 ),
               ),
@@ -73,92 +77,104 @@ class _SignupLandlordState extends State<SignupLandlord> {
                         context: context,
                         builder: (context) {
                           return SizedBox(
-                              height: 100,
-                              child: TextButton.icon(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                    selectedImage(
-                                        imageSource: ImageSource.camera);
-                                  },
-                                  icon: const Icon(Icons.camera_alt),
-                                  label: Text('Select to take a selfie')));
+                            height: 100,
+                            child: TextButton.icon(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                  selectedImage(
+                                      imageSource: ImageSource.camera);
+                                },
+                                icon: const Icon(Icons.camera_alt),
+                                label: const Text('Select to take Selfie')),
+                          );
                         });
                   },
                   icon: Icon(Icons.camera_alt),
                   label: Text('Please take a selfie')),
+              Text('Full name'),
               SizedBox(height: 5),
-              TextFormField(
-                controller: _nameController,
-                keyboardType: TextInputType.text,
-                textCapitalization: TextCapitalization.sentences,
-                decoration: const InputDecoration(
-                  labelText: 'Full Name',
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey)),
-                  hintText: 'Enter your full name',
-                  hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue),
-                      borderRadius: BorderRadius.all(Radius.circular(8.0))),
+              Card(
+                child: TextFormField(
+                  controller: _nameController,
+                  keyboardType: TextInputType.text,
+                  textCapitalization: TextCapitalization.sentences,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey)),
+                    hintText: 'Enter your full name',
+                    hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.blue),
+                        borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                  ),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter your full name';
+                    }
+                  },
                 ),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'please enter your full name';
-                  }
-                  return null;
-                },
               ),
               SizedBox(
                 height: 10,
               ),
+              Text('E-mail'),
               SizedBox(height: 5),
-              TextFormField(
-                controller: _emailController,
-                keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(
-                  labelText: 'E-mail',
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey)),
-                  hintText: 'Enter your E-mail',
-                  hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue),
-                      borderRadius: BorderRadius.all(Radius.circular(8.0))),
+              Card(
+                child: TextFormField(
+                  controller: _emailController,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: const InputDecoration(
+                    label: Icon(Icons.email),
+                    border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey)),
+                    hintText: 'Enter your E-mail',
+                    hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.blue),
+                        borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                  ),
+                  validator: (value) {
+                    if (!emailRegExp.hasMatch(value!)) {
+                      return 'Please enter a valid email';
+                    }
+                    if (value.isEmpty) {
+                      return 'Please enter Email';
+                    }
+                  },
                 ),
-                validator: (value) {
-                  if (!emailRegExp.hasMatch(value!)) {
-                    return 'Please enter a valid email';
-                  }
-                  if (value.isEmpty) {
-                    return 'Please enter email';
-                  }
-                },
               ),
               SizedBox(
                 height: 10,
               ),
-              TextFormField(
-                keyboardType: TextInputType.visiblePassword,
-                textCapitalization: TextCapitalization.sentences,
-                decoration: const InputDecoration(
-                  labelText: 'Password',
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey)),
-                  hintText: 'Enter your your password',
-                  hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue),
-                      borderRadius: BorderRadius.all(Radius.circular(8.0))),
+              Text('Password'),
+              SizedBox(height: 5),
+              Card(
+                child: TextFormField(
+                  controller: _passwordController,
+                  keyboardType: TextInputType.visiblePassword,
+                  textCapitalization: TextCapitalization.sentences,
+                  decoration: const InputDecoration(
+                    label: Icon(Icons.lock),
+                    border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey)),
+                    hintText: 'Enter your your location',
+                    hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.blue),
+                        borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                  ),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please password is required';
+                    }
+                    if (value.length < 6) {
+                      return 'Password should not be less than 6 characters';
+                    }
+                    return null;
+                  },
                 ),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Please password is required';
-                  }
-                  if (value.length < 6) {
-                    return 'Password should not be less than 6 characters';
-                  }
-                  return null;
-                },
               ),
               SizedBox(
                 height: 10,
@@ -193,77 +209,89 @@ class _SignupLandlordState extends State<SignupLandlord> {
               SizedBox(
                 height: 10,
               ),
+              Text('Location/Digital Address'),
               SizedBox(height: 5),
-              TextFormField(
-                controller: _locationController,
-                keyboardType: TextInputType.text,
-                textCapitalization: TextCapitalization.sentences,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey)),
-                  hintText: 'Enter your location/ Digital Address',
-                  hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue),
-                      borderRadius: BorderRadius.all(Radius.circular(8.0))),
+              Card(
+                child: TextFormField(
+                  controller: _locationController,
+                  keyboardType: TextInputType.text,
+                  textCapitalization: TextCapitalization.sentences,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey)),
+                    hintText: 'Enter your location/ Digital Address',
+                    hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.blue),
+                        borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                  ),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter your location';
+                    }
+                    return null;
+                  },
                 ),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return ' Please enter location';
-                  }
-                  return null;
-                },
               ),
               SizedBox(
                 height: 10,
               ),
-              TextFormField(
-                controller: _phoneController,
-                keyboardType: TextInputType.number,
-                textCapitalization: TextCapitalization.sentences,
-                decoration: const InputDecoration(
-                  labelText: 'Phone Number',
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey)),
-                  hintText: 'Enter your phone number',
-                  hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue),
-                      borderRadius: BorderRadius.all(Radius.circular(8.0))),
+              Text('Phone Number'),
+              SizedBox(height: 5),
+              Card(
+                child: TextFormField(
+                  controller: _phoneController,
+                  keyboardType: TextInputType.number,
+                  textCapitalization: TextCapitalization.sentences,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey)),
+                    hintText: 'Enter your phone number',
+                    hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.blue),
+                        borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                  ),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'PLease enter your phone number';
+                    }
+                    if (value.length < 10) {
+                      return 'phone number should not be less than 10';
+                    }
+                    return null;
+                  },
                 ),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Please enter your phone number';
-                  }
-                  if (value.length < 10) {
-                    return 'Phone number should not be less than 10';
-                  }
-                },
               ),
               SizedBox(
                 height: 10,
               ),
-              TextFormField(
-                controller: _nationalityController,
-                keyboardType: TextInputType.text,
-                textCapitalization: TextCapitalization.sentences,
-                decoration: const InputDecoration(
-                  labelText: 'Nationality',
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey)),
-                  hintText: 'Ghanaian',
-                  hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
-                  floatingLabelBehavior: FloatingLabelBehavior.never,
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue),
-                      borderRadius: BorderRadius.all(Radius.circular(8.0))),
+              Text('Nationality'),
+              SizedBox(height: 5),
+              Card(
+                child: TextFormField(
+                  controller: _nationalityController,
+                  keyboardType: TextInputType.text,
+                  textCapitalization: TextCapitalization.sentences,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey)),
+                    hintText: 'Ghanaian',
+                    hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.blue),
+                        borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                  ),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter your nationality';
+                    }
+                    return null;
+                  },
                 ),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Please enter your nationality';
-                  }
-                  return null;
-                },
               ),
               SizedBox(
                 height: 20,
@@ -284,6 +312,7 @@ class _SignupLandlordState extends State<SignupLandlord> {
                             String location = _locationController.text;
                             String nationality = _nationalityController.text;
                             String gender = dropdownValue.toString();
+
                             setState(() {
                               _isLoading = true;
                             });
@@ -297,21 +326,22 @@ class _SignupLandlordState extends State<SignupLandlord> {
                                 nationality: nationality,
                                 imageFile: imageFile!);
                             if (isCreated) {
-                              // success
+                              //success
                               Fluttertoast.showToast(
-                                  msg: "$name, Welcome to lets Accommodate",
+                                  msg: "$name, Welcome to Lets Accommodate",
                                   toastLength: Toast.LENGTH_SHORT,
                                   gravity: ToastGravity.CENTER,
                                   timeInSecForIosWeb: 1,
-                                  backgroundColor: Colors.green,
+                                  backgroundColor:
+                                      Color.fromARGB(255, 94, 196, 97),
                                   textColor: Colors.white,
                                   fontSize: 16.0);
                               Navigator.of(context).pushAndRemoveUntil(
                                   MaterialPageRoute(
-                                      builder: (Context) => LoginLandlord()),
+                                      builder: (context) => LoginLandlord()),
                                   (route) => false);
                             } else {
-                              // failure
+                              //failure
                               Fluttertoast.showToast(
                                   msg: _authManager.message,
                                   toastLength: Toast.LENGTH_SHORT,

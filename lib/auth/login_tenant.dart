@@ -15,12 +15,12 @@ class LoginTenant extends StatefulWidget {
 
 class _LoginTenantState extends State<LoginTenant> {
   final AuthManager _authManager = AuthManager();
-
-  final GlobalKey<FormState> _globalKey = GlobalKey();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final GlobalKey<FormState> _globalKey = GlobalKey();
   bool _isLoading = false;
-  final emailRegExp = RegExp(r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-z]+');
+  final emailRegExp = RegExp(r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+');
+  final GlobalKey<NavigatorState> navigatorKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class _LoginTenantState extends State<LoginTenant> {
             ),
             const Center(
               child: Text(
-                'Welcome ',
+                'Welcome',
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 40,
@@ -45,51 +45,78 @@ class _LoginTenantState extends State<LoginTenant> {
             const SizedBox(
               height: 30,
             ),
-            TextFormField(
-              controller: _emailController,
-              keyboardType: TextInputType.text,
-              textCapitalization: TextCapitalization.sentences,
-              decoration: InputDecoration(
-                labelText: 'E-mail',
-                border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey)),
-                hintText: 'Enter your e-mail',
-                floatingLabelBehavior: FloatingLabelBehavior.never,
-                focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue),
-                    borderRadius: BorderRadius.all(Radius.circular(4.0))),
-              ),
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return 'please enter your full name';
-                }
-              },
+            const Text(
+              'E-mail',
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600),
+              textAlign: TextAlign.left,
             ),
             SizedBox(
-              height: 10,
+              height: 5,
             ),
-            TextFormField(
-              controller: _passwordController,
-              keyboardType: TextInputType.visiblePassword,
-              textCapitalization: TextCapitalization.sentences,
-              decoration: InputDecoration(
-                labelText: 'Password',
-                border: const OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey)),
-                hintText: 'Enter your password',
-                floatingLabelBehavior: FloatingLabelBehavior.never,
-                focusedBorder: const OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue),
-                    borderRadius: BorderRadius.all(Radius.circular(8.0))),
+            Card(
+              child: TextFormField(
+                controller: _emailController,
+                keyboardType: TextInputType.text,
+                textCapitalization: TextCapitalization.sentences,
+                decoration: const InputDecoration(
+                  label: Icon(Icons.email),
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey)),
+                  hintText: 'Enter your e-mail',
+                  floatingLabelBehavior: FloatingLabelBehavior.never,
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue),
+                      borderRadius: BorderRadius.all(Radius.circular(4.0))),
+                ),
+                validator: (value) {
+                  if (!emailRegExp.hasMatch(value!)) {
+                    return 'Enter a valid email!';
+                  }
+
+                  if (value.isEmpty) {
+                    return 'Please enter an email address';
+                  }
+                },
               ),
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return 'please enter your password';
-                }
-                if (value.length < 6) {
-                  return 'password could not be less than 6 character';
-                }
-              },
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            const Text('Password',
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600)),
+            SizedBox(
+              height: 5,
+            ),
+            Card(
+              child: TextFormField(
+                controller: _passwordController,
+                keyboardType: TextInputType.visiblePassword,
+                textCapitalization: TextCapitalization.sentences,
+                decoration: const InputDecoration(
+                  label: Icon(Icons.lock),
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey)),
+                  hintText: 'Enter your password',
+                  floatingLabelBehavior: FloatingLabelBehavior.never,
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue),
+                      borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                ),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Please Enter a password';
+                  }
+                  if (value.length < 6) {
+                    return 'Password should not be less than 6 characters';
+                  }
+                },
+              ),
             ),
             const SizedBox(
               height: 5,
@@ -115,7 +142,7 @@ class _LoginTenantState extends State<LoginTenant> {
             SizedBox(
               width: MediaQuery.of(context).size.width,
               child: _authManager.isLoading
-                  ? Center(
+                  ? const Center(
                       child: CircularProgressIndicator.adaptive(),
                     )
                   : TextButton(
@@ -130,9 +157,9 @@ class _LoginTenantState extends State<LoginTenant> {
                           bool isSuccessful = await _authManager.loginUser(
                               email: email, password: password);
                           if (isSuccessful) {
-                            //success
+                            //succcess
                             Fluttertoast.showToast(
-                                msg: " Welcome back to Let's Accomodate",
+                                msg: "Welcome back to Lets Accommodate",
                                 toastLength: Toast.LENGTH_SHORT,
                                 gravity: ToastGravity.BOTTOM,
                                 timeInSecForIosWeb: 1,
@@ -140,15 +167,18 @@ class _LoginTenantState extends State<LoginTenant> {
                                     Color.fromARGB(255, 94, 196, 97),
                                 textColor: Colors.white,
                                 fontSize: 16.0);
+
                             Navigator.of(context).pushAndRemoveUntil(
                                 MaterialPageRoute(
-                                    builder: (context) => const IndexView()),
+                                    builder: (context) =>
+                                        const IndexView()),
                                 (route) => false);
                           } else {
+                            //failure
                             Fluttertoast.showToast(
                                 msg: _authManager.message,
                                 toastLength: Toast.LENGTH_SHORT,
-                                gravity: ToastGravity.CENTER,
+                                gravity: ToastGravity.BOTTOM,
                                 timeInSecForIosWeb: 1,
                                 backgroundColor: Colors.red,
                                 textColor: Colors.white,
@@ -156,11 +186,11 @@ class _LoginTenantState extends State<LoginTenant> {
                           }
                         } else {
                           Fluttertoast.showToast(
-                              msg: " Email and Password is required",
+                              msg: "Email and password is required!",
                               toastLength: Toast.LENGTH_SHORT,
-                              gravity: ToastGravity.CENTER,
+                              gravity: ToastGravity.BOTTOM,
                               timeInSecForIosWeb: 1,
-                              backgroundColor: Color.fromARGB(255, 94, 196, 97),
+                              backgroundColor: Colors.red,
                               textColor: Colors.white,
                               fontSize: 16.0);
                         }

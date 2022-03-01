@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lets_accommodate/auth/login_tenant.dart';
 import 'package:lets_accommodate/managers/auth_manager.dart';
+import 'package:lets_accommodate/tenant/categories_tenant.dart';
+import 'package:lets_accommodate/tenant/index_view.dart';
 
 class SignupTenant extends StatefulWidget {
   SignupTenant({Key? key}) : super(key: key);
@@ -19,12 +21,14 @@ class _SignupTenantState extends State<SignupTenant> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _locationController = TextEditingController();
-  final TextEditingController _numberController = TextEditingController();
   final TextEditingController _nationalityController = TextEditingController();
+  final TextEditingController _numberController = TextEditingController();
+  final GlobalKey<NavigatorState> navigatorKey = GlobalKey();
   bool _isLoading = false;
+
   final AuthManager _authManager = AuthManager();
 
-  final emailRegExp = RegExp(r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-z]+');
+  final emailRegExp = RegExp(r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+');
 
   @override
   Widget build(BuildContext context) {
@@ -57,12 +61,7 @@ class _SignupTenantState extends State<SignupTenant> {
                       borderSide: BorderSide(color: Colors.blue),
                       borderRadius: BorderRadius.all(Radius.circular(8.0))),
                 ),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'please enter your full name';
-                  }
-                  return null;
-                },
+              
               ),
               SizedBox(
                 height: 10,
@@ -82,14 +81,7 @@ class _SignupTenantState extends State<SignupTenant> {
                       borderSide: BorderSide(color: Colors.blue),
                       borderRadius: BorderRadius.all(Radius.circular(8.0))),
                 ),
-                validator: (value) {
-                  if (!emailRegExp.hasMatch(value!)) {
-                    return 'Enter a valid emanil!';
-                  }
-                  if (value.isEmpty) {
-                    return 'Please enter an email address';
-                  }
-                },
+               
               ),
               SizedBox(
                 height: 10,
@@ -166,11 +158,7 @@ class _SignupTenantState extends State<SignupTenant> {
                       borderSide: BorderSide(color: Colors.blue),
                       borderRadius: BorderRadius.all(Radius.circular(8.0))),
                 ),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Please Enter your location';
-                  }
-                },
+               
               ),
               SizedBox(
                 height: 10,
@@ -221,7 +209,9 @@ class _SignupTenantState extends State<SignupTenant> {
                     return 'Please enter your nationality';
                   }
                 },
-              ),
+                ),
+                
+              
               SizedBox(
                 height: 20,
               ),
