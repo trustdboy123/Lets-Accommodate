@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lets_accommodate/managers/auth_manager.dart';
-import 'package:lets_accommodate/tenant/categories_tenant.dart';
 import 'package:lets_accommodate/auth/forgot_password.dart';
 import 'package:lets_accommodate/auth/signup_tenant.dart';
 import 'package:lets_accommodate/tenant/index_view.dart';
@@ -96,8 +95,9 @@ class _LoginTenantState extends State<LoginTenant> {
             Card(
               child: TextFormField(
                 controller: _passwordController,
+                obscureText: true,
+                obscuringCharacter: '*',
                 keyboardType: TextInputType.visiblePassword,
-                textCapitalization: TextCapitalization.sentences,
                 decoration: const InputDecoration(
                   label: Icon(Icons.lock),
                   border: OutlineInputBorder(
@@ -170,8 +170,7 @@ class _LoginTenantState extends State<LoginTenant> {
 
                             Navigator.of(context).pushAndRemoveUntil(
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        const IndexView()),
+                                    builder: (context) => const IndexView()),
                                 (route) => false);
                           } else {
                             //failure
