@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lets_accommodate/landlord/add_details_page.dart';
 
 import 'auth/decision.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';

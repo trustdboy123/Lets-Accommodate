@@ -37,22 +37,25 @@ class Decision extends StatelessWidget {
             const SizedBox(
               height: 40,
             ),
-            SizedBox(
-              height: 50,
-              width: MediaQuery.of(context).size.width,
-              child: TextButton(
-                onPressed: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) {
-                    return const LoginTenant();
-                  }));
-                },
-                style: TextButton.styleFrom(backgroundColor: Colors.blue),
-                child: const Text(
-                  'Tenant',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 30,
+            Card(
+              elevation: 10,
+              child: SizedBox(
+                height: 50,
+                width: MediaQuery.of(context).size.width,
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (context) {
+                      return const LoginTenant();
+                    }));
+                  },
+                  style: TextButton.styleFrom(backgroundColor: Colors.blue),
+                  child: const Text(
+                    'Tenant',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 30,
+                    ),
                   ),
                 ),
               ),
@@ -60,21 +63,24 @@ class Decision extends StatelessWidget {
             SizedBox(
               height: 40,
             ),
-            SizedBox(
-              height: 50,
-              width: MediaQuery.of(context).size.width,
-              child: TextButton(
-                  onPressed: () {
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (context) {
-                      return const LoginLandlord();
-                    }));
-                  },
-                  style: TextButton.styleFrom(backgroundColor: Colors.blue),
-                  child: Text(
-                    'Landlord',
-                    style: TextStyle(color: Colors.white, fontSize: 30),
-                  )),
+            Card(
+              elevation: 10,
+              child: SizedBox(
+                height: 50,
+                width: MediaQuery.of(context).size.width,
+                child: TextButton(
+                    onPressed: () {
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(builder: (context) {
+                        return const LoginLandlord();
+                      }));
+                    },
+                    style: TextButton.styleFrom(backgroundColor: Colors.blue),
+                    child: Text(
+                      'Landlord',
+                      style: TextStyle(color: Colors.white, fontSize: 30),
+                    )),
+              ),
             ),
             SizedBox(
               height: 100,

@@ -42,32 +42,26 @@ class _LoginTenantState extends State<LoginTenant> {
               ),
             ),
             const SizedBox(
-              height: 30,
-            ),
-            const Text(
-              'E-mail',
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600),
-              textAlign: TextAlign.left,
+              height: 35,
             ),
             SizedBox(
               height: 5,
             ),
             Card(
+              elevation: 5,
               child: TextFormField(
                 controller: _emailController,
                 keyboardType: TextInputType.text,
                 textCapitalization: TextCapitalization.sentences,
                 decoration: const InputDecoration(
-                  label: Icon(Icons.email),
+                  labelText: 'E-mail',
+                  labelStyle: TextStyle(fontWeight: FontWeight.w600),
                   border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey)),
                   hintText: 'Enter your e-mail',
                   floatingLabelBehavior: FloatingLabelBehavior.never,
                   focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue),
+                      borderSide: BorderSide(color: Colors.black),
                       borderRadius: BorderRadius.all(Radius.circular(4.0))),
                 ),
                 validator: (value) {
@@ -82,30 +76,24 @@ class _LoginTenantState extends State<LoginTenant> {
               ),
             ),
             const SizedBox(
-              height: 5,
-            ),
-            const Text('Password',
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600)),
-            SizedBox(
-              height: 5,
+              height: 20,
             ),
             Card(
+              elevation: 10,
               child: TextFormField(
                 controller: _passwordController,
                 obscureText: true,
                 obscuringCharacter: '*',
                 keyboardType: TextInputType.visiblePassword,
                 decoration: const InputDecoration(
-                  label: Icon(Icons.lock),
+                  labelText: 'Password',
+                  labelStyle: TextStyle(fontWeight: FontWeight.w600),
                   border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey)),
                   hintText: 'Enter your password',
                   floatingLabelBehavior: FloatingLabelBehavior.never,
                   focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue),
+                      borderSide: BorderSide(color: Colors.black),
                       borderRadius: BorderRadius.all(Radius.circular(8.0))),
                 ),
                 validator: (value) {

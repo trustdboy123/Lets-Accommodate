@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:lets_accommodate/landlord/Settings%20landlord/setting_landlord.dart';
 import 'package:lets_accommodate/landlord/add_details_page.dart';
@@ -115,7 +113,7 @@ class DashboardView extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-            return AddDetailsView();
+            return AddImage();
           }));
         },
         child: Icon(
