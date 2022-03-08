@@ -5,14 +5,17 @@ import 'package:lets_accommodate/tenant/details.dart';
 import 'package:lets_accommodate/tenant/comments_tenants.dart';
 
 class SingleRoom extends StatelessWidget {
-  SingleRoom({Key? key}) : super(key: key);
+  final String category;
+
+  SingleRoom({required this.category});
+  // SingleRoom({Key? key}) : super(key: key);
   final PostManager _postManager = PostManager();
   TextEditingController? _textEditingController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text('Single Rooms'),
+          title: Text(category),
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(60),
             child: Padding(
@@ -40,7 +43,7 @@ class SingleRoom extends StatelessWidget {
             ),
           )),
       body: StreamBuilder<QuerySnapshot<Map<String, dynamic>?>>(
-          stream: _postManager.getSingleRooms(),
+          stream: _postManager.getSingleRooms(category: category),
           builder: (context, snapshot) {
             return ListView.separated(
                 itemBuilder: (context, index) {
@@ -54,7 +57,10 @@ class SingleRoom extends StatelessWidget {
                   if (snapshot.connectionState == ConnectionState.done &&
                       snapshot.data == null) {
                     return const Center(
-                      child: Text('No data is available'),
+                      child: Text(
+                        'No data is available',
+                        style: TextStyle(color: Colors.black),
+                      ),
                     );
                   }
                   return Card(
@@ -94,8 +100,7 @@ class SingleRoom extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    snapshot.data!.docs[index]
-                                        .data()!['price']!,
+                                    snapshot.data!.docs[index].data()!['price'],
                                     style: TextStyle(
                                       fontSize: 15,
                                       fontWeight: FontWeight.w600,
@@ -136,8 +141,8 @@ class SingleRoom extends StatelessWidget {
                                 },
                                 icon: Icon(Icons.comment_outlined)),
                             Spacer(),
-                            Text(snapshot.data!.docs[index]
-                                .data()!['city/town']!)
+                            Text(
+                                snapshot.data!.docs[index].data()!['city/Town'])
                           ],
                         ),
                       )

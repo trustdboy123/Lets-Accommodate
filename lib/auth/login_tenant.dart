@@ -3,7 +3,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lets_accommodate/managers/auth_manager.dart';
 import 'package:lets_accommodate/auth/forgot_password.dart';
 import 'package:lets_accommodate/auth/signup_tenant.dart';
+import 'package:lets_accommodate/tenant/categories_tenant.dart';
 import 'package:lets_accommodate/tenant/index_view.dart';
+import 'package:lets_accommodate/tenant/single%20room/single_room.dart';
 
 class LoginTenant extends StatefulWidget {
   const LoginTenant({Key? key}) : super(key: key);
@@ -158,7 +160,7 @@ class _LoginTenantState extends State<LoginTenant> {
 
                             Navigator.of(context).pushAndRemoveUntil(
                                 MaterialPageRoute(
-                                    builder: (context) => const IndexView()),
+                                    builder: (context) => CategoriesTenant()),
                                 (route) => false);
                           } else {
                             //failure

@@ -50,7 +50,7 @@ class FileUploadService {
         TaskSnapshot snapshot = await storageUploadTask
             .whenComplete(() => storageRef.getDownloadURL());
 
-        return await snapshot.ref.getDownloadURL().then((value) {});
+        return await snapshot.ref.getDownloadURL();
       }
     } on FirebaseException catch (e) {
       print('####### $e');

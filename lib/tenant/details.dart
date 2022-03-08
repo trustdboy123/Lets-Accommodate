@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:lets_accommodate/services/post_manager.dart';
 import 'package:lets_accommodate/tenant/categories_tenant.dart';
 import 'package:lets_accommodate/tenant/landlord_details.dart';
 
 class Details extends StatelessWidget {
-  const Details({Key? key}) : super(key: key);
+   Details({Key? key}) : super(key: key);
+
+  final PostManager _postManager = PostManager();
 
   @override
   Widget build(BuildContext context) {

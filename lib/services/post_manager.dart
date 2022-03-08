@@ -94,9 +94,21 @@ class PostManager with ChangeNotifier {
     return isSubmited;
   }
 
-  Stream<QuerySnapshot<Map<String, dynamic>?>> getSingleRooms() {
+  Stream<QuerySnapshot<Map<String, dynamic>?>> getSingleRooms(
+      {required String category}) {
     return _uploadsCollection
-        .where('category', isEqualTo: 'Single Room')
+        .where('category', isEqualTo: category)
+        .snapshots();
+  }
+
+  Stream<QuerySnapshot<Map<String, dynamic>?>> getRoomDetails(
+      ) {
+    return _uploadsCollection.snapshots();
+  }
+
+  Stream<QuerySnapshot<Map<String, dynamic>?>> getAllPost() {
+    return _uploadsCollection
+        .orderBy('createdAt', descending: true)
         .snapshots();
   }
 }

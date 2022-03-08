@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:lets_accommodate/tenant/Two%20bedroom%20plus/twobedroom_plus.dart';
-import 'package:lets_accommodate/tenant/chamber%20and%20hall/chamber_hall.dart';
 import 'package:lets_accommodate/tenant/single%20room/single_room.dart';
-import 'package:lets_accommodate/tenant/two%20bedroom/two_bedroom.dart';
+
 
 class CategoriesTenant extends StatelessWidget {
+  
   const CategoriesTenant({Key? key}) : super(key: key);
 
   @override
@@ -23,7 +22,7 @@ class CategoriesTenant extends StatelessWidget {
                 onTap: () {
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
-                    return SingleRoom();
+                    return SingleRoom(category: 'Single Room',);
                   }));
                 },
                 child: Card(
@@ -63,7 +62,7 @@ class CategoriesTenant extends StatelessWidget {
                 onTap: () {
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
-                    return ChamberHall();
+                    return SingleRoom(category: 'Chamber and Hall');
                   }));
                 },
                 child: Card(
@@ -103,7 +102,7 @@ class CategoriesTenant extends StatelessWidget {
                 onTap: () {
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
-                    return TwoBedroom();
+                    return SingleRoom(category: 'Two Bedroom');
                   }));
                 },
                 child: Card(
@@ -143,7 +142,7 @@ class CategoriesTenant extends StatelessWidget {
                 onTap: () {
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
-                    return TwobedroomPlus();
+                    return SingleRoom(category: 'Two Bedroom Plus');
                   }));
                 },
                 child: Card(
