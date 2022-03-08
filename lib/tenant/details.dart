@@ -1,12 +1,36 @@
+import 'dart:ffi';
+
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:lets_accommodate/services/post_manager.dart';
 import 'package:lets_accommodate/tenant/categories_tenant.dart';
 import 'package:lets_accommodate/tenant/landlord_details.dart';
 
-class Details extends StatelessWidget {
-   Details({Key? key}) : super(key: key);
+class Details extends StatefulWidget {
+  Details({Key? key}) : super(key: key);
 
+  @override
+  State<Details> createState() => _DetailsState();
+}
+
+class _DetailsState extends State<Details> {
   final PostManager _postManager = PostManager();
+  PageController _pageController = PageController();
+  var _currentPageValue = 0.0;
+  @override
+  void initState() {
+    super.initState();
+    _pageController.addListener(() {
+      setState(() {
+        _currentPageValue = _pageController.page!;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,31 +43,25 @@ class Details extends StatelessWidget {
           padding: EdgeInsets.all(15),
           child: Column(
             children: [
-              SizedBox(
-                width: MediaQuery.of(context).size.width,
-                height: 250,
-                child: ListView.separated(
-                    controller: ScrollController(initialScrollOffset: 0),
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (contex, index) {
-                      return Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: 200,
-                        color: Colors.black,
-                        child: Image.network(
-                          'https://images.unsplash.com/photo-1589834390005-5d4fb9bf3d32?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80',
-                          fit: BoxFit.fill,
-                          height: 250,
-                          width: double.infinity,
-                        ),
-                      );
+              Container(
+                  height: 250,
+                  child: PageView.builder(
+                    controller: _pageController,
+                    itemCount: 5,
+                    itemBuilder: (context, positon) {
+                      return imagesView();
                     },
-                    separatorBuilder: (context, index) {
-                      return SizedBox(
-                        width: 10,
-                      );
-                    },
-                    itemCount: 5),
+                  )),
+              DotsIndicator(
+                dotsCount: 5,
+                position: _currentPageValue,
+                decorator: DotsDecorator(
+                    color: Colors.black87,
+                    activeColor: Colors.blueAccent,
+                    activeSize: Size(18.0, 9.0),
+                    size: Size.square(9.0),
+                    activeShape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10))),
               ),
               const SizedBox(
                 height: 10,
@@ -357,5 +375,29 @@ class Details extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class imagesView extends StatelessWidget {
+  const imagesView({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+        width: MediaQuery.of(context).size.width,
+        height: 240,
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          height: 200,
+          color: Colors.black,
+          child: Image.network(
+            'https://images.unsplash.com/photo-1589834390005-5d4fb9bf3d32?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80',
+            fit: BoxFit.fill,
+            height: 250,
+            width: double.infinity,
+          ),
+        ));
   }
 }
