@@ -72,6 +72,7 @@ class PostManager with ChangeNotifier {
         "size": size,
         "region": region,
         "city/Town": citytown,
+        "porch": porch,
         "digital Address": digitalAddress,
         "house Number": houseNumber,
         "picture": photoUrl,
@@ -101,14 +102,15 @@ class PostManager with ChangeNotifier {
         .snapshots();
   }
 
-  Stream<QuerySnapshot<Map<String, dynamic>?>> getRoomDetails(
-      ) {
-    return _uploadsCollection.snapshots();
+  Stream<DocumentSnapshot<Map<String, dynamic>>> getRoomDetails(
+      {required String docID}) {
+    return _uploadsCollection.doc(docID).snapshots();
   }
 
-  Stream<QuerySnapshot<Map<String, dynamic>?>> getAllPost() {
-    return _uploadsCollection
-        .orderBy('createdAt', descending: true)
-        .snapshots();
-  }
+  // Stream<QuerySnapshot<Map<String, dynamic>?>> getAllPost() {
+  //   return _uploadsCollection
+  //       .orderBy('createdAt', descending: true)
+  //       .snapshots();
+  // }
+
 }

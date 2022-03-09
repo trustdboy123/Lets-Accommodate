@@ -21,10 +21,10 @@ class FavouriteTenant extends StatelessWidget {
                   children: [
                     InkWell(
                       onTap: () {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute(builder: (context) {
-                          return Details();
-                        }));
+                        // Navigator.of(context)
+                        //     .push(MaterialPageRoute(builder: (context) {
+                        //   return Details();
+                        // }));
                       },
                       child: Card(
                         shape: RoundedRectangleBorder(
