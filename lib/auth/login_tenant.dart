@@ -138,8 +138,8 @@ class _LoginTenantState extends State<LoginTenant> {
                   : TextButton(
                       onPressed: () async {
                         if (_globalKey.currentState!.validate()) {
-                          String email = _emailController.text;
-                          String password = _passwordController.text;
+                          String email = _emailController.text.trim();
+                          String password = _passwordController.text.trim();
                           setState(() {
                             _isLoading = true;
                           });
@@ -160,7 +160,7 @@ class _LoginTenantState extends State<LoginTenant> {
 
                             Navigator.of(context).pushAndRemoveUntil(
                                 MaterialPageRoute(
-                                    builder: (context) => CategoriesTenant()),
+                                    builder: (context) => IndexView()),
                                 (route) => false);
                           } else {
                             //failure
