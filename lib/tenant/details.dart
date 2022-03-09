@@ -42,6 +42,20 @@ class _DetailsState extends State<Details> {
         child: StreamBuilder<DocumentSnapshot<Map<String, dynamic>?>>(
             stream: _postManager.getRoomDetails(docID: widget.docId),
             builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting &&
+                  snapshot.data == null) {
+                return const Center(
+                  child: CircularProgressIndicator.adaptive(),
+                );
+              }
+              if (snapshot.connectionState == ConnectionState.done &&
+                  snapshot.data == null) {
+                return const Center(
+                  child: Text('No data is available'),
+                );
+              }
+              var userId = snapshot.data!.data()!['user_id'];
+              print('user ID $userId');
               return SingleChildScrollView(
                 padding: EdgeInsets.all(15),
                 child: Column(
@@ -361,7 +375,7 @@ class _DetailsState extends State<Details> {
                             onPressed: () {
                               Navigator.of(context)
                                   .push(MaterialPageRoute(builder: (context) {
-                                return const LandlordDetails();
+                                return LandlordDetails(userId: userId,);
                               }));
                             },
                             style: TextButton.styleFrom(
@@ -387,6 +401,18 @@ class _DetailsState extends State<Details> {
     return StreamBuilder<DocumentSnapshot<Map<String, dynamic>?>>(
         stream: _postManager.getRoomDetails(docID: widget.docId),
         builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting &&
+              snapshot.data == null) {
+            return const Center(
+              child: CircularProgressIndicator.adaptive(),
+            );
+          }
+          if (snapshot.connectionState == ConnectionState.done &&
+              snapshot.data == null) {
+            return const Center(
+              child: Text('No data is available'),
+            );
+          }
           return SizedBox(
               width: MediaQuery.of(context).size.width,
               height: 240,

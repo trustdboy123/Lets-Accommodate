@@ -47,9 +47,11 @@ class SingleRoom extends StatelessWidget {
       body: StreamBuilder<QuerySnapshot<Map<String, dynamic>?>>(
           stream: _postManager.getSingleRooms(category: category),
           builder: (context, snapshot) {
+            
             return ListView.separated(
                 itemBuilder: (context, index) {
                   var docId = snapshot.data!.docs[index].id;
+                  var userId = snapshot.data!.docs[index].data()!['user_id'];
                   if (snapshot.connectionState == ConnectionState.waiting &&
                       snapshot.data == null) {
                     return const Center(

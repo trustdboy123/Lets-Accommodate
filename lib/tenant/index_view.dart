@@ -29,6 +29,9 @@ class _IndexViewState extends State<IndexView> {
         Navigator.pushAndRemoveUntil(context,
             MaterialPageRoute(builder: (_) => LoginTenant()), (route) => false);
       }
+      if (user != null) {
+        print(user.uid);
+      }
     });
   }
 

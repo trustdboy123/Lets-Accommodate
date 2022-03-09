@@ -18,6 +18,8 @@ class PostManager with ChangeNotifier {
       _firebaseFirestore.collection("landlord");
   final CollectionReference<Map<String, dynamic>> _uploadsCollection =
       _firebaseFirestore.collection('uploads');
+      final CollectionReference<Map<String, dynamic>> _tenantsCollection =
+      _firebaseFirestore.collection('tenants');
 
   String _message = '';
   bool _isLoading = false;
@@ -107,10 +109,34 @@ class PostManager with ChangeNotifier {
     return _uploadsCollection.doc(docID).snapshots();
   }
 
-  // Stream<QuerySnapshot<Map<String, dynamic>?>> getAllPost() {
-  //   return _uploadsCollection
-  //       .orderBy('createdAt', descending: true)
-  //       .snapshots();
-  // }
+  Future<Map<String, dynamic>?> getUserInfo(String userUid) async {
+    Map<String, dynamic>? userData;
+    await _landlordCollection
+        .doc(userUid)
+        .get()
+        .then((DocumentSnapshot<Map<String, dynamic>> doc) {
+      if (doc.exists) {
+        userData = doc.data();
+      } else {
+        userData = null;
+      }
+    });
+    return userData;
+  }
 
+Future<Map<String, dynamic>?> getTenantInfo(String userUid) async {
+    Map<String, dynamic>? userData;
+    await _tenantsCollection
+        .doc(userUid)
+        .get()
+        .then((DocumentSnapshot<Map<String, dynamic>> doc) {
+      if (doc.exists) {
+        userData = doc.data();
+      } else {
+        userData = null;
+      }
+    });
+    return userData;
+  }
+  
 }
