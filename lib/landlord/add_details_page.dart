@@ -52,20 +52,7 @@ class _AddImageState extends State<AddImage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Add Image'),
-          actions: [
-            FlatButton(
-                onPressed: () {
-                  setState(() {
-                    uploading = true;
-                  });
-                  uploadFile().whenComplete(() => Navigator.of(context).pop());
-                },
-                child: Text(
-                  'upload',
-                  style: TextStyle(color: Colors.white),
-                ))
-          ],
+          title: Text('Add Details'),
         ),
         body: SafeArea(
           child: Form(
@@ -85,7 +72,7 @@ class _AddImageState extends State<AddImage> {
                           return index == 0
                               ? Center(
                                   child: IconButton(
-                                      icon: Icon(Icons.add),
+                                      icon: Icon(Icons.add_a_photo),
                                       onPressed: () => chooseImage()),
                                 )
                               : Container(
@@ -588,7 +575,7 @@ class _AddImageState extends State<AddImage> {
                                 labelText: 'House Number',
                               )),
                           SizedBox(
-                            width: double.infinity,
+                            width: MediaQuery.of(context).size.width,
                             child: TextButton(
                               onPressed: () async {
                                 if (_formKey.currentState!.validate()) {
