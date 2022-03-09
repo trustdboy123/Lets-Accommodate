@@ -10,7 +10,9 @@ class SingleRoom extends StatelessWidget {
   SingleRoom({required this.category});
   // SingleRoom({Key? key}) : super(key: key);
   final PostManager _postManager = PostManager();
-  TextEditingController? _textEditingController = TextEditingController();
+  final TextEditingController? _textEditingController = TextEditingController();
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,6 +49,7 @@ class SingleRoom extends StatelessWidget {
           builder: (context, snapshot) {
             return ListView.separated(
                 itemBuilder: (context, index) {
+                  var docId = snapshot.data!.docs[index].id;
                   if (snapshot.connectionState == ConnectionState.waiting &&
                       snapshot.data == null) {
                     return const Center(
@@ -70,10 +73,15 @@ class SingleRoom extends StatelessWidget {
                         alignment: const Alignment(-1, -1),
                         children: [
                           InkWell(
-                            onTap: () {
+                            onTap: () async {
+                              
+                              print('***$docId');
+
                               Navigator.of(context)
                                   .push(MaterialPageRoute(builder: (context) {
-                                return Details();
+                                return Details(
+                                  docId: docId,
+                                );
                               }));
                             },
                             child: Card(
@@ -100,7 +108,7 @@ class SingleRoom extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    snapshot.data!.docs[index].data()!['price'],
+                                    "${snapshot.data!.docs[index].data()!['price']} /Month",
                                     style: TextStyle(
                                       fontSize: 15,
                                       fontWeight: FontWeight.w600,
