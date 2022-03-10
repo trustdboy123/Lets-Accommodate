@@ -18,7 +18,7 @@ class PostManager with ChangeNotifier {
       _firebaseFirestore.collection("landlord");
   final CollectionReference<Map<String, dynamic>> _uploadsCollection =
       _firebaseFirestore.collection('uploads');
-      final CollectionReference<Map<String, dynamic>> _tenantsCollection =
+  final CollectionReference<Map<String, dynamic>> _tenantsCollection =
       _firebaseFirestore.collection('tenants');
 
   String _message = '';
@@ -109,6 +109,44 @@ class PostManager with ChangeNotifier {
     return _uploadsCollection.doc(docID).snapshots();
   }
 
+  Future updateRoomDetails(
+      {required String docID,
+      String? kitchen,
+      String? washroom,
+      String? storeRoom,
+      String? walledHouse,
+      String? tiled,
+      String? porch,
+      String? electricity,
+      String? waterAvailability,
+      String? price,
+      String? size,
+      String? region,
+      String? citytown,
+      String? digitalAddress,
+      String? houseNumber}) {
+    return _uploadsCollection.doc(docID).update({
+      "kitchen": kitchen,
+      "washroom": washroom,
+      "store Room": storeRoom,
+      "walled House": walledHouse,
+      "tiled": tiled,
+      "electricity": electricity,
+      "water Availability": waterAvailability,
+      "price": price,
+      "size": size,
+      "region": region,
+      "city/Town": citytown,
+      "porch": porch,
+      "digital Address": digitalAddress,
+      "house Number": houseNumber,
+    }).then((value) {
+      return value;
+    }).catchError((error) {
+      SetMessage(error);
+    });
+  }
+
   Future<Map<String, dynamic>?> getUserInfo(String userUid) async {
     Map<String, dynamic>? userData;
     await _landlordCollection
@@ -124,7 +162,7 @@ class PostManager with ChangeNotifier {
     return userData;
   }
 
-Future<Map<String, dynamic>?> getTenantInfo(String userUid) async {
+  Future<Map<String, dynamic>?> getTenantInfo(String userUid) async {
     Map<String, dynamic>? userData;
     await _tenantsCollection
         .doc(userUid)
@@ -138,5 +176,4 @@ Future<Map<String, dynamic>?> getTenantInfo(String userUid) async {
     });
     return userData;
   }
-  
 }
