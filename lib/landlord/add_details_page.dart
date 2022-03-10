@@ -622,7 +622,7 @@ class _AddImageState extends State<AddImage> {
                                     Navigator.of(context).pushAndRemoveUntil(
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                const DashboardView()),
+                                                 DashboardView()),
                                         (route) => false);
                                   } else {
                                     Fluttertoast.showToast(

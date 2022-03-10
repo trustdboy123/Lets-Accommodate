@@ -15,7 +15,7 @@ class EditProfileTenant extends StatefulWidget {
 class _EditProfileTenantState extends State<EditProfileTenant> {
   File? _profilePic;
   final ImagePicker _imagePicker = ImagePicker();
-  PostManager _postManager = PostManager();
+  final PostManager _postManager = PostManager();
   final String uid = FirebaseAuth.instance.currentUser!.uid;
 
   Future selectImage({ImageSource imageSource = ImageSource.camera}) async {

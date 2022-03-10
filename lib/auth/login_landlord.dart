@@ -164,7 +164,7 @@ class _LoginLandlordState extends State<LoginLandlord> {
 
                         Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
-                                builder: (context) => const DashboardView()),
+                                builder: (context) =>  DashboardView()),
                             (route) => false);
                       } else {
                         //failure

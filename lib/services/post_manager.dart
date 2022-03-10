@@ -57,7 +57,7 @@ class PostManager with ChangeNotifier {
     bool isSubmited = false;
     String userUid = _firebaseAuth.currentUser!.uid;
     FieldValue timestamp = FieldValue.serverTimestamp();
-    String? photoUrl = await _fileUploadService.uploadPostFile(file: postImage);
+    List<String> photoUrl = await _fileUploadService.uploadFiles(postImage);
 
     if (photoUrl != null) {
       await _uploadsCollection.doc().set({
@@ -107,6 +107,13 @@ class PostManager with ChangeNotifier {
   Stream<DocumentSnapshot<Map<String, dynamic>>> getRoomDetails(
       {required String docID}) {
     return _uploadsCollection.doc(docID).snapshots();
+  }
+
+  Stream<QuerySnapshot<Map<String, dynamic>?>> getAllLandlordRooms(
+      {required String userId}) {
+    return _uploadsCollection
+        .where('user_id', isEqualTo: userId)
+        .snapshots();
   }
 
   Future<Map<String, dynamic>?> getUserInfo(String userUid) async {

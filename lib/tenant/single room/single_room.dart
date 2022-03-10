@@ -4,20 +4,26 @@ import 'package:lets_accommodate/services/post_manager.dart';
 import 'package:lets_accommodate/tenant/details.dart';
 import 'package:lets_accommodate/tenant/comments_tenants.dart';
 
-class SingleRoom extends StatelessWidget {
+class SingleRoom extends StatefulWidget {
   final String category;
 
   SingleRoom({required this.category});
+
+  @override
+  State<SingleRoom> createState() => _SingleRoomState();
+}
+
+class _SingleRoomState extends State<SingleRoom> {
   // SingleRoom({Key? key}) : super(key: key);
   final PostManager _postManager = PostManager();
-  final TextEditingController? _textEditingController = TextEditingController();
 
+  final TextEditingController? _textEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text(category),
+          title: Text(widget.category),
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(60),
             child: Padding(
@@ -45,13 +51,12 @@ class SingleRoom extends StatelessWidget {
             ),
           )),
       body: StreamBuilder<QuerySnapshot<Map<String, dynamic>?>>(
-          stream: _postManager.getSingleRooms(category: category),
+          stream: _postManager.getSingleRooms(category: widget.category),
           builder: (context, snapshot) {
-            
             return ListView.separated(
                 itemBuilder: (context, index) {
                   var docId = snapshot.data!.docs[index].id;
-                  var userId = snapshot.data!.docs[index].data()!['user_id'];
+                  //var userId = snapshot.data!.docs[index].data()!['user_id'];
                   if (snapshot.connectionState == ConnectionState.waiting &&
                       snapshot.data == null) {
                     return const Center(
@@ -76,7 +81,6 @@ class SingleRoom extends StatelessWidget {
                         children: [
                           InkWell(
                             onTap: () async {
-                              
                               print('***$docId');
 
                               Navigator.of(context)
@@ -118,7 +122,14 @@ class SingleRoom extends StatelessWidget {
                                     ),
                                   ),
                                   IconButton(
-                                      onPressed: () {},
+                                      onPressed: () async {
+                                        setState(() {
+                                          Icon(
+                                            Icons.favorite,
+                                            color: Colors.red,
+                                          );
+                                        });
+                                      },
                                       icon: Icon(
                                         Icons.favorite_border_rounded,
                                         color: Colors.white,
