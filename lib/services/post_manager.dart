@@ -108,6 +108,10 @@ class PostManager with ChangeNotifier {
       {required String docID}) {
     return _uploadsCollection.doc(docID).snapshots();
   }
+  Stream<QuerySnapshot<Map<String, dynamic>>> getRoomPictures(
+      {required String docID}) {
+    return _uploadsCollection.doc(docID).collection('picture').snapshots();
+  }
 
   Stream<QuerySnapshot<Map<String, dynamic>?>> getAllLandlordRooms(
       {required String userId}) {

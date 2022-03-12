@@ -55,7 +55,7 @@ class _DetailsState extends State<Details> {
                 );
               }
               var userId = snapshot.data!.data()!['user_id'];
-              print('user ID $userId');
+
               return SingleChildScrollView(
                 padding: EdgeInsets.all(15),
                 child: Column(
@@ -66,7 +66,30 @@ class _DetailsState extends State<Details> {
                           controller: _pageController,
                           itemCount: snapshot.data!.data()!.length,
                           itemBuilder: (context, index) {
-                            return imagesView(context);
+                            return SizedBox(
+                                width: MediaQuery.of(context).size.width,
+                                height: 240,
+                                child: StreamBuilder<
+                                        QuerySnapshot<Map<String, dynamic>?>>(
+                                    stream: _postManager.getRoomPictures(
+                                        docID: widget.docId),
+                                    builder: (context, picSnapshot) {
+                                      return Container(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        height: 200,
+                                        color: Colors.black,
+                                        child: Image.network(
+                                          snapshot.data!.data()!['picture'][0][3]
+                                              ? 'https://images.unsplash.com/photo-1646357799937-a9fb1c17fd66?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80'
+                                              : picSnapshot.data!.docs[index]
+                                                  .data()![0],
+                                          fit: BoxFit.fill,
+                                          height: 250,
+                                          width: double.infinity,
+                                        ),
+                                      );
+                                    }));
                           },
                         )),
                     DotsIndicator(
@@ -375,7 +398,9 @@ class _DetailsState extends State<Details> {
                             onPressed: () {
                               Navigator.of(context)
                                   .push(MaterialPageRoute(builder: (context) {
-                                return LandlordDetails(userId: userId,);
+                                return LandlordDetails(
+                                  userId: userId,
+                                );
                               }));
                             },
                             style: TextButton.styleFrom(
@@ -397,36 +422,36 @@ class _DetailsState extends State<Details> {
     );
   }
 
-  Widget imagesView(BuildContext context) {
-    return StreamBuilder<DocumentSnapshot<Map<String, dynamic>?>>(
-        stream: _postManager.getRoomDetails(docID: widget.docId),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting &&
-              snapshot.data == null) {
-            return const Center(
-              child: CircularProgressIndicator.adaptive(),
-            );
-          }
-          if (snapshot.connectionState == ConnectionState.done &&
-              snapshot.data == null) {
-            return const Center(
-              child: Text('No data is available'),
-            );
-          }
-          return SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: 240,
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                height: 200,
-                color: Colors.black,
-                child: Image.network(
-                  snapshot.data!.data()!['picture'],
-                  fit: BoxFit.fill,
-                  height: 250,
-                  width: double.infinity,
-                ),
-              ));
-        });
-  }
+//   Widget imagesView(BuildContext context) {
+//     return StreamBuilder<QuerySnapshot<Map<String, dynamic>?>>(
+//         stream: _postManager.getRoomPictures(docID:widget.docId),
+//         builder: (context, picSnapshot) {
+//           if (picSnapshot.connectionState == ConnectionState.waiting &&
+//               picSnapshot.data == null) {
+//             return const Center(
+//               child: CircularProgressIndicator.adaptive(),
+//             );
+//           }
+//           if (picSnapshot.connectionState == ConnectionState.done &&
+//               picSnapshot.data == null) {
+//             return const Center(
+//               child: Text('No data is available'),
+//             );
+//           }
+//           return SizedBox(
+//               width: MediaQuery.of(context).size.width,
+//               height: 240,
+//               child: Container(
+//                 width: MediaQuery.of(context).size.width,
+//                 height: 200,
+//                 color: Colors.black,
+//                 child: Image.network(
+//                   picSnapshot.data!.docs,
+//                   fit: BoxFit.fill,
+//                   height: 250,
+//                   width: double.infinity,
+//                 ),
+//               ));
+//         });
+//   }
 }

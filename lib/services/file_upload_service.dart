@@ -61,7 +61,7 @@ class FileUploadService {
 
   Future<String> uploadPic(File _image) async {
     Reference storageReference =
-        _firebaseStorage.ref().child('posts').child(_image.path);
+        _firebaseStorage.ref().child('post_images').child(_image.path);
     UploadTask uploadTask = storageReference.putFile(_image);
     TaskSnapshot snapshot =
         await uploadTask.whenComplete(() => storageReference.getDownloadURL());

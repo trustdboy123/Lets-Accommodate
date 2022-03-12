@@ -6,6 +6,7 @@ import 'package:lets_accommodate/landlord/add_details_page.dart';
 import 'package:lets_accommodate/landlord/comments_landlord.dart';
 import 'package:lets_accommodate/landlord/view_uploads.dart';
 import 'package:lets_accommodate/services/post_manager.dart';
+import 'package:lets_accommodate/tenant/details.dart';
 
 class DashboardView extends StatelessWidget {
   DashboardView({
@@ -37,6 +38,7 @@ class DashboardView extends StatelessWidget {
             builder: (context, snapshot) {
               return ListView.separated(
                 itemBuilder: (context, index) {
+                  var docID = snapshot.data!.docs[index].id;
                   if (snapshot.connectionState == ConnectionState.waiting &&
                       snapshot.data == null) {
                     return const Center(
@@ -46,6 +48,9 @@ class DashboardView extends StatelessWidget {
                       snapshot.data == null) {
                     return const Center(child: Text('No house added yet'));
                   }
+                  // var usersDataFromJson =
+                  //     snapshot.data!.docs[index].data()!['picture'][index][0];
+                  // List<String> userData = List<String>.from(usersDataFromJson);
                   return Card(
                     child: Column(
                       children: [
@@ -56,7 +61,7 @@ class DashboardView extends StatelessWidget {
                               onTap: () {
                                 Navigator.of(context)
                                     .push(MaterialPageRoute(builder: (context) {
-                                  return ViewUploads();
+                                  return Details(docId: docID);
                                 }));
                               },
                               child: Card(
@@ -64,7 +69,8 @@ class DashboardView extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(30)),
                                 color: Colors.black,
                                 child: Image.network(
-                                  snapshot.data!.docs[index].data()!['picture'],
+                                  snapshot.data!.docs[index].data()!['picture']
+                                      [1],
                                   fit: BoxFit.fill,
                                   height: 250,
                                   width: double.infinity,
