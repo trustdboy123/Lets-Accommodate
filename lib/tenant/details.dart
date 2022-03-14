@@ -2,11 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:lets_accommodate/services/post_manager.dart';
-import 'package:lets_accommodate/tenant/categories_tenant.dart';
 import 'package:lets_accommodate/tenant/landlord_details.dart';
 
 class Details extends StatefulWidget {
-  Details({Key? key, required this.docId}) : super(key: key);
+  const Details({Key? key, required this.docId}) : super(key: key);
   final String docId;
 
   @override
@@ -27,10 +26,6 @@ class _DetailsState extends State<Details> {
     });
   }
 
-  // @override
-  // void dispose() {
-  //   _pageController.dispose();
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +50,7 @@ class _DetailsState extends State<Details> {
                 );
               }
               var userId = snapshot.data!.data()!['user_id'];
+              var pictures = snapshot.data!.data()!['pictures'];
 
               return SingleChildScrollView(
                 padding: EdgeInsets.all(15),
@@ -64,36 +60,27 @@ class _DetailsState extends State<Details> {
                         height: 250,
                         child: PageView.builder(
                           controller: _pageController,
-                          itemCount: snapshot.data!.data()!.length,
+                          itemCount: pictures.length,
                           itemBuilder: (context, index) {
                             return SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              height: 240,
+                              child: Container(
                                 width: MediaQuery.of(context).size.width,
-                                height: 240,
-                                child: StreamBuilder<
-                                        QuerySnapshot<Map<String, dynamic>?>>(
-                                    stream: _postManager.getRoomPictures(
-                                        docID: widget.docId),
-                                    builder: (context, picSnapshot) {
-                                      return Container(
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        height: 200,
-                                        color: Colors.black,
-                                        child: Image.network(
-                                          snapshot.data!.data()!['picture'][0][3]
-                                              ? 'https://images.unsplash.com/photo-1646357799937-a9fb1c17fd66?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80'
-                                              : picSnapshot.data!.docs[index]
-                                                  .data()![0],
-                                          fit: BoxFit.fill,
-                                          height: 250,
-                                          width: double.infinity,
-                                        ),
-                                      );
-                                    }));
+                                height: 200,
+                                color: Colors.black,
+                                child: Image.network(
+                                  pictures[index],
+                                  fit: BoxFit.fill,
+                                  height: 250,
+                                  width: double.infinity,
+                                ),
+                              ),
+                            );
                           },
                         )),
                     DotsIndicator(
-                      dotsCount: 4,
+                      dotsCount: pictures.length,
                       position: _currentPageValue,
                       decorator: DotsDecorator(
                           color: Colors.black87,

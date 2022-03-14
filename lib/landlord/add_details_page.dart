@@ -52,31 +52,35 @@ class _AddImageState extends State<AddImage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Add Details'),
+          title: const Text('Add Details'),
         ),
         body: SafeArea(
           child: Form(
             key: _formKey,
             child: GridView(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 1),
                 children: [
                   Container(
-                    padding: EdgeInsets.all(4),
+                    decoration: BoxDecoration(
+                      
+                    ),
+                    padding: const EdgeInsets.all(4),
                     child: GridView.builder(
                         itemCount: _image.length + 1,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
                         ),
                         itemBuilder: (context, index) {
                           return index == 0
                               ? Center(
                                   child: IconButton(
-                                      icon: Icon(Icons.add_a_photo),
+                                      icon: const Icon(Icons.add_a_photo),
                                       onPressed: () => chooseImage()),
                                 )
                               : Container(
-                                  margin: EdgeInsets.all(3),
+                                  margin: const EdgeInsets.all(3),
                                   decoration: BoxDecoration(
                                       image: DecorationImage(
                                           image: FileImage(_image[index - 1]),
@@ -84,31 +88,8 @@ class _AddImageState extends State<AddImage> {
                                 );
                         }),
                   ),
-
-                  // uploading
-                  //     ? Center(
-                  //         child: Column(
-                  //         mainAxisSize: MainAxisSize.min,
-                  //         children: [
-                  //           Container(
-                  //             child: Text(
-                  //               'uploading...',
-                  //               style: TextStyle(fontSize: 20),
-                  //             ),
-                  //           ),
-                  //           SizedBox(
-                  //             height: 10,
-                  //           ),
-                  //           CircularProgressIndicator(
-                  //             value: val,
-                  //             valueColor:
-                  //                 AlwaysStoppedAnimation<Color>(Colors.green),
-                  //           )
-                  //         ],
-                  //       ))
-                  //     : Container(),
                   ListView(
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     children: [
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -614,15 +595,15 @@ class _AddImageState extends State<AddImage> {
                                         toastLength: Toast.LENGTH_SHORT,
                                         gravity: ToastGravity.BOTTOM,
                                         timeInSecForIosWeb: 1,
-                                        backgroundColor:
-                                            Color.fromARGB(255, 94, 196, 97),
+                                        backgroundColor: const Color.fromARGB(
+                                            255, 94, 196, 97),
                                         textColor: Colors.white,
                                         fontSize: 16.0);
 
                                     Navigator.of(context).pushAndRemoveUntil(
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                 DashboardView()),
+                                                DashboardView()),
                                         (route) => false);
                                   } else {
                                     Fluttertoast.showToast(
@@ -641,8 +622,8 @@ class _AddImageState extends State<AddImage> {
                                       toastLength: Toast.LENGTH_SHORT,
                                       gravity: ToastGravity.CENTER,
                                       timeInSecForIosWeb: 1,
-                                      backgroundColor:
-                                          Color.fromARGB(255, 94, 196, 97),
+                                      backgroundColor: const Color.fromARGB(
+                                          255, 94, 196, 97),
                                       textColor: Colors.white,
                                       fontSize: 16.0);
                                 }
@@ -655,7 +636,7 @@ class _AddImageState extends State<AddImage> {
                                   backgroundColor: Colors.blue),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 40,
                           )
                         ],
@@ -689,28 +670,4 @@ class _AddImageState extends State<AddImage> {
     }
   }
 
-  Future uploadFile() async {
-    int i = 1;
-
-    for (var img in _image) {
-      setState(() {
-        val = i / _image.length;
-      });
-      ref = firebase_storage.FirebaseStorage.instance
-          .ref()
-          .child('images/${Path.basename(img.path)}');
-      await ref.putFile(img).whenComplete(() async {
-        await ref.getDownloadURL().then((value) {
-          imgRef.add({'url': value});
-          i++;
-        });
-      });
-    }
   }
-
-  @override
-  void initState() {
-    super.initState();
-    imgRef = FirebaseFirestore.instance.collection('imageURLs');
-  }
-}

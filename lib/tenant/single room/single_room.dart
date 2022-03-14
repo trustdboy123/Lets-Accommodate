@@ -95,7 +95,8 @@ class _SingleRoomState extends State<SingleRoom> {
                                   borderRadius: BorderRadius.circular(30)),
                               color: Colors.black,
                               child: Image.network(
-                                snapshot.data!.docs[index].data()!['picture'],
+                                snapshot.data!.docs[index].data()!['pictures']
+                                    [0],
                                 fit: BoxFit.fill,
                                 height: 250,
                                 width: double.infinity,

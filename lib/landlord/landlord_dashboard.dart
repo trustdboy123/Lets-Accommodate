@@ -6,7 +6,7 @@ import 'package:lets_accommodate/landlord/add_details_page.dart';
 import 'package:lets_accommodate/landlord/comments_landlord.dart';
 import 'package:lets_accommodate/landlord/view_uploads.dart';
 import 'package:lets_accommodate/services/post_manager.dart';
-import 'package:lets_accommodate/tenant/details.dart';
+
 
 class DashboardView extends StatelessWidget {
   DashboardView({
@@ -26,10 +26,10 @@ class DashboardView extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context)
                     .push(MaterialPageRoute(builder: (context) {
-                  return SettingLandlord();
+                  return const SettingLandlord();
                 }));
               },
-              icon: Icon(Icons.settings))
+              icon:const Icon(Icons.settings))
         ],
       ),
       body: SafeArea(
@@ -46,11 +46,12 @@ class DashboardView extends StatelessWidget {
                   }
                   if (snapshot.connectionState == ConnectionState.done &&
                       snapshot.data == null) {
-                    return const Center(child: Text('No house added yet'));
+                    return const Center(
+                        child: Text(
+                      'No house added yet',
+                      style: TextStyle(color: Colors.black),
+                    ));
                   }
-                  // var usersDataFromJson =
-                  //     snapshot.data!.docs[index].data()!['picture'][index][0];
-                  // List<String> userData = List<String>.from(usersDataFromJson);
                   return Card(
                     child: Column(
                       children: [
@@ -61,20 +62,26 @@ class DashboardView extends StatelessWidget {
                               onTap: () {
                                 Navigator.of(context)
                                     .push(MaterialPageRoute(builder: (context) {
-                                  return Details(docId: docID);
+                                  return ViewUploads(
+                                    docId: docID,
+                                  );
                                 }));
                               },
                               child: Card(
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(30)),
                                 color: Colors.black,
-                                child: Image.network(
-                                  snapshot.data!.docs[index].data()!['picture']
-                                      [1],
-                                  fit: BoxFit.fill,
-                                  height: 250,
-                                  width: double.infinity,
-                                ),
+                                child: snapshot.data!.docs.isEmpty
+                                    ? const SizedBox(
+                                        child: Text('no data yet'),
+                                      )
+                                    : Image.network(
+                                        snapshot.data!.docs[index]
+                                            .data()!['pictures'][0],
+                                        fit: BoxFit.fitWidth,
+                                        height: 250,
+                                        width: double.infinity,
+                                      ),
                               ),
                             ),
                             Padding(
@@ -89,7 +96,7 @@ class DashboardView extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      '${snapshot.data!.docs[index].data()!['price']}/month',
+                                      'GHC${snapshot.data!.docs[index].data()!['price']} /month',
                                       style: TextStyle(
                                         fontSize: 15,
                                         fontWeight: FontWeight.w600,

@@ -26,14 +26,14 @@ class PostManager with ChangeNotifier {
   String get message => _message;
   bool get isLoading => _isLoading;
 
-  SetMessage(String message) {
+  setMessage(String message) {
     _message = message;
     notifyListeners();
+  }
 
-    setIsLoading(bool loading) {
-      _isLoading = isLoading;
-      notifyListeners();
-    }
+  setIsLoading(bool loading) {
+    _isLoading = isLoading;
+    notifyListeners();
   }
 
   Future<bool> submitPost(
@@ -77,22 +77,23 @@ class PostManager with ChangeNotifier {
         "porch": porch,
         "digital Address": digitalAddress,
         "house Number": houseNumber,
-        "picture": photoUrl,
+        "pictures": photoUrl,
+        "intrested": 0,
         "createdAt": timestamp,
         "user_id": userUid
       }).then((_) {
         isSubmited = true;
-        SetMessage('Post successfully submited');
+        setMessage('Post successfully submited');
       }).catchError((onError) {
         isSubmited = false;
-        SetMessage('### $onError');
+        setMessage('### $onError');
       }).timeout(const Duration(seconds: 60), onTimeout: () {
         isSubmited = false;
-        SetMessage('Please Check your connection');
+        setMessage('Please Check your connection');
       });
     } else {
       isSubmited = false;
-      SetMessage('Image not found');
+      setMessage('Image not found');
     }
     return isSubmited;
   }
@@ -108,17 +109,13 @@ class PostManager with ChangeNotifier {
       {required String docID}) {
     return _uploadsCollection.doc(docID).snapshots();
   }
-  Stream<QuerySnapshot<Map<String, dynamic>>> getRoomPictures(
-      {required String docID}) {
-    return _uploadsCollection.doc(docID).collection('picture').snapshots();
-  }
 
   Stream<QuerySnapshot<Map<String, dynamic>?>> getAllLandlordRooms(
       {required String userId}) {
     return _uploadsCollection.where('user_id', isEqualTo: userId).snapshots();
   }
 
-  Future updateRoomDetails(
+  Future<bool> updateRoomDetails(
       {required String docID,
       String? kitchen,
       String? washroom,
@@ -133,27 +130,33 @@ class PostManager with ChangeNotifier {
       String? region,
       String? citytown,
       String? digitalAddress,
-      String? houseNumber}) {
-    return _uploadsCollection.doc(docID).update({
-      "kitchen": kitchen,
-      "washroom": washroom,
-      "store Room": storeRoom,
-      "walled House": walledHouse,
-      "tiled": tiled,
-      "electricity": electricity,
-      "water Availability": waterAvailability,
-      "price": price,
-      "size": size,
-      "region": region,
-      "city/Town": citytown,
-      "porch": porch,
-      "digital Address": digitalAddress,
-      "house Number": houseNumber,
-    }).then((value) {
+      String? houseNumber}) async {
+    Map<String, dynamic> data = <String, dynamic>{
+      "kitchen": kitchen.toString(),
+      "washroom": washroom.toString(),
+      "store Room": storeRoom.toString(),
+      "walled House": walledHouse.toString(),
+      "tiled": tiled.toString(),
+      "electricity": electricity.toString(),
+      "water Availability": waterAvailability.toString(),
+      "price": price.toString(),
+      "size": size.toString(),
+      "region": region.toString(),
+      "city/Town": citytown.toString(),
+      "porch": porch.toString(),
+      "digital Address": digitalAddress.toString(),
+      "house Number": houseNumber.toString(),
+    };
+    print(data);
+    bool isUpdated = false;
+    await _uploadsCollection.doc(docID).update(data).then((value) {
+      isUpdated = true;
       return value;
     }).catchError((error) {
-      SetMessage(error);
+      setMessage('Failed to update room details: $error');
+      print(error);
     });
+    return isUpdated;
   }
 
   Future<Map<String, dynamic>?> getUserInfo(String userUid) async {
