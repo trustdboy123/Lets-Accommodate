@@ -20,6 +20,8 @@ class PostManager with ChangeNotifier {
       _firebaseFirestore.collection('uploads');
   final CollectionReference<Map<String, dynamic>> _tenantsCollection =
       _firebaseFirestore.collection('tenants');
+  final CollectionReference<Map<String, dynamic>> _commentsCollection =
+      _firebaseFirestore.collection('comments');
 
   String _message = '';
   bool _isLoading = false;
@@ -36,6 +38,7 @@ class PostManager with ChangeNotifier {
     notifyListeners();
   }
 
+  //Add a new room for rent
   Future<bool> submitPost(
       {required List<File> postImage,
       required String category,
@@ -59,7 +62,6 @@ class PostManager with ChangeNotifier {
     FieldValue timestamp = FieldValue.serverTimestamp();
     List<String> photoUrl = await _fileUploadService.uploadFiles(postImage);
 
-    if (photoUrl != null) {
       await _uploadsCollection.doc().set({
         "category": category,
         "type": type,
@@ -91,13 +93,35 @@ class PostManager with ChangeNotifier {
         isSubmited = false;
         setMessage('Please Check your connection');
       });
-    } else {
-      isSubmited = false;
-      setMessage('Image not found');
-    }
+    
     return isSubmited;
   }
 
+  //create comment
+  Future<bool> createComments(
+      {required String docId,
+      required String comment,
+      String? profilePic}) async {
+    bool isSubmited = false;
+    String userUid = _firebaseAuth.currentUser!.uid;
+    FieldValue timeStamp = FieldValue.serverTimestamp();
+    await _commentsCollection.doc().set({
+      "comment": comment,
+      "picture": profilePic,
+      "createdAt": timeStamp,
+      "user_id": userUid,
+      "doc_id": docId
+    }).then((_) {
+      isSubmited = true;
+      setMessage('Comment success');
+    }).catchError((onError) {
+      isSubmited = false;
+      setMessage('Error whiles commenting: $onError');
+    });
+    return isSubmited;
+  }
+
+//read rooms based on categories
   Stream<QuerySnapshot<Map<String, dynamic>?>> getSingleRooms(
       {required String category}) {
     return _uploadsCollection
@@ -105,16 +129,19 @@ class PostManager with ChangeNotifier {
         .snapshots();
   }
 
+//details of a room
   Stream<DocumentSnapshot<Map<String, dynamic>>> getRoomDetails(
       {required String docID}) {
     return _uploadsCollection.doc(docID).snapshots();
   }
 
+//landlord's uploaded rooms
   Stream<QuerySnapshot<Map<String, dynamic>?>> getAllLandlordRooms(
       {required String userId}) {
     return _uploadsCollection.where('user_id', isEqualTo: userId).snapshots();
   }
 
+  //update room info
   Future<bool> updateRoomDetails(
       {required String docID,
       String? kitchen,
@@ -159,6 +186,18 @@ class PostManager with ChangeNotifier {
     return isUpdated;
   }
 
+  //delete rooms
+  Future<bool> deleteRoom({required String docID}) async {
+    bool isDeleted = false;
+    await _uploadsCollection.doc(docID).delete().then((value) {
+      isDeleted = true;
+    }).catchError((onError) {
+      setMessage("Failed to delete room due to: $onError");
+    });
+    return isDeleted;
+  }
+
+  //landlord profile details
   Future<Map<String, dynamic>?> getUserInfo(String userUid) async {
     Map<String, dynamic>? userData;
     await _landlordCollection
@@ -174,6 +213,7 @@ class PostManager with ChangeNotifier {
     return userData;
   }
 
+//tenant's profile details
   Future<Map<String, dynamic>?> getTenantInfo(String userUid) async {
     Map<String, dynamic>? userData;
     await _tenantsCollection

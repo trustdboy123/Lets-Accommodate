@@ -5,6 +5,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:lets_accommodate/landlord/landlord_dashboard.dart';
 import 'package:lets_accommodate/services/post_manager.dart';
 import 'package:multi_image_picker2/multi_image_picker2.dart';
 
@@ -98,8 +99,10 @@ class _EditDescription extends State<EditDescription> {
               _priceController.text = snapshot.data!.data()!['price'];
               _sizeController.text = snapshot.data!.data()!['size'];
               _cityController.text = snapshot.data!.data()!['city/Town'];
-              _digitalAddressController.text = snapshot.data!.data()!['digital Address'];
-              _houseNumberController.text = snapshot.data!.data()!['house Number'];
+              _digitalAddressController.text =
+                  snapshot.data!.data()!['digital Address'];
+              _houseNumberController.text =
+                  snapshot.data!.data()!['house Number'];
               var pictures = snapshot.data!.data()!['pictures'];
 
               return SafeArea(
@@ -158,17 +161,17 @@ class _EditDescription extends State<EditDescription> {
                                                     Navigator.pop(context);
                                                     openImages();
                                                   },
-                                                  icon: Icon(
+                                                  icon: const Icon(
                                                     Icons.photo_album,
                                                     color: Colors.blue,
                                                   ),
-                                                  label: Text(
+                                                  label: const Text(
                                                       'Select from Gallery')),
                                             );
                                           });
                                     },
-                                    icon: Icon(Icons.camera_alt)),
-                                Text('Upload Photos')
+                                    icon: const Icon(Icons.camera_alt)),
+                                const Text('Upload Photos')
                               ],
                             ),
                             const SizedBox(
@@ -686,7 +689,7 @@ class _EditDescription extends State<EditDescription> {
                                             context: context,
                                             builder: (context) {
                                               return AlertDialog(
-                                                content: Text(
+                                                content: const Text(
                                                     'Are you sure you want to update House Info?'),
                                                 actions: [
                                                   TextButton(
@@ -807,7 +810,76 @@ class _EditDescription extends State<EditDescription> {
                                 SizedBox(
                                   width: MediaQuery.of(context).size.width,
                                   child: TextButton(
-                                    onPressed: () {},
+                                    onPressed: () async {
+                                      showDialog<bool>(
+                                          context: context,
+                                          builder: (context) {
+                                            return AlertDialog(
+                                              content: const Text(
+                                                  'Are you sure you want to delete?'),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () async {
+                                                    bool isDeleted =
+                                                        await _postManager
+                                                            .deleteRoom(
+                                                                docID: widget
+                                                                    .docId);
+                                                    if (isDeleted) {
+                                                      Fluttertoast.showToast(
+                                                          msg:
+                                                              "Details deleted successfully!",
+                                                          toastLength: Toast
+                                                              .LENGTH_SHORT,
+                                                          gravity: ToastGravity
+                                                              .BOTTOM,
+                                                          timeInSecForIosWeb: 1,
+                                                          backgroundColor:
+                                                              const Color
+                                                                      .fromARGB(
+                                                                  255,
+                                                                  94,
+                                                                  196,
+                                                                  97),
+                                                          textColor:
+                                                              Colors.white,
+                                                          fontSize: 16.0);
+                                                      Navigator.of(context).push(
+                                                          MaterialPageRoute(
+                                                              builder: (_) =>
+                                                                  DashboardView()));
+                                                    } else {
+                                                      Fluttertoast.showToast(
+                                                          msg: _postManager
+                                                              .message,
+                                                          toastLength: Toast
+                                                              .LENGTH_SHORT,
+                                                          gravity: ToastGravity
+                                                              .BOTTOM,
+                                                          timeInSecForIosWeb: 1,
+                                                          backgroundColor:
+                                                              Colors.red,
+                                                          textColor:
+                                                              Colors.white,
+                                                          fontSize: 16.0);
+                                                    }
+                                                  },
+                                                  child: const Text(
+                                                    'Yes',
+                                                    style: TextStyle(
+                                                        color: Colors.red),
+                                                  ),
+                                                ),
+                                                TextButton(
+                                                  onPressed: () =>
+                                                      Navigator.of(context)
+                                                          .pop(false),
+                                                  child: const Text('Cancel'),
+                                                )
+                                              ],
+                                            );
+                                          });
+                                    },
                                     child: const Text(
                                       'Delete',
                                       style: TextStyle(color: Colors.white),
@@ -816,7 +888,7 @@ class _EditDescription extends State<EditDescription> {
                                         backgroundColor: Colors.redAccent),
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 20,
                                 )
                               ],
