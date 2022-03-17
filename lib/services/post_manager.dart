@@ -22,6 +22,8 @@ class PostManager with ChangeNotifier {
       _firebaseFirestore.collection('tenants');
   final CollectionReference<Map<String, dynamic>> _commentsCollection =
       _firebaseFirestore.collection('comments');
+  final CollectionReference<Map<String, dynamic>> _favoritesCollection =
+      _firebaseFirestore.collection('favorites');
 
   String _message = '';
   bool _isLoading = false;
@@ -128,6 +130,34 @@ class PostManager with ChangeNotifier {
         .orderBy('createdAt', descending: true)
         .snapshots();
   }
+  //add to favorites
+
+  Future<bool> addToFavorites({required String docId}) async {
+    bool isAdded = false;
+    String userUid = _firebaseAuth.currentUser!.uid;
+    await _favoritesCollection
+        .doc()
+        .set({"doc_id": docId, "user_id": userUid}).then((_) {
+      isAdded = true;
+      setMessage('Favorites added successfully');
+    }).catchError((onError) {
+      isAdded = false;
+      setMessage('Failed to add to favourites: $onError');
+    });
+    return isAdded;
+  }
+
+  //remove from favorites
+  Future<bool> removeFavorites({required String docID}) async {
+    bool isDeleted = false;
+    await _uploadsCollection.doc(docID).delete().then((value) {
+      isDeleted = true;
+      setMessage('Favorite removed successfully');
+    }).catchError((onError) {
+      setMessage("Failed to delete room due to: $onError");
+    });
+    return isDeleted;
+  }
 
 //read rooms based on categories
   Stream<QuerySnapshot<Map<String, dynamic>?>> getSingleRooms(
@@ -167,20 +197,18 @@ class PostManager with ChangeNotifier {
       String? digitalAddress,
       String? houseNumber}) async {
     Map<String, dynamic> data = <String, dynamic>{
-      "kitchen": kitchen.toString(),
-      "washroom": washroom.toString(),
-      "store Room": storeRoom.toString(),
-      "walled House": walledHouse.toString(),
-      "tiled": tiled.toString(),
-      "electricity": electricity.toString(),
-      "water Availability": waterAvailability.toString(),
-      "price": price.toString(),
-      "size": size.toString(),
-      "region": region.toString(),
-      "city/Town": citytown.toString(),
-      "porch": porch.toString(),
-      "digital Address": digitalAddress.toString(),
-      "house Number": houseNumber.toString(),
+      "porch": porch,
+      "washroom": washroom,
+      "store Room": storeRoom,
+      "walled House": walledHouse,
+      "tiled": tiled,
+      "electricity": electricity,
+      "water Availability": waterAvailability,
+      "kitchen": kitchen,
+      "digital Address": digitalAddress,
+      "price": price,
+      "size": size,
+      "house Number": houseNumber,
     };
     print(data);
     bool isUpdated = false;

@@ -62,7 +62,8 @@ class _AddImageState extends State<AddImage> {
                     crossAxisCount: 1),
                 children: [
                   Container(
-                    padding: EdgeInsets.all(4),
+                    decoration: BoxDecoration(),
+                    padding: const EdgeInsets.all(4),
                     child: GridView.builder(
                         itemCount: _image.length + 1,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -575,84 +576,97 @@ class _AddImageState extends State<AddImage> {
                               )),
                           SizedBox(
                             width: MediaQuery.of(context).size.width,
-                            child: TextButton(
-                              onPressed: () async {
-                                if (_formKey.currentState!.validate()) {
-                                  setState(() {
-                                    isLoading = true;
-                                  });
-                                  bool isSubmited =
-                                      await _postManager.submitPost(
-                                    postImage: _image,
-                                    category: dropdownValue.toString(),
-                                    type: dropdownValueType.toString(),
-                                    electricity:
-                                        dropdownValueElectricity.toString(),
-                                    waterAvailability:
-                                        dropdownValueWaterAvailability
-                                            .toString(),
-                                    price: _priceController.text,
-                                    size: _sizeController.text,
-                                    region: dropdownValueRegion.toString(),
-                                    citytown: _cityController.text,
-                                    houseNumber: _houseNumberController.text,
-                                    washroom: dropdownValueWashRoom.toString(),
-                                    storeRoom:
-                                        dropdownValueStoreRoom.toString(),
-                                    porch: dropdownValuePorch.toString(),
-                                    walledHouse:
-                                        dropdownValueWaledHouse.toString(),
-                                    kitchen: dropdownValueKitchen.toString(),
-                                    tiled: dropdownValueTiledHouse.toString(),
-                                    digitalAddress:
-                                        _digitalAddressController.text,
-                                  );
-                                  if (isSubmited) {
-                                    Fluttertoast.showToast(
-                                        msg: "House Uploaded successfully",
-                                        toastLength: Toast.LENGTH_SHORT,
-                                        gravity: ToastGravity.BOTTOM,
-                                        timeInSecForIosWeb: 1,
-                                        backgroundColor:
-                                            Color.fromARGB(255, 94, 196, 97),
-                                        textColor: Colors.white,
-                                        fontSize: 16.0);
+                            child: isLoading
+                                ? const Center(
+                                    child: CircularProgressIndicator.adaptive(),
+                                  )
+                                : TextButton(
+                                    onPressed: () async {
+                                      if (_formKey.currentState!.validate()) {
+                                        setState(() {
+                                          isLoading = true;
+                                        });
+                                        bool isSubmited =
+                                            await _postManager.submitPost(
+                                          postImage: _image,
+                                          category: dropdownValue.toString(),
+                                          type: dropdownValueType.toString(),
+                                          electricity: dropdownValueElectricity
+                                              .toString(),
+                                          waterAvailability:
+                                              dropdownValueWaterAvailability
+                                                  .toString(),
+                                          price: _priceController.text,
+                                          size: _sizeController.text,
+                                          region:
+                                              dropdownValueRegion.toString(),
+                                          citytown: _cityController.text,
+                                          houseNumber:
+                                              _houseNumberController.text,
+                                          washroom:
+                                              dropdownValueWashRoom.toString(),
+                                          storeRoom:
+                                              dropdownValueStoreRoom.toString(),
+                                          porch: dropdownValuePorch.toString(),
+                                          walledHouse: dropdownValueWaledHouse
+                                              .toString(),
+                                          kitchen:
+                                              dropdownValueKitchen.toString(),
+                                          tiled: dropdownValueTiledHouse
+                                              .toString(),
+                                          digitalAddress:
+                                              _digitalAddressController.text,
+                                        );
+                                        if (isSubmited) {
+                                          Fluttertoast.showToast(
+                                              msg:
+                                                  "House Uploaded successfully",
+                                              toastLength: Toast.LENGTH_SHORT,
+                                              gravity: ToastGravity.BOTTOM,
+                                              timeInSecForIosWeb: 1,
+                                              backgroundColor:
+                                                  const Color.fromARGB(
+                                                      255, 94, 196, 97),
+                                              textColor: Colors.white,
+                                              fontSize: 16.0);
 
-                                    Navigator.of(context).pushAndRemoveUntil(
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                DashboardView()),
-                                        (route) => false);
-                                  } else {
-                                    Fluttertoast.showToast(
-                                        msg: _postManager.message,
-                                        toastLength: Toast.LENGTH_SHORT,
-                                        gravity: ToastGravity.CENTER,
-                                        timeInSecForIosWeb: 1,
-                                        backgroundColor: Colors.red,
-                                        textColor: Colors.white,
-                                        fontSize: 16.0);
-                                  }
-                                } else {
-                                  // validation failed
-                                  Fluttertoast.showToast(
-                                      msg: " Please Check all fields",
-                                      toastLength: Toast.LENGTH_SHORT,
-                                      gravity: ToastGravity.CENTER,
-                                      timeInSecForIosWeb: 1,
-                                      backgroundColor:
-                                          Color.fromARGB(255, 94, 196, 97),
-                                      textColor: Colors.white,
-                                      fontSize: 16.0);
-                                }
-                              },
-                              child: const Text(
-                                'Upload',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              style: TextButton.styleFrom(
-                                  backgroundColor: Colors.blue),
-                            ),
+                                          Navigator.of(context)
+                                              .pushAndRemoveUntil(
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          DashboardView()),
+                                                  (route) => false);
+                                        } else {
+                                          Fluttertoast.showToast(
+                                              msg: _postManager.message,
+                                              toastLength: Toast.LENGTH_SHORT,
+                                              gravity: ToastGravity.CENTER,
+                                              timeInSecForIosWeb: 1,
+                                              backgroundColor: Colors.red,
+                                              textColor: Colors.white,
+                                              fontSize: 16.0);
+                                        }
+                                      } else {
+                                        // validation failed
+                                        Fluttertoast.showToast(
+                                            msg: " Please Check all fields",
+                                            toastLength: Toast.LENGTH_SHORT,
+                                            gravity: ToastGravity.CENTER,
+                                            timeInSecForIosWeb: 1,
+                                            backgroundColor:
+                                                const Color.fromARGB(
+                                                    255, 94, 196, 97),
+                                            textColor: Colors.white,
+                                            fontSize: 16.0);
+                                      }
+                                    },
+                                    child: const Text(
+                                      'Upload',
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                    style: TextButton.styleFrom(
+                                        backgroundColor: Colors.blue),
+                                  ),
                           ),
                           SizedBox(
                             height: 40,
@@ -686,30 +700,5 @@ class _AddImageState extends State<AddImage> {
     } else {
       print(response.file);
     }
-  }
-
-  Future uploadFile() async {
-    int i = 1;
-
-    for (var img in _image) {
-      setState(() {
-        val = i / _image.length;
-      });
-      ref = firebase_storage.FirebaseStorage.instance
-          .ref()
-          .child('images/${Path.basename(img.path)}');
-      await ref.putFile(img).whenComplete(() async {
-        await ref.getDownloadURL().then((value) {
-          imgRef.add({'url': value});
-          i++;
-        });
-      });
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    imgRef = FirebaseFirestore.instance.collection('imageURLs');
   }
 }

@@ -26,6 +26,18 @@ class _EditDescription extends State<EditDescription> {
   final TextEditingController _digitalAddressController =
       TextEditingController();
   final TextEditingController _houseNumberController = TextEditingController();
+  String dropdownValue = 'Select option';
+  String dropdownValueType = 'Select option';
+  String dropdownValueRegion = 'Select option';
+  String dropdownValueKitchen = 'Select option';
+  String dropdownValueWashRoom = 'Select option';
+  String dropdownValueStoreRoom = 'Select option';
+  String dropdownValuePorch = 'Select option';
+  String dropdownValueWaledHouse = 'Select option';
+  String dropdownValueTiledHouse = 'Select option';
+  String dropdownValueElectricity = 'Select option';
+  String dropdownValueWaterAvailability = 'Select option';
+
   final GlobalKey<FormState> _formKey = GlobalKey();
   bool isLoading = false;
   final PostManager _postManager = PostManager();
@@ -81,21 +93,22 @@ class _EditDescription extends State<EditDescription> {
                   child: Text('No data is available'),
                 );
               }
-              String dropdownValue = snapshot.data!.data()!['category'];
-              String dropdownValueType = snapshot.data!.data()!['type'];
-              String dropdownValueKitchen = snapshot.data!.data()!['kitchen'];
-              String dropdownValueWashRoom = snapshot.data!.data()!['washroom'];
-              String dropdownValueStoreRoom =
+              String dropdownValue1 = snapshot.data!.data()!['category'];
+              String dropdownValueType1 = snapshot.data!.data()!['type'];
+              String dropdownValueKitchen1 = snapshot.data!.data()!['kitchen'];
+              String dropdownValueWashRoom1 =
+                  snapshot.data!.data()!['washroom'];
+              String dropdownValueStoreRoom1 =
                   snapshot.data!.data()!['store Room'];
-              String dropdownValuePorch = snapshot.data!.data()!['porch'];
-              String dropdownValueWaledHouse =
+              String dropdownValuePorch1 = snapshot.data!.data()!['porch'];
+              String dropdownValueWaledHouse1 =
                   snapshot.data!.data()!['walled House'];
-              String dropdownValueTiledHouse = snapshot.data!.data()!['tiled'];
-              String dropdownValueElectricity =
+              String dropdownValueTiledHouse1 = snapshot.data!.data()!['tiled'];
+              String dropdownValueElectricity1 =
                   snapshot.data!.data()!['electricity'];
-              String dropdownValueWaterAvailability =
+              String dropdownValueWaterAvailability1 =
                   snapshot.data!.data()!['water Availability'];
-              String dropdownValueRegion = snapshot.data!.data()!['region'];
+              String dropdownValueRegion1 = snapshot.data!.data()!['region'];
               _priceController.text = snapshot.data!.data()!['price'];
               _sizeController.text = snapshot.data!.data()!['size'];
               _cityController.text = snapshot.data!.data()!['city/Town'];
@@ -104,6 +117,22 @@ class _EditDescription extends State<EditDescription> {
               _houseNumberController.text =
                   snapshot.data!.data()!['house Number'];
               var pictures = snapshot.data!.data()!['pictures'];
+
+              String dropdownValueWaterAvailability =
+                  dropdownValueWaterAvailability1;
+              String dropdownValueElectricity = dropdownValueElectricity1;
+              String dropdownValueTiledHouse = dropdownValueTiledHouse1;
+              String dropdownValueWaledHouse = dropdownValueWaledHouse1;
+              String dropdownValuePorch = dropdownValuePorch1;
+              String dropdownValueStoreRoom = dropdownValueStoreRoom1;
+              String dropdownValueWashRoom = dropdownValueWashRoom1;
+              String dropdownValueKitchen = dropdownValueKitchen1;
+
+              String hn = _houseNumberController.text,
+                  city = _cityController.text,
+                  price = _priceController.text,
+                  digitalAddress = _digitalAddressController.text,
+                  size = _sizeController.text;
 
               return SafeArea(
                   child: Form(
@@ -193,16 +222,12 @@ class _EditDescription extends State<EditDescription> {
                                             fontWeight: FontWeight.bold),
                                       ),
                                       DropdownButtonFormField(
-                                        value: dropdownValue,
+                                        value: dropdownValue1,
                                         icon: const Icon(Icons.arrow_drop_down),
                                         elevation: 16,
                                         style: const TextStyle(
                                             color: Colors.black),
-                                        onChanged: (String? newValue) {
-                                          setState(() {
-                                            dropdownValue = newValue!;
-                                          });
-                                        },
+                                        onChanged: null,
                                         items: <String>[
                                           'Select option',
                                           'Single Room',
@@ -232,16 +257,12 @@ class _EditDescription extends State<EditDescription> {
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold)),
                                       DropdownButtonFormField(
-                                        value: dropdownValueType,
+                                        value: dropdownValueType1,
                                         icon: const Icon(Icons.arrow_drop_down),
                                         elevation: 16,
                                         style: const TextStyle(
                                             color: Colors.black),
-                                        onChanged: (String? newValue) {
-                                          setState(() {
-                                            dropdownValueType = newValue!;
-                                          });
-                                        },
+                                        onChanged: null,
                                         items: <String>[
                                           'Select option',
                                           'Apartment',
@@ -271,7 +292,7 @@ class _EditDescription extends State<EditDescription> {
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold)),
                                       DropdownButtonFormField(
-                                        value: dropdownValueKitchen,
+                                        value: dropdownValueKitchen1,
                                         icon: const Icon(Icons.arrow_drop_down),
                                         elevation: 16,
                                         style: const TextStyle(
@@ -308,7 +329,7 @@ class _EditDescription extends State<EditDescription> {
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold)),
                                       DropdownButtonFormField(
-                                        value: dropdownValueWashRoom,
+                                        value: dropdownValueWashRoom1,
                                         icon: const Icon(Icons.arrow_drop_down),
                                         elevation: 16,
                                         style: const TextStyle(
@@ -345,7 +366,7 @@ class _EditDescription extends State<EditDescription> {
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold)),
                                       DropdownButtonFormField(
-                                        value: dropdownValueStoreRoom,
+                                        value: dropdownValueStoreRoom1,
                                         icon: const Icon(Icons.arrow_drop_down),
                                         elevation: 16,
                                         style: const TextStyle(
@@ -382,7 +403,7 @@ class _EditDescription extends State<EditDescription> {
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold)),
                                       DropdownButtonFormField(
-                                        value: dropdownValuePorch,
+                                        value: dropdownValuePorch1,
                                         icon: const Icon(Icons.arrow_drop_down),
                                         elevation: 16,
                                         style: const TextStyle(
@@ -419,7 +440,7 @@ class _EditDescription extends State<EditDescription> {
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold)),
                                       DropdownButtonFormField(
-                                        value: dropdownValueWaledHouse,
+                                        value: dropdownValueWaledHouse1,
                                         icon: const Icon(Icons.arrow_drop_down),
                                         elevation: 16,
                                         style: const TextStyle(
@@ -456,7 +477,7 @@ class _EditDescription extends State<EditDescription> {
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold)),
                                       DropdownButtonFormField(
-                                        value: dropdownValueTiledHouse,
+                                        value: dropdownValueTiledHouse1,
                                         icon: const Icon(Icons.arrow_drop_down),
                                         elevation: 16,
                                         style: const TextStyle(
@@ -493,7 +514,7 @@ class _EditDescription extends State<EditDescription> {
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold)),
                                       DropdownButtonFormField(
-                                        value: dropdownValueElectricity,
+                                        value: dropdownValueElectricity1,
                                         icon: const Icon(Icons.arrow_drop_down),
                                         elevation: 16,
                                         style: const TextStyle(
@@ -531,7 +552,7 @@ class _EditDescription extends State<EditDescription> {
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold)),
                                       DropdownButtonFormField(
-                                        value: dropdownValueWaterAvailability,
+                                        value: dropdownValueWaterAvailability1,
                                         icon: const Icon(Icons.arrow_drop_down),
                                         elevation: 16,
                                         style: const TextStyle(
@@ -561,19 +582,26 @@ class _EditDescription extends State<EditDescription> {
                                   height: 10,
                                 ),
                                 TextFormField(
-                                    controller: _priceController,
+                                    initialValue: _priceController.text,
+                                    onChanged: (value) {
+                                      price = value;
+                                    },
                                     decoration: InputDecoration(
                                         border: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(20),
                                         ),
                                         labelText: "price",
-                                        hintText: 'Enter new price of rent')),
+                                        hintText: 'Enter new price of rent',
+                                        prefix: const Text('GHC'))),
                                 const SizedBox(
                                   height: 10,
                                 ),
                                 TextFormField(
-                                    controller: _sizeController,
+                                    initialValue: _sizeController.text,
+                                    onChanged: (value) {
+                                      size = value;
+                                    },
                                     keyboardType: TextInputType.text,
                                     decoration: InputDecoration(
                                         border: OutlineInputBorder(
@@ -581,7 +609,8 @@ class _EditDescription extends State<EditDescription> {
                                               BorderRadius.circular(20),
                                         ),
                                         labelText: "size",
-                                        hintText: 'Enter new size of room')),
+                                        hintText: 'Enter new size of room',
+                                        prefix: Text('Sqft'))),
                                 const SizedBox(height: 10),
                                 Card(
                                     child: Padding(
@@ -594,16 +623,12 @@ class _EditDescription extends State<EditDescription> {
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold)),
                                       DropdownButtonFormField(
-                                        value: dropdownValueRegion,
-                                        icon: const Icon(Icons.arrow_drop_down),
+                                        value: dropdownValueRegion1,
+                                        //icon: const Icon(Icons.arrow_drop_down),
                                         elevation: 16,
                                         style: const TextStyle(
                                             color: Colors.black),
-                                        onChanged: (String? newValue) {
-                                          setState(() {
-                                            dropdownValueRegion = newValue!;
-                                          });
-                                        },
+                                        onChanged: null,
                                         items: <String>[
                                           'Select option',
                                           'Ashanti Region',
@@ -635,7 +660,10 @@ class _EditDescription extends State<EditDescription> {
                                   height: 10,
                                 ),
                                 TextFormField(
-                                    controller: _cityController,
+                                    initialValue: _cityController.text,
+                                    onChanged: (value) {
+                                      city = value;
+                                    },
                                     keyboardType: TextInputType.text,
                                     decoration: InputDecoration(
                                         border: OutlineInputBorder(
@@ -648,7 +676,11 @@ class _EditDescription extends State<EditDescription> {
                                   height: 10,
                                 ),
                                 TextFormField(
-                                    controller: _digitalAddressController,
+                                    initialValue:
+                                        _digitalAddressController.text,
+                                    onChanged: (value) {
+                                      digitalAddress = value;
+                                    },
                                     keyboardType: TextInputType.text,
                                     decoration: InputDecoration(
                                         border: OutlineInputBorder(
@@ -664,7 +696,10 @@ class _EditDescription extends State<EditDescription> {
                                   height: 10,
                                 ),
                                 TextFormField(
-                                    controller: _houseNumberController,
+                                    initialValue: _houseNumberController.text,
+                                    onChanged: (value) {
+                                      hn = value;
+                                    },
                                     keyboardType: TextInputType.text,
                                     decoration: InputDecoration(
                                         border: OutlineInputBorder(
@@ -699,23 +734,15 @@ class _EditDescription extends State<EditDescription> {
                                                               .updateRoomDetails(
                                                         docID: widget.docId,
                                                         electricity:
-                                                            dropdownValueElectricity,
+                                                            dropdownValueElectricity
+                                                                .toString(),
                                                         waterAvailability:
                                                             dropdownValueWaterAvailability
                                                                 .toString(),
-                                                        price: _priceController
-                                                            .text,
-                                                        size: _sizeController
-                                                            .text,
-                                                        region:
-                                                            dropdownValueRegion
-                                                                .toString(),
-                                                        citytown:
-                                                            _cityController
-                                                                .text,
+                                                        price: price.toString(),
+                                                        size: size.toString(),
                                                         houseNumber:
-                                                            _houseNumberController
-                                                                .text,
+                                                            hn.toString(),
                                                         washroom:
                                                             dropdownValueWashRoom
                                                                 .toString(),
@@ -735,8 +762,8 @@ class _EditDescription extends State<EditDescription> {
                                                             dropdownValueTiledHouse
                                                                 .toString(),
                                                         digitalAddress:
-                                                            _digitalAddressController
-                                                                .text,
+                                                            digitalAddress
+                                                                .toString(),
                                                       );
                                                       if (isUpadted) {
                                                         Navigator.of(context)
@@ -844,10 +871,12 @@ class _EditDescription extends State<EditDescription> {
                                                           textColor:
                                                               Colors.white,
                                                           fontSize: 16.0);
-                                                      Navigator.of(context).push(
-                                                          MaterialPageRoute(
-                                                              builder: (_) =>
-                                                                  DashboardView()));
+                                                      Navigator.of(context)
+                                                          .pushAndRemoveUntil(
+                                                              MaterialPageRoute(
+                                                                  builder: (_) =>
+                                                                      DashboardView()),
+                                                              (route) => false);
                                                     } else {
                                                       Fluttertoast.showToast(
                                                           msg: _postManager

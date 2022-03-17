@@ -140,59 +140,67 @@ class _LoginLandlordState extends State<LoginLandlord> {
             ),
             SizedBox(
               width: MediaQuery.of(context).size.width,
-              child: TextButton(
-                  onPressed: () async {
-                    if (_globalKey.currentState!.validate()) {
-                      String email = _emailController.text;
-                      String password = _passwordController.text;
-                      setState(() {
-                        _isLoading = true;
-                      });
+              child: _isLoading
+                  ? const Center(
+                      child: TextButton(
+                          onPressed: null,
+                          child: CircularProgressIndicator.adaptive()),
+                    )
+                  : TextButton(
+                      onPressed: () async {
+                        if (_globalKey.currentState!.validate()) {
+                          String email = _emailController.text.trim();
+                          String password = _passwordController.text.trim();
+                          setState(() {
+                            _isLoading = true;
+                          });
 
-                      bool isSuccessful = await _authManager.loginUser(
-                          email: email, password: password);
-                      if (isSuccessful) {
-                        //succcess
-                        Fluttertoast.showToast(
-                            msg: "Welcome back to Lets Accommodate",
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.BOTTOM,
-                            timeInSecForIosWeb: 1,
-                            backgroundColor: Color.fromARGB(255, 94, 196, 97),
-                            textColor: Colors.white,
-                            fontSize: 16.0);
+                          bool isSuccessful = await _authManager.loginUser(
+                              email: email, password: password);
+                          if (isSuccessful) {
+                            //succcess
+                            Fluttertoast.showToast(
+                                msg: "Welcome back to Lets Accommodate",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor:
+                                    Color.fromARGB(255, 94, 196, 97),
+                                textColor: Colors.white,
+                                fontSize: 16.0);
 
-                        Navigator.of(context).pushAndRemoveUntil(
-                            MaterialPageRoute(
-                                builder: (context) =>  DashboardView()),
-                            (route) => false);
-                      } else {
-                        //failure
-                        Fluttertoast.showToast(
-                            msg: _authManager.message,
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.BOTTOM,
-                            timeInSecForIosWeb: 1,
-                            backgroundColor: Colors.red,
-                            textColor: Colors.white,
-                            fontSize: 16.0);
-                      }
-                    } else {
-                      Fluttertoast.showToast(
-                          msg: "Email and password is required!",
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.BOTTOM,
-                          timeInSecForIosWeb: 1,
-                          backgroundColor: Colors.red,
-                          textColor: Colors.white,
-                          fontSize: 16.0);
-                    }
-                  },
-                  style: TextButton.styleFrom(backgroundColor: Colors.blue),
-                  child: Text(
-                    'Login',
-                    style: TextStyle(color: Colors.white, fontSize: 20),
-                  )),
+                            Navigator.of(context).pushAndRemoveUntil(
+                                MaterialPageRoute(
+                                    builder: (context) => DashboardView()),
+                                (route) => false);
+                          } else {
+                            //failure
+                            Fluttertoast.showToast(
+                                msg: _authManager.message,
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: Colors.red,
+                                textColor: Colors.white,
+                                fontSize: 16.0);
+                                
+                          }
+                        } else {
+                          Fluttertoast.showToast(
+                              msg: "Email and password is required!",
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.BOTTOM,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Colors.red,
+                              textColor: Colors.white,
+                              fontSize: 16.0);
+                        }
+                      },
+                      style: TextButton.styleFrom(backgroundColor: Colors.blue),
+                      child: Text(
+                        'Login',
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      )),
             ),
             SizedBox(
               height: 40,
