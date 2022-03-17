@@ -7,7 +7,6 @@ import 'package:lets_accommodate/landlord/comments_landlord.dart';
 import 'package:lets_accommodate/landlord/view_uploads.dart';
 import 'package:lets_accommodate/services/post_manager.dart';
 
-
 class DashboardView extends StatelessWidget {
   DashboardView({
     Key? key,
@@ -29,29 +28,30 @@ class DashboardView extends StatelessWidget {
                   return const SettingLandlord();
                 }));
               },
-              icon:const Icon(Icons.settings))
+              icon: const Icon(Icons.settings))
         ],
       ),
       body: SafeArea(
         child: StreamBuilder<QuerySnapshot<Map<String, dynamic>?>>(
             stream: _postManager.getAllLandlordRooms(userId: userID),
             builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting &&
+                  snapshot.data == null) {
+                return const Center(
+                    child: CircularProgressIndicator.adaptive());
+              }
+              if (snapshot.connectionState == ConnectionState.done &&
+                  snapshot.data == null) {
+                return const Center(
+                    child: Text(
+                  'No house added yet',
+                  style: TextStyle(color: Colors.black),
+                ));
+              }
               return ListView.separated(
                 itemBuilder: (context, index) {
                   var docID = snapshot.data!.docs[index].id;
-                  if (snapshot.connectionState == ConnectionState.waiting &&
-                      snapshot.data == null) {
-                    return const Center(
-                        child: CircularProgressIndicator.adaptive());
-                  }
-                  if (snapshot.connectionState == ConnectionState.done &&
-                      snapshot.data == null) {
-                    return const Center(
-                        child: Text(
-                      'No house added yet',
-                      style: TextStyle(color: Colors.black),
-                    ));
-                  }
+
                   return Card(
                     child: Column(
                       children: [

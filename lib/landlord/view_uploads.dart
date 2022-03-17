@@ -49,7 +49,7 @@ class _ViewUploadsState extends State<ViewUploads> {
                   child: Text('No data is available'),
                 );
               }
-              var userId = snapshot.data!.data()!['user_id'];
+             // var userId = snapshot.data!.data()!['user_id'];
               var pictures = snapshot.data!.data()!['pictures'];
               var docID = snapshot.data!.id;
 
