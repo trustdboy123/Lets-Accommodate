@@ -126,7 +126,9 @@ class DashboardView extends StatelessWidget {
                                   onPressed: () {
                                     Navigator.of(context).push(
                                         MaterialPageRoute(builder: (context) {
-                                      return CommentsLandlord();
+                                      return CommentsLandlord(
+                                        docId: docID,
+                                      );
                                     }));
                                   },
                                   icon: Icon(Icons.comment_outlined)),
