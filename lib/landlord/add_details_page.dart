@@ -52,13 +52,13 @@ class _AddImageState extends State<AddImage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Add Details'),
+          title: Text('Add Details'),
         ),
         body: SafeArea(
           child: Form(
             key: _formKey,
             child: GridView(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 1),
                 children: [
                   Container(
@@ -66,19 +66,18 @@ class _AddImageState extends State<AddImage> {
                     padding: const EdgeInsets.all(4),
                     child: GridView.builder(
                         itemCount: _image.length + 1,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
                         ),
                         itemBuilder: (context, index) {
                           return index == 0
                               ? Center(
                                   child: IconButton(
-                                      icon: const Icon(Icons.add_a_photo),
+                                      icon: Icon(Icons.add_a_photo),
                                       onPressed: () => chooseImage()),
                                 )
                               : Container(
-                                  margin: const EdgeInsets.all(3),
+                                  margin: EdgeInsets.all(3),
                                   decoration: BoxDecoration(
                                       image: DecorationImage(
                                           image: FileImage(_image[index - 1]),
@@ -86,8 +85,30 @@ class _AddImageState extends State<AddImage> {
                                 );
                         }),
                   ),
+                  uploading
+                      ? Center(
+                          child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                              child: Text(
+                                'uploading...',
+                                style: TextStyle(fontSize: 20),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            CircularProgressIndicator(
+                              value: val,
+                              valueColor:
+                                  AlwaysStoppedAnimation<Color>(Colors.green),
+                            )
+                          ],
+                        ))
+                      : Container(),
                   ListView(
-                    padding: const EdgeInsets.all(10),
+                    padding: EdgeInsets.all(10),
                     children: [
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -647,7 +668,7 @@ class _AddImageState extends State<AddImage> {
                                         backgroundColor: Colors.blue),
                                   ),
                           ),
-                          const SizedBox(
+                          SizedBox(
                             height: 40,
                           )
                         ],

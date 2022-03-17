@@ -39,6 +39,7 @@ class AuthManager with ChangeNotifier {
     required String location,
     required String number,
     required String nationality,
+    required String region,
   }) async {
     setIsLoading(true);
     bool isCreated = false;
@@ -52,6 +53,7 @@ class AuthManager with ChangeNotifier {
         "gender": gender,
         "location": location,
         "number": number,
+        "region": region,
         "nationality": nationality,
         "createdAt": FieldValue.serverTimestamp(),
         "uid": userCredential.user!.uid

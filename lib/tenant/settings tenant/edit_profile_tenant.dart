@@ -179,20 +179,17 @@ class _EditProfileTenantState extends State<EditProfileTenant> {
                   ),
                   SizedBox(height: 5),
                   Card(
-                    child: TextFormField(
-                      keyboardType: TextInputType.text,
-                      textCapitalization: TextCapitalization.sentences,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey)),
-                        hintText: 'Enter your location',
-                        hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
-                        label: Text(snapshot.data!['location']),
-                        floatingLabelBehavior: FloatingLabelBehavior.never,
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.blue),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(8.0))),
+                    shadowColor: Color(0xFF322E2E),
+                    color: Colors.white,
+                    child: SizedBox(
+                      height: 40,
+                      width: MediaQuery.of(context).size.width,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          snapshot.data!['location'],
+                          style: TextStyle(fontSize: 15),
+                        ),
                       ),
                     ),
                   ),

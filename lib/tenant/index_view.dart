@@ -43,7 +43,7 @@ class _IndexViewState extends State<IndexView> {
           )
         : Scaffold(
             body: IndexedStack(
-              children: const [
+              children: [
                 CategoriesTenant(),
                 FavouriteTenant(),
                 SettingsTenant(),

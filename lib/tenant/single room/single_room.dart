@@ -158,7 +158,9 @@ class _SingleRoomState extends State<SingleRoom> {
                                 onPressed: () {
                                   Navigator.of(context).push(
                                       MaterialPageRoute(builder: (context) {
-                                    return TestMe();
+                                    return TestMe(
+                                      docId: docId,
+                                    );
                                   }));
                                 },
                                 icon: Icon(Icons.comment_outlined)),

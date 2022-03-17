@@ -123,6 +123,14 @@ class PostManager with ChangeNotifier {
     return isSubmited;
   }
 
+  //read comments
+  Stream<QuerySnapshot<Map<String, dynamic>?>> getComments(
+      {required String docId}) {
+    return _commentsCollection
+        .orderBy('createdAt', descending: true)
+        .snapshots();
+  }
+
   //add to favorites
   Future<bool> addToFavorites({required String docId}) async {
     bool isAdded = false;
