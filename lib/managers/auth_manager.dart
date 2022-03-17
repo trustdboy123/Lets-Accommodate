@@ -31,22 +31,25 @@ class AuthManager with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<bool> createNewUser({
-    required String name,
-    required String email,
-    required String password,
-    required String gender,
-    required String location,
-    required String number,
-    required String nationality,
-    required String region,
-  }) async {
+  Future<bool> createNewUser(
+      {required String name,
+      required String email,
+      required String password,
+      required String gender,
+      required String location,
+      required String number,
+      required String nationality,
+      required String region,
+      required File profile}) async {
     setIsLoading(true);
     bool isCreated = false;
 
     await _firebaseAuth
         .createUserWithEmailAndPassword(email: email, password: password)
-        .then((userCredential) {
+        .then((userCredential) async {
+      String? photoUrl = await _fileUploadService.uploadFile(
+          file: profile, uid: userCredential.user!.uid);
+
       userCollection.doc(userCredential.user!.uid).set({
         "name": name,
         " email": email,
@@ -56,6 +59,7 @@ class AuthManager with ChangeNotifier {
         "region": region,
         "nationality": nationality,
         "createdAt": FieldValue.serverTimestamp(),
+        "profile_pic": photoUrl,
         "uid": userCredential.user!.uid
       });
       isCreated = true;

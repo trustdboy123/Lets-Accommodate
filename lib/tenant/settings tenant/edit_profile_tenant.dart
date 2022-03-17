@@ -274,7 +274,10 @@ class _EditProfileTenantState extends State<EditProfileTenant> {
                   SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: TextButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          bool isUpdated = await _postManager.updateTenantInfo(
+                              imageFile: _profilePic!);
+                        },
                         style:
                             TextButton.styleFrom(backgroundColor: Colors.blue),
                         child: Text(

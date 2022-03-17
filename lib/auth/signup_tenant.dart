@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:lets_accommodate/auth/login_tenant.dart';
 import 'package:lets_accommodate/managers/auth_manager.dart';
 import 'package:lets_accommodate/tenant/categories_tenant.dart';
@@ -16,6 +19,17 @@ class SignupTenant extends StatefulWidget {
 class _SignupTenantState extends State<SignupTenant> {
   String dropdownValue = 'Male';
   GlobalKey<FormState> _globalKey = GlobalKey();
+  File? imageFile;
+  final ImagePicker _imagePicker = ImagePicker();
+
+  Future selectImage({ImageSource imageSource = ImageSource.camera}) async {
+    XFile? profilePic = await _imagePicker.pickImage(source: imageSource);
+    File profileImageFile = File(profilePic!.path);
+
+    setState(() {
+      imageFile = profileImageFile;
+    });
+  }
 
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
@@ -45,6 +59,54 @@ class _SignupTenantState extends State<SignupTenant> {
           child: ListView(
             padding: EdgeInsets.all(16.0),
             children: [
+              Center(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(90),
+                  child: imageFile != null
+                      ? Image.file(
+                          imageFile!,
+                          height: 130,
+                          width: 130,
+                          fit: BoxFit.cover,
+                        )
+                      : Image.asset(
+                          'assets/Profile_avatar.png',
+                          height: 130,
+                          width: 130,
+                          fit: BoxFit.contain,
+                        ),
+                ),
+              ),
+              TextButton.icon(
+                  onPressed: () {
+                    showModalBottomSheet(
+                        context: context,
+                        builder: (context) {
+                          return SizedBox(
+                            height: 100,
+                            child: Column(children: [
+                              TextButton.icon(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                    selectImage(
+                                        imageSource: ImageSource.camera);
+                                  },
+                                  icon: Icon(Icons.camera_alt),
+                                  label: Text('Select from camera')),
+                              TextButton.icon(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                    selectImage(
+                                        imageSource: ImageSource.gallery);
+                                  },
+                                  icon: Icon(Icons.browse_gallery),
+                                  label: Text('Select from gallery'))
+                            ]),
+                          );
+                        });
+                  },
+                  icon: Icon(Icons.camera_alt),
+                  label: Text('Please select a picture')),
               Card(
                 child: TextFormField(
                   controller: _nameController,
@@ -281,7 +343,8 @@ class _SignupTenantState extends State<SignupTenant> {
                                 location: location,
                                 number: number,
                                 nationality: nationality,
-                                region: dropdownValueRegion.toString());
+                                region: dropdownValueRegion.toString(),
+                                profile: imageFile!);
 
                             if (isCreated) {
                               setState(() {
