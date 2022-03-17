@@ -2,8 +2,10 @@ import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lets_accommodate/services/post_manager.dart';
+import 'package:lets_accommodate/tenant/settings%20tenant/settings_tenant.dart';
 
 class EditProfileTenant extends StatefulWidget {
   const EditProfileTenant({Key? key}) : super(key: key);
@@ -66,11 +68,11 @@ class _EditProfileTenantState extends State<EditProfileTenant> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(90),
                           child: _profilePic == null
-                              ? Image.asset(
-                                  'assets/Profile_avatar.png',
+                              ? Image.network(
+                                  snapshot.data!['profile_pic'],
                                   width: 130,
                                   height: 130,
-                                  fit: BoxFit.contain,
+                                  fit: BoxFit.fill,
                                 )
                               : InkWell(
                                   onTap: () => showModalBottomSheet(
@@ -277,6 +279,32 @@ class _EditProfileTenantState extends State<EditProfileTenant> {
                         onPressed: () async {
                           bool isUpdated = await _postManager.updateTenantInfo(
                               imageFile: _profilePic!);
+                          if (isUpdated) {
+                            Fluttertoast.showToast(
+                                msg: "Profile Pic Updated successfully",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor:
+                                    Color.fromARGB(255, 94, 196, 97),
+                                textColor: Colors.white,
+                                fontSize: 16.0);
+
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => SettingsTenant()),
+                                (route) => false);
+                          } else {
+                            Fluttertoast.showToast(
+                                msg: _postManager.message,
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: Colors.red,
+                                textColor: Colors.white,
+                                fontSize: 16.0);
+                          }
                         },
                         style:
                             TextButton.styleFrom(backgroundColor: Colors.blue),

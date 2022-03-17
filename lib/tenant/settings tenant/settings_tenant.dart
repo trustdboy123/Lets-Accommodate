@@ -55,8 +55,8 @@ class _SettingsTenantState extends State<SettingsTenant> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         CircleAvatar(
-                          backgroundImage: NetworkImage(
-                              'https://images.unsplash.com/photo-1589317621382-0cbef7ffcc4c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80'),
+                          backgroundImage:
+                              NetworkImage(snapshot.data!['profile_pic']),
                           radius: 100,
                         ),
                         SizedBox(

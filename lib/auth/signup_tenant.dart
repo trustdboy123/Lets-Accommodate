@@ -162,7 +162,7 @@ class _SignupTenantState extends State<SignupTenant> {
                     labelStyle: TextStyle(fontWeight: FontWeight.w600),
                     border: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.grey)),
-                    hintText: 'Enter your your location',
+                    hintText: 'Enter your your password',
                     hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     focusedBorder: OutlineInputBorder(
