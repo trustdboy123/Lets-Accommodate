@@ -65,76 +65,46 @@ class _TestMeState extends State<TestMe> {
       appBar: AppBar(
         title: Text("Comments"),
       ),
-      body: StreamBuilder<Map<String, dynamic>?>(
-          stream: _postManager.getTenantInfo(uid).asStream(),
-          builder: (context, snapshot) {
-            // var profilePic = snapshot.data!['profile_pic'];
-            return Container(
-              child: CommentBox(
-                userImage: '',
-                child: ListView.builder(
-                  itemBuilder: ((context, index) {
-                    if (snapshot.connectionState == ConnectionState.waiting &&
-                        snapshot.data == null) {
-                      return const Center(
-                        child: CircularProgressIndicator.adaptive(),
-                      );
-                    }
-                    if (snapshot.connectionState == ConnectionState.done &&
-                        snapshot.data == null) {
-                      return const Center(
-                        child: Text('No data available!'),
-                      );
-                    }
-                    return StreamBuilder<QuerySnapshot<Map<String, dynamic>?>>(
-                        stream: _postManager.getComments(docId: widget.docId),
-                        builder: (context, userSnapshot) {
-                          return ListTile(
-                            leading: CircleAvatar(),
-                            title:
-                                userSnapshot.data!.docs[index].data()!['name'],
-                            subtitle: userSnapshot.data!.docs[index]
-                                .data()!['comment'],
-                          );
-                        });
-                  }),
-                  itemCount: snapshot.data == null ? 0 : snapshot.data!.length,
+      body: SafeArea(
+          child: SingleChildScrollView(
+        child: ListView(
+          shrinkWrap: true,
+          children: [
+            ListView.builder(
+                shrinkWrap: true,
+                itemBuilder: ((context, index) {
+                  return ListTile();
+                })),
+            Material(
+              color: Colors.black12,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 10, right: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    CircleAvatar(),
+                    Expanded(
+                        child: Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                            labelText: 'Write a comment...',
+                            labelStyle: TextStyle(color: Colors.white)),
+                      ),
+                    )),
+                    IconButton(
+                        onPressed: null,
+                        icon: Icon(
+                          Icons.send,
+                          color: Colors.white,
+                        ))
+                  ],
                 ),
-                labelText: 'Write a comment...',
-                withBorder: false,
-                errorText: 'Comment cannot be blank',
-                sendButtonMethod: () async {
-                  if (formKey.currentState!.validate()) {
-                    print(commentController.text);
-                    bool isSubmited = await _postManager.createComments(
-                      comment: commentController.text,
-                      profilePic: 'profilePic',
-                      docId: widget.docId,
-                    );
-                    // setState(() {
-                    //   var value = {
-                    //     'name': '',
-                    //     'pic':
-                    //         ' profilePic == null ? CircleAvatar() : profilePic',
-                    //     'message': commentController.text
-                    //   };
-                    //   filedata.insert(0, value);
-                    // });
-                    commentController.clear();
-                    FocusScope.of(context).unfocus();
-                  } else {
-                    print("Not validated");
-                  }
-                },
-                formKey: formKey,
-                commentController: commentController,
-                backgroundColor: Colors.black38,
-                textColor: Colors.white,
-                sendWidget:
-                    Icon(Icons.send_sharp, size: 30, color: Colors.white),
               ),
-            );
-          }),
+            ),
+          ],
+        ),
+      )),
     );
   }
 }
