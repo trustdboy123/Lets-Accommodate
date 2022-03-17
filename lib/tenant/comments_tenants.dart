@@ -16,11 +16,6 @@ class _TestMeState extends State<TestMe> {
   final TextEditingController commentController = TextEditingController();
   final PostManager _postManager = PostManager();
   final String uid = FirebaseAuth.instance.currentUser!.uid;
-  final Stream<QuerySnapshot<Map<String, dynamic>>> _commentsCollection =
-      FirebaseFirestore.instance
-          .collection('comments')
-          .orderBy('createdAt')
-          .snapshots();
 
   List filedata = [
     {
@@ -73,11 +68,38 @@ class _TestMeState extends State<TestMe> {
       body: StreamBuilder<Map<String, dynamic>?>(
           stream: _postManager.getTenantInfo(uid).asStream(),
           builder: (context, snapshot) {
-            var profilePic = snapshot.data!['profile_pic'];
+            // var profilePic = snapshot.data!['profile_pic'];
             return Container(
               child: CommentBox(
-                userImage: profilePic,
-                child: commentChild(filedata),
+                userImage: '',
+                child: ListView.builder(
+                  itemBuilder: ((context, index) {
+                    if (snapshot.connectionState == ConnectionState.waiting &&
+                        snapshot.data == null) {
+                      return const Center(
+                        child: CircularProgressIndicator.adaptive(),
+                      );
+                    }
+                    if (snapshot.connectionState == ConnectionState.done &&
+                        snapshot.data == null) {
+                      return const Center(
+                        child: Text('No data available!'),
+                      );
+                    }
+                    return StreamBuilder<QuerySnapshot<Map<String, dynamic>?>>(
+                        stream: _postManager.getComments(docId: widget.docId),
+                        builder: (context, userSnapshot) {
+                          return ListTile(
+                            leading: CircleAvatar(),
+                            title:
+                                userSnapshot.data!.docs[index].data()!['name'],
+                            subtitle: userSnapshot.data!.docs[index]
+                                .data()!['comment'],
+                          );
+                        });
+                  }),
+                  itemCount: snapshot.data == null ? 0 : snapshot.data!.length,
+                ),
                 labelText: 'Write a comment...',
                 withBorder: false,
                 errorText: 'Comment cannot be blank',
@@ -86,17 +108,18 @@ class _TestMeState extends State<TestMe> {
                     print(commentController.text);
                     bool isSubmited = await _postManager.createComments(
                       comment: commentController.text,
-                      profilePic: profilePic,
+                      profilePic: 'profilePic',
                       docId: widget.docId,
                     );
-                    setState(() {
-                      var value = {
-                        'name': snapshot.data!['name'],
-                        'pic': profilePic == null ? CircleAvatar() : profilePic,
-                        'message': commentController.text
-                      };
-                      filedata.insert(0, value);
-                    });
+                    // setState(() {
+                    //   var value = {
+                    //     'name': '',
+                    //     'pic':
+                    //         ' profilePic == null ? CircleAvatar() : profilePic',
+                    //     'message': commentController.text
+                    //   };
+                    //   filedata.insert(0, value);
+                    // });
                     commentController.clear();
                     FocusScope.of(context).unfocus();
                   } else {

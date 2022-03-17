@@ -23,6 +23,7 @@ class _SignupTenantState extends State<SignupTenant> {
   final TextEditingController _locationController = TextEditingController();
   final TextEditingController _nationalityController = TextEditingController();
   final TextEditingController _numberController = TextEditingController();
+  String dropdownValueRegion = 'Select option';
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey();
   bool _isLoading = false;
 
@@ -215,6 +216,40 @@ class _SignupTenantState extends State<SignupTenant> {
                   }
                 },
               ),
+              Text('Region', style: TextStyle(fontWeight: FontWeight.bold)),
+              DropdownButtonFormField(
+                value: dropdownValueRegion,
+                icon: const Icon(Icons.arrow_drop_down),
+                elevation: 16,
+                style: const TextStyle(color: Colors.black),
+                onChanged: (String? newValue) {
+                  setState(() {
+                    dropdownValueRegion = newValue!;
+                  });
+                },
+                items: <String>[
+                  'Select option',
+                  'Ashanti Region',
+                  'Ahafo Region',
+                  'Bono East',
+                  'Central Region',
+                  'Eastern Region',
+                  'Greater Accra',
+                  'Northern Region',
+                  'North East',
+                  'Oti Region',
+                  'Savannah Region',
+                  'Upper East Region',
+                  'Upper West Region',
+                  'Volta Region',
+                  'Western Region',
+                ].map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+              ),
               SizedBox(
                 height: 20,
               ),
@@ -245,7 +280,8 @@ class _SignupTenantState extends State<SignupTenant> {
                                 gender: gender,
                                 location: location,
                                 number: number,
-                                nationality: nationality);
+                                nationality: nationality,
+                                region: dropdownValueRegion.toString());
 
                             if (isCreated) {
                               setState(() {

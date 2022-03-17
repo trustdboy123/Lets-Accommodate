@@ -130,8 +130,8 @@ class PostManager with ChangeNotifier {
         .orderBy('createdAt', descending: true)
         .snapshots();
   }
-  //add to favorites
 
+  //add to favorites
   Future<bool> addToFavorites({required String docId}) async {
     bool isAdded = false;
     String userUid = _firebaseAuth.currentUser!.uid;
