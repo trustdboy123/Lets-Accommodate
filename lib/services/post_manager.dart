@@ -62,38 +62,38 @@ class PostManager with ChangeNotifier {
     FieldValue timestamp = FieldValue.serverTimestamp();
     List<String> photoUrl = await _fileUploadService.uploadFiles(postImage);
 
-      await _uploadsCollection.doc().set({
-        "category": category,
-        "type": type,
-        "kitchen": kitchen,
-        "washroom": washroom,
-        "store Room": storeRoom,
-        "walled House": walledHouse,
-        "tiled": tiled,
-        "electricity": electricity,
-        "water Availability": waterAvailability,
-        "price": price,
-        "size": size,
-        "region": region,
-        "city/Town": citytown,
-        "porch": porch,
-        "digital Address": digitalAddress,
-        "house Number": houseNumber,
-        "pictures": photoUrl,
-        "intrested": 0,
-        "createdAt": timestamp,
-        "user_id": userUid
-      }).then((_) {
-        isSubmited = true;
-        setMessage('Post successfully submited');
-      }).catchError((onError) {
-        isSubmited = false;
-        setMessage('### $onError');
-      }).timeout(const Duration(seconds: 60), onTimeout: () {
-        isSubmited = false;
-        setMessage('Please Check your connection');
-      });
-    
+    await _uploadsCollection.doc().set({
+      "category": category,
+      "type": type,
+      "kitchen": kitchen,
+      "washroom": washroom,
+      "store Room": storeRoom,
+      "walled House": walledHouse,
+      "tiled": tiled,
+      "electricity": electricity,
+      "water Availability": waterAvailability,
+      "price": price,
+      "size": size,
+      "region": region,
+      "city/Town": citytown,
+      "porch": porch,
+      "digital Address": digitalAddress,
+      "house Number": houseNumber,
+      "pictures": photoUrl,
+      "intrested": 0,
+      "createdAt": timestamp,
+      "user_id": userUid
+    }).then((_) {
+      isSubmited = true;
+      setMessage('Post successfully submited');
+    }).catchError((onError) {
+      isSubmited = false;
+      setMessage('### $onError');
+    }).timeout(const Duration(seconds: 60), onTimeout: () {
+      isSubmited = false;
+      setMessage('Please Check your connection');
+    });
+
     return isSubmited;
   }
 
@@ -119,6 +119,14 @@ class PostManager with ChangeNotifier {
       setMessage('Error whiles commenting: $onError');
     });
     return isSubmited;
+  }
+
+  //read comments
+  Stream<QuerySnapshot<Map<String, dynamic>?>> getComments(
+      {required String docId}) {
+    return _commentsCollection
+        .orderBy('createdAt', descending: true)
+        .snapshots();
   }
 
 //read rooms based on categories

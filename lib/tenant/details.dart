@@ -26,7 +26,6 @@ class _DetailsState extends State<Details> {
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -204,7 +203,7 @@ class _DetailsState extends State<Details> {
                                   fontSize: 15, fontWeight: FontWeight.w600),
                             ),
                             Text(
-                              '',
+                              snapshot.data!.data()!['porch'],
                               style: TextStyle(
                                   fontSize: 15, fontWeight: FontWeight.bold),
                             )
