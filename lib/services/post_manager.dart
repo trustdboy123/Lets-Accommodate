@@ -214,6 +214,28 @@ class PostManager with ChangeNotifier {
     return isUpdated;
   }
 
+ //update user info
+  Future<bool> updateTenantInfo(
+   { required File imageFile}
+  ) async {
+       String userUid = _firebaseAuth.currentUser!.uid;
+        String? photoUrl = await _fileUploadService.uploadFile(
+          file: imageFile, uid: userUid);
+    Map<String, dynamic> data = <String, dynamic>{
+     "profile_pic": photoUrl,
+    };
+    bool isUpdated = false;
+    await _tenantsCollection.doc(userUid).update(data).then((value) {
+      isUpdated = true;
+      return value;
+    }).catchError((error) {
+      setMessage('Failed to update room details: $error');
+      print(error);
+    });
+    return isUpdated;
+  }
+
+
   //delete rooms
   Future<bool> deleteRoom({required String docID}) async {
     bool isDeleted = false;
