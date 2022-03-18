@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:lets_accommodate/landlord/edit_description.dart';
-import 'package:lets_accommodate/services/post_manager.dart';
+import 'package:lets_accommodate/managers/post_manager.dart';
 import 'package:lets_accommodate/tenant/landlord_details.dart';
 
 class ViewUploads extends StatefulWidget {

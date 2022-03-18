@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:lets_accommodate/services/post_manager.dart';
+import 'package:lets_accommodate/managers/post_manager.dart';
 import 'package:lets_accommodate/tenant/comments_tenants.dart';
 import 'package:lets_accommodate/tenant/details.dart';
 

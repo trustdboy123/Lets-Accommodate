@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:lets_accommodate/services/file_upload_service.dart';
 
 class PostManager with ChangeNotifier {
@@ -82,7 +81,7 @@ class PostManager with ChangeNotifier {
       "digital Address": digitalAddress,
       "house Number": houseNumber,
       "pictures": photoUrl,
-      "intrested": 0,
+      "intrested": {userUid: false},
       "createdAt": timestamp,
       "user_id": userUid
     }).then((_) {
@@ -159,6 +158,24 @@ class PostManager with ChangeNotifier {
       setMessage("Failed to delete room due to: $onError");
     });
     return isDeleted;
+  }
+
+  //handle intrested
+  Future<bool> handleIntrested(
+      {required String docId, required bool intrested}) async {
+    bool isIntrested = false;
+
+    String currentUser = _firebaseAuth.currentUser!.uid;
+    await _uploadsCollection
+        .doc(docId)
+        .update({"interested.$currentUser": intrested}).then((_) {
+      isIntrested = true;
+      setMessage('Interested');
+    }).catchError((onError) {
+      isIntrested;
+      setMessage('Could not add to intreste at the moment: $onError');
+    });
+    return isIntrested;
   }
 
   //read favorites

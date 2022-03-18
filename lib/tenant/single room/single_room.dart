@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:lets_accommodate/services/post_manager.dart';
+import 'package:lets_accommodate/managers/post_manager.dart';
 import 'package:lets_accommodate/tenant/details.dart';
 import 'package:lets_accommodate/tenant/comments_tenants.dart';
 
@@ -56,6 +56,11 @@ class _SingleRoomState extends State<SingleRoom> {
             return ListView.separated(
                 itemBuilder: (context, index) {
                   var docId = snapshot.data!.docs[index].id;
+                  var intrested =
+                      snapshot.data!.docs[index].data()!['interested'];
+                  //     var intrested = snapshot.data!.doc[index].data()!['intrested'];
+                  var interestedCount = intrested.length;
+
                   //var userId = snapshot.data!.docs[index].data()!['user_id'];
                   if (snapshot.connectionState == ConnectionState.waiting &&
                       snapshot.data == null) {
@@ -146,9 +151,7 @@ class _SingleRoomState extends State<SingleRoom> {
                             Row(
                               children: [
                                 Icon(Icons.star_border_outlined),
-                                Text(snapshot.data!.docs[index]
-                                    .data()!['intrested']
-                                    .toString())
+                                Text(interestedCount.toString())
                               ],
                             ),
                             Spacer(),

@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:lets_accommodate/services/post_manager.dart';
+import 'package:lets_accommodate/managers/post_manager.dart';
 import 'package:lets_accommodate/tenant/landlord_details.dart';
 
 class Details extends StatefulWidget {
@@ -15,6 +16,8 @@ class Details extends StatefulWidget {
 class _DetailsState extends State<Details> {
   final PostManager _postManager = PostManager();
   final PageController _pageController = PageController();
+  final String uid = FirebaseAuth.instance.currentUser!.uid;
+  bool isSelected = false;
   var _currentPageValue = 0.0;
   @override
   void initState() {
@@ -50,6 +53,8 @@ class _DetailsState extends State<Details> {
               }
               var userId = snapshot.data!.data()!['user_id'];
               var pictures = snapshot.data!.data()!['pictures'];
+              var intrested = snapshot.data!.data()!['interested'];
+              var interestedCount = intrested.length;
 
               return SingleChildScrollView(
                 padding: EdgeInsets.all(15),
@@ -381,7 +386,27 @@ class _DetailsState extends State<Details> {
                         SizedBox(
                           width: MediaQuery.of(context).size.width,
                           child: TextButton(
-                            onPressed: () {
+                            onPressed: () async {
+                              bool isIntrested = intrested[uid] == true;
+
+                              if (isIntrested) {
+                                await _postManager.handleIntrested(
+                                    docId: widget.docId, intrested: false);
+                                setState(() {
+                                  interestedCount -= 1;
+                                  isSelected = false;
+                                  intrested[uid] = false;
+                                });
+                              } else if (!isIntrested) {
+                                await _postManager.handleIntrested(
+                                    docId: widget.docId, intrested: true);
+                                setState(() {
+                                  interestedCount += 1;
+                                  isSelected = true;
+                                  intrested[uid] = true;
+                                });
+                              }
+
                               Navigator.of(context)
                                   .push(MaterialPageRoute(builder: (context) {
                                 return LandlordDetails(

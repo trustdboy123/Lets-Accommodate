@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:lets_accommodate/services/post_manager.dart';
+import 'package:lets_accommodate/managers/post_manager.dart';
 import 'package:lets_accommodate/tenant/settings%20tenant/edit_profile_tenant.dart';
 
 class SettingsTenant extends StatefulWidget {
