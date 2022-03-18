@@ -6,7 +6,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:lets_accommodate/managers/auth_manager.dart';
-import 'package:lets_accommodate/services/post_manager.dart';
+import 'package:lets_accommodate/managers/post_manager.dart';
 import 'package:path/path.dart' as Path;
 
 import 'landlord_dashboard.dart';

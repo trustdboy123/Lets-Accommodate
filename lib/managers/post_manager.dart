@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:lets_accommodate/services/file_upload_service.dart';
 
 class PostManager with ChangeNotifier {
@@ -82,7 +81,7 @@ class PostManager with ChangeNotifier {
       "digital Address": digitalAddress,
       "house Number": houseNumber,
       "pictures": photoUrl,
-      "intrested": 0,
+      "intrested": {userUid: false},
       "createdAt": timestamp,
       "user_id": userUid
     }).then((_) {
@@ -159,6 +158,24 @@ class PostManager with ChangeNotifier {
     return isDeleted;
   }
 
+  //handle intrested
+  Future<bool> handleIntrested(
+      {required String docId, required bool intrested}) async {
+    bool isIntrested = false;
+
+    String currentUser = _firebaseAuth.currentUser!.uid;
+    await _uploadsCollection
+        .doc(docId)
+        .update({"interested.$currentUser": intrested}).then((_) {
+      isIntrested = true;
+      setMessage('Intrested');
+    }).catchError((onError) {
+      isIntrested;
+      setMessage('Could not add to intreste at the moment: $onError');
+    });
+    return isIntrested;
+  }
+
 //read rooms based on categories
   Stream<QuerySnapshot<Map<String, dynamic>?>> getSingleRooms(
       {required String category}) {
@@ -222,15 +239,13 @@ class PostManager with ChangeNotifier {
     return isUpdated;
   }
 
- //update user info
-  Future<bool> updateTenantInfo(
-   { required File imageFile}
-  ) async {
-       String userUid = _firebaseAuth.currentUser!.uid;
-        String? photoUrl = await _fileUploadService.uploadFile(
-          file: imageFile, uid: userUid);
+  //update user info
+  Future<bool> updateTenantInfo({required File imageFile}) async {
+    String userUid = _firebaseAuth.currentUser!.uid;
+    String? photoUrl =
+        await _fileUploadService.uploadFile(file: imageFile, uid: userUid);
     Map<String, dynamic> data = <String, dynamic>{
-     "profile_pic": photoUrl,
+      "profile_pic": photoUrl,
     };
     bool isUpdated = false;
     await _tenantsCollection.doc(userUid).update(data).then((value) {
@@ -242,7 +257,6 @@ class PostManager with ChangeNotifier {
     });
     return isUpdated;
   }
-
 
   //delete rooms
   Future<bool> deleteRoom({required String docID}) async {

@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lets_accommodate/landlord/landlord_dashboard.dart';
-import 'package:lets_accommodate/services/post_manager.dart';
+import 'package:lets_accommodate/managers/post_manager.dart';
 import 'package:multi_image_picker2/multi_image_picker2.dart';
 
 class EditDescription extends StatefulWidget {

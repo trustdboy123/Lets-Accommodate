@@ -5,7 +5,7 @@ import 'package:lets_accommodate/landlord/Settings%20landlord/setting_landlord.d
 import 'package:lets_accommodate/landlord/add_details_page.dart';
 import 'package:lets_accommodate/landlord/comments_landlord.dart';
 import 'package:lets_accommodate/landlord/view_uploads.dart';
-import 'package:lets_accommodate/services/post_manager.dart';
+import 'package:lets_accommodate/managers/post_manager.dart';
 
 class DashboardView extends StatelessWidget {
   DashboardView({
