@@ -30,7 +30,7 @@ class CategoriesTenant extends StatelessWidget {
                       borderRadius: BorderRadius.circular(30)),
                   color: Colors.black,
                   child: Image.network(
-                    'https://images.unsplash.com/photo-1589834390005-5d4fb9bf3d32?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80',
+                    'https://images.unsplash.com/photo-1560448205-4d9b3e6bb6db?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fHJvb218ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
                     fit: BoxFit.fill,
                     height: 250,
                     width: double.infinity,
