@@ -41,24 +41,45 @@ class _TestMeState extends State<TestMe> {
                 child: StreamBuilder<QuerySnapshot<Map<String, dynamic>?>>(
                     stream: _postManager.getComments(docId: widget.docId),
                     builder: (context, userSnapshot) {
-                      return ListView.builder(
-                          itemCount: userSnapshot.data == null
-                              ? 0
-                              : userSnapshot.data!.docs.length,
-                          itemBuilder: ((context, index) {
-                            return ListTile(
-                              leading: CircleAvatar(
-                                  backgroundImage: NetworkImage(userSnapshot
-                                      .data!.docs[index]
-                                      .data()!['picture'])),
-                              title: Text(
-                                userSnapshot.data!.docs[index].data()!['name'],
-                                style: TextStyle(fontWeight: FontWeight.w600),
-                              ),
-                              subtitle: Text(userSnapshot.data!.docs[index]
-                                  .data()!['comment']),
-                            );
-                          }));
+                      return GestureDetector(
+                        onLongPress: () async {
+                          return showDialog(
+                              context: context,
+                              builder: (context) {
+                                return const AlertDialog(
+                                  content:
+                                      Text('Do you want to delete comment?'),
+                                  actions: [
+                                    TextButton(
+                                        onPressed: null,
+                                        child: const Text('Yes')),
+                                         TextButton(
+                                        onPressed: null,
+                                        child: const Text('No'))
+                                  ],
+                                );
+                              });
+                        },
+                        child: ListView.builder(
+                            itemCount: userSnapshot.data == null
+                                ? 0
+                                : userSnapshot.data!.docs.length,
+                            itemBuilder: ((context, index) {
+                              return ListTile(
+                                leading: CircleAvatar(
+                                    backgroundImage: NetworkImage(userSnapshot
+                                        .data!.docs[index]
+                                        .data()!['picture'])),
+                                title: Text(
+                                  userSnapshot.data!.docs[index]
+                                      .data()!['name'],
+                                  style: TextStyle(fontWeight: FontWeight.w600),
+                                ),
+                                subtitle: Text(userSnapshot.data!.docs[index]
+                                    .data()!['comment']),
+                              );
+                            })),
+                      );
                     }),
                 labelText: 'Write a comment...',
                 withBorder: false,

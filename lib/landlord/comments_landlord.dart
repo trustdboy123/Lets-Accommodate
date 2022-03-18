@@ -24,7 +24,7 @@ class _CommentsLandlordState extends State<CommentsLandlord> {
         title: Text("Comments"),
       ),
       body: StreamBuilder<Map<String, dynamic>?>(
-          stream: _postManager.getTenantInfo(uid).asStream(),
+          stream: _postManager.getUserInfo(uid).asStream(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting &&
                 snapshot.data == null) {
