@@ -61,7 +61,7 @@ class _DetailsState extends State<Details> {
                 child: Column(
                   children: [
                     Container(
-                        height: 250,
+                        height: 350,
                         child: PageView.builder(
                           controller: _pageController,
                           itemCount: pictures.length,

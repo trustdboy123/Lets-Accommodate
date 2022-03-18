@@ -124,6 +124,19 @@ class PostManager with ChangeNotifier {
     return isSubmited;
   }
 
+  //delete comments
+  Future<bool> deleteComment() async {
+    bool isDeleted = false;
+    String docID = _commentsCollection.doc().id;
+    print(docID);
+    await _commentsCollection.doc(docID).delete().then((value) {
+      isDeleted = true;
+    }).catchError((onError) {
+      setMessage("Failed to delete comment due to: $onError");
+    });
+    return isDeleted;
+  }
+
   //read comments
   Stream<QuerySnapshot<Map<String, dynamic>?>> getComments(
       {required String docId}) {
@@ -160,7 +173,7 @@ class PostManager with ChangeNotifier {
     return isDeleted;
   }
 
-  //handle intrested
+  //handle interested
   Future<bool> handleIntrested(
       {required String docId, required bool intrested}) async {
     bool isIntrested = false;

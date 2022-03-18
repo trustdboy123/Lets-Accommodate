@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:comment_box/comment/comment.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lets_accommodate/managers/post_manager.dart';
 
 class TestMe extends StatefulWidget {
@@ -46,16 +47,52 @@ class _TestMeState extends State<TestMe> {
                           return showDialog(
                               context: context,
                               builder: (context) {
-                                return const AlertDialog(
+                                return AlertDialog(
                                   content:
                                       Text('Do you want to delete comment?'),
                                   actions: [
                                     TextButton(
-                                        onPressed: null,
-                                        child: const Text('Yes')),
-                                         TextButton(
-                                        onPressed: null,
-                                        child: const Text('No'))
+                                        onPressed: () async {
+                                          bool isDeleted = await _postManager
+                                              .deleteComment();
+                                          if (isDeleted) {
+                                            Navigator.of(context)
+                                                .pop(isDeleted);
+                                            Fluttertoast.showToast(
+                                                msg:
+                                                    "Comment is deleted successfully",
+                                                toastLength: Toast.LENGTH_SHORT,
+                                                gravity: ToastGravity.BOTTOM,
+                                                timeInSecForIosWeb: 1,
+                                                backgroundColor:
+                                                    const Color.fromARGB(
+                                                        255, 94, 196, 97),
+                                                textColor: Colors.white,
+                                                fontSize: 16.0);
+                                          } else {
+                                            Fluttertoast.showToast(
+                                                msg: _postManager.message,
+                                                toastLength: Toast.LENGTH_SHORT,
+                                                gravity: ToastGravity.BOTTOM,
+                                                timeInSecForIosWeb: 1,
+                                                backgroundColor: Color.fromARGB(
+                                                    255, 235, 9, 9),
+                                                textColor: Colors.white,
+                                                fontSize: 16.0);
+                                          }
+                                        },
+                                        child: const Text(
+                                          'Yes',
+                                          style: TextStyle(color: Colors.red),
+                                        )),
+                                    TextButton(
+                                        onPressed: () {
+                                          return Navigator.of(context).pop();
+                                        },
+                                        child: Text(
+                                          'No',
+                                          style: TextStyle(color: Colors.blue),
+                                        ))
                                   ],
                                 );
                               });
