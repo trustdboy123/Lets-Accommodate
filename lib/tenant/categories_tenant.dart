@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lets_accommodate/tenant/single%20room/single_room.dart';
 
-
 class CategoriesTenant extends StatelessWidget {
-  
   const CategoriesTenant({Key? key}) : super(key: key);
 
   @override
@@ -22,7 +20,9 @@ class CategoriesTenant extends StatelessWidget {
                 onTap: () {
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
-                    return SingleRoom(category: 'Single Room',);
+                    return SingleRoom(
+                      category: 'Single Room',
+                    );
                   }));
                 },
                 child: Card(

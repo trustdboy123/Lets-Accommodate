@@ -64,7 +64,7 @@ class FavouriteTenant extends StatelessWidget {
                                     ),
                                   ),
                                   IconButton(
-                                      onPressed: () {},
+                                      onPressed: () async {},
                                       icon: Icon(
                                         Icons.favorite,
                                         color: Colors.red,

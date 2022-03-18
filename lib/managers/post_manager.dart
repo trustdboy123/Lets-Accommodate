@@ -102,16 +102,18 @@ class PostManager with ChangeNotifier {
   Future<bool> createComments(
       {required String docId,
       required String comment,
+      required String name,
       String? profilePic}) async {
     bool isSubmited = false;
     String userUid = _firebaseAuth.currentUser!.uid;
     FieldValue timeStamp = FieldValue.serverTimestamp();
     await _commentsCollection.doc().set({
       "comment": comment,
+      "name": name,
       "picture": profilePic,
       "createdAt": timeStamp,
       "user_id": userUid,
-      "doc_id": docId
+      "doc_id": docId,
     }).then((_) {
       isSubmited = true;
       setMessage('Comment success');
@@ -149,7 +151,7 @@ class PostManager with ChangeNotifier {
   //remove from favorites
   Future<bool> removeFavorites({required String docID}) async {
     bool isDeleted = false;
-    await _uploadsCollection.doc(docID).delete().then((value) {
+    await _favoritesCollection.doc(docID).delete().then((value) {
       isDeleted = true;
       setMessage('Favorite removed successfully');
     }).catchError((onError) {
@@ -174,6 +176,22 @@ class PostManager with ChangeNotifier {
       setMessage('Could not add to intreste at the moment: $onError');
     });
     return isIntrested;
+  }
+
+  //read favorites
+  Future<Map<String, dynamic>?> readFavorites(String docId) async {
+    Map<String, dynamic>? favoriteData;
+    await _favoritesCollection
+        .doc(docId)
+        .get()
+        .then((DocumentSnapshot<Map<String, dynamic>> doc) {
+      if (doc.exists) {
+        favoriteData = doc.data();
+      } else {
+        favoriteData = null;
+      }
+    });
+    return favoriteData;
   }
 
 //read rooms based on categories

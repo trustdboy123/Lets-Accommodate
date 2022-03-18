@@ -97,7 +97,7 @@ class _SingleRoomState extends State<SingleRoom> {
                               child: Image.network(
                                 snapshot.data!.docs[index].data()!['pictures']
                                     [0],
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                                 height: 250,
                                 width: double.infinity,
                               ),
@@ -115,7 +115,7 @@ class _SingleRoomState extends State<SingleRoom> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    "${snapshot.data!.docs[index].data()!['price']} /Month",
+                                    "GHC${snapshot.data!.docs[index].data()!['price']} /Month",
                                     style: TextStyle(
                                       fontSize: 15,
                                       fontWeight: FontWeight.w600,
@@ -124,12 +124,8 @@ class _SingleRoomState extends State<SingleRoom> {
                                   ),
                                   IconButton(
                                       onPressed: () async {
-                                        setState(() {
-                                          Icon(
-                                            Icons.favorite,
-                                            color: Colors.red,
-                                          );
-                                        });
+                                        _postManager.addToFavorites(
+                                            docId: docId);
                                       },
                                       icon: Icon(
                                         Icons.favorite_border_rounded,
@@ -150,7 +146,9 @@ class _SingleRoomState extends State<SingleRoom> {
                             Row(
                               children: [
                                 Icon(Icons.star_border_outlined),
-                                Text('12')
+                                Text(snapshot.data!.docs[index]
+                                    .data()!['intrested']
+                                    .toString())
                               ],
                             ),
                             Spacer(),
