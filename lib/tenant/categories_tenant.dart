@@ -70,7 +70,7 @@ class CategoriesTenant extends StatelessWidget {
                       borderRadius: BorderRadius.circular(30)),
                   color: Colors.black,
                   child: Image.network(
-                    'https://images.unsplash.com/photo-1589834390005-5d4fb9bf3d32?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80',
+                    'https://images.unsplash.com/photo-1554995207-c18c203602cb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
                     fit: BoxFit.fill,
                     height: 250,
                     width: double.infinity,
@@ -110,7 +110,7 @@ class CategoriesTenant extends StatelessWidget {
                       borderRadius: BorderRadius.circular(30)),
                   color: Colors.black,
                   child: Image.network(
-                    'https://images.unsplash.com/photo-1589834390005-5d4fb9bf3d32?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80',
+                    'https://lh3.googleusercontent.com/IrX8q_pNLb4ZmB4k8X5OOqLlNaXVrrCk4BT1WTaxtjB2mBSLfDQKSbi_-NnuirlA6D0YwfOrHvZlSL_SC1ssut0Uk8WPVxXHfEFzvWEgBWHMv7EIJfcBKzz7NRxdwA=s0',
                     fit: BoxFit.fill,
                     height: 250,
                     width: double.infinity,
@@ -150,7 +150,7 @@ class CategoriesTenant extends StatelessWidget {
                       borderRadius: BorderRadius.circular(30)),
                   color: Colors.black,
                   child: Image.network(
-                    'https://images.unsplash.com/photo-1589834390005-5d4fb9bf3d32?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80',
+                    'https://sucasapropertiesgh.com/wp-content/uploads/2020/10/1-11.jpg',
                     fit: BoxFit.fill,
                     height: 250,
                     width: double.infinity,
