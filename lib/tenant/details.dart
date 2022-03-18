@@ -53,7 +53,7 @@ class _DetailsState extends State<Details> {
               }
               var userId = snapshot.data!.data()!['user_id'];
               var pictures = snapshot.data!.data()!['pictures'];
-              var intrested = snapshot.data!.data()!['intrested'];
+              var intrested = snapshot.data!.data()!['interested'];
               var interestedCount = intrested.length;
 
               return SingleChildScrollView(
@@ -387,23 +387,23 @@ class _DetailsState extends State<Details> {
                           width: MediaQuery.of(context).size.width,
                           child: TextButton(
                             onPressed: () async {
-                              bool isIntrested = intrested[userId] == true;
+                              bool isIntrested = intrested[uid] == true;
 
                               if (isIntrested) {
                                 await _postManager.handleIntrested(
                                     docId: widget.docId, intrested: false);
                                 setState(() {
                                   interestedCount -= 1;
-                                  isSelected;
-                                  intrested[userId] = false;
+                                  isSelected = false;
+                                  intrested[uid] = false;
                                 });
                               } else if (!isIntrested) {
-                                 await _postManager.handleIntrested(
+                                await _postManager.handleIntrested(
                                     docId: widget.docId, intrested: true);
                                 setState(() {
                                   interestedCount += 1;
-                                  isSelected =true;
-                                  intrested[userId] = true;
+                                  isSelected = true;
+                                  intrested[uid] = true;
                                 });
                               }
 

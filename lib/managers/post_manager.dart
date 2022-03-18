@@ -170,7 +170,7 @@ class PostManager with ChangeNotifier {
         .doc(docId)
         .update({"interested.$currentUser": intrested}).then((_) {
       isIntrested = true;
-      setMessage('Intrested');
+      setMessage('Interested');
     }).catchError((onError) {
       isIntrested;
       setMessage('Could not add to intreste at the moment: $onError');
