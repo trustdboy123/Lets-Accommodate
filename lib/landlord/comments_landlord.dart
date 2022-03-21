@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:comment_box/comment/comment.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lets_accommodate/managers/post_manager.dart';
 
 class CommentsLandlord extends StatefulWidget {
@@ -24,7 +25,7 @@ class _CommentsLandlordState extends State<CommentsLandlord> {
         title: Text("Comments"),
       ),
       body: StreamBuilder<Map<String, dynamic>?>(
-          stream: _postManager.getUserInfo(uid).asStream(),
+          stream: _postManager.getTenantInfo(uid).asStream(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting &&
                 snapshot.data == null) {
@@ -46,18 +47,78 @@ class _CommentsLandlordState extends State<CommentsLandlord> {
                               ? 0
                               : commentSnapshot.data!.docs.length,
                           itemBuilder: ((context, index) {
-                            return ListTile(
-                              leading: CircleAvatar(
-                                  backgroundImage: NetworkImage(commentSnapshot
-                                      .data!.docs[index]
-                                      .data()!['picture'])),
-                              title: Text(
-                                commentSnapshot.data!.docs[index]
-                                    .data()!['name'],
-                                style: TextStyle(fontWeight: FontWeight.w600),
+                            var commentId =
+                                commentSnapshot.data!.docs[index].id;
+                            return GestureDetector(
+                              onLongPress: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return AlertDialog(
+                                        content: Text('Delete Comment?'),
+                                        actions: [
+                                          TextButton(
+                                              onPressed: () async {
+                                                bool isDeleted =
+                                                    await _postManager
+                                                        .deleteComment(
+                                                            commentId:
+                                                                commentId);
+                                                if (isDeleted) {
+                                                  //show flutter toast 'successfull delete'
+                                                  Fluttertoast.showToast(
+                                                      msg:
+                                                          "Deleted successfully",
+                                                      toastLength:
+                                                          Toast.LENGTH_SHORT,
+                                                      gravity:
+                                                          ToastGravity.BOTTOM,
+                                                      timeInSecForIosWeb: 1,
+                                                      backgroundColor:
+                                                          const Color.fromARGB(
+                                                              255, 94, 196, 97),
+                                                      textColor: Colors.white,
+                                                      fontSize: 16.0);
+                                                  Navigator.of(context)
+                                                      .pop(isDeleted);
+                                                } else {
+                                                  //show error in deleting
+                                                  Fluttertoast.showToast(
+                                                      msg: _postManager.message,
+                                                      toastLength:
+                                                          Toast.LENGTH_SHORT,
+                                                      gravity:
+                                                          ToastGravity.CENTER,
+                                                      timeInSecForIosWeb: 1,
+                                                      backgroundColor:
+                                                          Colors.red,
+                                                      textColor: Colors.white,
+                                                      fontSize: 16.0);
+                                                  Navigator.of(context).pop();
+                                                }
+                                              },
+                                              child: Text('Yes')),
+                                          TextButton(
+                                              onPressed: () =>
+                                                  Navigator.of(context).pop(),
+                                              child: Text('No'))
+                                        ],
+                                      );
+                                    });
+                              },
+                              child: ListTile(
+                                leading: CircleAvatar(
+                                    backgroundImage: NetworkImage(
+                                        commentSnapshot.data!.docs[index]
+                                            .data()!['picture'])),
+                                title: Text(
+                                  commentSnapshot.data!.docs[index]
+                                      .data()!['name'],
+                                  style: TextStyle(fontWeight: FontWeight.w600),
+                                ),
+                                subtitle: Text(commentSnapshot.data!.docs[index]
+                                    .data()!['comment']),
                               ),
-                              subtitle: Text(commentSnapshot.data!.docs[index]
-                                  .data()!['comment']),
                             );
                           }));
                     }),

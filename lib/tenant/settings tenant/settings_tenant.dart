@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lets_accommodate/managers/post_manager.dart';
 import 'package:lets_accommodate/tenant/settings%20tenant/edit_profile_tenant.dart';
+import 'package:path/path.dart';
 
 class SettingsTenant extends StatefulWidget {
   const SettingsTenant({Key? key}) : super(key: key);
@@ -21,16 +22,6 @@ class _SettingsTenantState extends State<SettingsTenant> {
     return Scaffold(
         appBar: AppBar(
           title: Text('Settings'),
-          actions: [
-            TextButton(
-                onPressed: () async {
-                  _firebaseAuth.signOut();
-                },
-                child: Text(
-                  'Logout',
-                  style: TextStyle(color: Colors.white, fontSize: 15),
-                ))
-          ],
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -54,10 +45,28 @@ class _SettingsTenantState extends State<SettingsTenant> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        CircleAvatar(
-                          backgroundImage:
-                              NetworkImage(snapshot.data!['profile_pic']),
-                          radius: 100,
+                        GestureDetector(
+                          onTap: () {
+                            showDialog(
+                                context: context,
+                                builder: (Context) {
+                                  return Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Image.network(
+                                          snapshot.data!['profile_pic']),
+                                    ),
+                                  );
+                                });
+                          },
+                          child: CircleAvatar(
+                            backgroundImage:
+                                NetworkImage(snapshot.data!['profile_pic']),
+                            radius: 100,
+                          ),
                         ),
                         SizedBox(
                           height: 5,
@@ -71,7 +80,10 @@ class _SettingsTenantState extends State<SettingsTenant> {
                                   return EditProfileTenant();
                                 }));
                               },
-                              child: Text('Edit Profile')),
+                              child: Text(
+                                'Edit profile',
+                                style: TextStyle(fontSize: 15),
+                              )),
                         ),
                         Text(
                           snapshot.data!['name'],
@@ -83,67 +95,95 @@ class _SettingsTenantState extends State<SettingsTenant> {
                     SizedBox(
                       height: 20,
                     ),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.help,
-                          color: Colors.blueAccent,
+                    InkWell(
+                      onTap: () {
+                        showModalBottomSheet(
+                            context: context,
+                            builder: (context) {
+                              return ListView(
+                                padding: EdgeInsets.all(16),
+                                children: const [
+                                  Icon(
+                                    Icons.email,
+                                    size: 100,
+                                    color: Colors.lightBlue,
+                                  ),
+                                  SizedBox(
+                                    height: 50,
+                                    child: Padding(
+                                      padding: EdgeInsets.all(16.0),
+                                      child: Text(
+                                        'Email: letsaccommodateof4@gmail.com',
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.facebook_rounded,
+                                    size: 100,
+                                    color: Colors.blue,
+                                  ),
+                                  SizedBox(
+                                    height: 50,
+                                    child: Padding(
+                                      padding: EdgeInsets.all(16.0),
+                                      child: Text(
+                                        'Facebook: Letsaccommodate Mobile app',
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              );
+                            });
+                      },
+                      child: Card(
+                        color: Color.fromARGB(255, 186, 203, 231),
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Row(
+                            children: const [
+                              Text(
+                                'Need help',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                              Icon(
+                                Icons.help,
+                                color: Colors.black,
+                              ),
+                              Text(
+                                'Contact Us',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            ],
+                          ),
                         ),
-                        const Text(
-                          'Need help?  Contact us',
-                          style: TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.w600),
-                        ),
-                        IconButton(
-                            color: Colors.blueAccent,
-                            onPressed: () {
-                              showModalBottomSheet(
-                                  context: context,
-                                  builder: (context) {
-                                    return ListView(
-                                      padding: EdgeInsets.all(16),
-                                      children: const [
-                                        Icon(
-                                          Icons.email,
-                                          size: 100,
-                                          color: Colors.lightBlue,
-                                        ),
-                                        SizedBox(
-                                          height: 50,
-                                          child: Padding(
-                                            padding: EdgeInsets.all(16.0),
-                                            child: Text(
-                                              'Email: letsaccommodateof4@gmail.com',
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                        ),
-                                        Icon(
-                                          Icons.facebook_rounded,
-                                          size: 100,
-                                          color: Colors.blue,
-                                        ),
-                                        SizedBox(
-                                          height: 50,
-                                          child: Padding(
-                                            padding: EdgeInsets.all(16.0),
-                                            child: Text(
-                                              'Facebook: Letsaccommodate Mobile app',
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    );
-                                  });
-                            },
-                            icon: Icon(Icons.arrow_drop_down_circle_rounded))
-                      ],
+                      ),
                     ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Card(
+                      child: TextButton(
+                          onPressed: () async {
+                            _firebaseAuth.signOut();
+                          },
+                          child: Text(
+                            'Logout',
+                            style: TextStyle(
+                                color: Colors.redAccent, fontSize: 20),
+                          )),
+                    )
                   ],
                 );
               }),

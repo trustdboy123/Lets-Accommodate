@@ -131,9 +131,11 @@ class _LoginTenantState extends State<LoginTenant> {
             ),
             SizedBox(
               width: MediaQuery.of(context).size.width,
-              child: _authManager.isLoading
+              child: _isLoading
                   ? const Center(
-                      child: CircularProgressIndicator.adaptive(),
+                      child: TextButton(
+                          onPressed: null,
+                          child: CircularProgressIndicator.adaptive()),
                     )
                   : TextButton(
                       onPressed: () async {

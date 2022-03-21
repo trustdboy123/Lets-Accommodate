@@ -151,7 +151,7 @@ class _FavouriteTenantState extends State<FavouriteTenant> {
                                 onPressed: () {
                                   Navigator.of(context).push(
                                       MaterialPageRoute(builder: (context) {
-                                    return TestMe(
+                                    return CommentTenants(
                                       docId: docId,
                                     );
                                   }));

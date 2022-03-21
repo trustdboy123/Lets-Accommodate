@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lets_accommodate/managers/post_manager.dart';
 
-class TestMe extends StatefulWidget {
-  const TestMe({Key? key, required this.docId}) : super(key: key);
+class CommentTenants extends StatefulWidget {
+  const CommentTenants({Key? key, required this.docId}) : super(key: key);
   final String docId;
   @override
-  _TestMeState createState() => _TestMeState();
+  _CommentTenantsState createState() => _CommentTenantsState();
 }
 
-class _TestMeState extends State<TestMe> {
+class _CommentTenantsState extends State<CommentTenants> {
   final formKey = GlobalKey<FormState>();
   final TextEditingController commentController = TextEditingController();
   final PostManager _postManager = PostManager();
@@ -66,8 +66,35 @@ class _TestMeState extends State<TestMe> {
                                                                 commentId);
                                                 if (isDeleted) {
                                                   //show flutter toast 'successfull delete'
+                                                  Fluttertoast.showToast(
+                                                      msg:
+                                                          "Deleted successfully",
+                                                      toastLength:
+                                                          Toast.LENGTH_SHORT,
+                                                      gravity:
+                                                          ToastGravity.BOTTOM,
+                                                      timeInSecForIosWeb: 1,
+                                                      backgroundColor:
+                                                          const Color.fromARGB(
+                                                              255, 94, 196, 97),
+                                                      textColor: Colors.white,
+                                                      fontSize: 16.0);
+                                                  Navigator.of(context)
+                                                      .pop(isDeleted);
                                                 } else {
                                                   //show error in deleting
+                                                  Fluttertoast.showToast(
+                                                      msg: _postManager.message,
+                                                      toastLength:
+                                                          Toast.LENGTH_SHORT,
+                                                      gravity:
+                                                          ToastGravity.CENTER,
+                                                      timeInSecForIosWeb: 1,
+                                                      backgroundColor:
+                                                          Colors.red,
+                                                      textColor: Colors.white,
+                                                      fontSize: 16.0);
+                                                  Navigator.of(context).pop();
                                                 }
                                               },
                                               child: Text('Yes')),
