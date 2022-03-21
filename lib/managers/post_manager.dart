@@ -82,6 +82,7 @@ class PostManager with ChangeNotifier {
       "house Number": houseNumber,
       "pictures": photoUrl,
       "intrested": {userUid: false},
+      "favorite": {userUid: false},
       "createdAt": timestamp,
       "user_id": userUid
     }).then((_) {
@@ -125,11 +126,9 @@ class PostManager with ChangeNotifier {
   }
 
   //delete comments
-  Future<bool> deleteComment() async {
+  Future<bool> deleteComment({required String commentId}) async {
     bool isDeleted = false;
-    String docID = _commentsCollection.doc().id;
-    print(docID);
-    await _commentsCollection.doc(docID).delete().then((value) {
+    await _commentsCollection.doc(commentId).delete().then((value) {
       isDeleted = true;
     }).catchError((onError) {
       setMessage("Failed to delete comment due to: $onError");
@@ -145,32 +144,28 @@ class PostManager with ChangeNotifier {
         .snapshots();
   }
 
-  //add to favorites
-  Future<bool> addToFavorites({required String docId}) async {
-    bool isAdded = false;
+//read rooms based on favourites
+  Stream<QuerySnapshot<Map<String, dynamic>?>> getFavoriteRooms() {
     String userUid = _firebaseAuth.currentUser!.uid;
-    await _favoritesCollection
-        .doc()
-        .set({"doc_id": docId, "user_id": userUid}).then((_) {
-      isAdded = true;
-      setMessage('Favorites added successfully');
-    }).catchError((onError) {
-      isAdded = false;
-      setMessage('Failed to add to favourites: $onError');
-    });
-    return isAdded;
+    return _uploadsCollection
+        .where('favorites.' + userUid, isEqualTo: true)
+        .snapshots();
   }
 
-  //remove from favorites
-  Future<bool> removeFavorites({required String docID}) async {
-    bool isDeleted = false;
-    await _favoritesCollection.doc(docID).delete().then((value) {
-      isDeleted = true;
-      setMessage('Favorite removed successfully');
-    }).catchError((onError) {
-      setMessage("Failed to delete room due to: $onError");
+  //read favorites
+  Future<Map<String, dynamic>?> readFavorites(String docId) async {
+    Map<String, dynamic>? favoriteData;
+    await _favoritesCollection
+        .doc(docId)
+        .get()
+        .then((DocumentSnapshot<Map<String, dynamic>> doc) {
+      if (doc.exists) {
+        favoriteData = doc.data();
+      } else {
+        favoriteData = null;
+      }
     });
-    return isDeleted;
+    return favoriteData;
   }
 
   //handle interested
@@ -191,20 +186,22 @@ class PostManager with ChangeNotifier {
     return isIntrested;
   }
 
-  //read favorites
-  Future<Map<String, dynamic>?> readFavorites(String docId) async {
-    Map<String, dynamic>? favoriteData;
-    await _favoritesCollection
+//handle favorites
+  Future<bool> handleFavorites(
+      {required String docId, required bool favorite}) async {
+    bool isFavorited = false;
+
+    String currentUser = _firebaseAuth.currentUser!.uid;
+    await _uploadsCollection
         .doc(docId)
-        .get()
-        .then((DocumentSnapshot<Map<String, dynamic>> doc) {
-      if (doc.exists) {
-        favoriteData = doc.data();
-      } else {
-        favoriteData = null;
-      }
+        .update({"favorites.$currentUser": favorite}).then((_) {
+      isFavorited = true;
+      setMessage('Favorated');
+    }).catchError((onError) {
+      isFavorited;
+      setMessage('Could not add to favorites at the moment: $onError');
     });
-    return favoriteData;
+    return isFavorited;
   }
 
 //read rooms based on categories
@@ -284,7 +281,6 @@ class PostManager with ChangeNotifier {
       return value;
     }).catchError((error) {
       setMessage('Failed to update room details: $error');
-      print(error);
     });
     return isUpdated;
   }

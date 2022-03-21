@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lets_accommodate/managers/post_manager.dart';
 import 'package:lets_accommodate/tenant/details.dart';
@@ -16,6 +17,8 @@ class SingleRoom extends StatefulWidget {
 class _SingleRoomState extends State<SingleRoom> {
   // SingleRoom({Key? key}) : super(key: key);
   final PostManager _postManager = PostManager();
+
+  String uid = FirebaseAuth.instance.currentUser!.uid;
 
   final TextEditingController? _textEditingController = TextEditingController();
 
@@ -58,9 +61,10 @@ class _SingleRoomState extends State<SingleRoom> {
                   var docId = snapshot.data!.docs[index].id;
                   var intrested =
                       snapshot.data!.docs[index].data()!['interested'];
-                  //     var intrested = snapshot.data!.doc[index].data()!['intrested'];
                   var interestedCount = intrested.length;
-
+                  var favorites =
+                      snapshot.data!.docs[index].data()!['favorites'];
+                  bool isSelected = (favorites[uid] == true);
                   //var userId = snapshot.data!.docs[index].data()!['user_id'];
                   if (snapshot.connectionState == ConnectionState.waiting &&
                       snapshot.data == null) {
@@ -129,12 +133,29 @@ class _SingleRoomState extends State<SingleRoom> {
                                   ),
                                   IconButton(
                                       onPressed: () async {
-                                        _postManager.addToFavorites(
-                                            docId: docId);
+                                        bool isFavorite =
+                                            favorites[uid] == false;
+                                        if (isFavorite) {
+                                          await _postManager.handleFavorites(
+                                              docId: docId, favorite: true);
+                                          setState(() {
+                                            isSelected = true;
+                                            favorites[uid] = true;
+                                          });
+                                        } else if (!isFavorite) {
+                                          await _postManager.handleFavorites(
+                                              docId: docId, favorite: false);
+                                          setState(() {
+                                            isSelected = false;
+                                            favorites[uid] = false;
+                                          });
+                                        }
                                       },
                                       icon: Icon(
-                                        Icons.favorite_border_rounded,
-                                        color: Colors.white,
+                                        isSelected
+                                            ? Icons.favorite
+                                            : Icons.favorite_border_rounded,
+                                        color: Colors.red,
                                       ))
                                 ],
                               ),
