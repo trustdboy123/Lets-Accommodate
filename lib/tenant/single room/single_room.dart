@@ -39,12 +39,10 @@ class _SingleRoomState extends State<SingleRoom> {
                   controller: _textEditingController,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30)),
-                      errorBorder: InputBorder.none,
-                      enabledBorder: InputBorder.none,
-                      focusedBorder: InputBorder.none,
+                          borderRadius: BorderRadius.circular(15)),
                       contentPadding: EdgeInsets.all(10),
                       hintText: 'Search',
+                      prefixIcon: Icon(Icons.search),
                       hintStyle: TextStyle(color: Colors.white)),
                 ),
               ),
