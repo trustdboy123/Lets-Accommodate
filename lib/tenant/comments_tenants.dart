@@ -41,82 +41,59 @@ class _TestMeState extends State<TestMe> {
                 userImage: profilePic,
                 child: StreamBuilder<QuerySnapshot<Map<String, dynamic>?>>(
                     stream: _postManager.getComments(docId: widget.docId),
-                    builder: (context, userSnapshot) {
-                      return GestureDetector(
-                        onLongPress: () async {
-                          return showDialog(
-                              context: context,
-                              builder: (context) {
-                                return AlertDialog(
-                                  content:
-                                      Text('Do you want to delete comment?'),
-                                  actions: [
-                                    TextButton(
-                                        onPressed: () async {
-                                          bool isDeleted = await _postManager
-                                              .deleteComment();
-                                          if (isDeleted) {
-                                            Navigator.of(context)
-                                                .pop(isDeleted);
-                                            Fluttertoast.showToast(
-                                                msg:
-                                                    "Comment is deleted successfully",
-                                                toastLength: Toast.LENGTH_SHORT,
-                                                gravity: ToastGravity.BOTTOM,
-                                                timeInSecForIosWeb: 1,
-                                                backgroundColor:
-                                                    const Color.fromARGB(
-                                                        255, 94, 196, 97),
-                                                textColor: Colors.white,
-                                                fontSize: 16.0);
-                                          } else {
-                                            Fluttertoast.showToast(
-                                                msg: _postManager.message,
-                                                toastLength: Toast.LENGTH_SHORT,
-                                                gravity: ToastGravity.BOTTOM,
-                                                timeInSecForIosWeb: 1,
-                                                backgroundColor: Color.fromARGB(
-                                                    255, 235, 9, 9),
-                                                textColor: Colors.white,
-                                                fontSize: 16.0);
-                                          }
-                                        },
-                                        child: const Text(
-                                          'Yes',
-                                          style: TextStyle(color: Colors.red),
-                                        )),
-                                    TextButton(
-                                        onPressed: () {
-                                          return Navigator.of(context).pop();
-                                        },
-                                        child: Text(
-                                          'No',
-                                          style: TextStyle(color: Colors.blue),
-                                        ))
-                                  ],
-                                );
-                              });
-                        },
-                        child: ListView.builder(
-                            itemCount: userSnapshot.data == null
-                                ? 0
-                                : userSnapshot.data!.docs.length,
-                            itemBuilder: ((context, index) {
-                              return ListTile(
+                    builder: (context, commentSnapshot) {
+                      return ListView.builder(
+                          itemCount: commentSnapshot.data == null
+                              ? 0
+                              : commentSnapshot.data!.docs.length,
+                          itemBuilder: ((context, index) {
+                            var commentId =
+                                commentSnapshot.data!.docs[index].id;
+                            return GestureDetector(
+                              onLongPress: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return AlertDialog(
+                                        content: Text('Delete Comment?'),
+                                        actions: [
+                                          TextButton(
+                                              onPressed: () async {
+                                                bool isDeleted =
+                                                    await _postManager
+                                                        .deleteComment(
+                                                            commentId:
+                                                                commentId);
+                                                if (isDeleted) {
+                                                  //show flutter toast 'successfull delete'
+                                                } else {
+                                                  //show error in deleting
+                                                }
+                                              },
+                                              child: Text('Yes')),
+                                          TextButton(
+                                              onPressed: () =>
+                                                  Navigator.of(context).pop(),
+                                              child: Text('No'))
+                                        ],
+                                      );
+                                    });
+                              },
+                              child: ListTile(
                                 leading: CircleAvatar(
-                                    backgroundImage: NetworkImage(userSnapshot
-                                        .data!.docs[index]
-                                        .data()!['picture'])),
+                                    backgroundImage: NetworkImage(
+                                        commentSnapshot.data!.docs[index]
+                                            .data()!['picture'])),
                                 title: Text(
-                                  userSnapshot.data!.docs[index]
+                                  commentSnapshot.data!.docs[index]
                                       .data()!['name'],
                                   style: TextStyle(fontWeight: FontWeight.w600),
                                 ),
-                                subtitle: Text(userSnapshot.data!.docs[index]
+                                subtitle: Text(commentSnapshot.data!.docs[index]
                                     .data()!['comment']),
-                              );
-                            })),
-                      );
+                              ),
+                            );
+                          }));
                     }),
                 labelText: 'Write a comment...',
                 withBorder: false,

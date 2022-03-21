@@ -40,22 +40,23 @@ class _CommentsLandlordState extends State<CommentsLandlord> {
                 userImage: profilePic,
                 child: StreamBuilder<QuerySnapshot<Map<String, dynamic>?>>(
                     stream: _postManager.getComments(docId: widget.docId),
-                    builder: (context, userSnapshot) {
+                    builder: (context, commentSnapshot) {
                       return ListView.builder(
-                          itemCount: userSnapshot.data == null
+                          itemCount: commentSnapshot.data == null
                               ? 0
-                              : userSnapshot.data!.docs.length,
+                              : commentSnapshot.data!.docs.length,
                           itemBuilder: ((context, index) {
                             return ListTile(
                               leading: CircleAvatar(
-                                  backgroundImage: NetworkImage(userSnapshot
+                                  backgroundImage: NetworkImage(commentSnapshot
                                       .data!.docs[index]
                                       .data()!['picture'])),
                               title: Text(
-                                userSnapshot.data!.docs[index].data()!['name'],
+                                commentSnapshot.data!.docs[index]
+                                    .data()!['name'],
                                 style: TextStyle(fontWeight: FontWeight.w600),
                               ),
-                              subtitle: Text(userSnapshot.data!.docs[index]
+                              subtitle: Text(commentSnapshot.data!.docs[index]
                                   .data()!['comment']),
                             );
                           }));

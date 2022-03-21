@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:lets_accommodate/tenant/single%20room/single_room.dart';
 
-class CategoriesTenant extends StatelessWidget {
+class CategoriesTenant extends StatefulWidget {
   const CategoriesTenant({Key? key}) : super(key: key);
 
+  @override
+  State<CategoriesTenant> createState() => _CategoriesTenantState();
+}
+
+class _CategoriesTenantState extends State<CategoriesTenant> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -18,7 +18,6 @@ class LandlordDetails extends StatelessWidget {
         body: StreamBuilder<Map<String, dynamic>?>(
             stream: _postManager.getUserInfo(userId).asStream(),
             builder: (context, snapshot) {
-              print('this is $userId');
               if (snapshot.connectionState == ConnectionState.waiting &&
                   snapshot.data == null) {
                 return const Center(

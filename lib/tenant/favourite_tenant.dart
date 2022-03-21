@@ -1,12 +1,21 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lets_accommodate/managers/post_manager.dart';
 import 'package:lets_accommodate/tenant/comments_tenants.dart';
 import 'package:lets_accommodate/tenant/details.dart';
 
-class FavouriteTenant extends StatelessWidget {
+class FavouriteTenant extends StatefulWidget {
   FavouriteTenant({Key? key}) : super(key: key);
+
+  @override
+  State<FavouriteTenant> createState() => _FavouriteTenantState();
+}
+
+class _FavouriteTenantState extends State<FavouriteTenant> {
   final PostManager _postManager = PostManager();
+
+  String uid = FirebaseAuth.instance.currentUser!.uid;
 
   @override
   Widget build(BuildContext context) {
@@ -15,30 +24,60 @@ class FavouriteTenant extends StatelessWidget {
         title: Text('Favourites'),
       ),
       body: StreamBuilder<QuerySnapshot<Map<String, dynamic>?>>(
-          stream: null,
+          stream: _postManager.getFavoriteRooms(),
           builder: (context, snapshot) {
-            return ListView(
-              children: [
-                Card(
-                  child: Column(
+            if (snapshot.connectionState == ConnectionState.waiting &&
+                snapshot.data == null) {
+              return const Center(
+                child: CircularProgressIndicator.adaptive(),
+              );
+            }
+
+            if (snapshot.connectionState == ConnectionState.done &&
+                snapshot.data == null) {
+              return const Center(
+                child: Text(
+                  'No data is available',
+                  style: TextStyle(color: Colors.black),
+                ),
+              );
+            }
+            return ListView.separated(
+                itemBuilder: (context, index) {
+                  var docId = snapshot.data!.docs[index].id;
+                  var intrested =
+                      snapshot.data!.docs[index].data()!['interested'];
+                  var interestedCount = intrested.length;
+                  var favorites =
+                      snapshot.data!.docs[index].data()!['favorites'];
+                  bool isSelected = (favorites[uid] == true);
+                  //var userId = snapshot.data!.docs[index].data()!['user_id'];
+
+                  return Card(
+                      child: Column(
                     children: [
                       Stack(
                         alignment: const Alignment(-1, -1),
                         children: [
                           InkWell(
-                            onTap: () {
-                              // Navigator.of(context)
-                              //     .push(MaterialPageRoute(builder: (context) {
-                              //   return Details();
-                              // }));
+                            onTap: () async {
+                              print('***$docId');
+
+                              Navigator.of(context)
+                                  .push(MaterialPageRoute(builder: (context) {
+                                return Details(
+                                  docId: docId,
+                                );
+                              }));
                             },
                             child: Card(
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30)),
                               color: Colors.black,
                               child: Image.network(
-                                'https://images.unsplash.com/photo-1589834390005-5d4fb9bf3d32?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80',
-                                fit: BoxFit.fill,
+                                snapshot.data!.docs[index].data()!['pictures']
+                                    [0],
+                                fit: BoxFit.cover,
                                 height: 250,
                                 width: double.infinity,
                               ),
@@ -55,8 +94,8 @@ class FavouriteTenant extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  const Text(
-                                    '60 cedis/month',
+                                  Text(
+                                    "GHC${snapshot.data!.docs[index].data()!['price']} /Month",
                                     style: TextStyle(
                                       fontSize: 15,
                                       fontWeight: FontWeight.w600,
@@ -64,9 +103,29 @@ class FavouriteTenant extends StatelessWidget {
                                     ),
                                   ),
                                   IconButton(
-                                      onPressed: () async {},
+                                      onPressed: () async {
+                                        bool isFavorite =
+                                            favorites[uid] == false;
+                                        if (isFavorite) {
+                                          await _postManager.handleFavorites(
+                                              docId: docId, favorite: true);
+                                          setState(() {
+                                            isSelected = true;
+                                            favorites[uid] = true;
+                                          });
+                                        } else if (!isFavorite) {
+                                          await _postManager.handleFavorites(
+                                              docId: docId, favorite: false);
+                                          setState(() {
+                                            isSelected = false;
+                                            favorites[uid] = false;
+                                          });
+                                        }
+                                      },
                                       icon: Icon(
-                                        Icons.favorite,
+                                        isSelected
+                                            ? Icons.favorite
+                                            : Icons.favorite_border_rounded,
                                         color: Colors.red,
                                       ))
                                 ],
@@ -81,26 +140,39 @@ class FavouriteTenant extends StatelessWidget {
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Icon(Icons.star_border_outlined),
+                            Row(
+                              children: [
+                                Icon(Icons.star_border_outlined),
+                                Text(interestedCount.toString())
+                              ],
+                            ),
                             Spacer(),
                             IconButton(
                                 onPressed: () {
-                                  // Navigator.of(context)
-                                  //     .push(MaterialPageRoute(builder: (context) {
-                                  //   return TestMe();
-                                  // }));
+                                  Navigator.of(context).push(
+                                      MaterialPageRoute(builder: (context) {
+                                    return TestMe(
+                                      docId: docId,
+                                    );
+                                  }));
                                 },
                                 icon: Icon(Icons.comment_outlined)),
                             Spacer(),
-                            Text('Koforidua, Adweso')
+                            Text(
+                                snapshot.data!.docs[index].data()!['city/Town'])
                           ],
                         ),
                       )
                     ],
-                  ),
-                ),
-              ],
-            );
+                  ));
+                },
+                separatorBuilder: (context, index) {
+                  return const SizedBox(
+                    height: 20,
+                  );
+                },
+                itemCount:
+                    snapshot.data == null ? 0 : snapshot.data!.docs.length);
           }),
     );
   }
