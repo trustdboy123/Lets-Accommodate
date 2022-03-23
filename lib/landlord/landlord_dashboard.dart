@@ -25,7 +25,7 @@ class DashboardView extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context)
                     .push(MaterialPageRoute(builder: (context) {
-                  return const SettingLandlord();
+                  return const SettingsLandlord();
                 }));
               },
               icon: const Icon(Icons.settings))
@@ -68,9 +68,9 @@ class DashboardView extends StatelessWidget {
                                 }));
                               },
                               child: Card(
+                                color: Color(0xFF254AA5),
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(30)),
-                                color: Colors.black,
                                 child: snapshot.data!.docs.isEmpty
                                     ? const SizedBox(
                                         child: Text('no data yet'),
