@@ -25,6 +25,7 @@ class PayDecision extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: GestureDetector(
+              onTap: () {},
               child: Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
