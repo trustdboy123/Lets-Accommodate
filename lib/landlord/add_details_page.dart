@@ -86,28 +86,6 @@ class _AddImageState extends State<AddImage> {
                                 );
                         }),
                   ),
-                  uploading
-                      ? Center(
-                          child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Container(
-                              child: Text(
-                                'uploading...',
-                                style: TextStyle(fontSize: 20),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            CircularProgressIndicator(
-                              value: val,
-                              valueColor:
-                                  AlwaysStoppedAnimation<Color>(Colors.green),
-                            )
-                          ],
-                        ))
-                      : Container(),
                   ListView(
                     padding: EdgeInsets.all(10),
                     children: [
@@ -583,9 +561,26 @@ class _AddImageState extends State<AddImage> {
                                   style: TextButton.styleFrom(
                                       backgroundColor: Colors.blue),
                                   onPressed: () {
+                                    var category = dropdownValue.toString();
+
                                     Navigator.of(context).push(
                                         MaterialPageRoute(builder: (context) {
-                                      return PayDecision();
+                                      return PayDecision(
+                                        price: category == 'Single Room'
+                                            ? 50
+                                            : category == 'Chamber and Hall'
+                                                ? 60
+                                                : category == 'Two Bedroom'
+                                                    ? 80
+                                                    : 90,
+                                        premiumPrice: category == 'Single Room'
+                                            ? 130
+                                            : category == 'Chamber and Hall'
+                                                ? 150
+                                                : category == 'Two Bedroom'
+                                                    ? 180
+                                                    : 200,
+                                      );
                                     }));
                                   },
                                   child: Text('Proceed to pay',

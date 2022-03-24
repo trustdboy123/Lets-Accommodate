@@ -3,7 +3,12 @@ import 'package:lets_accommodate/auth/decision.dart';
 import 'package:lets_accommodate/landlord/payments/add_creditcard.dart';
 
 class PayDecision extends StatelessWidget {
-  const PayDecision({Key? key}) : super(key: key);
+  // ignore: prefer_typing_uninitialized_variables
+  var price;
+  var premiumPrice;
+
+  PayDecision({Key? key, required this.price, required this.premiumPrice})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -45,8 +50,8 @@ class PayDecision extends StatelessWidget {
                         SizedBox(
                           height: 10,
                         ),
-                        const Text(
-                          'GHC 60/ Month',
+                        Text(
+                          'GHC $price/ Month',
                           style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -122,8 +127,8 @@ class PayDecision extends StatelessWidget {
                       SizedBox(
                         height: 10,
                       ),
-                      const Text(
-                        'GHC 90/ Month',
+                      Text(
+                        'GHC $premiumPrice/ Month',
                         style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
