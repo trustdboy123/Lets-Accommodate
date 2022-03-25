@@ -183,7 +183,6 @@ class _LoginLandlordState extends State<LoginLandlord> {
                                 backgroundColor: Colors.red,
                                 textColor: Colors.white,
                                 fontSize: 16.0);
-                                
                           }
                         } else {
                           Fluttertoast.showToast(

@@ -51,7 +51,7 @@ dependencies:
   dots_indicator: ^2.1.0
   intl: ^0.17.0
   dio: ^4.0.4
-  flutter_paystack: ^1.0.5+1
+  flutter_paystack: ^1.0.5+1 
   pinput: ^2.1.4
 
 
@@ -68,7 +68,7 @@ dev_dependencies:
 
 flutter_native_splash:
   color: "#ffffff"  
-  image: assets/letacc.jpg
+  image: assets/smallsize.png
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
