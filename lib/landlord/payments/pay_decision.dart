@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:lets_accommodate/auth/decision.dart';
 import 'package:lets_accommodate/landlord/payments/add_creditcard.dart';
 
-
 import 'momo_payment_view.dart';
 
 class PayDecision extends StatelessWidget {
   // ignore: prefer_typing_uninitialized_variables
-  var price;
+  double price;
   var premiumPrice;
 
   PayDecision({Key? key, required this.price, required this.premiumPrice})
@@ -43,7 +42,9 @@ class PayDecision extends StatelessWidget {
                           TextButton.icon(
                               onPressed: () {
                                 Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (_) => MomoPaymentView(price: price,)));
+                                    builder: (_) => MomoPaymentView(
+                                          price: price,
+                                        )));
                               },
                               icon: Icon(Icons.payments_outlined),
                               label: Text('Pay with Mobile Money')),

@@ -52,6 +52,7 @@ dependencies:
   intl: ^0.17.0
   dio: ^4.0.4
   flutter_paystack: ^1.0.5+1
+  pinput: ^2.1.4
 
 
 dev_dependencies:

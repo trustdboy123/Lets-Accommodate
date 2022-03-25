@@ -12,12 +12,9 @@ class MomoPaymentView extends StatefulWidget {
 }
 
 class _MomoPaymentViewState extends State<MomoPaymentView> {
-  String networkProvider = 'Select option';
+  String networkProvider = 'mtn';
   final TextEditingController _numberController = TextEditingController();
-  final PaystackProvider _paystackProvider = PaystackProvider();
-  final WalletProvider walletProviderMtn = WalletProvider.mtn;
-  final WalletProvider walletProvidervoda = WalletProvider.vod;
-  final WalletProvider walletProviderAtg = WalletProvider.tgo;
+  //final PaystackProvider _paystackProvider = PaystackProvider();
 
   String uid = FirebaseAuth.instance.currentUser!.uid;
   final PostManager _postManager = PostManager();
@@ -60,27 +57,26 @@ class _MomoPaymentViewState extends State<MomoPaymentView> {
                             const Text('Network Provider',
                                 style: TextStyle(fontWeight: FontWeight.bold)),
                             DropdownButtonFormField(
-                              value: networkProvider,
-                              icon: const Icon(Icons.arrow_drop_down),
-                              elevation: 16,
-                              style: const TextStyle(color: Colors.black),
-                              onChanged: (String? newValue) {
-                                setState(() {
-                                  networkProvider = newValue!;
-                                });
-                              },
-                              items: <String>[
-                                'Select option',
-                                'MTN',
-                                'Vodafone',
-                                'AirtelTigo',
-                              ].map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value),
-                                );
-                              }).toList(),
-                            ),
+                                value: networkProvider,
+                                icon: const Icon(Icons.arrow_drop_down),
+                                elevation: 16,
+                                style: const TextStyle(color: Colors.black),
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    networkProvider = newValue!;
+                                  });
+                                },
+                                items: {
+                                  'MTN Momo': 'mtn',
+                                  'VodaCash': 'vod',
+                                  'AirtelTigo Cash': 'tgo',
+                                }
+                                    .entries
+                                    .map((entry) => DropdownMenuItem(
+                                          value: entry.value,
+                                          child: Text(entry.key),
+                                        ))
+                                    .toList()),
                           ],
                         ),
                       )),
@@ -95,19 +91,14 @@ class _MomoPaymentViewState extends State<MomoPaymentView> {
                         width: MediaQuery.of(context).size.width,
                         child: TextButton.icon(
                           onPressed: () async {
-                            String network = networkProvider.toString();
                             double amount = widget.price;
-                            await _paystackProvider.payWithMobileMoney(
-                                email: email,
-                                username: username,
-                                amountInPesswas: amount * 100,
-                                walletPhoneNumber:
-                                    _numberController.text.trim(),
-                                walletProvider: network == 'MTN'
-                                    ? walletProviderMtn
-                                    : network == 'Vodafone'
-                                        ? walletProvidervoda
-                                        : walletProviderAtg);
+                            await PaystackProvider(context).payWithMobileMoney(
+                              email: email,
+                              username: username,
+                              amountInPesswas: amount * 100,
+                              walletPhoneNumber: _numberController.text.trim(),
+                              walletProvider: networkProvider,
+                            );
                           },
                           icon: Icon(
                             Icons.security,

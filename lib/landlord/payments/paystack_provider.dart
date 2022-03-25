@@ -1,26 +1,32 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_paystack/flutter_paystack.dart';
+import 'package:lets_accommodate/landlord/payments/otp_screen.dart';
 
-enum WalletProvider {
-  mtn,
-  vod,
-  tgo,
-}
+// enum WalletProvider {
+//   mtn,
+//   vod,
+//   tgo,
+// }
 
 class PaystackProvider {
   // TODO: Insert your heroku url of your paystack backend server here without a trailing slash
-  String paystackBackendServerURL = "";
+  String paystackBackendServerURL =
+      "";
+  final BuildContext context;
+
+  PaystackProvider(this.context);
 
   payWithMobileMoney({
     required String email,
     required String username,
     required double amountInPesswas,
     required String walletPhoneNumber,
-    required WalletProvider walletProvider,
+    required String walletProvider,
   }) async {
     Dio dio = Dio();
     try {
+      // it makes a post to the paystack backend you deploy to heroku
       var response = await dio.post(
         '$paystackBackendServerURL/payments/charge',
         data: {
@@ -29,19 +35,24 @@ class PaystackProvider {
           "device_id": username,
           "mobile_money": {
             "phone": walletPhoneNumber,
-            "provider": walletProvider.name
+            "provider": walletProvider
           }
         },
       );
+
       if (response.statusCode == 200 &&
           response.data["data"]["status"] == "send_otp") {
         print("Charge response: ${response.data}");
-        // TODO: README
-        // the user needs to enter an OTP code sent from Paystack to authorize the payment
-        // so navigate the user to the screen/modal dialog where they can enter the otp code and submit it
-        // pass the `walletPhoneNumber`,  `response.data["data"]["reference"]`, and the `sendOtpRequest` function as required props  to the screen/dialog/modal
-        // when submitted, call the `sendOtpRequest` function pass in the otp entered by the user and the reference `response.data["data"]["reference"]`
-        // to finalize the payment
+
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (_) => OtpScreen(
+              phoneNumber: walletPhoneNumber,
+              reference: response.data["data"]["reference"],
+              submitOtp: sendOtpRequest,
+            ),
+          ),
+        );
       }
     } on DioError catch (error) {
       handleError(error);
@@ -50,7 +61,9 @@ class PaystackProvider {
     dio.close();
   }
 
-  sendOtpRequest({required String otp, required String reference}) async {
+
+  Future<void> sendOtpRequest(
+      {required String otp, required String reference}) async {
     print("Sending OTP request: $otp , with reference: $reference");
     Dio dio = Dio();
     try {
