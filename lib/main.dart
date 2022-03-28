@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lets_accommodate/landlord/add_details_page.dart';
-import 'package:lets_accommodate/landlord/payments/pay_decision.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:lets_accommodate/environment.dart';
 
 import 'auth/decision.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -9,6 +9,7 @@ import 'package:firebase_core/firebase_core.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await dotenv.load(fileName: Environment.FILE_NAME);
   FlutterNativeSplash.removeAfter(initialization);
   runApp(const MyApp());
 }
