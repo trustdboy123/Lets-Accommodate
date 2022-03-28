@@ -105,108 +105,75 @@ class _SignupTenantState extends State<SignupTenant> {
                           );
                         });
                   },
-                  icon: Icon(Icons.camera_alt),
-                  label: Text('Please select a picture')),
-              Card(
-                child: TextFormField(
-                  controller: _nameController,
-                  keyboardType: TextInputType.text,
-                  textCapitalization: TextCapitalization.sentences,
-                  decoration: InputDecoration(
-                    labelText: 'Full Name *',
-                    labelStyle:
-                        TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
-                    border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey)),
-                    hintText: 'Enter your full name',
-                    hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
-                    floatingLabelBehavior: FloatingLabelBehavior.never,
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.blue),
-                        borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                  icon: Icon(
+                    Icons.camera_alt,
+                    color: Colors.blueGrey,
                   ),
+                  label: Text(
+                    'Please select a picture',
+                    style: TextStyle(color: Colors.black),
+                  )),
+              TextFormField(
+                controller: _nameController,
+                keyboardType: TextInputType.text,
+                textCapitalization: TextCapitalization.sentences,
+                decoration: const InputDecoration(
+                  labelText: 'Full Name *',
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey)),
+                  hintText: 'Enter your full name',
+                  hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
+                  floatingLabelBehavior: FloatingLabelBehavior.never,
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(8.0))),
                 ),
               ),
               SizedBox(
                 height: 10,
               ),
-              Card(
-                child: TextFormField(
-                  controller: _emailController,
-                  keyboardType: TextInputType.emailAddress,
-                  textCapitalization: TextCapitalization.sentences,
-                  decoration: const InputDecoration(
-                    labelText: 'E-mail *',
-                    labelStyle: TextStyle(fontWeight: FontWeight.w600),
-                    border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey)),
-                    hintText: 'Enter your E-mail',
-                    hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
-                    floatingLabelBehavior: FloatingLabelBehavior.never,
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.blue),
-                        borderRadius: BorderRadius.all(Radius.circular(8.0))),
-                  ),
+              TextFormField(
+                controller: _emailController,
+                keyboardType: TextInputType.emailAddress,
+                textCapitalization: TextCapitalization.sentences,
+                decoration: const InputDecoration(
+                  labelText: 'E-mail *',
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey)),
+                  hintText: 'Enter your E-mail',
+                  hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
+                  floatingLabelBehavior: FloatingLabelBehavior.never,
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(8.0))),
                 ),
               ),
               SizedBox(
                 height: 10,
               ),
-              Card(
-                child: TextFormField(
-                  controller: _passwordController,
-                  keyboardType: TextInputType.visiblePassword,
-                  textCapitalization: TextCapitalization.sentences,
-                  decoration: const InputDecoration(
-                    labelText: 'Password *',
-                    labelStyle: TextStyle(fontWeight: FontWeight.w600),
-                    border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey)),
-                    hintText: 'Enter your your password',
-                    hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
-                    floatingLabelBehavior: FloatingLabelBehavior.never,
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.blue),
-                        borderRadius: BorderRadius.all(Radius.circular(8.0))),
-                  ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please Enter a password';
-                    }
-                    if (value.length < 6) {
-                      return 'Password should not be less than 6 characters';
-                    }
-                  },
+              TextFormField(
+                controller: _passwordController,
+                keyboardType: TextInputType.visiblePassword,
+                textCapitalization: TextCapitalization.sentences,
+                decoration: const InputDecoration(
+                  labelText: 'Password *',
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey)),
+                  hintText: 'Enter your your password',
+                  hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
+                  floatingLabelBehavior: FloatingLabelBehavior.never,
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(8.0))),
                 ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Text('Gender *'),
-              SizedBox(height: 5),
-              DropdownButton<String>(
-                value: dropdownValue,
-                icon: const Icon(Icons.arrow_drop_down),
-                elevation: 16,
-                style: const TextStyle(color: Colors.black),
-                underline: Container(
-                  height: 2,
-                  color: Colors.black,
-                ),
-                onChanged: (String? newValue) {
-                  setState(() {
-                    dropdownValue = newValue!;
-                  });
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Please Enter a password';
+                  }
+                  if (value.length < 6) {
+                    return 'Password should not be less than 6 characters';
+                  }
                 },
-                items: <String>[
-                  'Male',
-                  'Female',
-                ].map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
+              ),
+              SizedBox(
+                height: 10,
               ),
               SizedBox(
                 height: 10,
@@ -243,7 +210,6 @@ class _SignupTenantState extends State<SignupTenant> {
                   hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
                   floatingLabelBehavior: FloatingLabelBehavior.never,
                   focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue),
                       borderRadius: BorderRadius.all(Radius.circular(8.0))),
                 ),
                 validator: (value) {
@@ -263,13 +229,13 @@ class _SignupTenantState extends State<SignupTenant> {
                 keyboardType: TextInputType.text,
                 textCapitalization: TextCapitalization.sentences,
                 decoration: const InputDecoration(
+                  labelText: 'Nationality *',
                   border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey)),
                   hintText: 'Ghanaian *',
                   hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
                   floatingLabelBehavior: FloatingLabelBehavior.never,
                   focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue),
                       borderRadius: BorderRadius.all(Radius.circular(8.0))),
                 ),
                 validator: (value) {
@@ -278,7 +244,39 @@ class _SignupTenantState extends State<SignupTenant> {
                   }
                 },
               ),
-              Text('Region', style: TextStyle(fontWeight: FontWeight.bold)),
+              SizedBox(
+                height: 10,
+              ),
+              Text('Gender *'),
+              SizedBox(height: 5),
+              DropdownButton<String>(
+                value: dropdownValue,
+                icon: const Icon(Icons.arrow_drop_down),
+                elevation: 16,
+                style: const TextStyle(color: Colors.black),
+                underline: Container(
+                  height: 2,
+                  color: Colors.black,
+                ),
+                onChanged: (String? newValue) {
+                  setState(() {
+                    dropdownValue = newValue!;
+                  });
+                },
+                items: <String>[
+                  'Male',
+                  'Female',
+                ].map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text('Region'),
               DropdownButtonFormField(
                 value: dropdownValueRegion,
                 icon: const Icon(Icons.arrow_drop_down),
@@ -387,8 +385,8 @@ class _SignupTenantState extends State<SignupTenant> {
                                 fontSize: 16.0);
                           }
                         },
-                        style:
-                            TextButton.styleFrom(backgroundColor: Colors.blue),
+                        style: TextButton.styleFrom(
+                            backgroundColor: Color.fromARGB(255, 4, 82, 146)),
                         child: Text(
                           'Create Account',
                           style: TextStyle(color: Colors.white, fontSize: 15),

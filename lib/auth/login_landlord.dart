@@ -44,79 +44,56 @@ class _LoginLandlordState extends State<LoginLandlord> {
             const SizedBox(
               height: 30,
             ),
-            const Text(
-              'E-mail',
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600),
-              textAlign: TextAlign.left,
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Card(
-              child: TextFormField(
-                  controller: _emailController,
-                  keyboardType: TextInputType.emailAddress,
-                  textCapitalization: TextCapitalization.sentences,
-                  decoration: const InputDecoration(
-                    label: Icon(Icons.email),
-                    border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey)),
-                    hintText: 'Enter your e-mail',
-                    floatingLabelBehavior: FloatingLabelBehavior.never,
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.blue),
-                        borderRadius: BorderRadius.all(Radius.circular(8.0))),
-                  ),
-                  validator: (value) {
-                    if (!emailRegExp.hasMatch(value!)) {
-                      return 'Enter a valid email!';
-                    }
+            TextFormField(
+                controller: _emailController,
+                keyboardType: TextInputType.emailAddress,
+                textCapitalization: TextCapitalization.sentences,
+                decoration: const InputDecoration(
+                  labelText: ('E-mail'),
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey)),
+                  hintText: 'Enter your E-mail',
+                  floatingLabelBehavior: FloatingLabelBehavior.never,
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue),
+                      borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                ),
+                validator: (value) {
+                  if (!emailRegExp.hasMatch(value!)) {
+                    return 'Enter a valid email!';
+                  }
 
-                    if (value.isEmpty) {
-                      return 'Please enter an email address';
-                    }
-                  }),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-            const Text('Password',
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600)),
+                  if (value.isEmpty) {
+                    return 'Please enter an email address';
+                  }
+                }),
             SizedBox(
-              height: 5,
+              height: 20,
             ),
-            Card(
-              child: TextFormField(
-                  controller: _passwordController,
-                  obscureText: true,
-                  obscuringCharacter: '*',
-                  keyboardType: TextInputType.visiblePassword,
-                  textCapitalization: TextCapitalization.sentences,
-                  decoration: const InputDecoration(
-                    label: Icon(Icons.lock),
-                    border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey)),
-                    hintText: 'Enter your password',
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.blue),
-                        borderRadius: BorderRadius.all(Radius.circular(4.0))),
-                  ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Enter a valid email!';
-                    }
+            TextFormField(
+                controller: _passwordController,
+                obscureText: true,
+                obscuringCharacter: '*',
+                keyboardType: TextInputType.visiblePassword,
+                textCapitalization: TextCapitalization.sentences,
+                decoration: const InputDecoration(
+                  labelText: ('Password'),
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey)),
+                  hintText: 'Enter your password',
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue),
+                      borderRadius: BorderRadius.all(Radius.circular(4.0))),
+                ),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Enter a valid email!';
+                  }
 
-                    if (value.length < 6) {
-                      return 'Password should not be less than 6 characters';
-                    }
-                  }),
-            ),
+                  if (value.length < 6) {
+                    return 'Password should not be less than 6 characters';
+                  }
+                }),
             const SizedBox(
               height: 5,
             ),
@@ -131,7 +108,8 @@ class _LoginLandlordState extends State<LoginLandlord> {
                   },
                   child: Text(
                     'Forgot password?',
-                    style: TextStyle(color: Colors.blue, fontSize: 15),
+                    style: TextStyle(
+                        color: Color.fromARGB(255, 4, 82, 146), fontSize: 15),
                     textAlign: TextAlign.right,
                   )),
             ),
@@ -195,7 +173,8 @@ class _LoginLandlordState extends State<LoginLandlord> {
                               fontSize: 16.0);
                         }
                       },
-                      style: TextButton.styleFrom(backgroundColor: Colors.blue),
+                      style: TextButton.styleFrom(
+                          backgroundColor: Color.fromARGB(255, 4, 82, 146)),
                       child: Text(
                         'Login',
                         style: TextStyle(color: Colors.white, fontSize: 20),
@@ -223,7 +202,7 @@ class _LoginLandlordState extends State<LoginLandlord> {
                     child: Text(
                       'Sign Up',
                       style: TextStyle(
-                        color: Colors.blue,
+                        color: Color.fromARGB(255, 4, 82, 146),
                         fontSize: 15,
                       ),
                     ))

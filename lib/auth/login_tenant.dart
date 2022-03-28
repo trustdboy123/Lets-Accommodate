@@ -26,32 +26,31 @@ class _LoginTenantState extends State<LoginTenant> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Form(
-        key: _globalKey,
-        child: ListView(
-          padding: EdgeInsets.all(16.0),
-          children: [
-            const SizedBox(
-              height: 50,
-            ),
-            const Center(
-              child: Text(
-                'Welcome',
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 40,
-                    fontWeight: FontWeight.w600),
+      body: Stack(children: [
+        Form(
+          key: _globalKey,
+          child: ListView(
+            padding: EdgeInsets.all(16.0),
+            children: [
+              const SizedBox(
+                height: 50,
               ),
-            ),
-            const SizedBox(
-              height: 35,
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Card(
-              elevation: 5,
-              child: TextFormField(
+              const Center(
+                child: Text(
+                  'Welcome',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 40,
+                      fontWeight: FontWeight.w600),
+                ),
+              ),
+              const SizedBox(
+                height: 35,
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              TextFormField(
                 controller: _emailController,
                 keyboardType: TextInputType.text,
                 textCapitalization: TextCapitalization.sentences,
@@ -76,13 +75,10 @@ class _LoginTenantState extends State<LoginTenant> {
                   }
                 },
               ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Card(
-              elevation: 10,
-              child: TextFormField(
+              const SizedBox(
+                height: 20,
+              ),
+              TextFormField(
                 controller: _passwordController,
                 obscureText: true,
                 obscuringCharacter: '*',
@@ -91,7 +87,9 @@ class _LoginTenantState extends State<LoginTenant> {
                   labelText: 'Password',
                   labelStyle: TextStyle(fontWeight: FontWeight.w600),
                   border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey)),
+                      borderSide: BorderSide(
+                    color: Color.fromARGB(255, 4, 82, 146),
+                  )),
                   hintText: 'Enter your password',
                   floatingLabelBehavior: FloatingLabelBehavior.never,
                   focusedBorder: OutlineInputBorder(
@@ -107,67 +105,77 @@ class _LoginTenantState extends State<LoginTenant> {
                   }
                 },
               ),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-            Align(
-              alignment: Alignment.centerRight,
-              child: TextButton(
-                  onPressed: () {
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (context) {
-                      return const ForgotPassword();
-                    }));
-                  },
-                  child: Text(
-                    'Forgot password?',
-                    style: TextStyle(color: Colors.blue, fontSize: 15),
-                    textAlign: TextAlign.right,
-                  )),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: _isLoading
-                  ? const Center(
-                      child: TextButton(
-                          onPressed: null,
-                          child: CircularProgressIndicator.adaptive()),
-                    )
-                  : TextButton(
-                      onPressed: () async {
-                        if (_globalKey.currentState!.validate()) {
-                          String email = _emailController.text.trim();
-                          String password = _passwordController.text.trim();
-                          setState(() {
-                            _isLoading = true;
-                          });
+              const SizedBox(
+                height: 5,
+              ),
+              Align(
+                alignment: Alignment.centerRight,
+                child: TextButton(
+                    onPressed: () {
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(builder: (context) {
+                        return const ForgotPassword();
+                      }));
+                    },
+                    child: Text(
+                      'Forgot password?',
+                      style: TextStyle(
+                          color: Color.fromARGB(255, 4, 82, 146), fontSize: 15),
+                      textAlign: TextAlign.right,
+                    )),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: _isLoading
+                    ? const Center(
+                        child: TextButton(
+                            onPressed: null,
+                            child: CircularProgressIndicator.adaptive()),
+                      )
+                    : TextButton(
+                        onPressed: () async {
+                          if (_globalKey.currentState!.validate()) {
+                            String email = _emailController.text.trim();
+                            String password = _passwordController.text.trim();
+                            setState(() {
+                              _isLoading = true;
+                            });
 
-                          bool isSuccessful = await _authManager.loginUser(
-                              email: email, password: password);
-                          if (isSuccessful) {
-                            //succcess
-                            Fluttertoast.showToast(
-                                msg: "Welcome back to Lets Accommodate",
-                                toastLength: Toast.LENGTH_SHORT,
-                                gravity: ToastGravity.BOTTOM,
-                                timeInSecForIosWeb: 1,
-                                backgroundColor:
-                                    Color.fromARGB(255, 94, 196, 97),
-                                textColor: Colors.white,
-                                fontSize: 16.0);
+                            bool isSuccessful = await _authManager.loginUser(
+                                email: email, password: password);
+                            if (isSuccessful) {
+                              //succcess
+                              Fluttertoast.showToast(
+                                  msg: "Welcome back to Lets Accommodate",
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  gravity: ToastGravity.BOTTOM,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor:
+                                      Color.fromARGB(255, 94, 196, 97),
+                                  textColor: Colors.white,
+                                  fontSize: 16.0);
 
-                            Navigator.of(context).pushAndRemoveUntil(
-                                MaterialPageRoute(
-                                    builder: (context) => IndexView()),
-                                (route) => false);
+                              Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute(
+                                      builder: (context) => IndexView()),
+                                  (route) => false);
+                            } else {
+                              //failure
+                              Fluttertoast.showToast(
+                                  msg: _authManager.message,
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  gravity: ToastGravity.BOTTOM,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor: Colors.red,
+                                  textColor: Colors.white,
+                                  fontSize: 16.0);
+                            }
                           } else {
-                            //failure
                             Fluttertoast.showToast(
-                                msg: _authManager.message,
+                                msg: "Email and password is required!",
                                 toastLength: Toast.LENGTH_SHORT,
                                 gravity: ToastGravity.BOTTOM,
                                 timeInSecForIosWeb: 1,
@@ -175,54 +183,46 @@ class _LoginTenantState extends State<LoginTenant> {
                                 textColor: Colors.white,
                                 fontSize: 16.0);
                           }
-                        } else {
-                          Fluttertoast.showToast(
-                              msg: "Email and password is required!",
-                              toastLength: Toast.LENGTH_SHORT,
-                              gravity: ToastGravity.BOTTOM,
-                              timeInSecForIosWeb: 1,
-                              backgroundColor: Colors.red,
-                              textColor: Colors.white,
-                              fontSize: 16.0);
-                        }
+                        },
+                        style: TextButton.styleFrom(
+                            backgroundColor: Color.fromARGB(255, 4, 82, 146)),
+                        child: const Text(
+                          'Login',
+                          style: TextStyle(color: Colors.white, fontSize: 20),
+                        )),
+              ),
+              const SizedBox(
+                height: 40,
+              ),
+              Row(
+                children: [
+                  const Text(
+                    'Dont have an account?',
+                    style: TextStyle(fontSize: 15, color: Colors.black),
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  TextButton(
+                      onPressed: () {
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(builder: (context) {
+                          return SignupTenant();
+                        }));
                       },
-                      style: TextButton.styleFrom(backgroundColor: Colors.blue),
-                      child: const Text(
-                        'Login',
-                        style: TextStyle(color: Colors.white, fontSize: 20),
-                      )),
-            ),
-            const SizedBox(
-              height: 40,
-            ),
-            Row(
-              children: [
-                const Text(
-                  'Dont have an account?',
-                  style: TextStyle(fontSize: 15, color: Colors.black),
-                ),
-                const SizedBox(
-                  width: 5,
-                ),
-                TextButton(
-                    onPressed: () {
-                      Navigator.of(context)
-                          .push(MaterialPageRoute(builder: (context) {
-                        return SignupTenant();
-                      }));
-                    },
-                    child: Text(
-                      'Sign Up',
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontSize: 15,
-                      ),
-                    ))
-              ],
-            )
-          ],
+                      child: Text(
+                        'Sign Up',
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 4, 82, 146),
+                          fontSize: 15,
+                        ),
+                      ))
+                ],
+              )
+            ],
+          ),
         ),
-      ),
+      ]),
     );
   }
 }
