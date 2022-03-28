@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_paystack/flutter_paystack.dart';
+import 'package:lets_accommodate/environment.dart';
 import 'package:lets_accommodate/landlord/payments/otp_screen.dart';
 
 // enum WalletProvider {
@@ -14,8 +15,11 @@ class PaystackProvider {
   String paystackBackendServerURL =
       "";
   final BuildContext context;
-
+  
   PaystackProvider(this.context);
+   
+PaystackPlugin paystackPlugin = PaystackPlugin();
+    
 
   payWithMobileMoney({
     required String email,
@@ -61,7 +65,6 @@ class PaystackProvider {
     dio.close();
   }
 
-
   Future<void> sendOtpRequest(
       {required String otp, required String reference}) async {
     print("Sending OTP request: $otp , with reference: $reference");
@@ -85,7 +88,7 @@ class PaystackProvider {
   }
 
   payWithCreditCard({
-    required PaystackPlugin paystackPlugin,
+    // required PaystackPlugin paystackPlugin,
     required BuildContext context,
     amount,
     email,
@@ -107,6 +110,9 @@ class PaystackProvider {
           ..currency = "GHS"
           ..accessCode = response.data["data"]["access_code"];
         // ..reference = _getReference() //TODO: Get access_token from backend
+        
+            paystackPlugin.initialize(publicKey: Environment.PAYSTACK_PUBLIC_KEY);
+
         CheckoutResponse checkoutResponse = await paystackPlugin.checkout(
           context,
           charge: charge,
