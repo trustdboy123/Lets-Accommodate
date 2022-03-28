@@ -49,7 +49,7 @@ class _SettingsLandlordState extends State<SettingsLandlord> {
                           onTap: () {
                             showDialog(
                                 context: context,
-                                builder: (Context) {
+                                builder: (context) {
                                   return Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: GestureDetector(
@@ -57,14 +57,14 @@ class _SettingsLandlordState extends State<SettingsLandlord> {
                                         Navigator.of(context).pop();
                                       },
                                       child: Image.network(
-                                          snapshot.data!['profile_pic']),
+                                          snapshot.data!['picture']),
                                     ),
                                   );
                                 });
                           },
                           child: CircleAvatar(
                             backgroundImage:
-                                NetworkImage(snapshot.data!['profile_pic']),
+                                NetworkImage(snapshot.data!['picture']),
                             radius: 100,
                           ),
                         ),

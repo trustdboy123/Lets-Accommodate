@@ -13,7 +13,7 @@ import 'package:lets_accommodate/landlord/payments/otp_screen.dart';
 class PaystackProvider {
   // TODO: Insert your heroku url of your paystack backend server here without a trailing slash
   String paystackBackendServerURL =
-      "";
+      "https://lets-accommodate-payment.herokuapp.com";
   final BuildContext context;
   
   PaystackProvider(this.context);

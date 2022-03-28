@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
@@ -66,6 +68,7 @@ class _AddImageState extends State<AddImage> {
                     decoration: BoxDecoration(),
                     padding: const EdgeInsets.all(4),
                     child: GridView.builder(
+                        scrollDirection: Axis.horizontal,
                         itemCount: _image.length + 1,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 3,
@@ -82,7 +85,7 @@ class _AddImageState extends State<AddImage> {
                                   decoration: BoxDecoration(
                                       image: DecorationImage(
                                           image: FileImage(_image[index - 1]),
-                                          fit: BoxFit.cover)),
+                                          fit: BoxFit.fill)),
                                 );
                         }),
                   ),
@@ -129,7 +132,7 @@ class _AddImageState extends State<AddImage> {
                               ],
                             ),
                           )),
-                          const SizedBox(height: 5),
+                          SizedBox(height: 5.h),
                           Card(
                               child: Padding(
                             padding: const EdgeInsets.all(16.0),
@@ -166,7 +169,7 @@ class _AddImageState extends State<AddImage> {
                               ],
                             ),
                           )),
-                          const SizedBox(height: 5),
+                          SizedBox(height: 5.h),
                           Card(
                               child: Padding(
                             padding: const EdgeInsets.all(16.0),
@@ -558,136 +561,140 @@ class _AddImageState extends State<AddImage> {
                             child: SizedBox(
                               width: MediaQuery.of(context).size.width,
                               child: TextButton(
-                                  style: TextButton.styleFrom(
-                                      backgroundColor: Colors.blue),
-                                  onPressed: () {
-                                    var category = dropdownValue.toString();
+                                style: TextButton.styleFrom(
+                                    backgroundColor: Colors.blue),
+                                onPressed: () {
+                                  var category = dropdownValue.toString();
 
-                                    Navigator.of(context).push(
-                                        MaterialPageRoute(builder: (context) {
-                                      return PayDecision(
-                                        price: category == 'Single Room'
-                                            ? 50
-                                            : category == 'Chamber and Hall'
-                                                ? 60
-                                                : category == 'Two Bedroom'
-                                                    ? 80
-                                                    : 90,
-                                        premiumPrice: category == 'Single Room'
-                                            ? 130
-                                            : category == 'Chamber and Hall'
-                                                ? 150
-                                                : category == 'Two Bedroom'
-                                                    ? 180
-                                                    : 200,
-                                      );
-                                    }));
-                                  },
-                                  child: Text('Proceed to pay',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                      ))
-                                  // SizedBox(
-                                  //   width: MediaQuery.of(context).size.width,
-                                  //   child: isLoading
-                                  //       ? const Center(
-                                  //           child: CircularProgressIndicator.adaptive(),
-                                  //         )
-                                  //       : TextButton(
-                                  //           onPressed: () async {
-                                  //             if (_formKey.currentState!.validate()) {
-                                  //               setState(() {
-                                  //                 isLoading = true;
-                                  //               });
-                                  //               bool isSubmited =
-                                  //                   await _postManager.submitPost(
-                                  //                 postImage: _image,
-                                  //                 category: dropdownValue.toString(),
-                                  //                 type: dropdownValueType.toString(),
-                                  //                 electricity: dropdownValueElectricity
-                                  //                     .toString(),
-                                  //                 waterAvailability:
-                                  //                     dropdownValueWaterAvailability
-                                  //                         .toString(),
-                                  //                 price: _priceController.text,
-                                  //                 size: _sizeController.text,
-                                  //                 region:
-                                  //                     dropdownValueRegion.toString(),
-                                  //                 citytown: _cityController.text,
-                                  //                 houseNumber:
-                                  //                     _houseNumberController.text,
-                                  //                 washroom:
-                                  //                     dropdownValueWashRoom.toString(),
-                                  //                 storeRoom:
-                                  //                     dropdownValueStoreRoom.toString(),
-                                  //                 porch: dropdownValuePorch.toString(),
-                                  //                 walledHouse: dropdownValueWaledHouse
-                                  //                     .toString(),
-                                  //                 kitchen:
-                                  //                     dropdownValueKitchen.toString(),
-                                  //                 tiled: dropdownValueTiledHouse
-                                  //                     .toString(),
-                                  //                 digitalAddress:
-                                  //                     _digitalAddressController.text,
-                                  //               );
-                                  //               if (isSubmited) {
-                                  //                 Fluttertoast.showToast(
-                                  //                     msg:
-                                  //                         "House Uploaded successfully",
-                                  //                     toastLength: Toast.LENGTH_SHORT,
-                                  //                     gravity: ToastGravity.BOTTOM,
-                                  //                     timeInSecForIosWeb: 1,
-                                  //                     backgroundColor:
-                                  //                         const Color.fromARGB(
-                                  //                             255, 94, 196, 97),
-                                  //                     textColor: Colors.white,
-                                  //                     fontSize: 16.0);
+                                  Navigator.of(context).push(
+                                      MaterialPageRoute(builder: (context) {
+                                    return PayDecision(
+                                      price: category == 'Single Room'
+                                          ? 50
+                                          : category == 'Chamber and Hall'
+                                              ? 60
+                                              : category == 'Two Bedroom'
+                                                  ? 80
+                                                  : 90,
+                                      premiumPrice: category == 'Single Room'
+                                          ? 130
+                                          : category == 'Chamber and Hall'
+                                              ? 150
+                                              : category == 'Two Bedroom'
+                                                  ? 180
+                                                  : 200,
+                                    );
+                                  }));
+                                },
+                                child: Text('Proceed to pay',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    )),
 
-                                  //                 Navigator.of(context)
-                                  //                     .pushAndRemoveUntil(
-                                  //                         MaterialPageRoute(
-                                  //                             builder: (context) =>
-                                  //                                 DashboardView()),
-                                  //                         (route) => false);
-                                  //               } else {
-                                  //                 Fluttertoast.showToast(
-                                  //                     msg: _postManager.message,
-                                  //                     toastLength: Toast.LENGTH_SHORT,
-                                  //                     gravity: ToastGravity.CENTER,
-                                  //                     timeInSecForIosWeb: 1,
-                                  //                     backgroundColor: Colors.red,
-                                  //                     textColor: Colors.white,
-                                  //                     fontSize: 16.0);
-                                  //               }
-                                  //             } else {
-                                  //               // validation failed
-                                  //               Fluttertoast.showToast(
-                                  //                   msg: " Please Check all fields",
-                                  //                   toastLength: Toast.LENGTH_SHORT,
-                                  //                   gravity: ToastGravity.CENTER,
-                                  //                   timeInSecForIosWeb: 1,
-                                  //                   backgroundColor:
-                                  //                       const Color.fromARGB(
-                                  //                           255, 94, 196, 97),
-                                  //                   textColor: Colors.white,
-                                  //                   fontSize: 16.0);
-                                  //             }
-                                  //           },
-                                  //           child: const Text(
-                                  //             'Upload',
-                                  //             style: TextStyle(color: Colors.white),
-                                  //           ),
-                                  //           style: TextButton.styleFrom(
-                                  //               backgroundColor: Colors.blue),
-                                  //         ),
-                                  // ),
-                                  // SizedBox(
-                                  //   height: 40,
-                                  // )
-                                  ),
+                                // SizedBox(
+                                //   width: MediaQuery.of(context).size.width,
+                                //   child: isLoading
+                                //       ? const Center(
+                                //           child: CircularProgressIndicator.adaptive(),
+                                //         )
+                                //       : TextButton(
+                                //           onPressed: () async {
+                                //             if (_formKey.currentState!.validate()) {
+                                //               setState(() {
+                                //                 isLoading = true;
+                                //               });
+                                //               bool isSubmited =
+                                //                   await _postManager.submitPost(
+                                //                 postImage: _image,
+                                //                 category: dropdownValue.toString(),
+                                //                 type: dropdownValueType.toString(),
+                                //                 electricity: dropdownValueElectricity
+                                //                     .toString(),
+                                //                 waterAvailability:
+                                //                     dropdownValueWaterAvailability
+                                //                         .toString(),
+                                //                 price: _priceController.text,
+                                //                 size: _sizeController.text,
+                                //                 region:
+                                //                     dropdownValueRegion.toString(),
+                                //                 citytown: _cityController.text,
+                                //                 houseNumber:
+                                //                     _houseNumberController.text,
+                                //                 washroom:
+                                //                     dropdownValueWashRoom.toString(),
+                                //                 storeRoom:
+                                //                     dropdownValueStoreRoom.toString(),
+                                //                 porch: dropdownValuePorch.toString(),
+                                //                 walledHouse: dropdownValueWaledHouse
+                                //                     .toString(),
+                                //                 kitchen:
+                                //                     dropdownValueKitchen.toString(),
+                                //                 tiled: dropdownValueTiledHouse
+                                //                     .toString(),
+                                //                 digitalAddress:
+                                //                     _digitalAddressController.text,
+                                //               );
+                                //               if (isSubmited) {
+                                //                 Fluttertoast.showToast(
+                                //                     msg:
+                                //                         "House Uploaded successfully",
+                                //                     toastLength: Toast.LENGTH_SHORT,
+                                //                     gravity: ToastGravity.BOTTOM,
+                                //                     timeInSecForIosWeb: 1,
+                                //                     backgroundColor:
+                                //                         const Color.fromARGB(
+                                //                             255, 94, 196, 97),
+                                //                     textColor: Colors.white,
+                                //                     fontSize: 16.0);
+
+                                //                 Navigator.of(context)
+                                //                     .pushAndRemoveUntil(
+                                //                         MaterialPageRoute(
+                                //                             builder: (context) =>
+                                //                                 DashboardView()),
+                                //                         (route) => false);
+                                //               } else {
+                                //                 Fluttertoast.showToast(
+                                //                     msg: _postManager.message,
+                                //                     toastLength: Toast.LENGTH_SHORT,
+                                //                     gravity: ToastGravity.CENTER,
+                                //                     timeInSecForIosWeb: 1,
+                                //                     backgroundColor: Colors.red,
+                                //                     textColor: Colors.white,
+                                //                     fontSize: 16.0);
+                                //               }
+                                //             } else {
+                                //               // validation failed
+                                //               Fluttertoast.showToast(
+                                //                   msg: " Please Check all fields",
+                                //                   toastLength: Toast.LENGTH_SHORT,
+                                //                   gravity: ToastGravity.CENTER,
+                                //                   timeInSecForIosWeb: 1,
+                                //                   backgroundColor:
+                                //                       const Color.fromARGB(
+                                //                           255, 94, 196, 97),
+                                //                   textColor: Colors.white,
+                                //                   fontSize: 16.0);
+                                //             }
+                                //           },
+                                //           child: const Text(
+                                //             'Upload',
+                                //             style: TextStyle(color: Colors.white),
+                                //           ),
+                                //           style: TextButton.styleFrom(
+                                //               backgroundColor: Colors.blue),
+                                //         ),
+                                // ),
+                                // SizedBox(
+                                //   height: 40,
+                                // )
+                              ),
                             ),
                           )
                         ],
+                      ),
+                      SizedBox(
+                        height: 150,
                       )
                     ],
                   )
