@@ -1,12 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:lets_accommodate/landlord/landlord_dashboard.dart';
 import 'package:lets_accommodate/managers/auth_manager.dart';
 import 'package:lets_accommodate/auth/forgot_password.dart';
 import 'package:lets_accommodate/auth/signup_tenant.dart';
-import 'package:lets_accommodate/tenant/categories_tenant.dart';
 import 'package:lets_accommodate/tenant/index_view.dart';
-import 'package:lets_accommodate/tenant/single%20room/single_room.dart';
 
 class LoginTenant extends StatefulWidget {
   const LoginTenant({Key? key}) : super(key: key);
@@ -129,9 +130,7 @@ class _LoginTenantState extends State<LoginTenant> {
                 width: MediaQuery.of(context).size.width,
                 child: _isLoading
                     ? const Center(
-                        child: TextButton(
-                            onPressed: null,
-                            child: CircularProgressIndicator.adaptive()),
+                        child: CircularProgressIndicator.adaptive(),
                       )
                     : TextButton(
                         onPressed: () async {
@@ -146,20 +145,65 @@ class _LoginTenantState extends State<LoginTenant> {
                                 email: email, password: password);
                             if (isSuccessful) {
                               //succcess
-                              Fluttertoast.showToast(
-                                  msg: "Welcome back to Lets Accommodate",
-                                  toastLength: Toast.LENGTH_SHORT,
-                                  gravity: ToastGravity.BOTTOM,
-                                  timeInSecForIosWeb: 1,
-                                  backgroundColor:
-                                      Color.fromARGB(255, 94, 196, 97),
-                                  textColor: Colors.white,
-                                  fontSize: 16.0);
+                              final String uid =
+                                  FirebaseAuth.instance.currentUser!.uid;
 
-                              Navigator.of(context).pushAndRemoveUntil(
-                                  MaterialPageRoute(
-                                      builder: (context) => IndexView()),
-                                  (route) => false);
+                              await FirebaseFirestore.instance
+                                  .collection('tenants')
+                                  .doc(uid)
+                                  .get()
+                                  .then((doc) async {
+                                if (doc.data()![''] == 'user') {
+                                  Navigator.of(context).pushAndRemoveUntil(
+                                      MaterialPageRoute(
+                                          builder: (context) => IndexView()),
+                                      (route) => false);
+
+                                  Fluttertoast.showToast(
+                                      msg: "Welcome back to Lets Accommodate",
+                                      toastLength: Toast.LENGTH_SHORT,
+                                      gravity: ToastGravity.BOTTOM,
+                                      timeInSecForIosWeb: 1,
+                                      backgroundColor:
+                                          Color.fromARGB(255, 94, 196, 97),
+                                      textColor: Colors.white,
+                                      fontSize: 16.0);
+                                } else {
+                                  await FirebaseFirestore.instance
+                                      .collection('landlord')
+                                      .doc(uid)
+                                      .get()
+                                      .then((doc) {
+                                    if (doc.data()![''] == 'user') {
+                                      Navigator.of(context).pushAndRemoveUntil(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  DashboardView()),
+                                          (route) => false);
+
+                                      Fluttertoast.showToast(
+                                          msg:
+                                              "Welcome back to Lets Accommodate",
+                                          toastLength: Toast.LENGTH_SHORT,
+                                          gravity: ToastGravity.BOTTOM,
+                                          timeInSecForIosWeb: 1,
+                                          backgroundColor:
+                                              Color.fromARGB(255, 94, 196, 97),
+                                          textColor: Colors.white,
+                                          fontSize: 16.0);
+                                    } else {
+                                      Fluttertoast.showToast(
+                                          msg: _authManager.message,
+                                          toastLength: Toast.LENGTH_SHORT,
+                                          gravity: ToastGravity.BOTTOM,
+                                          timeInSecForIosWeb: 1,
+                                          backgroundColor: Colors.red,
+                                          textColor: Colors.white,
+                                          fontSize: 16.0);
+                                    }
+                                  });
+                                }
+                              });
                             } else {
                               //failure
                               Fluttertoast.showToast(

@@ -23,6 +23,8 @@ class PostManager with ChangeNotifier {
       _firebaseFirestore.collection('comments');
   final CollectionReference<Map<String, dynamic>> _favoritesCollection =
       _firebaseFirestore.collection('favorites');
+  final CollectionReference<Map<String, dynamic>> _invoiceCollection =
+      _firebaseFirestore.collection('invoices');
 
   String _message = '';
   bool _isLoading = false;
