@@ -41,7 +41,9 @@ class _IndexViewState extends State<IndexView> {
         ? const Center(
             child: CircularProgressIndicator.adaptive(),
           )
-        : Scaffold(
+        :
+        
+         Scaffold(
             body: IndexedStack(
               children: [
                 CategoriesTenant(),
@@ -67,6 +69,6 @@ class _IndexViewState extends State<IndexView> {
                   BottomNavigationBarItem(
                       icon: Icon(Icons.settings), label: 'Settings'),
                 ]));
-    ;
+    
   }
 }

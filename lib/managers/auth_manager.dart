@@ -26,7 +26,7 @@ class AuthManager with ChangeNotifier {
     notifyListeners();
   }
 
-  setIsLoading(bool message) {
+  setIsLoading(bool isLoading) {
     _isloading = isLoading;
     notifyListeners();
   }
