@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lets_accommodate/managers/auth_manager.dart';
 import 'package:lets_accommodate/auth/forgot_password.dart';
@@ -32,8 +33,8 @@ class _LoginTenantState extends State<LoginTenant> {
           child: ListView(
             padding: EdgeInsets.all(16.0),
             children: [
-              const SizedBox(
-                height: 50,
+              SizedBox(
+                height: 50.h,
               ),
               const Center(
                 child: Text(
@@ -44,11 +45,8 @@ class _LoginTenantState extends State<LoginTenant> {
                       fontWeight: FontWeight.w600),
                 ),
               ),
-              const SizedBox(
-                height: 35,
-              ),
               SizedBox(
-                height: 5,
+                height: 40.h,
               ),
               TextFormField(
                 controller: _emailController,
@@ -75,8 +73,8 @@ class _LoginTenantState extends State<LoginTenant> {
                   }
                 },
               ),
-              const SizedBox(
-                height: 20,
+              SizedBox(
+                height: 10.h,
               ),
               TextFormField(
                 controller: _passwordController,
@@ -105,8 +103,8 @@ class _LoginTenantState extends State<LoginTenant> {
                   }
                 },
               ),
-              const SizedBox(
-                height: 5,
+              SizedBox(
+                height: 5.h,
               ),
               Align(
                 alignment: Alignment.centerRight,
@@ -117,7 +115,7 @@ class _LoginTenantState extends State<LoginTenant> {
                         return const ForgotPassword();
                       }));
                     },
-                    child: Text(
+                    child: const Text(
                       'Forgot password?',
                       style: TextStyle(
                           color: Color.fromARGB(255, 4, 82, 146), fontSize: 15),
@@ -125,7 +123,7 @@ class _LoginTenantState extends State<LoginTenant> {
                     )),
               ),
               SizedBox(
-                height: 10,
+                height: 10.h,
               ),
               SizedBox(
                 width: MediaQuery.of(context).size.width,
@@ -191,13 +189,13 @@ class _LoginTenantState extends State<LoginTenant> {
                           style: TextStyle(color: Colors.white, fontSize: 20),
                         )),
               ),
-              const SizedBox(
-                height: 40,
+              SizedBox(
+                height: 15.h,
               ),
               Row(
                 children: [
                   const Text(
-                    'Dont have an account?',
+                    'Don\'t have an account?',
                     style: TextStyle(fontSize: 15, color: Colors.black),
                   ),
                   const SizedBox(

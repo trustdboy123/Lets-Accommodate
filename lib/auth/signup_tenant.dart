@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lets_accommodate/auth/login_tenant.dart';
@@ -83,7 +84,7 @@ class _SignupTenantState extends State<SignupTenant> {
                         context: context,
                         builder: (context) {
                           return SizedBox(
-                            height: 100,
+                            height: 80.h,
                             child: Column(children: [
                               TextButton.icon(
                                   onPressed: () {
@@ -92,7 +93,10 @@ class _SignupTenantState extends State<SignupTenant> {
                                         imageSource: ImageSource.camera);
                                   },
                                   icon: Icon(Icons.camera_alt),
-                                  label: Text('Select from camera')),
+                                  label: Text(
+                                    'Select from camera',
+                                    style: TextStyle(color: Colors.black),
+                                  )),
                               TextButton.icon(
                                   onPressed: () {
                                     Navigator.pop(context);
@@ -100,7 +104,8 @@ class _SignupTenantState extends State<SignupTenant> {
                                         imageSource: ImageSource.gallery);
                                   },
                                   icon: Icon(Icons.browse_gallery),
-                                  label: Text('Select from gallery'))
+                                  label: Text('Select from gallery',
+                                      style: TextStyle(color: Colors.black)))
                             ]),
                           );
                         });
@@ -113,6 +118,9 @@ class _SignupTenantState extends State<SignupTenant> {
                     'Please select a picture',
                     style: TextStyle(color: Colors.black),
                   )),
+              SizedBox(
+                height: 10.h,
+              ),
               TextFormField(
                 controller: _nameController,
                 keyboardType: TextInputType.text,
@@ -129,7 +137,7 @@ class _SignupTenantState extends State<SignupTenant> {
                 ),
               ),
               SizedBox(
-                height: 10,
+                height: 10.h,
               ),
               TextFormField(
                 controller: _emailController,
@@ -147,7 +155,7 @@ class _SignupTenantState extends State<SignupTenant> {
                 ),
               ),
               SizedBox(
-                height: 10,
+                height: 10.h,
               ),
               TextFormField(
                 controller: _passwordController,
@@ -173,10 +181,7 @@ class _SignupTenantState extends State<SignupTenant> {
                 },
               ),
               SizedBox(
-                height: 10,
-              ),
-              SizedBox(
-                height: 10,
+                height: 10.h,
               ),
               TextFormField(
                 controller: _locationController,
@@ -196,7 +201,7 @@ class _SignupTenantState extends State<SignupTenant> {
                 ),
               ),
               SizedBox(
-                height: 10,
+                height: 10.h,
               ),
               TextFormField(
                 controller: _numberController,
@@ -222,7 +227,7 @@ class _SignupTenantState extends State<SignupTenant> {
                 },
               ),
               SizedBox(
-                height: 10,
+                height: 10.h,
               ),
               TextFormField(
                 controller: _nationalityController,
@@ -245,7 +250,7 @@ class _SignupTenantState extends State<SignupTenant> {
                 },
               ),
               SizedBox(
-                height: 10,
+                height: 10.h,
               ),
               Text('Gender *'),
               SizedBox(height: 5),
@@ -274,7 +279,7 @@ class _SignupTenantState extends State<SignupTenant> {
                 }).toList(),
               ),
               SizedBox(
-                height: 10,
+                height: 10.h,
               ),
               Text('Region'),
               DropdownButtonFormField(
@@ -311,7 +316,7 @@ class _SignupTenantState extends State<SignupTenant> {
                 }).toList(),
               ),
               SizedBox(
-                height: 20,
+                height: 20.h,
               ),
               SizedBox(
                 width: MediaQuery.of(context).size.width,
