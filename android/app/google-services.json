@@ -7,17 +7,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:642825766952:android:0ed2fc79c2030b3e6c8d1d",
+        "mobilesdk_app_id": "1:642825766952:android:64baa2297720fe276c8d1d",
         "android_client_info": {
-          "package_name": "com.example.lets_accommodate"
+          "package_name": "com.deCoders.Lets_Accommodate"
         }
       },
       "oauth_client": [
         {
-          "client_id": "642825766952-79l1d7q772mt25oekp13fsg7kles51lu.apps.googleusercontent.com",
+          "client_id": "642825766952-q2lliae0um9cbumemc70vob9c44hfqlk.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.lets_accommodate",
+            "package_name": "com.deCoders.Lets_Accommodate",
             "certificate_hash": "2dfa1c93c183acfd18b6ea672dcf85aae0f1dead"
           }
         },

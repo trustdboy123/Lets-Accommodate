@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.10)
 project(runner LANGUAGES CXX)
 
-set(BINARY_NAME "lets_accommodate")
-set(APPLICATION_ID "com.example.lets_accommodate")
+set(BINARY_NAME "Let's Accommodate")
+set(APPLICATION_ID "com.deCoders.Lets_Accommodate")
 
 cmake_policy(SET CMP0063 NEW)
 

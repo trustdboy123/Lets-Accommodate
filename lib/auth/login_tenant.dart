@@ -128,11 +128,13 @@ class _LoginTenantState extends State<LoginTenant> {
               ),
               SizedBox(
                 width: MediaQuery.of(context).size.width,
-                child: _isLoading
-                    ? const Center(
-                        child: CircularProgressIndicator.adaptive(),
-                      )
-                    : TextButton(
+                child:
+                    // _isLoading
+                    //     ? const Center(
+                    //         child: CircularProgressIndicator.adaptive(),
+                    //       )
+                    //     :
+                    TextButton(
                         onPressed: () async {
                           if (_globalKey.currentState!.validate()) {
                             String email = _emailController.text.trim();
@@ -143,66 +145,73 @@ class _LoginTenantState extends State<LoginTenant> {
 
                             bool isSuccessful = await _authManager.loginUser(
                                 email: email, password: password);
+
                             if (isSuccessful) {
                               //succcess
                               final String uid =
                                   FirebaseAuth.instance.currentUser!.uid;
+                              print(uid);
 
                               await FirebaseFirestore.instance
                                   .collection('tenants')
                                   .doc(uid)
                                   .get()
                                   .then((doc) async {
-                                if (doc.data()![''] == 'user') {
-                                  Navigator.of(context).pushAndRemoveUntil(
-                                      MaterialPageRoute(
-                                          builder: (context) => IndexView()),
-                                      (route) => false);
+                                doc.data()!['role'] == 'tenant';
+                                Navigator.of(context).pushAndRemoveUntil(
+                                    MaterialPageRoute(
+                                        builder: (_) => IndexView()),
+                                    (route) => false);
+                                // if (doc.data()!['role'] == 'tenant') {
+                                //   Navigator.of(context).pushAndRemoveUntil(
+                                //       MaterialPageRoute(
+                                //           builder: (context) => IndexView()),
+                                //       (route) => false);
 
-                                  Fluttertoast.showToast(
-                                      msg: "Welcome back to Lets Accommodate",
-                                      toastLength: Toast.LENGTH_SHORT,
-                                      gravity: ToastGravity.BOTTOM,
-                                      timeInSecForIosWeb: 1,
-                                      backgroundColor:
-                                          Color.fromARGB(255, 94, 196, 97),
-                                      textColor: Colors.white,
-                                      fontSize: 16.0);
-                                } else {
-                                  await FirebaseFirestore.instance
-                                      .collection('landlord')
-                                      .doc(uid)
-                                      .get()
-                                      .then((doc) {
-                                    if (doc.data()![''] == 'user') {
-                                      Navigator.of(context).pushAndRemoveUntil(
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  DashboardView()),
-                                          (route) => false);
+                                //   Fluttertoast.showToast(
+                                //       msg: "Welcome back to Lets Accommodate",
+                                //       toastLength: Toast.LENGTH_SHORT,
+                                //       gravity: ToastGravity.BOTTOM,
+                                //       timeInSecForIosWeb: 1,
+                                //       backgroundColor:
+                                //           Color.fromARGB(255, 94, 196, 97),
+                                //       textColor: Colors.white,
+                                //       fontSize: 16.0);
+                                // } else {
+                                //   await FirebaseFirestore.instance
+                                //       .collection('landlord')
+                                //       .doc(uid)
+                                //       .get()
+                                //       .then((doc) {
+                                //     if (doc.data()!['role'] == 'landlord') {
+                                //       Navigator.of(context).pushAndRemoveUntil(
+                                //           MaterialPageRoute(
+                                //               builder: (context) =>
+                                //                   DashboardView()),
+                                //           (route) => false);
 
-                                      Fluttertoast.showToast(
-                                          msg:
-                                              "Welcome back to Lets Accommodate",
-                                          toastLength: Toast.LENGTH_SHORT,
-                                          gravity: ToastGravity.BOTTOM,
-                                          timeInSecForIosWeb: 1,
-                                          backgroundColor:
-                                              Color.fromARGB(255, 94, 196, 97),
-                                          textColor: Colors.white,
-                                          fontSize: 16.0);
-                                    } else {
-                                      Fluttertoast.showToast(
-                                          msg: _authManager.message,
-                                          toastLength: Toast.LENGTH_SHORT,
-                                          gravity: ToastGravity.BOTTOM,
-                                          timeInSecForIosWeb: 1,
-                                          backgroundColor: Colors.red,
-                                          textColor: Colors.white,
-                                          fontSize: 16.0);
-                                    }
-                                  });
-                                }
+                                //       Fluttertoast.showToast(
+                                //           msg:
+                                //               "Welcome back to Lets Accommodate",
+                                //           toastLength: Toast.LENGTH_SHORT,
+                                //           gravity: ToastGravity.BOTTOM,
+                                //           timeInSecForIosWeb: 1,
+                                //           backgroundColor:
+                                //               Color.fromARGB(255, 94, 196, 97),
+                                //           textColor: Colors.white,
+                                //           fontSize: 16.0);
+                                //     } else {
+                                //       Fluttertoast.showToast(
+                                //           msg: _authManager.message,
+                                //           toastLength: Toast.LENGTH_SHORT,
+                                //           gravity: ToastGravity.BOTTOM,
+                                //           timeInSecForIosWeb: 1,
+                                //           backgroundColor: Colors.red,
+                                //           textColor: Colors.white,
+                                //           fontSize: 16.0);
+                                //     }
+                                //   });
+                                // }
                               });
                             } else {
                               //failure

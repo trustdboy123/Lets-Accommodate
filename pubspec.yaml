@@ -41,7 +41,7 @@ dependencies:
   comment_box: ^0.0.17
   flutter_native_splash: ^2.0.5
   firebase_auth: ^3.3.8
-  firebase_core: ^1.13.0
+  firebase_core: ^1.13.1
   firebase_storage: ^10.2.8
   cloud_firestore: ^3.1.9
   fluttertoast: ^8.0.9
@@ -54,6 +54,7 @@ dependencies:
   flutter_paystack: ^1.0.5+1 
   pinput: ^2.1.4
   flutter_dotenv: ^5.0.2
+  flutter_launcher_icons: ^0.9.2
 
 
 dev_dependencies:
@@ -70,6 +71,13 @@ dev_dependencies:
 flutter_native_splash:
   color: "#ffffff"  
   image: assets/smallsize.png
+
+
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
