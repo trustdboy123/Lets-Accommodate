@@ -66,7 +66,7 @@ class _SettingsLandlordState extends State<SettingsLandlord> {
                           child: CircleAvatar(
                             backgroundImage:
                                 NetworkImage(snapshot.data!['picture']),
-                            radius: 100,
+                            radius: 100.r,
                           ),
                         ),
                         SizedBox(

@@ -64,6 +64,7 @@ class _SettingsTenantState extends State<SettingsTenant> {
                                 });
                           },
                           child: CircleAvatar(
+                            backgroundColor: Colors.white,
                             backgroundImage:
                                 NetworkImage(snapshot.data!['profile_pic']),
                             radius: 100.r,

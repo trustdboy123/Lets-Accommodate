@@ -26,19 +26,22 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: Size(360, 390),
+      minTextAdapt: true,
+      splitScreenMode: true,
       builder: () => MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          appBarTheme: const AppBarTheme(
-              backgroundColor: Color(0xFF322E2E),
+          appBarTheme: AppBarTheme(
+              backgroundColor: Colors.blueGrey,
               iconTheme: IconThemeData(color: Colors.white),
               elevation: 0,
               titleTextStyle: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.w600,
-                fontSize: 20,
+                fontSize: 20.sp,
               ),
               centerTitle: true),
+          textTheme: TextTheme(),
           primarySwatch: Colors.blue,
         ),
         home: Decision(),

@@ -41,9 +41,7 @@ class _IndexViewState extends State<IndexView> {
         ? const Center(
             child: CircularProgressIndicator.adaptive(),
           )
-        :
-        
-         Scaffold(
+        : Scaffold(
             body: IndexedStack(
               children: [
                 CategoriesTenant(),
@@ -53,7 +51,7 @@ class _IndexViewState extends State<IndexView> {
               index: _currentIndex,
             ),
             bottomNavigationBar: BottomNavigationBar(
-                backgroundColor: Colors.white,
+                backgroundColor: Colors.blueGrey,
                 type: BottomNavigationBarType.fixed,
                 currentIndex: _currentIndex,
                 onTap: (int index) {
@@ -61,14 +59,19 @@ class _IndexViewState extends State<IndexView> {
                     _currentIndex = index;
                   }));
                 },
+                unselectedItemColor: Colors.white,
+                selectedItemColor: Colors.black,
+                unselectedFontSize: 12,
                 items: const [
                   BottomNavigationBarItem(
-                      icon: Icon(Icons.home), label: 'Categories'),
+                      icon: Icon(
+                        Icons.home,
+                      ),
+                      label: 'Categories'),
                   BottomNavigationBarItem(
                       icon: Icon(Icons.favorite), label: 'Favourites'),
                   BottomNavigationBarItem(
                       icon: Icon(Icons.settings), label: 'Settings'),
                 ]));
-    
   }
 }
