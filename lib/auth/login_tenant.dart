@@ -146,73 +146,16 @@ class _LoginTenantState extends State<LoginTenant> {
                             bool isSuccessful = await _authManager.loginUser(
                                 email: email, password: password);
 
+                            final String uid =
+                                FirebaseAuth.instance.currentUser!.uid;
+
                             if (isSuccessful) {
                               //succcess
-                              final String uid =
-                                  FirebaseAuth.instance.currentUser!.uid;
-                              print(uid);
 
-                              await FirebaseFirestore.instance
-                                  .collection('tenants')
-                                  .doc(uid)
-                                  .get()
-                                  .then((doc) async {
-                                doc.data()!['role'] == 'tenant';
-                                Navigator.of(context).pushAndRemoveUntil(
-                                    MaterialPageRoute(
-                                        builder: (_) => IndexView()),
-                                    (route) => false);
-                                // if (doc.data()!['role'] == 'tenant') {
-                                //   Navigator.of(context).pushAndRemoveUntil(
-                                //       MaterialPageRoute(
-                                //           builder: (context) => IndexView()),
-                                //       (route) => false);
-
-                                //   Fluttertoast.showToast(
-                                //       msg: "Welcome back to Lets Accommodate",
-                                //       toastLength: Toast.LENGTH_SHORT,
-                                //       gravity: ToastGravity.BOTTOM,
-                                //       timeInSecForIosWeb: 1,
-                                //       backgroundColor:
-                                //           Color.fromARGB(255, 94, 196, 97),
-                                //       textColor: Colors.white,
-                                //       fontSize: 16.0);
-                                // } else {
-                                //   await FirebaseFirestore.instance
-                                //       .collection('landlord')
-                                //       .doc(uid)
-                                //       .get()
-                                //       .then((doc) {
-                                //     if (doc.data()!['role'] == 'landlord') {
-                                //       Navigator.of(context).pushAndRemoveUntil(
-                                //           MaterialPageRoute(
-                                //               builder: (context) =>
-                                //                   DashboardView()),
-                                //           (route) => false);
-
-                                //       Fluttertoast.showToast(
-                                //           msg:
-                                //               "Welcome back to Lets Accommodate",
-                                //           toastLength: Toast.LENGTH_SHORT,
-                                //           gravity: ToastGravity.BOTTOM,
-                                //           timeInSecForIosWeb: 1,
-                                //           backgroundColor:
-                                //               Color.fromARGB(255, 94, 196, 97),
-                                //           textColor: Colors.white,
-                                //           fontSize: 16.0);
-                                //     } else {
-                                //       Fluttertoast.showToast(
-                                //           msg: _authManager.message,
-                                //           toastLength: Toast.LENGTH_SHORT,
-                                //           gravity: ToastGravity.BOTTOM,
-                                //           timeInSecForIosWeb: 1,
-                                //           backgroundColor: Colors.red,
-                                //           textColor: Colors.white,
-                                //           fontSize: 16.0);
-                                //     }
-                                //   });
-                                // }
-                              });
+                              Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute(
+                                      builder: (_) => IndexView()),
+                                  (route) => false);
                             } else {
                               //failure
                               Fluttertoast.showToast(

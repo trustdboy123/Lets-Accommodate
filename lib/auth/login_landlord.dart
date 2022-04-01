@@ -134,7 +134,7 @@ class _LoginLandlordState extends State<LoginLandlord> {
                             _isLoading = true;
                           });
 
-                          bool isSuccessful = await _authManager.loginUser(
+                          bool isSuccessful = await _authManager.loginLandlord(
                               email: email, password: password);
                           if (isSuccessful) {
                             //succcess

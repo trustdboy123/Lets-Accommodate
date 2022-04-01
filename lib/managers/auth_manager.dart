@@ -79,9 +79,49 @@ class AuthManager with ChangeNotifier {
     bool isSuccessful = false;
     await _firebaseAuth
         .signInWithEmailAndPassword(email: email, password: password)
-        .then((userCredential) {
+        .then((userCredential) async {
       if (userCredential.user != null) {
-        isSuccessful = true;
+        await userCollection.doc(userCredential.user!.uid).get().then((doc) {
+          if (doc.data() != null) {
+            isSuccessful = true;
+          } else {
+            setMesage('No Data found');
+            isSuccessful = false;
+          }
+        });
+      } else {
+        isSuccessful = false;
+      }
+    }).catchError((onError) {
+      setMesage('$onError');
+      isSuccessful = false;
+      setIsLoading(false);
+    }).timeout(const Duration(seconds: 30), onTimeout: () {
+      setMesage('please check your internet connection');
+      isSuccessful = false;
+      setIsLoading(false);
+    });
+    return isSuccessful;
+  }
+
+  Future<bool> loginLandlord(
+      {required String email, required String password}) async {
+    bool isSuccessful = false;
+    await _firebaseAuth
+        .signInWithEmailAndPassword(email: email, password: password)
+        .then((userCredential) async {
+      if (userCredential.user != null) {
+        await landlordCollection
+            .doc(userCredential.user!.uid)
+            .get()
+            .then((doc) {
+          if (doc.data() != null) {
+            isSuccessful = true;
+          } else {
+            setMesage('No Data found');
+            isSuccessful = false;
+          }
+        });
       } else {
         isSuccessful = false;
       }
