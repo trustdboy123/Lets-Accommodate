@@ -54,21 +54,23 @@ class _SignupLandlordState extends State<SignupLandlord> {
             padding: EdgeInsets.all(16.0),
             children: [
               Center(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(90),
-                  child: imageFile != null
-                      ? Image.file(
-                          imageFile!,
-                          height: 130,
-                          width: 130,
-                          fit: BoxFit.cover,
-                        )
-                      : Image.asset(
-                          'assets/Profile_avatar.png',
-                          height: 130,
-                          width: 130,
-                          fit: BoxFit.contain,
-                        ),
+                child: GestureDetector(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(90),
+                    child: imageFile != null
+                        ? Image.file(
+                            imageFile!,
+                            height: 130,
+                            width: 130,
+                            fit: BoxFit.cover,
+                          )
+                        : Image.asset(
+                            'assets/Profile_avatar.png',
+                            height: 130,
+                            width: 130,
+                            fit: BoxFit.contain,
+                          ),
+                  ),
                 ),
               ),
               TextButton.icon(
@@ -77,14 +79,14 @@ class _SignupLandlordState extends State<SignupLandlord> {
                         context: context,
                         builder: (context) {
                           return SizedBox(
-                            height: 100,
+                            height: 50.h,
                             child: TextButton.icon(
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                   selectedImage(
                                       imageSource: ImageSource.camera);
                                 },
-                                icon: const Icon(
+                                icon: Icon(
                                   Icons.camera_alt,
                                   color: Colors.blueGrey,
                                 ),
@@ -92,7 +94,10 @@ class _SignupLandlordState extends State<SignupLandlord> {
                           );
                         });
                   },
-                  icon: Icon(Icons.camera_alt),
+                  icon: Icon(
+                    Icons.camera_alt,
+                    color: Colors.blueGrey,
+                  ),
                   label: Text(
                     'Please take a selfie',
                     style: TextStyle(color: Colors.black),

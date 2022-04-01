@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lets_accommodate/managers/post_manager.dart';
 import 'package:lets_accommodate/tenant/details.dart';
 import 'package:lets_accommodate/tenant/comments_tenants.dart';
@@ -105,8 +106,8 @@ class _SingleRoomState extends State<SingleRoom> {
                                 snapshot.data!.docs[index].data()!['pictures']
                                     [0],
                                 fit: BoxFit.cover,
-                                height: 250,
-                                width: double.infinity,
+                                height: 150.h,
+                                width: double.infinity.w,
                               ),
                             ),
                           ),
@@ -194,8 +195,8 @@ class _SingleRoomState extends State<SingleRoom> {
                   ));
                 },
                 separatorBuilder: (context, index) {
-                  return const SizedBox(
-                    height: 20,
+                  return SizedBox(
+                    height: 10.h,
                   );
                 },
                 itemCount:

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:lets_accommodate/landlord/landlord_dashboard.dart';
 import 'package:lets_accommodate/tenant/categories_tenant.dart';
@@ -29,8 +30,8 @@ class _LoginLandlordState extends State<LoginLandlord> {
         child: ListView(
           padding: EdgeInsets.all(16.0),
           children: [
-            const SizedBox(
-              height: 50,
+            SizedBox(
+              height: 50.h,
             ),
             const Center(
               child: Text(
@@ -41,8 +42,8 @@ class _LoginLandlordState extends State<LoginLandlord> {
                     fontWeight: FontWeight.w600),
               ),
             ),
-            const SizedBox(
-              height: 30,
+            SizedBox(
+              height: 40.h,
             ),
             TextFormField(
                 controller: _emailController,
@@ -68,7 +69,7 @@ class _LoginLandlordState extends State<LoginLandlord> {
                   }
                 }),
             SizedBox(
-              height: 20,
+              height: 10.h,
             ),
             TextFormField(
                 controller: _passwordController,
@@ -94,8 +95,8 @@ class _LoginLandlordState extends State<LoginLandlord> {
                     return 'Password should not be less than 6 characters';
                   }
                 }),
-            const SizedBox(
-              height: 5,
+            SizedBox(
+              height: 5.h,
             ),
             Align(
               alignment: Alignment.centerRight,
@@ -114,7 +115,7 @@ class _LoginLandlordState extends State<LoginLandlord> {
                   )),
             ),
             SizedBox(
-              height: 10,
+              height: 10.h,
             ),
             SizedBox(
               width: MediaQuery.of(context).size.width,
@@ -181,7 +182,7 @@ class _LoginLandlordState extends State<LoginLandlord> {
                       )),
             ),
             SizedBox(
-              height: 40,
+              height: 15.h,
             ),
             Row(
               children: [
@@ -190,7 +191,7 @@ class _LoginLandlordState extends State<LoginLandlord> {
                   style: TextStyle(fontSize: 15, color: Colors.black),
                 ),
                 SizedBox(
-                  width: 5,
+                  width: 5.w,
                 ),
                 TextButton(
                     onPressed: () {

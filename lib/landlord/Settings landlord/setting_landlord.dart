@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lets_accommodate/managers/post_manager.dart';
 import 'package:lets_accommodate/tenant/settings%20tenant/edit_profile_tenant.dart';
 import 'package:path/path.dart';
@@ -69,7 +70,7 @@ class _SettingsLandlordState extends State<SettingsLandlord> {
                           ),
                         ),
                         SizedBox(
-                          height: 5,
+                          height: 5.h,
                         ),
                         Align(
                           alignment: Alignment.topCenter,
@@ -88,12 +89,12 @@ class _SettingsLandlordState extends State<SettingsLandlord> {
                         Text(
                           snapshot.data!['name'],
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 30),
+                              fontWeight: FontWeight.w600, fontSize: 30),
                         ),
                       ],
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 20.h,
                     ),
                     InkWell(
                       onTap: () {
@@ -102,15 +103,15 @@ class _SettingsLandlordState extends State<SettingsLandlord> {
                             builder: (context) {
                               return ListView(
                                 padding: EdgeInsets.all(16),
-                                children: const [
-                                  Icon(
+                                children: [
+                                  const Icon(
                                     Icons.email,
                                     size: 100,
                                     color: Colors.lightBlue,
                                   ),
                                   SizedBox(
-                                    height: 50,
-                                    child: Padding(
+                                    height: 40.h,
+                                    child: const Padding(
                                       padding: EdgeInsets.all(16.0),
                                       child: Text(
                                         'Email: letsaccommodateof4@gmail.com',
@@ -120,14 +121,14 @@ class _SettingsLandlordState extends State<SettingsLandlord> {
                                       ),
                                     ),
                                   ),
-                                  Icon(
+                                  const Icon(
                                     Icons.facebook_rounded,
                                     size: 100,
                                     color: Colors.blue,
                                   ),
                                   SizedBox(
-                                    height: 50,
-                                    child: Padding(
+                                    height: 40.h,
+                                    child: const Padding(
                                       padding: EdgeInsets.all(16.0),
                                       child: Text(
                                         'Facebook: Letsaccommodate Mobile app',
@@ -171,17 +172,26 @@ class _SettingsLandlordState extends State<SettingsLandlord> {
                       ),
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 10.h,
                     ),
                     Card(
                       child: TextButton(
                           onPressed: () async {
                             _firebaseAuth.signOut();
                           },
-                          child: Text(
-                            'Logout',
-                            style: TextStyle(
-                                color: Colors.redAccent, fontSize: 20),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.power_settings_new,
+                                color: Colors.red,
+                              ),
+                              Text(
+                                'logout',
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 20),
+                              ),
+                            ],
                           )),
                     )
                   ],

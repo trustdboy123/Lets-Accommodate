@@ -204,7 +204,7 @@ class _AddImageState extends State<AddImage> {
                               ],
                             ),
                           )),
-                          const SizedBox(height: 5),
+                          SizedBox(height: 5.h),
                           Card(
                               child: Padding(
                             padding: const EdgeInsets.all(16.0),
@@ -239,7 +239,7 @@ class _AddImageState extends State<AddImage> {
                               ],
                             ),
                           )),
-                          const SizedBox(height: 5),
+                          SizedBox(height: 5.h),
                           Card(
                               child: Padding(
                             padding: const EdgeInsets.all(16.0),
@@ -274,7 +274,7 @@ class _AddImageState extends State<AddImage> {
                               ],
                             ),
                           )),
-                          const SizedBox(height: 5),
+                          SizedBox(height: 5.h),
                           Card(
                               child: Padding(
                             padding: const EdgeInsets.all(16.0),
@@ -309,7 +309,7 @@ class _AddImageState extends State<AddImage> {
                               ],
                             ),
                           )),
-                          const SizedBox(height: 5),
+                          SizedBox(height: 5.h),
                           Card(
                               child: Padding(
                             padding: const EdgeInsets.all(16.0),
@@ -344,7 +344,7 @@ class _AddImageState extends State<AddImage> {
                               ],
                             ),
                           )),
-                          const SizedBox(height: 5),
+                          SizedBox(height: 5.h),
                           Card(
                               child: Padding(
                             padding: const EdgeInsets.all(16.0),
@@ -379,7 +379,7 @@ class _AddImageState extends State<AddImage> {
                               ],
                             ),
                           )),
-                          const SizedBox(height: 5),
+                          SizedBox(height: 5.h),
                           Card(
                               child: Padding(
                             padding: const EdgeInsets.all(16.0),
@@ -415,6 +415,9 @@ class _AddImageState extends State<AddImage> {
                               ],
                             ),
                           )),
+                          SizedBox(
+                            height: 5.h,
+                          ),
                           Card(
                               child: Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -450,30 +453,40 @@ class _AddImageState extends State<AddImage> {
                               ],
                             ),
                           )),
-                          const SizedBox(
-                            height: 10,
+                          SizedBox(
+                            height: 5.h,
                           ),
-                          TextFormField(
-                              controller: _priceController,
-                              decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  labelText: 'Price',
-                                  hintText: 'Enter Price of Rent')),
-                          const SizedBox(
-                            height: 10,
+                          Card(
+                            child: TextFormField(
+                                controller: _priceController,
+                                decoration: InputDecoration(
+                                    floatingLabelBehavior:
+                                        FloatingLabelBehavior.never,
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    labelText: 'Price',
+                                    hintText: 'Enter Price of Rent')),
                           ),
-                          TextFormField(
-                              controller: _sizeController,
-                              keyboardType: TextInputType.text,
-                              decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  labelText: 'Size',
-                                  hintText: 'Enter Size of Room')),
-                          const SizedBox(height: 10),
+                          SizedBox(
+                            height: 5.h,
+                          ),
+                          Card(
+                            child: TextFormField(
+                                controller: _sizeController,
+                                keyboardType: TextInputType.text,
+                                decoration: InputDecoration(
+                                    floatingLabelBehavior:
+                                        FloatingLabelBehavior.never,
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    labelText: 'Size',
+                                    hintText: 'Enter Size of Room')),
+                          ),
+                          SizedBox(height: 5.h),
                           Card(
                               child: Padding(
                             padding: const EdgeInsets.all(16.0),
@@ -520,49 +533,68 @@ class _AddImageState extends State<AddImage> {
                               ],
                             ),
                           )),
-                          const SizedBox(
-                            height: 10,
+                          SizedBox(
+                            height: 5.h,
                           ),
-                          TextFormField(
-                              controller: _cityController,
-                              keyboardType: TextInputType.text,
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                labelText: 'City/Town',
-                              )),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          TextFormField(
-                              controller: _digitalAddressController,
-                              keyboardType: TextInputType.text,
-                              decoration: InputDecoration(
+                          Card(
+                            child: TextFormField(
+                                controller: _cityController,
+                                keyboardType: TextInputType.text,
+                                decoration: InputDecoration(
+                                  floatingLabelBehavior:
+                                      FloatingLabelBehavior.never,
                                   border: OutlineInputBorder(
+                                    borderSide: BorderSide.none,
                                     borderRadius: BorderRadius.circular(20),
                                   ),
-                                  labelText: 'Digital Address',
-                                  hintText: 'GN-1234-5678')),
-                          const SizedBox(
-                            height: 10,
+                                  labelText: 'City/Town',
+                                )),
                           ),
-                          TextFormField(
-                              controller: _houseNumberController,
-                              keyboardType: TextInputType.text,
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                labelText: 'House Number',
-                              )),
+                          SizedBox(
+                            height: 5.h,
+                          ),
+                          Card(
+                            child: TextFormField(
+                                controller: _digitalAddressController,
+                                keyboardType: TextInputType.text,
+                                decoration: InputDecoration(
+                                    floatingLabelBehavior:
+                                        FloatingLabelBehavior.never,
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    labelText: 'Digital Address',
+                                    hintText: 'GN-1234-5678')),
+                          ),
+                          SizedBox(
+                            height: 5.h,
+                          ),
+                          Card(
+                            child: TextFormField(
+                                controller: _houseNumberController,
+                                keyboardType: TextInputType.text,
+                                decoration: InputDecoration(
+                                  floatingLabelBehavior:
+                                      FloatingLabelBehavior.never,
+                                  border: OutlineInputBorder(
+                                    borderSide: BorderSide.none,
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  labelText: 'House Number',
+                                )),
+                          ),
+                          SizedBox(
+                            height: 10.h,
+                          ),
                           Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: SizedBox(
                               width: MediaQuery.of(context).size.width,
                               child: TextButton(
                                 style: TextButton.styleFrom(
-                                    backgroundColor: Colors.blue),
+                                    backgroundColor:
+                                        Color.fromARGB(255, 4, 82, 146)),
                                 onPressed: () {
                                   var category = dropdownValue.toString();
 
@@ -694,7 +726,7 @@ class _AddImageState extends State<AddImage> {
                         ],
                       ),
                       SizedBox(
-                        height: 150,
+                        height: 10.h,
                       )
                     ],
                   )
