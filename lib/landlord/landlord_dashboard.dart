@@ -1,19 +1,48 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:lets_accommodate/auth/login_landlord.dart';
 import 'package:lets_accommodate/landlord/Settings%20landlord/setting_landlord.dart';
 import 'package:lets_accommodate/landlord/add_details_page.dart';
 import 'package:lets_accommodate/landlord/comments_landlord.dart';
 import 'package:lets_accommodate/landlord/view_uploads.dart';
 import 'package:lets_accommodate/managers/post_manager.dart';
 
-class DashboardView extends StatelessWidget {
+class DashboardView extends StatefulWidget {
   DashboardView({
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<DashboardView> createState() => _DashboardViewState();
+}
+
+class _DashboardViewState extends State<DashboardView> {
   final String userID = FirebaseAuth.instance.currentUser!.uid;
+
   final PostManager _postManager = PostManager();
+
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
+  @override
+  void initState() {
+    isUserAuth();
+    super.initState();
+  }
+
+  isUserAuth() {
+    _firebaseAuth.authStateChanges().listen((user) {
+      if (user == null) {
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (_) => LoginLandlord()),
+            (route) => false);
+      }
+      if (user != null) {
+        print(user.uid);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,107 +76,108 @@ class DashboardView extends StatelessWidget {
                   'No house added yet',
                   style: TextStyle(color: Colors.black),
                 ));
-              }
-              return ListView.separated(
-                itemBuilder: (context, index) {
-                  var docID = snapshot.data!.docs[index].id;
+              } else {
+                return ListView.separated(
+                  itemBuilder: (context, index) {
+                    var docID = snapshot.data!.docs[index].id;
 
-                  return Card(
-                    child: Column(
-                      children: [
-                        Stack(
-                          alignment: const Alignment(-1, -1),
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                Navigator.of(context)
-                                    .push(MaterialPageRoute(builder: (context) {
-                                  return ViewUploads(
-                                    docId: docID,
-                                  );
-                                }));
-                              },
-                              child: Card(
-                                color: Color(0xFF254AA5),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30)),
-                                child: snapshot.data!.docs.isEmpty
-                                    ? const SizedBox(
-                                        child: Text('no data yet'),
-                                      )
-                                    : Image.network(
-                                        snapshot.data!.docs[index]
-                                            .data()!['pictures'][0],
-                                        fit: BoxFit.fitWidth,
-                                        height: 250,
-                                        width: double.infinity,
-                                      ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                padding: EdgeInsets.all(8),
-                                decoration: const BoxDecoration(
-                                  color: Colors.black12,
-                                ),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      'GHC${snapshot.data!.docs[index].data()!['price']} /month',
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              vertical: 0.1, horizontal: 20),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
+                    return Card(
+                      child: Column(
+                        children: [
+                          Stack(
+                            alignment: const Alignment(-1, -1),
                             children: [
-                              Row(
-                                children: [
-                                  Icon(Icons.star_border_outlined),
-                                  Text('12')
-                                ],
+                              InkWell(
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                      MaterialPageRoute(builder: (context) {
+                                    return ViewUploads(
+                                      docId: docID,
+                                    );
+                                  }));
+                                },
+                                child: Card(
+                                  color: Color(0xFF254AA5),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(30)),
+                                  child: snapshot.data!.docs.isEmpty
+                                      ? const SizedBox(
+                                          child: Text('no data yet'),
+                                        )
+                                      : Image.network(
+                                          snapshot.data!.docs[index]
+                                              .data()!['pictures'][0],
+                                          fit: BoxFit.fitWidth,
+                                          height: 250,
+                                          width: double.infinity,
+                                        ),
+                                ),
                               ),
-                              Spacer(),
-                              IconButton(
-                                  onPressed: () {
-                                    Navigator.of(context).push(
-                                        MaterialPageRoute(builder: (context) {
-                                      return CommentsLandlord(
-                                        docId: docID,
-                                      );
-                                    }));
-                                  },
-                                  icon: Icon(Icons.comment_outlined)),
-                              Spacer(),
-                              Text(snapshot.data!.docs[index]
-                                  .data()!['city/Town'])
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  padding: EdgeInsets.all(8),
+                                  decoration: const BoxDecoration(
+                                    color: Colors.black12,
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'GHC${snapshot.data!.docs[index].data()!['price']} /month',
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
-                        )
-                      ],
-                    ),
-                  );
-                },
-                itemCount:
-                    snapshot.data == null ? 0 : snapshot.data!.docs.length,
-                separatorBuilder: (context, index) {
-                  return SizedBox(height: 10);
-                },
-              );
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 0.1, horizontal: 20),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Row(
+                                  children: [
+                                    Icon(Icons.star_border_outlined),
+                                    Text('12')
+                                  ],
+                                ),
+                                Spacer(),
+                                IconButton(
+                                    onPressed: () {
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(builder: (context) {
+                                        return CommentsLandlord(
+                                          docId: docID,
+                                        );
+                                      }));
+                                    },
+                                    icon: Icon(Icons.comment_outlined)),
+                                Spacer(),
+                                Text(snapshot.data!.docs[index]
+                                    .data()!['city/Town'])
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    );
+                  },
+                  itemCount:
+                      snapshot.data == null ? 0 : snapshot.data!.docs.length,
+                  separatorBuilder: (context, index) {
+                    return SizedBox(height: 10);
+                  },
+                );
+              }
             }),
       ),
       floatingActionButton: FloatingActionButton(
