@@ -63,6 +63,7 @@ class AuthManager with ChangeNotifier {
         "uid": userCredential.user!.uid
       });
       isCreated = true;
+      await userCredential.user!.sendEmailVerification();
     }).catchError((onError) {
       setMesage('$onError');
     }).timeout(const Duration(seconds: 60), onTimeout: () {
@@ -187,5 +188,22 @@ class AuthManager with ChangeNotifier {
       setIsLoading(false);
     });
     return isCreated;
+  }
+
+  Future<bool> sendResetLink(String email) async {
+    bool isSent = false;
+    await _firebaseAuth.sendPasswordResetEmail(email: email).then((_) {
+      isSent = true;
+    }).catchError((error) {
+      setIsLoading(false);
+      isSent = false;
+      setMesage('$error');
+    }).timeout(const Duration(seconds: 30), onTimeout: () {
+      setIsLoading(false);
+      setMesage('Please check your internet connection');
+      isSent = false;
+    });
+    setIsLoading(false);
+    return isSent;
   }
 }
