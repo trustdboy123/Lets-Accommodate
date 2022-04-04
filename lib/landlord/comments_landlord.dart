@@ -133,7 +133,7 @@ class _CommentsLandlordState extends State<CommentsLandlord> {
                         profilePic: profilePic,
                         docId: widget.docId,
                         name: snapshot.data!['name']);
-                    ;
+                    
                     commentController.clear();
                     FocusScope.of(context).unfocus();
                   } else {

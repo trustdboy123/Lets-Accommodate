@@ -108,23 +108,28 @@ class AuthManager with ChangeNotifier {
   Future<bool> loginLandlord(
       {required String email, required String password}) async {
     bool isSuccessful = false;
+
     await _firebaseAuth
         .signInWithEmailAndPassword(email: email, password: password)
         .then((userCredential) async {
       if (userCredential.user != null) {
+        setIsLoading(true);
         await landlordCollection
             .doc(userCredential.user!.uid)
             .get()
             .then((doc) {
           if (doc.data() != null) {
             isSuccessful = true;
+            setIsLoading(false);
           } else {
             setMesage('No Data found');
             isSuccessful = false;
+            setIsLoading(false);
           }
         });
       } else {
         isSuccessful = false;
+        setIsLoading(false);
       }
     }).catchError((onError) {
       setMesage('$onError');
@@ -135,6 +140,7 @@ class AuthManager with ChangeNotifier {
       isSuccessful = false;
       setIsLoading(false);
     });
+    setIsLoading(false);
     return isSuccessful;
   }
 

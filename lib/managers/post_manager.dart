@@ -211,6 +211,7 @@ class PostManager with ChangeNotifier {
       {required String category}) {
     return _uploadsCollection
         .where('category', isEqualTo: category)
+        // .orderBy("createdAt", descending: true)
         .snapshots();
   }
 
