@@ -204,7 +204,7 @@ class _SingleRoomState extends State<SingleRoom> {
                   },
                   separatorBuilder: (context, index) {
                     return SizedBox(
-                      height: 10.h,
+                      height: 5.h,
                     );
                   },
                   itemCount:
