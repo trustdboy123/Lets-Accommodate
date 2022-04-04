@@ -80,6 +80,10 @@ class _DashboardViewState extends State<DashboardView> {
                 return ListView.separated(
                   itemBuilder: (context, index) {
                     var docID = snapshot.data!.docs[index].id;
+                    var intrested =
+                        snapshot.data!.docs[index].data()!['interested'];
+                    var interestedCount =
+                        intrested == null ? 0 : intrested.length;
 
                     return Card(
                       child: Column(
@@ -147,7 +151,7 @@ class _DashboardViewState extends State<DashboardView> {
                                 Row(
                                   children: [
                                     Icon(Icons.star_border_outlined),
-                                    Text('12')
+                                    Text(interestedCount.toString())
                                   ],
                                 ),
                                 Spacer(),

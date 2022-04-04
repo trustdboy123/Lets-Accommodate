@@ -47,10 +47,11 @@ class _FavouriteTenantState extends State<FavouriteTenant> {
                   var docId = snapshot.data!.docs[index].id;
                   var intrested =
                       snapshot.data!.docs[index].data()!['interested'];
-                  var interestedCount = intrested.length;
+                  var interestedCount =
+                      intrested == null ? 0 : intrested.length;
                   var favorites =
                       snapshot.data!.docs[index].data()!['favorites'];
-                  bool isSelected = (favorites[uid] == true);
+                  bool isSelected = (favorites?[uid] == true);
                   //var userId = snapshot.data!.docs[index].data()!['user_id'];
 
                   return Card(
@@ -61,8 +62,6 @@ class _FavouriteTenantState extends State<FavouriteTenant> {
                         children: [
                           InkWell(
                             onTap: () async {
-                              print('***$docId');
-
                               Navigator.of(context)
                                   .push(MaterialPageRoute(builder: (context) {
                                 return Details(
@@ -105,20 +104,20 @@ class _FavouriteTenantState extends State<FavouriteTenant> {
                                   IconButton(
                                       onPressed: () async {
                                         bool isFavorite =
-                                            favorites[uid] == false;
+                                            favorites?[uid] == false;
                                         if (isFavorite) {
                                           await _postManager.handleFavorites(
                                               docId: docId, favorite: true);
                                           setState(() {
                                             isSelected = true;
-                                            favorites[uid] = true;
+                                            favorites?[uid] = true;
                                           });
                                         } else if (!isFavorite) {
                                           await _postManager.handleFavorites(
                                               docId: docId, favorite: false);
                                           setState(() {
                                             isSelected = false;
-                                            favorites[uid] = false;
+                                            favorites?[uid] = false;
                                           });
                                         }
                                       },
