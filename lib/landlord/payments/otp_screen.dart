@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lets_accommodate/landlord/landlord_dashboard.dart';
 import 'package:pinput/pinput.dart';
 
 class OtpScreen extends StatelessWidget {
@@ -14,7 +16,7 @@ class OtpScreen extends StatelessWidget {
   final Future<void> Function({required String otp, required String reference})
       submitOtp;
   final TextEditingController _pinController = TextEditingController();
-  final FocusNode _pinOtpCodeFocus = FocusNode();    
+  final FocusNode _pinOtpCodeFocus = FocusNode();
   final BoxDecoration pinOtpCodeDecoration = BoxDecoration(
       color: Colors.white,
       borderRadius: BorderRadius.circular(12),
@@ -25,9 +27,11 @@ class OtpScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            SizedBox(
+              height: 50.h,
+            ),
             Text(
                 "An OTP code was sent to $phoneNumber. Enter it here to authorize the transction"),
-
             Padding(
               padding: EdgeInsets.all(15),
               child: Pinput(
@@ -44,11 +48,13 @@ class OtpScreen extends StatelessWidget {
                 obscureText: true,
                 onSubmitted: (pin) async {
                   await submitOtp(otp: pin, reference: reference);
-                  
-                  
-                  // so when the onSubmitted is called we call the submitOtp function 
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(builder: (_) => DashboardView()),
+                      (route) => false);
+
+                  // so when the onSubmitted is called we call the submitOtp function
                   //which is a parameter we passed from the paystack provider when we navigated to the otp screen
-                  // we only passed the fucntion there as a parameter, and didn't execute it, 
+                  // we only passed the fucntion there as a parameter, and didn't execute it,
                   // so here is where we execute it passing in the otp that was just entered and the reference passed in when we navigated to this screen
                   // makes sense???
                   //sure it does.
