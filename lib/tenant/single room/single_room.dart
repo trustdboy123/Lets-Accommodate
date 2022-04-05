@@ -179,7 +179,7 @@ class _SingleRoomState extends State<SingleRoom> {
                       snapshot.data == null ? 0 : snapshot.data!.docs.length,
                   separatorBuilder: (context, index) {
                     return SizedBox(
-                      height: 10.h,
+                      height: 5.h,
                     );
                   },
                 );
