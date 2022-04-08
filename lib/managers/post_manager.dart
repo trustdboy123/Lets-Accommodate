@@ -86,7 +86,8 @@ class PostManager with ChangeNotifier {
       "intrested": {userUid: false},
       "favorite": {userUid: false},
       "createdAt": timestamp,
-      "user_id": userUid
+      "user_id": userUid,
+      "has_payed": false
     }).then((_) {
       isSubmited = true;
       setMessage('Post successfully submited');
@@ -211,7 +212,8 @@ class PostManager with ChangeNotifier {
       {required String category}) {
     return _uploadsCollection
         .where('category', isEqualTo: category)
-        // .orderBy("createdAt", descending: true)
+        .where('has_payed', isEqualTo: true)
+        .orderBy("createdAt", descending: true)
         .snapshots();
   }
 
