@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lets_accommodate/managers/post_manager.dart';
@@ -56,8 +57,9 @@ class _EditProfileTenantState extends State<EditProfileTenant> {
               }
               if (snapshot.connectionState == ConnectionState.done &&
                   snapshot.data == null) {
-                return const Center(
-                  child: Text('No data is available'),
+                return Center(
+                  child: Text('No data is available',
+                      style: TextStyle(fontSize: 12.sp)),
                 );
               }
               return ListView(
@@ -104,8 +106,13 @@ class _EditProfileTenantState extends State<EditProfileTenant> {
                                                 imageSource:
                                                     ImageSource.camera);
                                           },
-                                          icon: Icon(Icons.camera_alt),
-                                          label: Text('Select from camera')),
+                                          icon: Icon(
+                                            Icons.camera_alt,
+                                            color: Colors.blueGrey,
+                                          ),
+                                          label: Text('Select from camera',
+                                              style:
+                                                  TextStyle(fontSize: 12.sp))),
                                       TextButton.icon(
                                           onPressed: () {
                                             Navigator.pop(context);
@@ -113,24 +120,31 @@ class _EditProfileTenantState extends State<EditProfileTenant> {
                                                 imageSource:
                                                     ImageSource.gallery);
                                           },
-                                          icon: Icon(Icons.browse_gallery),
-                                          label: Text('Select from gallery'))
+                                          icon: Icon(
+                                            Icons.browse_gallery,
+                                            color: Colors.blueGrey,
+                                          ),
+                                          label: Text('Select from gallery',
+                                              style:
+                                                  TextStyle(fontSize: 12.sp)))
                                     ]),
                                   );
                                 });
                           },
-                          child: Text('Edit Photo'))
+                          child: Text('Edit Photo',
+                              style: TextStyle(fontSize: 12.sp)))
                     ],
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 5.h,
                   ),
                   Text(
                     'Full Name',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style:
+                        TextStyle(fontWeight: FontWeight.w600, fontSize: 12.sp),
                   ),
                   SizedBox(
-                    height: 5,
+                    height: 1.h,
                   ),
                   Card(
                     shadowColor: Color(0xFF322E2E),
@@ -142,20 +156,21 @@ class _EditProfileTenantState extends State<EditProfileTenant> {
                         padding: EdgeInsets.all(8.0),
                         child: Text(
                           snapshot.data!['name'],
-                          style: TextStyle(fontSize: 15),
+                          style: TextStyle(fontSize: 12.sp),
                         ),
                       ),
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 5.h,
                   ),
-                  const Text(
+                  Text(
                     'E-mail',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style:
+                        TextStyle(fontWeight: FontWeight.w600, fontSize: 12.sp),
                   ),
                   SizedBox(
-                    height: 5,
+                    height: 1.h,
                   ),
                   Card(
                     shadowColor: Color(0xFF322E2E),
@@ -167,19 +182,20 @@ class _EditProfileTenantState extends State<EditProfileTenant> {
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
                           snapshot.data![' email'],
-                          style: TextStyle(fontSize: 15),
+                          style: TextStyle(fontSize: 12.sp),
                         ),
                       ),
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 5.h,
                   ),
                   Text(
                     'Location',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style:
+                        TextStyle(fontWeight: FontWeight.w600, fontSize: 12.sp),
                   ),
-                  SizedBox(height: 5),
+                  SizedBox(height: 1.h),
                   Card(
                     shadowColor: Color(0xFF322E2E),
                     color: Colors.white,
@@ -190,20 +206,21 @@ class _EditProfileTenantState extends State<EditProfileTenant> {
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
                           snapshot.data!['location'],
-                          style: TextStyle(fontSize: 15),
+                          style: TextStyle(fontSize: 12.sp),
                         ),
                       ),
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 5.h,
                   ),
                   Text(
                     'Gender',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style:
+                        TextStyle(fontWeight: FontWeight.w600, fontSize: 12.sp),
                   ),
                   SizedBox(
-                    height: 5,
+                    height: 1.h,
                   ),
                   Card(
                     shadowColor: Color(0xFF322E2E),
@@ -215,20 +232,21 @@ class _EditProfileTenantState extends State<EditProfileTenant> {
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
                           snapshot.data!['gender'],
-                          style: TextStyle(fontSize: 15),
+                          style: TextStyle(fontSize: 12.sp),
                         ),
                       ),
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 5.h,
                   ),
                   Text(
                     'Phone Number',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style:
+                        TextStyle(fontWeight: FontWeight.w600, fontSize: 12.sp),
                   ),
                   SizedBox(
-                    height: 5,
+                    height: 1.h,
                   ),
                   Card(
                     shadowColor: Color(0xFF322E2E),
@@ -240,20 +258,21 @@ class _EditProfileTenantState extends State<EditProfileTenant> {
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
                           snapshot.data!['number'],
-                          style: TextStyle(fontSize: 15),
+                          style: TextStyle(fontSize: 12.sp),
                         ),
                       ),
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 5.h,
                   ),
                   Text(
                     'Nationality',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style:
+                        TextStyle(fontWeight: FontWeight.w600, fontSize: 12.sp),
                   ),
                   SizedBox(
-                    height: 5,
+                    height: 1.h,
                   ),
                   Card(
                     shadowColor: Color(0xFF322E2E),
@@ -265,13 +284,13 @@ class _EditProfileTenantState extends State<EditProfileTenant> {
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
                           snapshot.data!['nationality'],
-                          style: TextStyle(fontSize: 15),
+                          style: TextStyle(fontSize: 12.sp),
                         ),
                       ),
                     ),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 15.h,
                   ),
                   SizedBox(
                     width: MediaQuery.of(context).size.width,
@@ -306,15 +325,16 @@ class _EditProfileTenantState extends State<EditProfileTenant> {
                                 fontSize: 16.0);
                           }
                         },
-                        style:
-                            TextButton.styleFrom(backgroundColor: Colors.blue),
+                        style: TextButton.styleFrom(
+                            backgroundColor: Color.fromARGB(255, 59, 112, 155)),
                         child: Text(
                           'Save',
-                          style: TextStyle(color: Colors.white, fontSize: 15),
+                          style:
+                              TextStyle(color: Colors.white, fontSize: 15.sp),
                         )),
                   ),
                   SizedBox(
-                    height: 50,
+                    height: 30.h,
                   )
                 ],
               );

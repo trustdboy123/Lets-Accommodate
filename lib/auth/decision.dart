@@ -34,7 +34,7 @@ class Decision extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               SizedBox(
-                height: 30.h,
+                height: 25.h,
               ),
               Text(
                 'I\'m a ...',

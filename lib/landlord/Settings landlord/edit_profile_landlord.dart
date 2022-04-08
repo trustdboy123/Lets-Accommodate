@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lets_accommodate/managers/post_manager.dart';
@@ -56,8 +57,9 @@ class _EditProfileLandlordState extends State<EditProfileLandlord> {
               }
               if (snapshot.connectionState == ConnectionState.done &&
                   snapshot.data == null) {
-                return const Center(
-                  child: Text('No data is available'),
+                return Center(
+                  child: Text('No data is available',
+                      style: TextStyle(fontSize: 12.sp)),
                 );
               }
               return ListView(
@@ -70,8 +72,8 @@ class _EditProfileLandlordState extends State<EditProfileLandlord> {
                           child: _profilePic == null
                               ? Image.network(
                                   snapshot.data!['picture'],
-                                  width: 130,
-                                  height: 130,
+                                  width: 130.w,
+                                  height: 130.h,
                                   fit: BoxFit.fill,
                                 )
                               : InkWell(
@@ -82,8 +84,8 @@ class _EditProfileLandlordState extends State<EditProfileLandlord> {
                                           )),
                                   child: Image.file(
                                     _profilePic!,
-                                    width: 130,
-                                    height: 130,
+                                    width: 130.w,
+                                    height: 130.h,
                                     fit: BoxFit.fill,
                                   ),
                                 ),
@@ -105,7 +107,9 @@ class _EditProfileLandlordState extends State<EditProfileLandlord> {
                                                     ImageSource.camera);
                                           },
                                           icon: Icon(Icons.camera_alt),
-                                          label: Text('Select from camera')),
+                                          label: Text('Select from camera',
+                                              style:
+                                                  TextStyle(fontSize: 12.sp))),
                                       TextButton.icon(
                                           onPressed: () {
                                             Navigator.pop(context);
@@ -114,48 +118,53 @@ class _EditProfileLandlordState extends State<EditProfileLandlord> {
                                                     ImageSource.gallery);
                                           },
                                           icon: Icon(Icons.browse_gallery),
-                                          label: Text('Select from gallery'))
+                                          label: Text('Select from gallery',
+                                              style:
+                                                  TextStyle(fontSize: 12.sp)))
                                     ]),
                                   );
                                 });
                           },
-                          child: Text('Edit Photo'))
+                          child: Text('Edit Photo',
+                              style: TextStyle(fontSize: 12.sp)))
                     ],
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 10.h,
                   ),
                   Text(
                     'Full Name',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style:
+                        TextStyle(fontWeight: FontWeight.w600, fontSize: 12.sp),
                   ),
                   SizedBox(
-                    height: 5,
+                    height: 1.h,
                   ),
                   Card(
                     shadowColor: Color(0xFF322E2E),
                     color: Colors.white,
                     child: SizedBox(
-                      height: 40,
+                      height: 40.h,
                       width: MediaQuery.of(context).size.width,
                       child: Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text(
                           snapshot.data!['name'],
-                          style: TextStyle(fontSize: 15),
+                          style: TextStyle(fontSize: 12.sp),
                         ),
                       ),
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 5.h,
                   ),
-                  const Text(
+                  Text(
                     'E-mail',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style:
+                        TextStyle(fontWeight: FontWeight.w600, fontSize: 12.sp),
                   ),
                   SizedBox(
-                    height: 5,
+                    height: 1.h,
                   ),
                   Card(
                     shadowColor: Color(0xFF322E2E),
@@ -167,17 +176,18 @@ class _EditProfileLandlordState extends State<EditProfileLandlord> {
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
                           snapshot.data![' email'],
-                          style: TextStyle(fontSize: 15),
+                          style: TextStyle(fontSize: 12.sp),
                         ),
                       ),
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 5.h,
                   ),
                   Text(
                     'Location',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style:
+                        TextStyle(fontWeight: FontWeight.w600, fontSize: 12.sp),
                   ),
                   SizedBox(height: 5),
                   Card(
@@ -190,7 +200,7 @@ class _EditProfileLandlordState extends State<EditProfileLandlord> {
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
                           snapshot.data!['location'],
-                          style: TextStyle(fontSize: 15),
+                          style: TextStyle(fontSize: 12.sp),
                         ),
                       ),
                     ),
@@ -200,7 +210,8 @@ class _EditProfileLandlordState extends State<EditProfileLandlord> {
                   ),
                   Text(
                     'Gender',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style:
+                        TextStyle(fontWeight: FontWeight.w600, fontSize: 12.sp),
                   ),
                   SizedBox(
                     height: 5,
@@ -215,20 +226,21 @@ class _EditProfileLandlordState extends State<EditProfileLandlord> {
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
                           snapshot.data!['gender'],
-                          style: TextStyle(fontSize: 15),
+                          style: TextStyle(fontSize: 12.sp),
                         ),
                       ),
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 5.h,
                   ),
                   Text(
                     'Phone Number',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style:
+                        TextStyle(fontWeight: FontWeight.w600, fontSize: 12.sp),
                   ),
                   SizedBox(
-                    height: 5,
+                    height: 1.h,
                   ),
                   Card(
                     shadowColor: Color(0xFF322E2E),
@@ -240,7 +252,7 @@ class _EditProfileLandlordState extends State<EditProfileLandlord> {
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
                           snapshot.data!['number'],
-                          style: TextStyle(fontSize: 15),
+                          style: TextStyle(fontSize: 12.sp),
                         ),
                       ),
                     ),
@@ -250,10 +262,11 @@ class _EditProfileLandlordState extends State<EditProfileLandlord> {
                   ),
                   Text(
                     'Nationality',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style:
+                        TextStyle(fontWeight: FontWeight.w600, fontSize: 12.sp),
                   ),
                   SizedBox(
-                    height: 5,
+                    height: 1.h,
                   ),
                   Card(
                     shadowColor: Color(0xFF322E2E),
@@ -265,13 +278,13 @@ class _EditProfileLandlordState extends State<EditProfileLandlord> {
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
                           snapshot.data!['nationality'],
-                          style: TextStyle(fontSize: 15),
+                          style: TextStyle(fontSize: 12.sp),
                         ),
                       ),
                     ),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 15.h,
                   ),
                   SizedBox(
                     width: MediaQuery.of(context).size.width,
@@ -306,15 +319,16 @@ class _EditProfileLandlordState extends State<EditProfileLandlord> {
                                 fontSize: 16.0);
                           }
                         },
-                        style:
-                            TextButton.styleFrom(backgroundColor: Colors.blue),
+                        style: TextButton.styleFrom(
+                            backgroundColor: Color.fromARGB(255, 59, 112, 155)),
                         child: Text(
                           'Save',
-                          style: TextStyle(color: Colors.white, fontSize: 15),
+                          style:
+                              TextStyle(color: Colors.white, fontSize: 15.sp),
                         )),
                   ),
                   SizedBox(
-                    height: 50,
+                    height: 30.sp,
                   )
                 ],
               );

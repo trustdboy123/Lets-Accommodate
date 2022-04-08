@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lets_accommodate/landlord/payments/paystack_provider.dart';
 import 'package:lets_accommodate/managers/post_manager.dart';
 
@@ -48,14 +49,19 @@ class _MomoPaymentViewState extends State<MomoPaymentView> {
                   padding: const EdgeInsets.all(10),
                   child: Column(
                     children: [
+                      SizedBox(
+                        height: 20.h,
+                      ),
                       Card(
                           child: Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text('Network Provider',
-                                style: TextStyle(fontWeight: FontWeight.bold)),
+                            Text('Network Provider',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15.sp)),
                             DropdownButtonFormField(
                                 value: networkProvider,
                                 icon: const Icon(Icons.arrow_drop_down),
@@ -74,18 +80,42 @@ class _MomoPaymentViewState extends State<MomoPaymentView> {
                                     .entries
                                     .map((entry) => DropdownMenuItem(
                                           value: entry.value,
-                                          child: Text(entry.key),
+                                          child: Text(
+                                            entry.key,
+                                            style: TextStyle(fontSize: 13.sp),
+                                          ),
                                         ))
                                     .toList()),
                           ],
                         ),
                       )),
-                      const SizedBox(height: 5),
-                      TextFormField(
-                        controller: _numberController,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
+                      SizedBox(height: 10.h),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextFormField(
+                          controller: _numberController,
+                          decoration: InputDecoration(
+                              floatingLabelBehavior:
+                                  FloatingLabelBehavior.never,
+                              labelText: 'Phone Number',
+                              labelStyle: TextStyle(
+                                  fontSize: 15.sp,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black),
+                              hintText: 'Enter mobile money number',
+                              hintStyle: TextStyle(fontSize: 12.sp),
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.black,
+                                  ),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(8.0))),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.black))),
                         ),
+                      ),
+                      SizedBox(
+                        height: 10.h,
                       ),
                       SizedBox(
                         width: MediaQuery.of(context).size.width,
@@ -113,7 +143,8 @@ class _MomoPaymentViewState extends State<MomoPaymentView> {
                             style: TextStyle(color: Colors.white),
                           ),
                           style: TextButton.styleFrom(
-                              backgroundColor: Colors.green),
+                              backgroundColor:
+                                  Color.fromARGB(255, 59, 112, 155)),
                         ),
                       )
                     ],

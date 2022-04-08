@@ -167,8 +167,11 @@ class _DashboardViewState extends State<DashboardView> {
                                     },
                                     icon: Icon(Icons.comment_outlined)),
                                 Spacer(),
-                                Text(snapshot.data!.docs[index]
-                                    .data()!['city/Town'])
+                                Text(
+                                  snapshot.data!.docs[index]
+                                      .data()!['city/Town'],
+                                  style: TextStyle(fontSize: 12.sp),
+                                )
                               ],
                             ),
                           )
@@ -179,7 +182,7 @@ class _DashboardViewState extends State<DashboardView> {
                   itemCount:
                       snapshot.data == null ? 0 : snapshot.data!.docs.length,
                   separatorBuilder: (context, index) {
-                    return SizedBox(height: 10);
+                    return SizedBox(height: 10.h);
                   },
                 );
               }

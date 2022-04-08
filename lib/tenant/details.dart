@@ -368,7 +368,8 @@ class _DetailsState extends State<Details> {
                               Text(
                                 snapshot.data!.data()!['digital Address'],
                                 style: TextStyle(
-                                    fontSize: 15, fontWeight: FontWeight.w600),
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w600),
                               )
                             ],
                           ),
@@ -428,7 +429,7 @@ class _DetailsState extends State<Details> {
                               child: Text(
                                 'Interested',
                                 style: TextStyle(
-                                    color: Colors.white, fontSize: 15.h),
+                                    color: Colors.white, fontSize: 10.h),
                               ),
                             ),
                           ),

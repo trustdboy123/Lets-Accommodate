@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lets_accommodate/landlord/landlord_dashboard.dart';
@@ -152,12 +153,12 @@ class _EditDescription extends State<EditDescription> {
                                       child: Container(
                                         width:
                                             MediaQuery.of(context).size.width,
-                                        height: 200,
+                                        height: 200.h,
                                         color: Colors.black,
                                         child: Image.network(
                                           pictures[index],
                                           fit: BoxFit.fitWidth,
-                                          height: 250,
+                                          height: 250.h,
                                           width: double.infinity,
                                         ),
                                       ),
@@ -194,17 +195,21 @@ class _EditDescription extends State<EditDescription> {
                                                     Icons.photo_album,
                                                     color: Colors.blue,
                                                   ),
-                                                  label: const Text(
-                                                      'Select from Gallery')),
+                                                  label: Text(
+                                                    'Select from Gallery',
+                                                    style: TextStyle(
+                                                        fontSize: 12.sp),
+                                                  )),
                                             );
                                           });
                                     },
-                                    icon: const Icon(Icons.camera_alt)),
-                                const Text('Upload Photos')
+                                    icon: Icon(Icons.camera_alt)),
+                                Text('Upload Photos',
+                                    style: TextStyle(fontSize: 12.sp))
                               ],
                             ),
-                            const SizedBox(
-                              height: 10,
+                            SizedBox(
+                              height: 5.h,
                             ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -216,10 +221,11 @@ class _EditDescription extends State<EditDescription> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      const Text(
+                                      Text(
                                         'Category',
                                         style: TextStyle(
-                                            fontWeight: FontWeight.bold),
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 12.sp),
                                       ),
                                       DropdownButtonFormField(
                                         value: dropdownValue1,
@@ -238,14 +244,16 @@ class _EditDescription extends State<EditDescription> {
                                             (String value) {
                                           return DropdownMenuItem<String>(
                                             value: value,
-                                            child: Text(value),
+                                            child: Text(value,
+                                                style:
+                                                    TextStyle(fontSize: 12.sp)),
                                           );
                                         }).toList(),
                                       ),
                                     ],
                                   ),
                                 )),
-                                const SizedBox(height: 5),
+                                SizedBox(height: 5.h),
                                 Card(
                                     child: Padding(
                                   padding: const EdgeInsets.all(16.0),
@@ -253,15 +261,17 @@ class _EditDescription extends State<EditDescription> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      const Text('Type',
+                                      Text('Type',
                                           style: TextStyle(
-                                              fontWeight: FontWeight.bold)),
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 12.sp)),
                                       DropdownButtonFormField(
                                         value: dropdownValueType1,
                                         icon: const Icon(Icons.arrow_drop_down),
                                         elevation: 16,
-                                        style: const TextStyle(
-                                            color: Colors.black),
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 12.sp),
                                         onChanged: null,
                                         items: <String>[
                                           'Select option',
@@ -273,14 +283,16 @@ class _EditDescription extends State<EditDescription> {
                                             (String value) {
                                           return DropdownMenuItem<String>(
                                             value: value,
-                                            child: Text(value),
+                                            child: Text(value,
+                                                style:
+                                                    TextStyle(fontSize: 12.sp)),
                                           );
                                         }).toList(),
                                       ),
                                     ],
                                   ),
                                 )),
-                                const SizedBox(height: 5),
+                                SizedBox(height: 5.h),
                                 Card(
                                     child: Padding(
                                   padding: const EdgeInsets.all(16.0),
@@ -290,13 +302,14 @@ class _EditDescription extends State<EditDescription> {
                                     children: [
                                       const Text('Kitchen',
                                           style: TextStyle(
-                                              fontWeight: FontWeight.bold)),
+                                              fontWeight: FontWeight.w600)),
                                       DropdownButtonFormField(
                                         value: dropdownValueKitchen1,
                                         icon: const Icon(Icons.arrow_drop_down),
                                         elevation: 16,
-                                        style: const TextStyle(
-                                            color: Colors.black),
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 12.sp),
                                         onChanged: (String? newValue) {
                                           setState(() {
                                             dropdownValueKitchen = newValue!;
@@ -310,7 +323,9 @@ class _EditDescription extends State<EditDescription> {
                                             (String value) {
                                           return DropdownMenuItem<String>(
                                             value: value,
-                                            child: Text(value),
+                                            child: Text(value,
+                                                style:
+                                                    TextStyle(fontSize: 12.sp)),
                                           );
                                         }).toList(),
                                       ),
@@ -327,13 +342,14 @@ class _EditDescription extends State<EditDescription> {
                                     children: [
                                       const Text('Washroom',
                                           style: TextStyle(
-                                              fontWeight: FontWeight.bold)),
+                                              fontWeight: FontWeight.w600)),
                                       DropdownButtonFormField(
                                         value: dropdownValueWashRoom1,
                                         icon: const Icon(Icons.arrow_drop_down),
                                         elevation: 16,
-                                        style: const TextStyle(
-                                            color: Colors.black),
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 12.sp),
                                         onChanged: (String? newValue) {
                                           setState(() {
                                             dropdownValueWashRoom = newValue!;
@@ -347,14 +363,16 @@ class _EditDescription extends State<EditDescription> {
                                             (String value) {
                                           return DropdownMenuItem<String>(
                                             value: value,
-                                            child: Text(value),
+                                            child: Text(value,
+                                                style:
+                                                    TextStyle(fontSize: 12.sp)),
                                           );
                                         }).toList(),
                                       ),
                                     ],
                                   ),
                                 )),
-                                const SizedBox(height: 5),
+                                SizedBox(height: 5.h),
                                 Card(
                                     child: Padding(
                                   padding: const EdgeInsets.all(16.0),
@@ -362,15 +380,17 @@ class _EditDescription extends State<EditDescription> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      const Text('Store Room',
+                                      Text('Store Room',
                                           style: TextStyle(
-                                              fontWeight: FontWeight.bold)),
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 12.sp)),
                                       DropdownButtonFormField(
                                         value: dropdownValueStoreRoom1,
                                         icon: const Icon(Icons.arrow_drop_down),
                                         elevation: 16,
-                                        style: const TextStyle(
-                                            color: Colors.black),
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 12.sp),
                                         onChanged: (String? newValue) {
                                           setState(() {
                                             dropdownValueStoreRoom = newValue!;
@@ -384,14 +404,16 @@ class _EditDescription extends State<EditDescription> {
                                             (String value) {
                                           return DropdownMenuItem<String>(
                                             value: value,
-                                            child: Text(value),
+                                            child: Text(value,
+                                                style:
+                                                    TextStyle(fontSize: 12.sp)),
                                           );
                                         }).toList(),
                                       ),
                                     ],
                                   ),
                                 )),
-                                const SizedBox(height: 5),
+                                SizedBox(height: 5.h),
                                 Card(
                                     child: Padding(
                                   padding: const EdgeInsets.all(16.0),
@@ -399,15 +421,17 @@ class _EditDescription extends State<EditDescription> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      const Text('Porch',
+                                      Text('Porch',
                                           style: TextStyle(
-                                              fontWeight: FontWeight.bold)),
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 12.sp)),
                                       DropdownButtonFormField(
                                         value: dropdownValuePorch1,
                                         icon: const Icon(Icons.arrow_drop_down),
                                         elevation: 16,
-                                        style: const TextStyle(
-                                            color: Colors.black),
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 12.sp),
                                         onChanged: (String? newValue) {
                                           setState(() {
                                             dropdownValuePorch = newValue!;
@@ -421,14 +445,16 @@ class _EditDescription extends State<EditDescription> {
                                             (String value) {
                                           return DropdownMenuItem<String>(
                                             value: value,
-                                            child: Text(value),
+                                            child: Text(value,
+                                                style:
+                                                    TextStyle(fontSize: 12.sp)),
                                           );
                                         }).toList(),
                                       ),
                                     ],
                                   ),
                                 )),
-                                const SizedBox(height: 5),
+                                SizedBox(height: 5.h),
                                 Card(
                                     child: Padding(
                                   padding: const EdgeInsets.all(16.0),
@@ -436,15 +462,17 @@ class _EditDescription extends State<EditDescription> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      const Text('Walled House',
+                                      Text('Walled House',
                                           style: TextStyle(
-                                              fontWeight: FontWeight.bold)),
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 12.sp)),
                                       DropdownButtonFormField(
                                         value: dropdownValueWaledHouse1,
                                         icon: const Icon(Icons.arrow_drop_down),
                                         elevation: 16,
-                                        style: const TextStyle(
-                                            color: Colors.black),
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 12.sp),
                                         onChanged: (String? newValue) {
                                           setState(() {
                                             dropdownValueWaledHouse = newValue!;
@@ -458,14 +486,17 @@ class _EditDescription extends State<EditDescription> {
                                             (String value) {
                                           return DropdownMenuItem<String>(
                                             value: value,
-                                            child: Text(value),
+                                            child: Text(
+                                              value,
+                                              style: TextStyle(fontSize: 12.sp),
+                                            ),
                                           );
                                         }).toList(),
                                       ),
                                     ],
                                   ),
                                 )),
-                                const SizedBox(height: 5),
+                                SizedBox(height: 5.h),
                                 Card(
                                     child: Padding(
                                   padding: const EdgeInsets.all(16.0),
@@ -473,15 +504,17 @@ class _EditDescription extends State<EditDescription> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      const Text('Tiled House',
+                                      Text('Tiled House',
                                           style: TextStyle(
-                                              fontWeight: FontWeight.bold)),
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 12.sp)),
                                       DropdownButtonFormField(
                                         value: dropdownValueTiledHouse1,
                                         icon: const Icon(Icons.arrow_drop_down),
                                         elevation: 16,
-                                        style: const TextStyle(
-                                            color: Colors.black),
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 12.sp),
                                         onChanged: (String? newValue) {
                                           setState(() {
                                             dropdownValueTiledHouse = newValue!;
@@ -495,14 +528,17 @@ class _EditDescription extends State<EditDescription> {
                                             (String value) {
                                           return DropdownMenuItem<String>(
                                             value: value,
-                                            child: Text(value),
+                                            child: Text(
+                                              value,
+                                              style: TextStyle(fontSize: 12.sp),
+                                            ),
                                           );
                                         }).toList(),
                                       ),
                                     ],
                                   ),
                                 )),
-                                const SizedBox(height: 5),
+                                SizedBox(height: 5.h),
                                 Card(
                                     child: Padding(
                                   padding: const EdgeInsets.all(16.0),
@@ -510,15 +546,17 @@ class _EditDescription extends State<EditDescription> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      const Text('Electricity',
+                                      Text('Electricity',
                                           style: TextStyle(
-                                              fontWeight: FontWeight.bold)),
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 12.sp)),
                                       DropdownButtonFormField(
                                         value: dropdownValueElectricity1,
                                         icon: const Icon(Icons.arrow_drop_down),
                                         elevation: 16,
-                                        style: const TextStyle(
-                                            color: Colors.black),
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 12.sp),
                                         onChanged: (String? newValue) {
                                           setState(() {
                                             dropdownValueElectricity =
@@ -534,13 +572,19 @@ class _EditDescription extends State<EditDescription> {
                                             (String value) {
                                           return DropdownMenuItem<String>(
                                             value: value,
-                                            child: Text(value),
+                                            child: Text(
+                                              value,
+                                              style: TextStyle(fontSize: 12.sp),
+                                            ),
                                           );
                                         }).toList(),
                                       ),
                                     ],
                                   ),
                                 )),
+                                SizedBox(
+                                  height: 5.h,
+                                ),
                                 Card(
                                     child: Padding(
                                   padding: const EdgeInsets.all(8.0),
@@ -548,15 +592,17 @@ class _EditDescription extends State<EditDescription> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      const Text('Water Availability',
+                                      Text('Water Availability',
                                           style: TextStyle(
-                                              fontWeight: FontWeight.bold)),
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 12.sp)),
                                       DropdownButtonFormField(
                                         value: dropdownValueWaterAvailability1,
                                         icon: const Icon(Icons.arrow_drop_down),
                                         elevation: 16,
-                                        style: const TextStyle(
-                                            color: Colors.black),
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 12.sp),
                                         onChanged: (String? newValue) {
                                           setState(() {
                                             dropdownValueWaterAvailability =
@@ -571,15 +617,18 @@ class _EditDescription extends State<EditDescription> {
                                             (String value) {
                                           return DropdownMenuItem<String>(
                                             value: value,
-                                            child: Text(value),
+                                            child: Text(
+                                              value,
+                                              style: TextStyle(fontSize: 12.sp),
+                                            ),
                                           );
                                         }).toList(),
                                       ),
                                     ],
                                   ),
                                 )),
-                                const SizedBox(
-                                  height: 10,
+                                SizedBox(
+                                  height: 5.h,
                                 ),
                                 Card(
                                   child: TextFormField(
@@ -592,11 +641,16 @@ class _EditDescription extends State<EditDescription> {
                                           floatingLabelBehavior:
                                               FloatingLabelBehavior.never,
                                           labelText: 'Price',
+                                          labelStyle:
+                                              TextStyle(fontSize: 12.sp),
+                                          hintStyle: TextStyle(fontSize: 12.sp),
                                           hintText: 'Enter new price of rent',
+                                          prefixStyle:
+                                              TextStyle(fontSize: 12.sp),
                                           prefix: Text('GHC'))),
                                 ),
-                                const SizedBox(
-                                  height: 10,
+                                SizedBox(
+                                  height: 5.h,
                                 ),
                                 Card(
                                   child: TextFormField(
@@ -613,11 +667,14 @@ class _EditDescription extends State<EditDescription> {
                                             borderRadius:
                                                 BorderRadius.circular(20),
                                           ),
-                                          labelText: "size",
+                                          labelText: "Size",
+                                          labelStyle:
+                                              TextStyle(fontSize: 12.sp),
+                                          hintStyle: TextStyle(fontSize: 12.sp),
                                           hintText: 'Enter new size of room',
                                           prefix: Text('Sqft'))),
                                 ),
-                                const SizedBox(height: 10),
+                                SizedBox(height: 5.h),
                                 Card(
                                     child: Padding(
                                   padding: const EdgeInsets.all(16.0),
@@ -625,15 +682,17 @@ class _EditDescription extends State<EditDescription> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      const Text('Region',
+                                      Text('Region',
                                           style: TextStyle(
-                                              fontWeight: FontWeight.bold)),
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 12.sp)),
                                       DropdownButtonFormField(
                                         value: dropdownValueRegion1,
                                         //icon: const Icon(Icons.arrow_drop_down),
                                         elevation: 16,
-                                        style: const TextStyle(
-                                            color: Colors.black),
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 12.sp),
                                         onChanged: null,
                                         items: <String>[
                                           'Select option',
@@ -655,15 +714,18 @@ class _EditDescription extends State<EditDescription> {
                                             (String value) {
                                           return DropdownMenuItem<String>(
                                             value: value,
-                                            child: Text(value),
+                                            child: Text(
+                                              value,
+                                              style: TextStyle(fontSize: 12.sp),
+                                            ),
                                           );
                                         }).toList(),
                                       ),
                                     ],
                                   ),
                                 )),
-                                const SizedBox(
-                                  height: 10,
+                                SizedBox(
+                                  height: 5.h,
                                 ),
                                 Card(
                                   child: TextFormField(
@@ -681,10 +743,14 @@ class _EditDescription extends State<EditDescription> {
                                                 BorderRadius.circular(20),
                                           ),
                                           labelText: 'city',
-                                          hintText: 'Enter new city')),
+                                          labelStyle:
+                                              TextStyle(fontSize: 12.sp),
+                                          hintText: 'Enter new city',
+                                          hintStyle:
+                                              TextStyle(fontSize: 12.sp))),
                                 ),
-                                const SizedBox(
-                                  height: 10,
+                                SizedBox(
+                                  height: 5.h,
                                 ),
                                 Card(
                                   child: TextFormField(
@@ -703,10 +769,14 @@ class _EditDescription extends State<EditDescription> {
                                                 BorderRadius.circular(20),
                                           ),
                                           labelText: "digitalAddress",
-                                          hintText: 'Enter digital address')),
+                                          labelStyle:
+                                              TextStyle(fontSize: 12.sp),
+                                          hintText: 'Enter digital address',
+                                          hintStyle:
+                                              TextStyle(fontSize: 12.sp))),
                                 ),
-                                const SizedBox(
-                                  height: 10,
+                                SizedBox(
+                                  height: 5.h,
                                 ),
                                 Card(
                                   child: TextFormField(
@@ -724,10 +794,13 @@ class _EditDescription extends State<EditDescription> {
                                                 BorderRadius.circular(20),
                                           ),
                                           labelText: 'houseNumber',
+                                          labelStyle:
+                                              TextStyle(fontSize: 12.sp),
+                                          hintStyle: TextStyle(fontSize: 12.sp),
                                           hintText: 'Enter new house number')),
                                 ),
-                                const SizedBox(
-                                  height: 20,
+                                SizedBox(
+                                  height: 15.h,
                                 ),
                                 SizedBox(
                                   width: MediaQuery.of(context).size.width,
@@ -742,8 +815,11 @@ class _EditDescription extends State<EditDescription> {
                                             context: context,
                                             builder: (context) {
                                               return AlertDialog(
-                                                content: const Text(
-                                                    'Are you sure you want to update House Info?'),
+                                                content: Text(
+                                                  'Are you sure you want to update House Info?',
+                                                  style: TextStyle(
+                                                      fontSize: 12.sp),
+                                                ),
                                                 actions: [
                                                   TextButton(
                                                     onPressed: () async {
@@ -824,16 +900,21 @@ class _EditDescription extends State<EditDescription> {
                                                             fontSize: 16.0);
                                                       }
                                                     },
-                                                    child: const Text('Yes'),
+                                                    child: Text(
+                                                      'Yes',
+                                                      style: TextStyle(
+                                                          fontSize: 12.sp),
+                                                    ),
                                                   ),
                                                   TextButton(
                                                     onPressed: () =>
                                                         Navigator.of(context)
                                                             .pop(false),
-                                                    child: const Text(
+                                                    child: Text(
                                                       'Cancel',
                                                       style: TextStyle(
-                                                          color: Colors.red),
+                                                          color: Colors.red,
+                                                          fontSize: 12.sp),
                                                     ),
                                                   )
                                                 ],
@@ -841,17 +922,18 @@ class _EditDescription extends State<EditDescription> {
                                             });
                                       }
                                     },
-                                    child: const Text(
+                                    child: Text(
                                       'Update',
-                                      style: TextStyle(color: Colors.white),
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 12.sp),
                                     ),
                                     style: TextButton.styleFrom(
                                         backgroundColor:
                                             Color.fromARGB(255, 59, 112, 155)),
                                   ),
                                 ),
-                                const SizedBox(
-                                  height: 10,
+                                SizedBox(
+                                  height: 5.h,
                                 ),
                                 SizedBox(
                                   width: MediaQuery.of(context).size.width,
@@ -861,8 +943,10 @@ class _EditDescription extends State<EditDescription> {
                                           context: context,
                                           builder: (context) {
                                             return AlertDialog(
-                                              content: const Text(
-                                                  'Are you sure you want to delete?'),
+                                              content: Text(
+                                                  'Are you sure you want to delete?',
+                                                  style: TextStyle(
+                                                      fontSize: 12.sp)),
                                               actions: [
                                                 TextButton(
                                                   onPressed: () async {
@@ -912,32 +996,38 @@ class _EditDescription extends State<EditDescription> {
                                                           fontSize: 16.0);
                                                     }
                                                   },
-                                                  child: const Text(
+                                                  child: Text(
                                                     'Yes',
                                                     style: TextStyle(
-                                                        color: Colors.red),
+                                                        color: Colors.red,
+                                                        fontSize: 12.sp),
                                                   ),
                                                 ),
                                                 TextButton(
                                                   onPressed: () =>
                                                       Navigator.of(context)
                                                           .pop(false),
-                                                  child: const Text('Cancel'),
+                                                  child: Text(
+                                                    'Cancel',
+                                                    style: TextStyle(
+                                                        fontSize: 12.sp),
+                                                  ),
                                                 )
                                               ],
                                             );
                                           });
                                     },
-                                    child: const Text(
+                                    child: Text(
                                       'Delete',
-                                      style: TextStyle(color: Colors.white),
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 15.sp),
                                     ),
                                     style: TextButton.styleFrom(
                                         backgroundColor: Colors.redAccent),
                                   ),
                                 ),
-                                const SizedBox(
-                                  height: 20,
+                                SizedBox(
+                                  height: 25.h,
                                 )
                               ],
                             )

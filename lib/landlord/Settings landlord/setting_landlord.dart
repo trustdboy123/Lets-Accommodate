@@ -83,18 +83,18 @@ class _SettingsLandlordState extends State<SettingsLandlord> {
                               },
                               child: Text(
                                 'Edit profile',
-                                style: TextStyle(fontSize: 15),
+                                style: TextStyle(fontSize: 12.sp),
                               )),
                         ),
                         Text(
                           snapshot.data!['name'],
                           style: TextStyle(
-                              fontWeight: FontWeight.w600, fontSize: 30),
+                              fontWeight: FontWeight.w600, fontSize: 25.sp),
                         ),
                       ],
                     ),
                     SizedBox(
-                      height: 20.h,
+                      height: 15.h,
                     ),
                     InkWell(
                       onTap: () {
@@ -111,13 +111,13 @@ class _SettingsLandlordState extends State<SettingsLandlord> {
                                   ),
                                   SizedBox(
                                     height: 40.h,
-                                    child: const Padding(
-                                      padding: EdgeInsets.all(16.0),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(16.0),
                                       child: Text(
                                         'Email: letsaccommodateof4@gmail.com',
                                         style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
+                                            fontSize: 14.sp,
+                                            fontWeight: FontWeight.w600),
                                       ),
                                     ),
                                   ),
@@ -128,13 +128,13 @@ class _SettingsLandlordState extends State<SettingsLandlord> {
                                   ),
                                   SizedBox(
                                     height: 40.h,
-                                    child: const Padding(
-                                      padding: EdgeInsets.all(16.0),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(16.0),
                                       child: Text(
                                         'Facebook: Letsaccommodate Mobile app',
                                         style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
+                                            fontSize: 14.sp,
+                                            fontWeight: FontWeight.w600),
                                       ),
                                     ),
                                   ),
@@ -147,12 +147,12 @@ class _SettingsLandlordState extends State<SettingsLandlord> {
                         child: Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Row(
-                            children: const [
+                            children: [
                               Text(
                                 'Need help',
                                 style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: 15,
+                                    fontSize: 12.sp,
                                     fontWeight: FontWeight.w600),
                               ),
                               Icon(
@@ -163,7 +163,7 @@ class _SettingsLandlordState extends State<SettingsLandlord> {
                                 'Contact Us',
                                 style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: 15,
+                                    fontSize: 12.sp,
                                     fontWeight: FontWeight.w600),
                               ),
                             ],
@@ -189,7 +189,7 @@ class _SettingsLandlordState extends State<SettingsLandlord> {
                               Text(
                                 'logout',
                                 style: TextStyle(
-                                    color: Colors.black, fontSize: 20),
+                                    color: Colors.black, fontSize: 15.h),
                               ),
                             ],
                           )),
