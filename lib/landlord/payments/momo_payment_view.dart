@@ -92,6 +92,10 @@ class _MomoPaymentViewState extends State<MomoPaymentView> {
                         child: TextButton.icon(
                           onPressed: () async {
                             double amount = widget.price;
+                            print(email);
+                            print(username);
+                            print(networkProvider);
+                            print(_numberController.text);
                             await PaystackProvider(context).payWithMobileMoney(
                               email: email,
                               username: username,

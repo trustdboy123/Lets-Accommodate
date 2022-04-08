@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_paystack/flutter_paystack.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lets_accommodate/environment.dart';
 import 'package:lets_accommodate/landlord/payments/otp_screen.dart';
 
@@ -79,13 +80,14 @@ class PaystackProvider {
       if (response.statusCode == 200) {
         print("Sent OTP response: ${response.data}");
         // show a toast with `response.data["data"]["display_text"]`
-        // try {
-        //   await dio.post(
-        //     '$paystackBackendServerURL/payments/webhook',
-        //   );
-        // } on DioError catch (e) {
-        //   handleError(e);
-        // }
+        Fluttertoast.showToast(
+            msg: '${response.data["data"]["display_text"]}',
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: const Color.fromARGB(255, 94, 196, 97),
+            textColor: Color.fromARGB(255, 65, 61, 61),
+            fontSize: 16.0);
       }
     } on DioError catch (error) {
       handleError(error);

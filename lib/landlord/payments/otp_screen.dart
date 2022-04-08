@@ -4,7 +4,7 @@ import 'package:lets_accommodate/landlord/landlord_dashboard.dart';
 import 'package:pinput/pinput.dart';
 
 class OtpScreen extends StatelessWidget {
-  OtpScreen({
+   OtpScreen({
     Key? key,
     required this.phoneNumber,
     required this.reference,
@@ -46,23 +46,45 @@ class OtpScreen extends StatelessWidget {
                     height: 50, width: 40, decoration: pinOtpCodeDecoration),
                 pinAnimationType: PinAnimationType.rotation,
                 obscureText: true,
-                onSubmitted: (pin) async {
-                  await submitOtp(otp: pin, reference: reference);
-                  Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(builder: (_) => DashboardView()),
-                      (route) => false);
+                // onSubmitted: (pin) async {
+                //   try {
+                //     await submitOtp(otp: pin, reference: reference);
+                //   } catch (e) {
+                //     print('Error on payment=> $e ');
+                //   }
 
-                  // so when the onSubmitted is called we call the submitOtp function
-                  //which is a parameter we passed from the paystack provider when we navigated to the otp screen
-                  // we only passed the fucntion there as a parameter, and didn't execute it,
-                  // so here is where we execute it passing in the otp that was just entered and the reference passed in when we navigated to this screen
-                  // makes sense???
-                  //sure it does.
-                  //the running is complete and when i tried i got
-                  //DioError [DioErrorType.response]: Http status error [400]
-                },
+                //   Navigator.of(context).pushAndRemoveUntil(
+                //       MaterialPageRoute(builder: (_) => DashboardView()),
+                //       (route) => false);
+
+                //   // so when the onSubmitted is called we call the submitOtp function
+                //   //which is a parameter we passed from the paystack provider when we navigated to the otp screen
+                //   // we only passed the fucntion there as a parameter, and didn't execute it,
+                //   // so here is where we execute it passing in the otp that was just entered and the reference passed in when we navigated to this screen
+                //   // makes sense???
+                //   //sure it does.
+                //   //the running is complete and when i tried i got
+                //   //DioError [DioErrorType.response]: Http status error [400]
+                // },
               ),
             ),
+            SizedBox(
+              width: double.infinity,
+              height: 30.h,
+              child: TextButton(
+                onPressed: () async {
+                  print(reference);
+                  print(_pinController.text);
+                  await submitOtp(
+                      otp: _pinController.text, reference: reference);
+                },
+                child: Text(
+                  'Verify..',
+                  style: TextStyle(color: Colors.white),
+                ),
+                style: TextButton.styleFrom(backgroundColor: Colors.blue),
+              ),
+            )
           ],
         ),
       ),
