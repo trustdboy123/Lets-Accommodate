@@ -15,11 +15,10 @@ class PaystackProvider {
   String paystackBackendServerURL =
       "https://lets-accommodate-payment.herokuapp.com";
   final BuildContext context;
-  
+
   PaystackProvider(this.context);
-   
-PaystackPlugin paystackPlugin = PaystackPlugin();
-    
+
+  PaystackPlugin paystackPlugin = PaystackPlugin();
 
   payWithMobileMoney({
     required String email,
@@ -80,6 +79,13 @@ PaystackPlugin paystackPlugin = PaystackPlugin();
       if (response.statusCode == 200) {
         print("Sent OTP response: ${response.data}");
         // show a toast with `response.data["data"]["display_text"]`
+        // try {
+        //   await dio.post(
+        //     '$paystackBackendServerURL/payments/webhook',
+        //   );
+        // } on DioError catch (e) {
+        //   handleError(e);
+        // }
       }
     } on DioError catch (error) {
       handleError(error);
@@ -110,8 +116,8 @@ PaystackPlugin paystackPlugin = PaystackPlugin();
           ..currency = "GHS"
           ..accessCode = response.data["data"]["access_code"];
         // ..reference = _getReference() //TODO: Get access_token from backend
-        
-            paystackPlugin.initialize(publicKey: Environment.PAYSTACK_PUBLIC_KEY);
+
+        paystackPlugin.initialize(publicKey: Environment.PAYSTACK_PUBLIC_KEY);
 
         CheckoutResponse checkoutResponse = await paystackPlugin.checkout(
           context,
