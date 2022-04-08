@@ -25,10 +25,10 @@ class Decision extends StatelessWidget {
               SizedBox(
                 height: 80.h,
               ),
-              const Text(
+              Text(
                 'Let\'s get started',
                 style: TextStyle(
-                    fontSize: 40,
+                    fontSize: 30.sp,
                     fontWeight: FontWeight.w600,
                     color: Colors.black),
                 textAlign: TextAlign.center,
@@ -36,11 +36,11 @@ class Decision extends StatelessWidget {
               SizedBox(
                 height: 30.h,
               ),
-              const Text(
+              Text(
                 'I\'m a ...',
                 style: TextStyle(
                   color: Colors.black,
-                  fontSize: 15,
+                  fontSize: 15.sp,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -59,11 +59,11 @@ class Decision extends StatelessWidget {
                   },
                   style: TextButton.styleFrom(
                       backgroundColor: Color.fromARGB(255, 4, 82, 146)),
-                  child: const Text(
+                  child: Text(
                     'Tenant',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 30,
+                      fontSize: 25.sp,
                     ),
                   ),
                 ),
@@ -85,19 +85,34 @@ class Decision extends StatelessWidget {
                         backgroundColor: Color.fromARGB(255, 4, 82, 146)),
                     child: Text(
                       'Landlord',
-                      style: TextStyle(color: Colors.white, fontSize: 30),
+                      style: TextStyle(color: Colors.white, fontSize: 25.sp),
                     )),
               ),
               SizedBox(
-                height: 80.h,
+                height: 70.h,
               ),
-              const Text(
-                'Let\'s accommodate is the best to trust in accommodation',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 15,
-                ),
-                textAlign: TextAlign.center,
+              Column(
+                children: [
+                  Text(
+                    'Rent a house in your comfort zone',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 10.sp,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(
+                    height: 5.h,
+                  ),
+                  Text(
+                    'Powered by DeCoders',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 10.sp,
+                        fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
               )
             ],
           ),

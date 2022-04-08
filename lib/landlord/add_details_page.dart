@@ -101,15 +101,18 @@ class _AddImageState extends State<AddImage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
+                                Text(
                                   'Category',
-                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12.sp),
                                 ),
                                 DropdownButtonFormField(
                                   value: dropdownValue,
                                   icon: const Icon(Icons.arrow_drop_down),
                                   elevation: 16,
-                                  style: const TextStyle(color: Colors.black),
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 12.sp),
                                   onChanged: (String? newValue) {
                                     setState(() {
                                       dropdownValue = newValue!;
@@ -125,7 +128,8 @@ class _AddImageState extends State<AddImage> {
                                       (String value) {
                                     return DropdownMenuItem<String>(
                                       value: value,
-                                      child: Text(value),
+                                      child: Text(value,
+                                          style: TextStyle(fontSize: 12.sp)),
                                     );
                                   }).toList(),
                                 ),
@@ -139,14 +143,16 @@ class _AddImageState extends State<AddImage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text('Type',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold)),
+                                Text('Type',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 12.sp)),
                                 DropdownButtonFormField(
                                   value: dropdownValueType,
                                   icon: const Icon(Icons.arrow_drop_down),
                                   elevation: 16,
-                                  style: const TextStyle(color: Colors.black),
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 12.sp),
                                   onChanged: (String? newValue) {
                                     setState(() {
                                       dropdownValueType = newValue!;
@@ -162,7 +168,8 @@ class _AddImageState extends State<AddImage> {
                                       (String value) {
                                     return DropdownMenuItem<String>(
                                       value: value,
-                                      child: Text(value),
+                                      child: Text(value,
+                                          style: TextStyle(fontSize: 12.sp)),
                                     );
                                   }).toList(),
                                 ),
@@ -176,14 +183,16 @@ class _AddImageState extends State<AddImage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text('Kitchen',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold)),
+                                Text('Kitchen',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 12.sp)),
                                 DropdownButtonFormField(
                                   value: dropdownValueKitchen,
                                   icon: const Icon(Icons.arrow_drop_down),
                                   elevation: 16,
-                                  style: const TextStyle(color: Colors.black),
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 12.sp),
                                   onChanged: (String? newValue) {
                                     setState(() {
                                       dropdownValueKitchen = newValue!;
@@ -197,7 +206,8 @@ class _AddImageState extends State<AddImage> {
                                       (String value) {
                                     return DropdownMenuItem<String>(
                                       value: value,
-                                      child: Text(value),
+                                      child: Text(value,
+                                          style: TextStyle(fontSize: 12.sp)),
                                     );
                                   }).toList(),
                                 ),
@@ -211,9 +221,10 @@ class _AddImageState extends State<AddImage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text('Washroom',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold)),
+                                Text('Washroom',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 12.sp)),
                                 DropdownButtonFormField(
                                   value: dropdownValueWashRoom,
                                   icon: const Icon(Icons.arrow_drop_down),
@@ -232,7 +243,8 @@ class _AddImageState extends State<AddImage> {
                                       (String value) {
                                     return DropdownMenuItem<String>(
                                       value: value,
-                                      child: Text(value),
+                                      child: Text(value,
+                                          style: TextStyle(fontSize: 12.sp)),
                                     );
                                   }).toList(),
                                 ),
@@ -246,14 +258,16 @@ class _AddImageState extends State<AddImage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text('Store Room',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold)),
+                                Text('Store Room',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 12.sp)),
                                 DropdownButtonFormField(
                                   value: dropdownValueStoreRoom,
                                   icon: const Icon(Icons.arrow_drop_down),
                                   elevation: 16,
-                                  style: const TextStyle(color: Colors.black),
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 12.sp),
                                   onChanged: (String? newValue) {
                                     setState(() {
                                       dropdownValueStoreRoom = newValue!;
@@ -267,7 +281,8 @@ class _AddImageState extends State<AddImage> {
                                       (String value) {
                                     return DropdownMenuItem<String>(
                                       value: value,
-                                      child: Text(value),
+                                      child: Text(value,
+                                          style: TextStyle(fontSize: 12.sp)),
                                     );
                                   }).toList(),
                                 ),
@@ -281,14 +296,16 @@ class _AddImageState extends State<AddImage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text('Porch',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold)),
+                                Text('Porch',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 12.sp)),
                                 DropdownButtonFormField(
                                   value: dropdownValuePorch,
                                   icon: const Icon(Icons.arrow_drop_down),
                                   elevation: 16,
-                                  style: const TextStyle(color: Colors.black),
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 12.sp),
                                   onChanged: (String? newValue) {
                                     setState(() {
                                       dropdownValuePorch = newValue!;
@@ -302,7 +319,8 @@ class _AddImageState extends State<AddImage> {
                                       (String value) {
                                     return DropdownMenuItem<String>(
                                       value: value,
-                                      child: Text(value),
+                                      child: Text(value,
+                                          style: TextStyle(fontSize: 12.sp)),
                                     );
                                   }).toList(),
                                 ),
@@ -316,14 +334,16 @@ class _AddImageState extends State<AddImage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text('Walled House',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold)),
+                                Text('Walled House',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 12.sp)),
                                 DropdownButtonFormField(
                                   value: dropdownValueWaledHouse,
                                   icon: const Icon(Icons.arrow_drop_down),
                                   elevation: 16,
-                                  style: const TextStyle(color: Colors.black),
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 12.sp),
                                   onChanged: (String? newValue) {
                                     setState(() {
                                       dropdownValueWaledHouse = newValue!;
@@ -351,14 +371,16 @@ class _AddImageState extends State<AddImage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text('Tiled House',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold)),
+                                Text('Tiled House',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 12.sp)),
                                 DropdownButtonFormField(
                                   value: dropdownValueTiledHouse,
                                   icon: const Icon(Icons.arrow_drop_down),
                                   elevation: 16,
-                                  style: const TextStyle(color: Colors.black),
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 12.sp),
                                   onChanged: (String? newValue) {
                                     setState(() {
                                       dropdownValueTiledHouse = newValue!;
@@ -372,7 +394,8 @@ class _AddImageState extends State<AddImage> {
                                       (String value) {
                                     return DropdownMenuItem<String>(
                                       value: value,
-                                      child: Text(value),
+                                      child: Text(value,
+                                          style: TextStyle(fontSize: 12.sp)),
                                     );
                                   }).toList(),
                                 ),
@@ -386,14 +409,16 @@ class _AddImageState extends State<AddImage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text('Electricity',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold)),
+                                Text('Electricity',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 12.sp)),
                                 DropdownButtonFormField(
                                   value: dropdownValueElectricity,
                                   icon: const Icon(Icons.arrow_drop_down),
                                   elevation: 16,
-                                  style: const TextStyle(color: Colors.black),
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 12.sp),
                                   onChanged: (String? newValue) {
                                     setState(() {
                                       dropdownValueElectricity = newValue!;
@@ -408,7 +433,8 @@ class _AddImageState extends State<AddImage> {
                                       (String value) {
                                     return DropdownMenuItem<String>(
                                       value: value,
-                                      child: Text(value),
+                                      child: Text(value,
+                                          style: TextStyle(fontSize: 12.sp)),
                                     );
                                   }).toList(),
                                 ),
@@ -424,9 +450,10 @@ class _AddImageState extends State<AddImage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text('Water Availability',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold)),
+                                Text('Water Availability',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 12.sp)),
                                 DropdownButtonFormField(
                                   value: dropdownValueWaterAvailability,
                                   icon: const Icon(Icons.arrow_drop_down),
@@ -446,7 +473,8 @@ class _AddImageState extends State<AddImage> {
                                       (String value) {
                                     return DropdownMenuItem<String>(
                                       value: value,
-                                      child: Text(value),
+                                      child: Text(value,
+                                          style: TextStyle(fontSize: 12.sp)),
                                     );
                                   }).toList(),
                                 ),
@@ -467,7 +495,9 @@ class _AddImageState extends State<AddImage> {
                                       borderRadius: BorderRadius.circular(20),
                                     ),
                                     labelText: 'Price',
-                                    hintText: 'Enter Price of Rent')),
+                                    hintText: 'Enter Price of Rent',
+                                    labelStyle: TextStyle(fontSize: 12.sp),
+                                    hintStyle: TextStyle(fontSize: 12.sp))),
                           ),
                           SizedBox(
                             height: 5.h,
@@ -484,6 +514,8 @@ class _AddImageState extends State<AddImage> {
                                       borderRadius: BorderRadius.circular(20),
                                     ),
                                     labelText: 'Size',
+                                    labelStyle: TextStyle(fontSize: 12.sp),
+                                    hintStyle: TextStyle(fontSize: 12.sp),
                                     hintText: 'Enter Size of Room')),
                           ),
                           SizedBox(height: 5.h),
@@ -495,7 +527,7 @@ class _AddImageState extends State<AddImage> {
                               children: [
                                 const Text('Region',
                                     style:
-                                        TextStyle(fontWeight: FontWeight.bold)),
+                                        TextStyle(fontWeight: FontWeight.w600)),
                                 DropdownButtonFormField(
                                   value: dropdownValueRegion,
                                   icon: const Icon(Icons.arrow_drop_down),
@@ -526,7 +558,8 @@ class _AddImageState extends State<AddImage> {
                                       (String value) {
                                     return DropdownMenuItem<String>(
                                       value: value,
-                                      child: Text(value),
+                                      child: Text(value,
+                                          style: TextStyle(fontSize: 12.sp)),
                                     );
                                   }).toList(),
                                 ),
@@ -541,14 +574,16 @@ class _AddImageState extends State<AddImage> {
                                 controller: _cityController,
                                 keyboardType: TextInputType.text,
                                 decoration: InputDecoration(
-                                  floatingLabelBehavior:
-                                      FloatingLabelBehavior.never,
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  labelText: 'City/Town',
-                                )),
+                                    floatingLabelBehavior:
+                                        FloatingLabelBehavior.never,
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    labelText: 'City/Town',
+                                    labelStyle: TextStyle(fontSize: 12.sp),
+                                    hintText: 'Koforidua',
+                                    hintStyle: TextStyle(fontSize: 12.sp))),
                           ),
                           SizedBox(
                             height: 5.h,
@@ -565,7 +600,9 @@ class _AddImageState extends State<AddImage> {
                                       borderRadius: BorderRadius.circular(20),
                                     ),
                                     labelText: 'Digital Address',
-                                    hintText: 'GN-1234-5678')),
+                                    labelStyle: TextStyle(fontSize: 12.sp),
+                                    hintText: 'GN-1234-5678',
+                                    hintStyle: TextStyle(fontSize: 12.sp))),
                           ),
                           SizedBox(
                             height: 5.h,
@@ -575,14 +612,14 @@ class _AddImageState extends State<AddImage> {
                                 controller: _houseNumberController,
                                 keyboardType: TextInputType.text,
                                 decoration: InputDecoration(
-                                  floatingLabelBehavior:
-                                      FloatingLabelBehavior.never,
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  labelText: 'House Number',
-                                )),
+                                    floatingLabelBehavior:
+                                        FloatingLabelBehavior.never,
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    labelText: 'House Number',
+                                    labelStyle: TextStyle(fontSize: 12.sp))),
                           ),
                           SizedBox(
                             height: 10.h,
@@ -725,7 +762,8 @@ class _AddImageState extends State<AddImage> {
                                           style: TextStyle(color: Colors.white),
                                         ),
                                         style: TextButton.styleFrom(
-                                            backgroundColor: Colors.blue),
+                                            backgroundColor: Color.fromARGB(
+                                                255, 4, 82, 146)),
                                       ),
                               )),
                           SizedBox(

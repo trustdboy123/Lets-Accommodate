@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:comment_box/comment/comment.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lets_accommodate/managers/post_manager.dart';
 
@@ -55,7 +56,10 @@ class _CommentTenantsState extends State<CommentTenants> {
                                     context: context,
                                     builder: (context) {
                                       return AlertDialog(
-                                        content: Text('Delete Comment?'),
+                                        content: Text(
+                                          'Delete Comment?',
+                                          style: TextStyle(fontSize: 12.sp),
+                                        ),
                                         actions: [
                                           TextButton(
                                               onPressed: () async {
@@ -97,11 +101,17 @@ class _CommentTenantsState extends State<CommentTenants> {
                                                   Navigator.of(context).pop();
                                                 }
                                               },
-                                              child: Text('Yes')),
+                                              child: Text(
+                                                'Yes',
+                                                style:
+                                                    TextStyle(fontSize: 12.sp),
+                                              )),
                                           TextButton(
                                               onPressed: () =>
                                                   Navigator.of(context).pop(),
-                                              child: Text('No'))
+                                              child: Text('No',
+                                                  style: TextStyle(
+                                                      fontSize: 12.sp)))
                                         ],
                                       );
                                     });
@@ -114,10 +124,15 @@ class _CommentTenantsState extends State<CommentTenants> {
                                 title: Text(
                                   commentSnapshot.data!.docs[index]
                                       .data()!['name'],
-                                  style: TextStyle(fontWeight: FontWeight.w600),
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12.sp),
                                 ),
-                                subtitle: Text(commentSnapshot.data!.docs[index]
-                                    .data()!['comment']),
+                                subtitle: Text(
+                                  commentSnapshot.data!.docs[index]
+                                      .data()!['comment'],
+                                  style: TextStyle(fontSize: 12.sp),
+                                ),
                               ),
                             );
                           }));

@@ -47,35 +47,39 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               height: 10.h,
             ),
             Text(
-                'Provide your e-mail and we will send you a link yo reset your password'),
-            TextFormField(
-                controller: _emailController,
-                keyboardType: TextInputType.emailAddress,
-                textCapitalization: TextCapitalization.sentences,
-                decoration: const InputDecoration(
-                  labelText: ('E-mail'),
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey)),
-                  hintText: 'Enter your E-mail',
-                  floatingLabelBehavior: FloatingLabelBehavior.never,
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue),
-                      borderRadius: BorderRadius.all(Radius.circular(8.0))),
-                ),
-                validator: (value) {
-                  if (!emailRegExp.hasMatch(value!)) {
-                    return 'Enter a valid email!';
-                  }
-
-                  if (value.isEmpty) {
-                    return 'Please enter an email address';
-                  }
-                }),
-            SizedBox(
-              height: 10.h,
+              'Provide your e-mail and we will send you a link to reset your password',
+              style: TextStyle(fontSize: 12.sp),
             ),
             SizedBox(
               height: 10.h,
+            ),
+            Card(
+              shadowColor: Color.fromARGB(255, 86, 79, 81),
+              child: TextFormField(
+                  controller: _emailController,
+                  keyboardType: TextInputType.emailAddress,
+                  textCapitalization: TextCapitalization.sentences,
+                  decoration: const InputDecoration(
+                    labelText: ('E-mail'),
+                    border: OutlineInputBorder(borderSide: BorderSide.none),
+                    hintText: 'Enter your E-mail',
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                  ),
+                  validator: (value) {
+                    if (!emailRegExp.hasMatch(value!)) {
+                      return 'Enter a valid email!';
+                    }
+
+                    if (value.isEmpty) {
+                      return 'Please enter an email address';
+                    }
+                  }),
+            ),
+            SizedBox(
+              height: 15.h,
             ),
             SizedBox(
               width: MediaQuery.of(context).size.width,
@@ -140,12 +144,12 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       style: TextButton.styleFrom(
                           backgroundColor: Color.fromARGB(255, 4, 82, 146)),
                       child: Text(
-                        'Login',
-                        style: TextStyle(color: Colors.white, fontSize: 20),
+                        'Send',
+                        style: TextStyle(color: Colors.white, fontSize: 15.sp),
                       )),
             ),
             SizedBox(
-              height: 15.h,
+              height: 10.h,
             ),
             TextButton(
                 onPressed: () {
@@ -158,7 +162,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   'Go Back',
                   style: TextStyle(
                     color: Color.fromARGB(255, 4, 82, 146),
-                    fontSize: 15,
+                    fontSize: 15.sp,
                   ),
                 ))
           ],

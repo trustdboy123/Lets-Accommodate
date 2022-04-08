@@ -47,10 +47,10 @@ class _CategoriesTenantState extends State<CategoriesTenant> {
                 decoration: const BoxDecoration(
                   color: Colors.black12,
                 ),
-                child: const Text(
+                child: Text(
                   'Single Rooms',
                   style: TextStyle(
-                    fontSize: 25,
+                    fontSize: 20.sp,
                     fontWeight: FontWeight.w600,
                     color: Colors.white,
                   ),
@@ -87,10 +87,10 @@ class _CategoriesTenantState extends State<CategoriesTenant> {
                 decoration: const BoxDecoration(
                   color: Colors.black12,
                 ),
-                child: const Text(
+                child: Text(
                   'Chamber and Hall',
                   style: TextStyle(
-                    fontSize: 25,
+                    fontSize: 20.sp,
                     fontWeight: FontWeight.w600,
                     color: Colors.white,
                   ),
@@ -127,10 +127,10 @@ class _CategoriesTenantState extends State<CategoriesTenant> {
                 decoration: const BoxDecoration(
                   color: Colors.black12,
                 ),
-                child: const Text(
+                child: Text(
                   'Two Bedroom',
                   style: TextStyle(
-                    fontSize: 25,
+                    fontSize: 20.sp,
                     fontWeight: FontWeight.w600,
                     color: Colors.white,
                   ),
@@ -167,10 +167,10 @@ class _CategoriesTenantState extends State<CategoriesTenant> {
                 decoration: const BoxDecoration(
                   color: Colors.black12,
                 ),
-                child: const Text(
+                child: Text(
                   'Two Bedroom Plus',
                   style: TextStyle(
-                    fontSize: 25,
+                    fontSize: 20.sp,
                     fontWeight: FontWeight.w600,
                     color: Colors.white,
                   ),

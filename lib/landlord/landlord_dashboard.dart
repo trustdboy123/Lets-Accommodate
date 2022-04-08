@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lets_accommodate/auth/login_landlord.dart';
 import 'package:lets_accommodate/landlord/Settings%20landlord/setting_landlord.dart';
 import 'package:lets_accommodate/landlord/add_details_page.dart';
@@ -131,7 +132,7 @@ class _DashboardViewState extends State<DashboardView> {
                                       Text(
                                         'GHC${snapshot.data!.docs[index].data()!['price']} /month',
                                         style: TextStyle(
-                                          fontSize: 15,
+                                          fontSize: 12.sp,
                                           fontWeight: FontWeight.w600,
                                           color: Colors.white,
                                         ),

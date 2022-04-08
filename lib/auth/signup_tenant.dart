@@ -95,7 +95,8 @@ class _SignupTenantState extends State<SignupTenant> {
                                   icon: Icon(Icons.camera_alt),
                                   label: Text(
                                     'Select from camera',
-                                    style: TextStyle(color: Colors.black),
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 12.sp),
                                   )),
                               TextButton.icon(
                                   onPressed: () {
@@ -105,7 +106,9 @@ class _SignupTenantState extends State<SignupTenant> {
                                   },
                                   icon: Icon(Icons.browse_gallery),
                                   label: Text('Select from gallery',
-                                      style: TextStyle(color: Colors.black)))
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 12.sp)))
                             ]),
                           );
                         });
@@ -116,7 +119,7 @@ class _SignupTenantState extends State<SignupTenant> {
                   ),
                   label: Text(
                     'Please select a picture',
-                    style: TextStyle(color: Colors.black),
+                    style: TextStyle(color: Colors.black, fontSize: 12.sp),
                   )),
               SizedBox(
                 height: 10.h,
@@ -125,12 +128,13 @@ class _SignupTenantState extends State<SignupTenant> {
                 controller: _nameController,
                 keyboardType: TextInputType.text,
                 textCapitalization: TextCapitalization.sentences,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'Full Name *',
+                  labelStyle: TextStyle(fontSize: 12.sp),
                   border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey)),
                   hintText: 'Enter your full name',
-                  hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
+                  hintStyle: TextStyle(color: Colors.grey, fontSize: 12.sp),
                   floatingLabelBehavior: FloatingLabelBehavior.never,
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(8.0))),
@@ -143,12 +147,13 @@ class _SignupTenantState extends State<SignupTenant> {
                 controller: _emailController,
                 keyboardType: TextInputType.emailAddress,
                 textCapitalization: TextCapitalization.sentences,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'E-mail *',
+                  labelStyle: TextStyle(fontSize: 12.sp),
                   border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey)),
                   hintText: 'Enter your E-mail',
-                  hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
+                  hintStyle: TextStyle(color: Colors.grey, fontSize: 12.sp),
                   floatingLabelBehavior: FloatingLabelBehavior.never,
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(8.0))),
@@ -161,12 +166,13 @@ class _SignupTenantState extends State<SignupTenant> {
                 controller: _passwordController,
                 keyboardType: TextInputType.visiblePassword,
                 textCapitalization: TextCapitalization.sentences,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'Password *',
+                  labelStyle: TextStyle(fontSize: 12.sp),
                   border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey)),
                   hintText: 'Enter your your password',
-                  hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
+                  hintStyle: TextStyle(color: Colors.grey, fontSize: 12.sp),
                   floatingLabelBehavior: FloatingLabelBehavior.never,
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(8.0))),
@@ -188,12 +194,13 @@ class _SignupTenantState extends State<SignupTenant> {
                 keyboardType: TextInputType.text,
                 textCapitalization: TextCapitalization.sentences,
                 maxLines: 3,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'Location/ Digital Address *',
+                  labelStyle: TextStyle(fontSize: 12.sp),
                   border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey)),
                   hintText: 'Enter your location/ Digital Address',
-                  hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
+                  hintStyle: TextStyle(color: Colors.grey, fontSize: 12.sp),
                   floatingLabelBehavior: FloatingLabelBehavior.never,
                   focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.blue),
@@ -207,12 +214,13 @@ class _SignupTenantState extends State<SignupTenant> {
                 controller: _numberController,
                 keyboardType: TextInputType.number,
                 textCapitalization: TextCapitalization.sentences,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'Phone Number *',
+                  labelStyle: TextStyle(fontSize: 12.sp),
                   border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey)),
                   hintText: 'Enter your phone number',
-                  hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
+                  hintStyle: TextStyle(color: Colors.grey, fontSize: 12.sp),
                   floatingLabelBehavior: FloatingLabelBehavior.never,
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(8.0))),
@@ -233,8 +241,9 @@ class _SignupTenantState extends State<SignupTenant> {
                 controller: _nationalityController,
                 keyboardType: TextInputType.text,
                 textCapitalization: TextCapitalization.sentences,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'Nationality *',
+                  labelStyle: TextStyle(fontSize: 12.sp),
                   border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey)),
                   hintText: 'Ghanaian *',
@@ -252,13 +261,16 @@ class _SignupTenantState extends State<SignupTenant> {
               SizedBox(
                 height: 10.h,
               ),
-              Text('Gender *'),
-              SizedBox(height: 5),
+              Text(
+                'Gender *',
+                style: TextStyle(fontSize: 12.sp),
+              ),
+              const SizedBox(height: 5),
               DropdownButton<String>(
                 value: dropdownValue,
                 icon: const Icon(Icons.arrow_drop_down),
                 elevation: 16,
-                style: const TextStyle(color: Colors.black),
+                style: TextStyle(fontSize: 12.sp, color: Colors.black),
                 underline: Container(
                   height: 2,
                   color: Colors.black,
@@ -274,7 +286,7 @@ class _SignupTenantState extends State<SignupTenant> {
                 ].map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
-                    child: Text(value),
+                    child: Text(value, style: TextStyle(fontSize: 12.sp)),
                   );
                 }).toList(),
               ),
@@ -286,7 +298,7 @@ class _SignupTenantState extends State<SignupTenant> {
                 value: dropdownValueRegion,
                 icon: const Icon(Icons.arrow_drop_down),
                 elevation: 16,
-                style: const TextStyle(color: Colors.black),
+                style: TextStyle(color: Colors.black, fontSize: 12.sp),
                 onChanged: (String? newValue) {
                   setState(() {
                     dropdownValueRegion = newValue!;
@@ -311,7 +323,10 @@ class _SignupTenantState extends State<SignupTenant> {
                 ].map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
-                    child: Text(value),
+                    child: Text(
+                      value,
+                      style: TextStyle(fontSize: 12.sp),
+                    ),
                   );
                 }).toList(),
               ),
@@ -394,11 +409,12 @@ class _SignupTenantState extends State<SignupTenant> {
                             backgroundColor: Color.fromARGB(255, 4, 82, 146)),
                         child: Text(
                           'Create Account',
-                          style: TextStyle(color: Colors.white, fontSize: 15),
+                          style:
+                              TextStyle(color: Colors.white, fontSize: 15.sp),
                         )),
               ),
               SizedBox(
-                height: 50,
+                height: 30.sp,
               )
             ],
           ),

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lets_accommodate/landlord/edit_description.dart';
 import 'package:lets_accommodate/managers/post_manager.dart';
 import 'package:lets_accommodate/tenant/landlord_details.dart';
@@ -49,7 +50,7 @@ class _ViewUploadsState extends State<ViewUploads> {
                   child: Text('No data is available'),
                 );
               }
-             // var userId = snapshot.data!.data()!['user_id'];
+              // var userId = snapshot.data!.data()!['user_id'];
               var pictures = snapshot.data!.data()!['pictures'];
               var docID = snapshot.data!.id;
 
@@ -58,23 +59,23 @@ class _ViewUploadsState extends State<ViewUploads> {
                 child: Column(
                   children: [
                     Container(
-                        height: 250,
+                        height: 140.h,
                         child: PageView.builder(
                           controller: _pageController,
                           itemCount: pictures.length,
                           itemBuilder: (context, index) {
                             return SizedBox(
-                              width: MediaQuery.of(context).size.width,
-                              height: 240,
+                              width: MediaQuery.of(context).size.width.w,
+                              height: 240.h,
                               child: Container(
-                                width: MediaQuery.of(context).size.width,
-                                height: 200,
-                                color: Colors.black,
+                                width: MediaQuery.of(context).size.width.w,
+                                height: 200.h,
+                                color: Colors.white,
                                 child: Image.network(
                                   pictures[index],
                                   fit: BoxFit.fitWidth,
-                                  height: 250,
-                                  width: double.infinity,
+                                  height: 250.h,
+                                  width: double.infinity.w,
                                 ),
                               ),
                             );
@@ -96,289 +97,278 @@ class _ViewUploadsState extends State<ViewUploads> {
                     ),
                     Column(
                       children: [
-                        const Center(
+                        Center(
                           child: Text(
                             'Description',
                             style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 20),
+                                fontWeight: FontWeight.w600, fontSize: 18.sp),
                           ),
                         ),
-                        const SizedBox(
-                          height: 5,
+                        SizedBox(
+                          height: 5.h,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text(
-                              'Categories',
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.w600),
-                            ),
+                            Text('Categories',
+                                style: TextStyle(
+                                  fontSize: 12.sp,
+                                )),
                             Text(
                               snapshot.data!.data()!['category'],
-                              style: const TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontSize: 12.sp, fontWeight: FontWeight.w600),
                             ),
                           ],
                         ),
-                        const SizedBox(
-                          height: 5,
+                        SizedBox(
+                          height: 5.h,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text(
+                            Text(
                               'Type',
                               style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.w600),
+                                fontSize: 12.sp,
+                              ),
                             ),
                             Text(
                               snapshot.data!.data()!['type'],
-                              style: const TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontSize: 12.sp, fontWeight: FontWeight.w600),
                             )
                           ],
                         ),
-                        const SizedBox(
-                          height: 5,
+                        SizedBox(
+                          height: 5.h,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text(
+                            Text(
                               'Kitchen',
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.w600),
+                              style: TextStyle(fontSize: 12.sp),
                             ),
                             Text(
                               snapshot.data!.data()!['kitchen'],
-                              style: const TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontSize: 12.sp, fontWeight: FontWeight.w600),
                             )
                           ],
                         ),
-                        const SizedBox(
-                          height: 5,
+                        SizedBox(
+                          height: 5.h,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text(
+                            Text(
                               'Washroom',
                               style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.w600),
+                                fontSize: 12.sp,
+                              ),
                             ),
                             Text(
                               snapshot.data!.data()!['washroom'],
-                              style: const TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontSize: 15.sp, fontWeight: FontWeight.w600),
                             )
                           ],
                         ),
-                        const SizedBox(
-                          height: 5,
+                        SizedBox(
+                          height: 5.h,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text(
+                            Text(
                               'Store Room',
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.w600),
+                              style: TextStyle(fontSize: 12.sp),
                             ),
                             Text(
                               snapshot.data!.data()!['store Room'],
-                              style: const TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontSize: 12.sp, fontWeight: FontWeight.w600),
                             )
                           ],
                         ),
-                        const SizedBox(
-                          height: 5,
+                        SizedBox(
+                          height: 5.h,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text(
+                            Text(
                               'Porch',
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.w600),
+                              style: TextStyle(fontSize: 12.sp),
                             ),
                             Text(
                               snapshot.data!.data()!['porch'],
-                              style: const TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontSize: 12.sp, fontWeight: FontWeight.w600),
                             )
                           ],
                         ),
-                        const SizedBox(
-                          height: 10,
+                        SizedBox(
+                          height: 5.h,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text(
-                              'Walled',
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.w600),
+                            Text(
+                              'Walled House',
+                              style: TextStyle(fontSize: 12.sp),
                             ),
                             Text(
                               snapshot.data!.data()!['walled House'],
-                              style: const TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontSize: 12.sp, fontWeight: FontWeight.w600),
                             )
                           ],
                         ),
-                        const SizedBox(
-                          height: 5,
+                        SizedBox(
+                          height: 5.h,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text(
+                            Text(
                               'Tiled',
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.w600),
+                              style: TextStyle(fontSize: 12.sp),
                             ),
                             Text(
                               snapshot.data!.data()!['tiled'],
-                              style: const TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontSize: 12.sp, fontWeight: FontWeight.w600),
                             )
                           ],
                         ),
-                        const SizedBox(
-                          height: 5,
+                        SizedBox(
+                          height: 5.h,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text(
+                            Text(
                               'Electricity',
-                              style: const TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.w600),
+                              style: TextStyle(fontSize: 12.sp),
                             ),
                             Text(
                               snapshot.data!.data()!['electricity'],
-                              style: const TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontSize: 12.sp, fontWeight: FontWeight.w600),
                             ),
                           ],
                         ),
-                        const SizedBox(height: 5),
+                        SizedBox(height: 5.h),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text(
+                            Text(
                               'Water',
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.w600),
+                              style: TextStyle(fontSize: 12.sp),
                             ),
                             Text(
                               snapshot.data!.data()!['water Availability'],
-                              style: const TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontSize: 12.sp, fontWeight: FontWeight.w600),
                             )
                           ],
                         ),
-                        const SizedBox(height: 5),
+                        SizedBox(height: 5.h),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text(
+                            Text(
                               'Price',
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.w600),
+                              style: TextStyle(fontSize: 12.sp),
                             ),
                             Text(
                               '${snapshot.data!.data()!['price']} /month',
-                              style: const TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontSize: 12.sp, fontWeight: FontWeight.w600),
                             )
                           ],
                         ),
-                        const SizedBox(height: 5),
+                        SizedBox(height: 5.h),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text(
+                            Text(
                               'Room size',
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.w600),
+                              style: TextStyle(fontSize: 12.sp),
                             ),
                             Text(
                               snapshot.data!.data()!['size'],
-                              style: const TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontSize: 12.sp, fontWeight: FontWeight.w600),
                             )
                           ],
                         ),
-                        const SizedBox(height: 5),
+                        SizedBox(height: 5.h),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text(
+                            Text(
                               'Region',
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.w600),
+                              style: TextStyle(fontSize: 12.sp),
                             ),
                             Text(
                               snapshot.data!.data()!['region'],
-                              style: const TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontSize: 12.sp, fontWeight: FontWeight.w600),
                             )
                           ],
                         ),
-                        const SizedBox(height: 5),
+                        SizedBox(height: 5.h),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text(
+                            Text(
                               'City/ Town',
-                              style: const TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.w600),
+                              style: TextStyle(fontSize: 12.sp),
                             ),
                             Text(
                               snapshot.data!.data()!['city/Town'],
-                              style: const TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontSize: 12.sp, fontWeight: FontWeight.w600),
                             )
                           ],
                         ),
-                        const SizedBox(height: 5),
+                        SizedBox(height: 5.h),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text(
+                            Text(
                               'Digital Address',
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.w600),
+                              style: TextStyle(fontSize: 12.sp),
                             ),
                             Text(
                               snapshot.data!.data()!['digital Address'],
-                              style: const TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontSize: 152.sp,
+                                  fontWeight: FontWeight.w600),
                             )
                           ],
                         ),
-                        const SizedBox(height: 5),
+                        SizedBox(height: 5.h),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text(
+                            Text(
                               'House Number',
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.w600),
+                              style: TextStyle(fontSize: 12.sp),
                             ),
                             Text(
                               snapshot.data!.data()!['house Number'],
-                              style: const TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontSize: 12.sp, fontWeight: FontWeight.w600),
                             )
                           ],
                         ),
-                        const SizedBox(
-                          height: 40,
+                        SizedBox(
+                          height: 15.h,
                         ),
                         SizedBox(
                           width: MediaQuery.of(context).size.width,
@@ -386,15 +376,18 @@ class _ViewUploadsState extends State<ViewUploads> {
                             onPressed: () {
                               Navigator.of(context)
                                   .push(MaterialPageRoute(builder: (context) {
-                                return EditDescription(docId: docID,);
+                                return EditDescription(
+                                  docId: docID,
+                                );
                               }));
                             },
                             style: TextButton.styleFrom(
-                                backgroundColor: Colors.blue),
-                            child: const Text(
+                                backgroundColor:
+                                    Color.fromARGB(255, 4, 82, 146)),
+                            child: Text(
                               'Edit Details',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 20),
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 15.h),
                             ),
                           ),
                         )
