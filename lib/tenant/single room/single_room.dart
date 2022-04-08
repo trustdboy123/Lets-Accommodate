@@ -6,6 +6,7 @@ import 'package:lets_accommodate/managers/post_manager.dart';
 import 'package:lets_accommodate/tenant/details.dart';
 import 'package:lets_accommodate/tenant/comments_tenants.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
+import 'package:path/path.dart';
 
 class SingleRoom extends StatefulWidget {
   final String category;
@@ -41,10 +42,10 @@ class _SingleRoomState extends State<SingleRoom> {
 
               if (snapshot.connectionState == ConnectionState.done &&
                   snapshot.data == null) {
-                return const Center(
+                return Center(
                   child: Text(
                     'No data is available',
-                    style: TextStyle(color: Colors.black),
+                    style: TextStyle(color: Colors.black, fontSize: 12.sp),
                   ),
                 );
               } else {
@@ -78,7 +79,7 @@ class _SingleRoomState extends State<SingleRoom> {
                               child: Card(
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(30)),
-                                color: Colors.black,
+                                color: Colors.white,
                                 child: snapshot.data!.docs.isEmpty
                                     ? const SizedBox(
                                         child: Text('no data yet'),
@@ -86,7 +87,7 @@ class _SingleRoomState extends State<SingleRoom> {
                                     : Image.network(
                                         snapshot.data!.docs[index]
                                             .data()!['pictures'][0],
-                                        fit: BoxFit.cover,
+                                        fit: BoxFit.fitWidth,
                                         height: 150.h,
                                         width: double.infinity,
                                       ),
@@ -106,7 +107,7 @@ class _SingleRoomState extends State<SingleRoom> {
                                     Text(
                                       "GHC${snapshot.data!.docs[index].data()!['price']} /Month",
                                       style: TextStyle(
-                                        fontSize: 15,
+                                        fontSize: 12.sp,
                                         fontWeight: FontWeight.w600,
                                         color: Colors.white,
                                       ),
@@ -167,8 +168,10 @@ class _SingleRoomState extends State<SingleRoom> {
                                   },
                                   icon: Icon(Icons.comment_outlined)),
                               Spacer(),
-                              Text(snapshot.data!.docs[index]
-                                  .data()!['city/Town'])
+                              Text(
+                                snapshot.data!.docs[index].data()!['city/Town'],
+                                style: TextStyle(fontSize: 12.sp),
+                              )
                             ],
                           ),
                         )
@@ -179,7 +182,7 @@ class _SingleRoomState extends State<SingleRoom> {
                       snapshot.data == null ? 0 : snapshot.data!.docs.length,
                   separatorBuilder: (context, index) {
                     return SizedBox(
-                      height: 5.h,
+                      height: 10.h,
                     );
                   },
                 );

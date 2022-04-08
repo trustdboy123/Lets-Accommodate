@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lets_accommodate/managers/post_manager.dart';
 import 'package:lets_accommodate/tenant/comments_tenants.dart';
 import 'package:lets_accommodate/tenant/details.dart';
@@ -35,10 +36,10 @@ class _FavouriteTenantState extends State<FavouriteTenant> {
 
             if (snapshot.connectionState == ConnectionState.done &&
                 snapshot.data == null) {
-              return const Center(
+              return Center(
                 child: Text(
                   'No data is available',
-                  style: TextStyle(color: Colors.black),
+                  style: TextStyle(color: Colors.black, fontSize: 12.sp),
                 ),
               );
             }
@@ -96,7 +97,7 @@ class _FavouriteTenantState extends State<FavouriteTenant> {
                                   Text(
                                     "GHC${snapshot.data!.docs[index].data()!['price']} /Month",
                                     style: TextStyle(
-                                      fontSize: 15,
+                                      fontSize: 12.sp,
                                       fontWeight: FontWeight.w600,
                                       color: Colors.white,
                                     ),
@@ -158,7 +159,8 @@ class _FavouriteTenantState extends State<FavouriteTenant> {
                                 icon: Icon(Icons.comment_outlined)),
                             Spacer(),
                             Text(
-                                snapshot.data!.docs[index].data()!['city/Town'])
+                                snapshot.data!.docs[index].data()!['city/Town'],
+                                style: TextStyle(fontSize: 12.sp))
                           ],
                         ),
                       )
@@ -166,8 +168,8 @@ class _FavouriteTenantState extends State<FavouriteTenant> {
                   ));
                 },
                 separatorBuilder: (context, index) {
-                  return const SizedBox(
-                    height: 20,
+                  return SizedBox(
+                    height: 10.h,
                   );
                 },
                 itemCount:

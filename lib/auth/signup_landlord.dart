@@ -90,7 +90,10 @@ class _SignupLandlordState extends State<SignupLandlord> {
                                   Icons.camera_alt,
                                   color: Colors.blueGrey,
                                 ),
-                                label: const Text('Select to take Selfie')),
+                                label: Text(
+                                  'Select to take picture',
+                                  style: TextStyle(fontSize: 12.sp),
+                                )),
                           );
                         });
                   },
@@ -99,19 +102,20 @@ class _SignupLandlordState extends State<SignupLandlord> {
                     color: Colors.blueGrey,
                   ),
                   label: Text(
-                    'Please take a selfie',
-                    style: TextStyle(color: Colors.black),
+                    'Please take a picture',
+                    style: TextStyle(color: Colors.black, fontSize: 12.sp),
                   )),
               TextFormField(
                 controller: _nameController,
                 keyboardType: TextInputType.text,
                 textCapitalization: TextCapitalization.sentences,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: ('Full Name *'),
+                  labelStyle: TextStyle(fontSize: 12.sp),
                   border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey)),
                   hintText: 'Enter your full name',
-                  hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
+                  hintStyle: TextStyle(color: Colors.grey, fontSize: 12.sp),
                   focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.blue),
                       borderRadius: BorderRadius.all(Radius.circular(8.0))),
@@ -128,12 +132,13 @@ class _SignupLandlordState extends State<SignupLandlord> {
               TextFormField(
                 controller: _emailController,
                 keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: ('E-mail *'),
+                  labelStyle: TextStyle(fontSize: 12.sp),
                   border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey)),
                   hintText: 'Enter your E-mail',
-                  hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
+                  hintStyle: TextStyle(color: Colors.grey, fontSize: 12.sp),
                   floatingLabelBehavior: FloatingLabelBehavior.never,
                   focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.blue),
@@ -155,12 +160,13 @@ class _SignupLandlordState extends State<SignupLandlord> {
                 controller: _passwordController,
                 keyboardType: TextInputType.visiblePassword,
                 textCapitalization: TextCapitalization.sentences,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: ('Password *'),
+                  labelStyle: TextStyle(fontSize: 12.sp),
                   border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey)),
                   hintText: 'Enter your password',
-                  hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
+                  hintStyle: TextStyle(color: Colors.grey, fontSize: 12.sp),
                   floatingLabelBehavior: FloatingLabelBehavior.never,
                   focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.blue),
@@ -179,8 +185,11 @@ class _SignupLandlordState extends State<SignupLandlord> {
               SizedBox(
                 height: 10.h,
               ),
-              Text('Gender *'),
-              SizedBox(height: 5),
+              Text(
+                'Gender *',
+                style: TextStyle(fontSize: 12.sp),
+              ),
+              const SizedBox(height: 5),
               Card(
                   child: DropdownButton<String>(
                 value: dropdownValue,
@@ -202,7 +211,10 @@ class _SignupLandlordState extends State<SignupLandlord> {
                 ].map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
-                    child: Text(value),
+                    child: Text(
+                      value,
+                      style: TextStyle(fontSize: 12.sp),
+                    ),
                   );
                 }).toList(),
               )),
@@ -213,15 +225,16 @@ class _SignupLandlordState extends State<SignupLandlord> {
                 controller: _locationController,
                 keyboardType: TextInputType.text,
                 textCapitalization: TextCapitalization.sentences,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: ('Location/ Digital Address *'),
+                  labelStyle: TextStyle(fontSize: 12.sp),
                   border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey)),
                   hintText: 'Enter your location/ Digital Address',
-                  hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
+                  hintStyle: TextStyle(color: Colors.grey, fontSize: 12.sp),
                   floatingLabelBehavior: FloatingLabelBehavior.never,
                   focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue),
+                      borderSide: BorderSide(color: Colors.black),
                       borderRadius: BorderRadius.all(Radius.circular(8.0))),
                 ),
                 validator: (value) {
@@ -238,12 +251,13 @@ class _SignupLandlordState extends State<SignupLandlord> {
                 controller: _phoneController,
                 keyboardType: TextInputType.number,
                 textCapitalization: TextCapitalization.sentences,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: ('Phone Number *'),
+                  labelStyle: TextStyle(fontSize: 12.sp),
                   border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey)),
                   hintText: 'Enter your phone number',
-                  hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
+                  hintStyle: TextStyle(color: Colors.grey, fontSize: 12.sp),
                   floatingLabelBehavior: FloatingLabelBehavior.never,
                   focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.blue),
@@ -266,15 +280,16 @@ class _SignupLandlordState extends State<SignupLandlord> {
                 controller: _nationalityController,
                 keyboardType: TextInputType.text,
                 textCapitalization: TextCapitalization.sentences,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: ('Nationality'),
+                  labelStyle: TextStyle(fontSize: 12.sp),
                   border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey)),
                   hintText: 'Ghanaian',
                   hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
                   floatingLabelBehavior: FloatingLabelBehavior.never,
                   focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue),
+                      borderSide: BorderSide(color: Colors.black),
                       borderRadius: BorderRadius.all(Radius.circular(8.0))),
                 ),
                 validator: (value) {
@@ -285,7 +300,7 @@ class _SignupLandlordState extends State<SignupLandlord> {
                 },
               ),
               SizedBox(
-                height: 20,
+                height: 20.h,
               ),
               SizedBox(
                 width: MediaQuery.of(context).size.width,
@@ -357,11 +372,12 @@ class _SignupLandlordState extends State<SignupLandlord> {
                             backgroundColor: Color.fromARGB(255, 4, 82, 146)),
                         child: Text(
                           'Create Account',
-                          style: TextStyle(color: Colors.white, fontSize: 15),
+                          style:
+                              TextStyle(color: Colors.white, fontSize: 15.sp),
                         )),
               ),
               SizedBox(
-                height: 50,
+                height: 30.h,
               )
             ],
           ),

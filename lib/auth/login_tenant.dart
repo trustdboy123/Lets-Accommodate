@@ -8,6 +8,7 @@ import 'package:lets_accommodate/managers/auth_manager.dart';
 import 'package:lets_accommodate/auth/forgot_password.dart';
 import 'package:lets_accommodate/auth/signup_tenant.dart';
 import 'package:lets_accommodate/tenant/index_view.dart';
+import 'package:path/path.dart';
 
 class LoginTenant extends StatefulWidget {
   const LoginTenant({Key? key}) : super(key: key);
@@ -37,12 +38,12 @@ class _LoginTenantState extends State<LoginTenant> {
               SizedBox(
                 height: 50.h,
               ),
-              const Center(
+              Center(
                 child: Text(
                   'Welcome',
                   style: TextStyle(
                       color: Colors.black,
-                      fontSize: 40,
+                      fontSize: 40.sp,
                       fontWeight: FontWeight.w600),
                 ),
               ),
@@ -53,12 +54,14 @@ class _LoginTenantState extends State<LoginTenant> {
                 controller: _emailController,
                 keyboardType: TextInputType.text,
                 textCapitalization: TextCapitalization.sentences,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'E-mail',
-                  labelStyle: TextStyle(fontWeight: FontWeight.w600),
+                  labelStyle:
+                      TextStyle(fontWeight: FontWeight.w600, fontSize: 12.sp),
                   border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey)),
                   hintText: 'Enter your e-mail',
+                  hintStyle: TextStyle(fontSize: 12.sp),
                   floatingLabelBehavior: FloatingLabelBehavior.never,
                   focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.black),
@@ -82,14 +85,16 @@ class _LoginTenantState extends State<LoginTenant> {
                 obscureText: true,
                 obscuringCharacter: '*',
                 keyboardType: TextInputType.visiblePassword,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'Password',
-                  labelStyle: TextStyle(fontWeight: FontWeight.w600),
+                  labelStyle:
+                      TextStyle(fontWeight: FontWeight.w600, fontSize: 12.sp),
                   border: OutlineInputBorder(
                       borderSide: BorderSide(
                     color: Color.fromARGB(255, 4, 82, 146),
                   )),
                   hintText: 'Enter your password',
+                  hintStyle: TextStyle(fontSize: 12.sp),
                   floatingLabelBehavior: FloatingLabelBehavior.never,
                   focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.black),
@@ -116,10 +121,11 @@ class _LoginTenantState extends State<LoginTenant> {
                         return const ForgotPassword();
                       }));
                     },
-                    child: const Text(
+                    child: Text(
                       'Forgot password?',
                       style: TextStyle(
-                          color: Color.fromARGB(255, 4, 82, 146), fontSize: 15),
+                          color: Color.fromARGB(255, 4, 82, 146),
+                          fontSize: 12.sp),
                       textAlign: TextAlign.right,
                     )),
               ),
@@ -180,9 +186,10 @@ class _LoginTenantState extends State<LoginTenant> {
                         },
                         style: TextButton.styleFrom(
                             backgroundColor: Color.fromARGB(255, 4, 82, 146)),
-                        child: const Text(
+                        child: Text(
                           'Login',
-                          style: TextStyle(color: Colors.white, fontSize: 20),
+                          style:
+                              TextStyle(color: Colors.white, fontSize: 15.sp),
                         )),
               ),
               SizedBox(
@@ -190,12 +197,12 @@ class _LoginTenantState extends State<LoginTenant> {
               ),
               Row(
                 children: [
-                  const Text(
+                  Text(
                     'Don\'t have an account?',
-                    style: TextStyle(fontSize: 15, color: Colors.black),
+                    style: TextStyle(fontSize: 12.sp, color: Colors.black),
                   ),
-                  const SizedBox(
-                    width: 5,
+                  SizedBox(
+                    width: 5.w,
                   ),
                   TextButton(
                       onPressed: () {
@@ -208,7 +215,7 @@ class _LoginTenantState extends State<LoginTenant> {
                         'Sign Up',
                         style: TextStyle(
                           color: Color.fromARGB(255, 4, 82, 146),
-                          fontSize: 15,
+                          fontSize: 12.sp,
                         ),
                       ))
                 ],

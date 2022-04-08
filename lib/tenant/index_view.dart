@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lets_accommodate/auth/login_tenant.dart';
 import 'package:lets_accommodate/tenant/categories_tenant.dart';
 import 'package:lets_accommodate/tenant/favourite_tenant.dart';
@@ -61,7 +62,8 @@ class _IndexViewState extends State<IndexView> {
                 },
                 unselectedItemColor: Colors.white,
                 selectedItemColor: Colors.black,
-                unselectedFontSize: 12,
+                selectedFontSize: 12.sp,
+                unselectedFontSize: 12.sp,
                 items: const [
                   BottomNavigationBarItem(
                       icon: Icon(

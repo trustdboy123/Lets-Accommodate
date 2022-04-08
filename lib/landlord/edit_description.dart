@@ -581,36 +581,42 @@ class _EditDescription extends State<EditDescription> {
                                 const SizedBox(
                                   height: 10,
                                 ),
-                                TextFormField(
-                                    initialValue: _priceController.text,
-                                    onChanged: (value) {
-                                      price = value;
-                                    },
-                                    decoration: InputDecoration(
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                        ),
-                                        labelText: "price",
-                                        hintText: 'Enter new price of rent',
-                                        prefix: const Text('GHC'))),
+                                Card(
+                                  child: TextFormField(
+                                      keyboardType: TextInputType.number,
+                                      initialValue: _priceController.text,
+                                      onChanged: (value) {
+                                        price = value;
+                                      },
+                                      decoration: InputDecoration(
+                                          floatingLabelBehavior:
+                                              FloatingLabelBehavior.never,
+                                          labelText: 'Price',
+                                          hintText: 'Enter new price of rent',
+                                          prefix: Text('GHC'))),
+                                ),
                                 const SizedBox(
                                   height: 10,
                                 ),
-                                TextFormField(
-                                    initialValue: _sizeController.text,
-                                    onChanged: (value) {
-                                      size = value;
-                                    },
-                                    keyboardType: TextInputType.text,
-                                    decoration: InputDecoration(
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                        ),
-                                        labelText: "size",
-                                        hintText: 'Enter new size of room',
-                                        prefix: Text('Sqft'))),
+                                Card(
+                                  child: TextFormField(
+                                      initialValue: _sizeController.text,
+                                      onChanged: (value) {
+                                        size = value;
+                                      },
+                                      keyboardType: TextInputType.number,
+                                      decoration: InputDecoration(
+                                          floatingLabelBehavior:
+                                              FloatingLabelBehavior.never,
+                                          border: OutlineInputBorder(
+                                            borderSide: BorderSide.none,
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                          ),
+                                          labelText: "size",
+                                          hintText: 'Enter new size of room',
+                                          prefix: Text('Sqft'))),
+                                ),
                                 const SizedBox(height: 10),
                                 Card(
                                     child: Padding(
@@ -659,55 +665,67 @@ class _EditDescription extends State<EditDescription> {
                                 const SizedBox(
                                   height: 10,
                                 ),
-                                TextFormField(
-                                    initialValue: _cityController.text,
-                                    onChanged: (value) {
-                                      city = value;
-                                    },
-                                    keyboardType: TextInputType.text,
-                                    decoration: InputDecoration(
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                        ),
-                                        labelText: 'city',
-                                        hintText: 'Enter new city')),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                TextFormField(
-                                    initialValue:
-                                        _digitalAddressController.text,
-                                    onChanged: (value) {
-                                      digitalAddress = value;
-                                    },
-                                    keyboardType: TextInputType.text,
-                                    decoration: InputDecoration(
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                        ),
-                                        labelText: "digitalAddress",
-                                        hintText: 'Enter digital address')),
-                                const SizedBox(
-                                  height: 10,
+                                Card(
+                                  child: TextFormField(
+                                      initialValue: _cityController.text,
+                                      onChanged: (value) {
+                                        city = value;
+                                      },
+                                      keyboardType: TextInputType.text,
+                                      decoration: InputDecoration(
+                                          floatingLabelBehavior:
+                                              FloatingLabelBehavior.never,
+                                          border: OutlineInputBorder(
+                                            borderSide: BorderSide.none,
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                          ),
+                                          labelText: 'city',
+                                          hintText: 'Enter new city')),
                                 ),
                                 const SizedBox(
                                   height: 10,
                                 ),
-                                TextFormField(
-                                    initialValue: _houseNumberController.text,
-                                    onChanged: (value) {
-                                      hn = value;
-                                    },
-                                    keyboardType: TextInputType.text,
-                                    decoration: InputDecoration(
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                        ),
-                                        labelText: 'houseNumber',
-                                        hintText: 'Enter new house number')),
+                                Card(
+                                  child: TextFormField(
+                                      initialValue:
+                                          _digitalAddressController.text,
+                                      onChanged: (value) {
+                                        digitalAddress = value;
+                                      },
+                                      keyboardType: TextInputType.text,
+                                      decoration: InputDecoration(
+                                          floatingLabelBehavior:
+                                              FloatingLabelBehavior.never,
+                                          border: OutlineInputBorder(
+                                            borderSide: BorderSide.none,
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                          ),
+                                          labelText: "digitalAddress",
+                                          hintText: 'Enter digital address')),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Card(
+                                  child: TextFormField(
+                                      initialValue: _houseNumberController.text,
+                                      onChanged: (value) {
+                                        hn = value;
+                                      },
+                                      keyboardType: TextInputType.text,
+                                      decoration: InputDecoration(
+                                          floatingLabelBehavior:
+                                              FloatingLabelBehavior.never,
+                                          border: OutlineInputBorder(
+                                            borderSide: BorderSide.none,
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                          ),
+                                          labelText: 'houseNumber',
+                                          hintText: 'Enter new house number')),
+                                ),
                                 const SizedBox(
                                   height: 20,
                                 ),
@@ -828,7 +846,8 @@ class _EditDescription extends State<EditDescription> {
                                       style: TextStyle(color: Colors.white),
                                     ),
                                     style: TextButton.styleFrom(
-                                        backgroundColor: Colors.blueAccent),
+                                        backgroundColor:
+                                            Color.fromARGB(255, 59, 112, 155)),
                                   ),
                                 ),
                                 const SizedBox(

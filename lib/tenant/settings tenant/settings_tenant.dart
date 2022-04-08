@@ -82,15 +82,15 @@ class _SettingsTenantState extends State<SettingsTenant> {
                                   return EditProfileTenant();
                                 }));
                               },
-                              child: const Text(
+                              child: Text(
                                 'Edit profile',
-                                style: TextStyle(fontSize: 15),
+                                style: TextStyle(fontSize: 12.sp),
                               )),
                         ),
                         Text(
                           snapshot.data!['name'],
                           style: TextStyle(
-                              fontWeight: FontWeight.w600, fontSize: 30),
+                              fontWeight: FontWeight.w600, fontSize: 25.sp),
                         ),
                       ],
                     ),
@@ -107,34 +107,34 @@ class _SettingsTenantState extends State<SettingsTenant> {
                                 children: [
                                   const Icon(
                                     Icons.email,
-                                    size: 100,
+                                    size: 80,
                                     color: Colors.lightBlue,
                                   ),
                                   SizedBox(
-                                    height: 40.h,
-                                    child: const Padding(
+                                    height: 30.h,
+                                    child: Padding(
                                       padding: EdgeInsets.all(16.0),
                                       child: Text(
                                         'Email: letsaccommodateof4@gmail.com',
                                         style: TextStyle(
-                                            fontSize: 15,
+                                            fontSize: 14.sp,
                                             fontWeight: FontWeight.bold),
                                       ),
                                     ),
                                   ),
                                   const Icon(
                                     Icons.facebook_rounded,
-                                    size: 100,
+                                    size: 80,
                                     color: Colors.blue,
                                   ),
                                   SizedBox(
-                                    height: 40.h,
+                                    height: 30.h,
                                     child: Padding(
                                       padding: EdgeInsets.all(16.0),
                                       child: Text(
                                         'Facebook: Letsaccommodate Mobile app',
                                         style: TextStyle(
-                                            fontSize: 15,
+                                            fontSize: 14.sp,
                                             fontWeight: FontWeight.bold),
                                       ),
                                     ),
@@ -148,12 +148,12 @@ class _SettingsTenantState extends State<SettingsTenant> {
                         child: Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Row(
-                            children: const [
+                            children: [
                               Text(
                                 'Need help',
                                 style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: 15,
+                                    fontSize: 12.sp,
                                     fontWeight: FontWeight.w600),
                               ),
                               Icon(
@@ -164,7 +164,7 @@ class _SettingsTenantState extends State<SettingsTenant> {
                                 'Contact Us',
                                 style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: 15,
+                                    fontSize: 12.sp,
                                     fontWeight: FontWeight.w600),
                               ),
                             ],
@@ -182,7 +182,7 @@ class _SettingsTenantState extends State<SettingsTenant> {
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
+                            children: [
                               Icon(
                                 Icons.settings_power,
                                 color: Colors.red,
@@ -190,7 +190,7 @@ class _SettingsTenantState extends State<SettingsTenant> {
                               Text(
                                 'logout',
                                 style: TextStyle(
-                                    color: Colors.black, fontSize: 20),
+                                    color: Colors.black, fontSize: 15.sp),
                               ),
                             ],
                           )),

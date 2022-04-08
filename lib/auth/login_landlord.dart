@@ -33,12 +33,12 @@ class _LoginLandlordState extends State<LoginLandlord> {
             SizedBox(
               height: 50.h,
             ),
-            const Center(
+            Center(
               child: Text(
                 'Welcome',
                 style: TextStyle(
                     color: Colors.black,
-                    fontSize: 40,
+                    fontSize: 40.sp,
                     fontWeight: FontWeight.w600),
               ),
             ),
@@ -49,11 +49,13 @@ class _LoginLandlordState extends State<LoginLandlord> {
                 controller: _emailController,
                 keyboardType: TextInputType.emailAddress,
                 textCapitalization: TextCapitalization.sentences,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: ('E-mail'),
+                  labelStyle: TextStyle(fontSize: 12.sp),
                   border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey)),
                   hintText: 'Enter your E-mail',
+                  hintStyle: TextStyle(fontSize: 12.sp),
                   floatingLabelBehavior: FloatingLabelBehavior.never,
                   focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.blue),
@@ -77,11 +79,13 @@ class _LoginLandlordState extends State<LoginLandlord> {
                 obscuringCharacter: '*',
                 keyboardType: TextInputType.visiblePassword,
                 textCapitalization: TextCapitalization.sentences,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: ('Password'),
+                  labelStyle: TextStyle(fontSize: 12.sp),
                   border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey)),
                   hintText: 'Enter your password',
+                  hintStyle: TextStyle(fontSize: 12.sp),
                   focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.blue),
                       borderRadius: BorderRadius.all(Radius.circular(4.0))),
@@ -110,7 +114,8 @@ class _LoginLandlordState extends State<LoginLandlord> {
                   child: Text(
                     'Forgot password?',
                     style: TextStyle(
-                        color: Color.fromARGB(255, 4, 82, 146), fontSize: 15),
+                        color: Color.fromARGB(255, 4, 82, 146),
+                        fontSize: 12.sp),
                     textAlign: TextAlign.right,
                   )),
             ),
@@ -121,9 +126,7 @@ class _LoginLandlordState extends State<LoginLandlord> {
               width: MediaQuery.of(context).size.width,
               child: _authManager.isLoading
                   ? const Center(
-                      child: CircularProgressIndicator.adaptive(
-                        
-                      ),
+                      child: CircularProgressIndicator.adaptive(),
                     )
                   : TextButton(
                       onPressed: () async {
@@ -178,7 +181,7 @@ class _LoginLandlordState extends State<LoginLandlord> {
                           backgroundColor: Color.fromARGB(255, 4, 82, 146)),
                       child: Text(
                         'Login',
-                        style: TextStyle(color: Colors.white, fontSize: 20),
+                        style: TextStyle(color: Colors.white, fontSize: 15.sp),
                       )),
             ),
             SizedBox(
@@ -188,7 +191,7 @@ class _LoginLandlordState extends State<LoginLandlord> {
               children: [
                 Text(
                   'Dont have an account?',
-                  style: TextStyle(fontSize: 15, color: Colors.black),
+                  style: TextStyle(fontSize: 12.sp, color: Colors.black),
                 ),
                 SizedBox(
                   width: 5.w,
@@ -204,7 +207,7 @@ class _LoginLandlordState extends State<LoginLandlord> {
                       'Sign Up',
                       style: TextStyle(
                         color: Color.fromARGB(255, 4, 82, 146),
-                        fontSize: 15,
+                        fontSize: 12.sp,
                       ),
                     ))
               ],

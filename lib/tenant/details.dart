@@ -55,14 +55,14 @@ class _DetailsState extends State<Details> {
               var userId = snapshot.data!.data()!['user_id'];
               var pictures = snapshot.data!.data()!['pictures'];
               var intrested = snapshot.data!.data()!['interested'];
-              var interestedCount = intrested.length;
+              var interestedCount = intrested == null ? 0 : intrested.length;
 
               return SingleChildScrollView(
-                padding: EdgeInsets.all(15),
+                padding: EdgeInsets.all(0),
                 child: Column(
                   children: [
                     Container(
-                        height: 180.h,
+                        height: 240.h,
                         child: PageView.builder(
                           controller: _pageController,
                           itemCount: pictures.length,
@@ -72,12 +72,12 @@ class _DetailsState extends State<Details> {
                               height: 240.h,
                               child: Container(
                                 width: MediaQuery.of(context).size.width.w,
-                                height: 200,
-                                color: Colors.black,
+                                height: 200.h,
+                                color: Colors.white,
                                 child: Image.network(
                                   pictures[index],
                                   fit: BoxFit.fill,
-                                  height: 250,
+                                  height: 200.h,
                                   width: double.infinity.w,
                                 ),
                               ),
@@ -88,7 +88,7 @@ class _DetailsState extends State<Details> {
                       dotsCount: pictures.length,
                       position: _currentPageValue,
                       decorator: DotsDecorator(
-                          color: Colors.black87,
+                          color: Colors.grey,
                           activeColor: Color.fromARGB(255, 17, 72, 167),
                           activeSize: Size(18.0, 9.0),
                           size: Size.square(9.0),
@@ -99,14 +99,14 @@ class _DetailsState extends State<Details> {
                       height: 10.h,
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(10.0),
+                      padding: const EdgeInsets.all(12.0),
                       child: Column(
                         children: [
-                          const Center(
+                          Center(
                             child: Text(
                               'Description',
                               style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 20),
+                                  fontWeight: FontWeight.bold, fontSize: 18.sp),
                             ),
                           ),
                           SizedBox(
@@ -115,16 +115,17 @@ class _DetailsState extends State<Details> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text(
+                              Text(
                                 'Categories',
                                 style: TextStyle(
-                                  fontSize: 15,
+                                  fontSize: 12.sp,
                                 ),
                               ),
                               Text(
                                 snapshot.data!.data()!['category'],
-                                style: const TextStyle(
-                                    fontSize: 15, fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w600),
                               ),
                             ],
                           ),
@@ -134,16 +135,17 @@ class _DetailsState extends State<Details> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text(
+                              Text(
                                 'Type',
                                 style: TextStyle(
-                                  fontSize: 15,
+                                  fontSize: 12.sp,
                                 ),
                               ),
                               Text(
                                 snapshot.data!.data()!['type'],
-                                style: const TextStyle(
-                                    fontSize: 15, fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w600),
                               )
                             ],
                           ),
@@ -153,14 +155,15 @@ class _DetailsState extends State<Details> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text(
+                              Text(
                                 'Kitchen',
-                                style: TextStyle(fontSize: 15),
+                                style: TextStyle(fontSize: 12.sp),
                               ),
                               Text(
                                 snapshot.data!.data()!['kitchen'],
-                                style: const TextStyle(
-                                    fontSize: 15, fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w600),
                               )
                             ],
                           ),
@@ -170,16 +173,17 @@ class _DetailsState extends State<Details> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text(
+                              Text(
                                 'Washroom',
                                 style: TextStyle(
-                                  fontSize: 15,
+                                  fontSize: 12.sp,
                                 ),
                               ),
                               Text(
                                 snapshot.data!.data()!['washroom'],
-                                style: const TextStyle(
-                                    fontSize: 15, fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w600),
                               )
                             ],
                           ),
@@ -189,14 +193,15 @@ class _DetailsState extends State<Details> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text(
+                              Text(
                                 'Store Room',
-                                style: TextStyle(fontSize: 15),
+                                style: TextStyle(fontSize: 12.sp),
                               ),
                               Text(
                                 snapshot.data!.data()!['store Room'],
-                                style: const TextStyle(
-                                    fontSize: 15, fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w600),
                               )
                             ],
                           ),
@@ -206,14 +211,15 @@ class _DetailsState extends State<Details> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text(
+                              Text(
                                 'Porch',
-                                style: TextStyle(fontSize: 15),
+                                style: TextStyle(fontSize: 12.sp),
                               ),
                               Text(
                                 snapshot.data!.data()!['porch'],
-                                style: const TextStyle(
-                                    fontSize: 15, fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w600),
                               )
                             ],
                           ),
@@ -223,14 +229,15 @@ class _DetailsState extends State<Details> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text(
-                                'Walled',
-                                style: TextStyle(fontSize: 15),
+                              Text(
+                                'Walled House',
+                                style: TextStyle(fontSize: 12.sp),
                               ),
                               Text(
                                 snapshot.data!.data()!['walled House'],
                                 style: TextStyle(
-                                    fontSize: 15, fontWeight: FontWeight.bold),
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w600),
                               )
                             ],
                           ),
@@ -241,13 +248,14 @@ class _DetailsState extends State<Details> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'Tiled',
-                                style: TextStyle(fontSize: 15),
+                                'Tiled Room',
+                                style: TextStyle(fontSize: 12.sp),
                               ),
                               Text(
                                 snapshot.data!.data()!['tiled'],
                                 style: TextStyle(
-                                    fontSize: 15, fontWeight: FontWeight.bold),
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w600),
                               )
                             ],
                           ),
@@ -257,14 +265,15 @@ class _DetailsState extends State<Details> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text(
+                              Text(
                                 'Electricity',
-                                style: TextStyle(fontSize: 15),
+                                style: TextStyle(fontSize: 12.sp),
                               ),
                               Text(
                                 snapshot.data!.data()!['electricity'],
-                                style: const TextStyle(
-                                    fontSize: 15, fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w600),
                               ),
                             ],
                           ),
@@ -272,14 +281,15 @@ class _DetailsState extends State<Details> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text(
+                              Text(
                                 'Water',
-                                style: TextStyle(fontSize: 15),
+                                style: TextStyle(fontSize: 12.sp),
                               ),
                               Text(
                                 snapshot.data!.data()!['water Availability'],
-                                style: const TextStyle(
-                                    fontSize: 15, fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w600),
                               )
                             ],
                           ),
@@ -287,14 +297,15 @@ class _DetailsState extends State<Details> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text(
+                              Text(
                                 'Price',
-                                style: TextStyle(fontSize: 15),
+                                style: TextStyle(fontSize: 12.sp),
                               ),
                               Text(
                                 '${snapshot.data!.data()!['price']} /month',
-                                style: const TextStyle(
-                                    fontSize: 15, fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w600),
                               )
                             ],
                           ),
@@ -302,14 +313,15 @@ class _DetailsState extends State<Details> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text(
+                              Text(
                                 'Room size',
-                                style: TextStyle(fontSize: 15),
+                                style: TextStyle(fontSize: 12.sp),
                               ),
                               Text(
                                 snapshot.data!.data()!['size'],
-                                style: const TextStyle(
-                                    fontSize: 15, fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w600),
                               )
                             ],
                           ),
@@ -317,14 +329,15 @@ class _DetailsState extends State<Details> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text(
+                              Text(
                                 'Region',
-                                style: TextStyle(fontSize: 15),
+                                style: TextStyle(fontSize: 12.sp),
                               ),
                               Text(
                                 snapshot.data!.data()!['region'],
                                 style: TextStyle(
-                                    fontSize: 15, fontWeight: FontWeight.bold),
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w600),
                               )
                             ],
                           ),
@@ -332,14 +345,15 @@ class _DetailsState extends State<Details> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text(
+                              Text(
                                 'City/ Town',
-                                style: TextStyle(fontSize: 15),
+                                style: TextStyle(fontSize: 12.sp),
                               ),
                               Text(
                                 snapshot.data!.data()!['city/Town'],
-                                style: const TextStyle(
-                                    fontSize: 15, fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w600),
                               )
                             ],
                           ),
@@ -347,14 +361,14 @@ class _DetailsState extends State<Details> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text(
+                              Text(
                                 'Digital Address',
-                                style: TextStyle(fontSize: 15),
+                                style: TextStyle(fontSize: 12.sp),
                               ),
                               Text(
                                 snapshot.data!.data()!['digital Address'],
                                 style: TextStyle(
-                                    fontSize: 15, fontWeight: FontWeight.bold),
+                                    fontSize: 15, fontWeight: FontWeight.w600),
                               )
                             ],
                           ),
@@ -362,19 +376,20 @@ class _DetailsState extends State<Details> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text(
+                              Text(
                                 'House Number',
-                                style: TextStyle(fontSize: 15),
+                                style: TextStyle(fontSize: 12.sp),
                               ),
                               Text(
                                 snapshot.data!.data()!['house Number'],
-                                style: const TextStyle(
-                                    fontSize: 15, fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w600),
                               )
                             ],
                           ),
                           SizedBox(
-                            height: 20.h,
+                            height: 15.h,
                           ),
                           SizedBox(
                             width: MediaQuery.of(context).size.width,
@@ -410,12 +425,15 @@ class _DetailsState extends State<Details> {
                               style: TextButton.styleFrom(
                                   backgroundColor:
                                       Color.fromARGB(255, 4, 82, 146)),
-                              child: const Text(
+                              child: Text(
                                 'Interested',
                                 style: TextStyle(
-                                    color: Colors.white, fontSize: 20),
+                                    color: Colors.white, fontSize: 15.h),
                               ),
                             ),
+                          ),
+                          SizedBox(
+                            height: 10.h,
                           )
                         ],
                       ),
