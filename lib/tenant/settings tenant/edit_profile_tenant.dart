@@ -200,7 +200,7 @@ class _EditProfileTenantState extends State<EditProfileTenant> {
                     shadowColor: Color(0xFF322E2E),
                     color: Colors.white,
                     child: SizedBox(
-                      height: 40,
+                      height: 20.h,
                       width: MediaQuery.of(context).size.width,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -226,7 +226,7 @@ class _EditProfileTenantState extends State<EditProfileTenant> {
                     shadowColor: Color(0xFF322E2E),
                     color: Colors.white,
                     child: SizedBox(
-                      height: 40,
+                      height: 20.h,
                       width: MediaQuery.of(context).size.width,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -252,7 +252,7 @@ class _EditProfileTenantState extends State<EditProfileTenant> {
                     shadowColor: Color(0xFF322E2E),
                     color: Colors.white,
                     child: SizedBox(
-                      height: 40,
+                      height: 20.h,
                       width: MediaQuery.of(context).size.width,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -278,7 +278,7 @@ class _EditProfileTenantState extends State<EditProfileTenant> {
                     shadowColor: Color(0xFF322E2E),
                     color: Colors.white,
                     child: SizedBox(
-                      height: 40,
+                      height: 20.h,
                       width: MediaQuery.of(context).size.width,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -305,7 +305,7 @@ class _EditProfileTenantState extends State<EditProfileTenant> {
                                 gravity: ToastGravity.BOTTOM,
                                 timeInSecForIosWeb: 1,
                                 backgroundColor:
-                                    Color.fromARGB(255, 94, 196, 97),
+                                    Color.fromARGB(255, 118, 119, 118),
                                 textColor: Colors.white,
                                 fontSize: 16.0);
 

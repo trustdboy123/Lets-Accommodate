@@ -41,7 +41,6 @@ class AuthManager with ChangeNotifier {
       required String nationality,
       required String region,
       required File profile}) async {
-    setIsLoading(true);
     bool isCreated = false;
 
     await _firebaseAuth
@@ -49,21 +48,26 @@ class AuthManager with ChangeNotifier {
         .then((userCredential) async {
       String? photoUrl = await _fileUploadService.uploadFile(
           file: profile, uid: userCredential.user!.uid);
-
-      userCollection.doc(userCredential.user!.uid).set({
-        "name": name,
-        " email": email,
-        "gender": gender,
-        "location": location,
-        "number": number,
-        "region": region,
-        "nationality": nationality,
-        "createdAt": FieldValue.serverTimestamp(),
-        "profile_pic": photoUrl,
-        "uid": userCredential.user!.uid
-      });
-      isCreated = true;
-      await userCredential.user!.sendEmailVerification();
+      if (photoUrl != null) {
+        setIsLoading(true);
+        userCollection.doc(userCredential.user!.uid).set({
+          "name": name,
+          " email": email,
+          "gender": gender,
+          "location": location,
+          "number": number,
+          "region": region,
+          "nationality": nationality,
+          "createdAt": FieldValue.serverTimestamp(),
+          "profile_pic": photoUrl,
+          "uid": userCredential.user!.uid
+        });
+        isCreated = true;
+        await userCredential.user!.sendEmailVerification();
+      } else {
+        setMesage('Please check your image!!!');
+        setIsLoading(false);
+      }
     }).catchError((onError) {
       setMesage('$onError');
     }).timeout(const Duration(seconds: 60), onTimeout: () {
@@ -78,20 +82,24 @@ class AuthManager with ChangeNotifier {
   Future<bool> loginUser(
       {required String email, required String password}) async {
     bool isSuccessful = false;
+    setIsLoading(true);
     await _firebaseAuth
         .signInWithEmailAndPassword(email: email, password: password)
         .then((userCredential) async {
       if (userCredential.user != null) {
         await userCollection.doc(userCredential.user!.uid).get().then((doc) {
           if (doc.data() != null) {
+            setIsLoading(true);
             isSuccessful = true;
           } else {
             setMesage('No Data found');
             isSuccessful = false;
+            setIsLoading(false);
           }
         });
       } else {
         isSuccessful = false;
+        setIsLoading(false);
       }
     }).catchError((onError) {
       setMesage('$onError');
@@ -153,7 +161,6 @@ class AuthManager with ChangeNotifier {
       required String number,
       required String nationality,
       required File imageFile}) async {
-    setIsLoading(true);
     bool isCreated = false;
 
     await _firebaseAuth
@@ -163,6 +170,7 @@ class AuthManager with ChangeNotifier {
           file: imageFile, uid: userCredential.user!.uid);
 
       if (photoUrl != null) {
+        setIsLoading(true);
         landlordCollection.doc(userCredential.user!.uid).set({
           "name": name,
           "email": email,
@@ -178,13 +186,14 @@ class AuthManager with ChangeNotifier {
       } else {
         setMesage('Image Upload failed');
         isCreated = false;
+        setIsLoading(false);
       }
     }).catchError((onError) {
       setMesage('$onError');
+      setIsLoading(false);
     }).timeout(const Duration(seconds: 60), onTimeout: () {
       setMesage('Check your internet connection');
       isCreated;
-
       setIsLoading(false);
     });
     return isCreated;
@@ -193,6 +202,7 @@ class AuthManager with ChangeNotifier {
   Future<bool> sendResetLink(String email) async {
     bool isSent = false;
     await _firebaseAuth.sendPasswordResetEmail(email: email).then((_) {
+      setIsLoading(true);
       isSent = true;
     }).catchError((error) {
       setIsLoading(false);

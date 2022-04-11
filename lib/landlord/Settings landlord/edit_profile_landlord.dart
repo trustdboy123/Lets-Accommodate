@@ -30,14 +30,6 @@ class _EditProfileLandlordState extends State<EditProfileLandlord> {
     });
   }
 
-  // isUserAuth() {
-  //   _firebaseAuth.authStateChanges().listen((user) {
-  //     if (user != null) {
-  //       print(user.uid);
-  //     }
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,8 +64,8 @@ class _EditProfileLandlordState extends State<EditProfileLandlord> {
                           child: _profilePic == null
                               ? Image.network(
                                   snapshot.data!['picture'],
-                                  width: 130.w,
-                                  height: 130.h,
+                                  width: 130,
+                                  height: 130,
                                   fit: BoxFit.fill,
                                 )
                               : InkWell(
@@ -84,8 +76,8 @@ class _EditProfileLandlordState extends State<EditProfileLandlord> {
                                           )),
                                   child: Image.file(
                                     _profilePic!,
-                                    width: 130.w,
-                                    height: 130.h,
+                                    width: 130,
+                                    height: 130,
                                     fit: BoxFit.fill,
                                   ),
                                 ),
@@ -144,7 +136,7 @@ class _EditProfileLandlordState extends State<EditProfileLandlord> {
                     shadowColor: Color(0xFF322E2E),
                     color: Colors.white,
                     child: SizedBox(
-                      height: 40.h,
+                      height: 20.h,
                       width: MediaQuery.of(context).size.width,
                       child: Padding(
                         padding: EdgeInsets.all(8.0),
@@ -170,12 +162,12 @@ class _EditProfileLandlordState extends State<EditProfileLandlord> {
                     shadowColor: Color(0xFF322E2E),
                     color: Colors.white,
                     child: SizedBox(
-                      height: 40,
+                      height: 20.h,
                       width: MediaQuery.of(context).size.width,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          snapshot.data![' email'],
+                          snapshot.data!['email'],
                           style: TextStyle(fontSize: 12.sp),
                         ),
                       ),
@@ -194,7 +186,7 @@ class _EditProfileLandlordState extends State<EditProfileLandlord> {
                     shadowColor: Color(0xFF322E2E),
                     color: Colors.white,
                     child: SizedBox(
-                      height: 40,
+                      height: 20.h,
                       width: MediaQuery.of(context).size.width,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -220,7 +212,7 @@ class _EditProfileLandlordState extends State<EditProfileLandlord> {
                     shadowColor: Color(0xFF322E2E),
                     color: Colors.white,
                     child: SizedBox(
-                      height: 40,
+                      height: 20.h,
                       width: MediaQuery.of(context).size.width,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -246,7 +238,7 @@ class _EditProfileLandlordState extends State<EditProfileLandlord> {
                     shadowColor: Color(0xFF322E2E),
                     color: Colors.white,
                     child: SizedBox(
-                      height: 40,
+                      height: 20.h,
                       width: MediaQuery.of(context).size.width,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -258,7 +250,7 @@ class _EditProfileLandlordState extends State<EditProfileLandlord> {
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 5.h,
                   ),
                   Text(
                     'Nationality',
@@ -272,7 +264,7 @@ class _EditProfileLandlordState extends State<EditProfileLandlord> {
                     shadowColor: Color(0xFF322E2E),
                     color: Colors.white,
                     child: SizedBox(
-                      height: 40,
+                      height: 20.h,
                       width: MediaQuery.of(context).size.width,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -299,7 +291,7 @@ class _EditProfileLandlordState extends State<EditProfileLandlord> {
                                 gravity: ToastGravity.BOTTOM,
                                 timeInSecForIosWeb: 1,
                                 backgroundColor:
-                                    Color.fromARGB(255, 94, 196, 97),
+                                    Color.fromARGB(255, 94, 97, 94),
                                 textColor: Colors.white,
                                 fontSize: 16.0);
 

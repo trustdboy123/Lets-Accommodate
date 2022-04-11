@@ -111,7 +111,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                 gravity: ToastGravity.BOTTOM,
                                 timeInSecForIosWeb: 1,
                                 backgroundColor:
-                                    Color.fromARGB(255, 94, 196, 97),
+                                    Color.fromARGB(255, 116, 117, 116),
                                 textColor: Colors.white,
                                 fontSize: 16.0);
 
@@ -153,10 +153,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             ),
             TextButton(
                 onPressed: () {
-                  Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(builder: (context) {
-                    return const LoginTenant();
-                  }), (route) => false);
+                  Navigator.of(context).pop();
                 },
                 child: Text(
                   'Go Back',

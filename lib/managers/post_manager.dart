@@ -213,6 +213,7 @@ class PostManager with ChangeNotifier {
     return _uploadsCollection
         .where('category', isEqualTo: category)
         .where('has_payed', isEqualTo: true)
+        .where('rented_out', isEqualTo: false)
         .orderBy("createdAt", descending: true)
         .snapshots();
   }
@@ -260,7 +261,6 @@ class PostManager with ChangeNotifier {
       "size": size,
       "house Number": houseNumber,
     };
-    print(data);
     bool isUpdated = false;
     await _uploadsCollection.doc(docID).update(data).then((value) {
       isUpdated = true;

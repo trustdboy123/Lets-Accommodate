@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lets_accommodate/auth/forgot_password.dart';
 
 import 'package:lets_accommodate/landlord/landlord_dashboard.dart';
 import 'package:lets_accommodate/tenant/categories_tenant.dart';
@@ -58,7 +59,7 @@ class _LoginLandlordState extends State<LoginLandlord> {
                   hintStyle: TextStyle(fontSize: 12.sp),
                   floatingLabelBehavior: FloatingLabelBehavior.never,
                   focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue),
+                      borderSide: BorderSide(color: Colors.black),
                       borderRadius: BorderRadius.all(Radius.circular(8.0))),
                 ),
                 validator: (value) {
@@ -80,6 +81,7 @@ class _LoginLandlordState extends State<LoginLandlord> {
                 keyboardType: TextInputType.visiblePassword,
                 textCapitalization: TextCapitalization.sentences,
                 decoration: InputDecoration(
+                  floatingLabelBehavior: FloatingLabelBehavior.never,
                   labelText: ('Password'),
                   labelStyle: TextStyle(fontSize: 12.sp),
                   border: OutlineInputBorder(
@@ -87,7 +89,7 @@ class _LoginLandlordState extends State<LoginLandlord> {
                   hintText: 'Enter your password',
                   hintStyle: TextStyle(fontSize: 12.sp),
                   focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue),
+                      borderSide: BorderSide(color: Colors.black),
                       borderRadius: BorderRadius.all(Radius.circular(4.0))),
                 ),
                 validator: (value) {
@@ -108,7 +110,7 @@ class _LoginLandlordState extends State<LoginLandlord> {
                   onPressed: () {
                     Navigator.of(context)
                         .push(MaterialPageRoute(builder: (context) {
-                      return const LoginLandlord();
+                      return const ForgotPassword();
                     }));
                   },
                   child: Text(
@@ -124,7 +126,7 @@ class _LoginLandlordState extends State<LoginLandlord> {
             ),
             SizedBox(
               width: MediaQuery.of(context).size.width,
-              child: _authManager.isLoading
+              child: _authManager.isLoading == true
                   ? const Center(
                       child: CircularProgressIndicator.adaptive(),
                     )

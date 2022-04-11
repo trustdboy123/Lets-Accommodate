@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lets_accommodate/landlord/Settings%20landlord/edit_profile_landlord.dart';
 import 'package:lets_accommodate/managers/post_manager.dart';
 import 'package:lets_accommodate/tenant/settings%20tenant/edit_profile_tenant.dart';
 import 'package:path/path.dart';
@@ -78,7 +79,7 @@ class _SettingsLandlordState extends State<SettingsLandlord> {
                               onPressed: () {
                                 Navigator.of(context)
                                     .push(MaterialPageRoute(builder: (context) {
-                                  return EditProfileTenant();
+                                  return EditProfileLandlord();
                                 }));
                               },
                               child: Text(
@@ -189,7 +190,7 @@ class _SettingsLandlordState extends State<SettingsLandlord> {
                               Text(
                                 'logout',
                                 style: TextStyle(
-                                    color: Colors.black, fontSize: 15.h),
+                                    color: Colors.black, fontSize: 15.sp),
                               ),
                             ],
                           )),

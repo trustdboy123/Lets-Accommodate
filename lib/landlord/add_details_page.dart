@@ -659,12 +659,12 @@ class _AddImageState extends State<AddImage> {
                                                 builder: (context) {
                                           return PayDecision(
                                             price: category == 'Single Room'
-                                                ? 1
+                                                ? 40
                                                 : category == 'Chamber and Hall'
-                                                    ? 70
+                                                    ? 60
                                                     : category == 'Two Bedroom'
-                                                        ? 100
-                                                        : 120,
+                                                        ? 80
+                                                        : 100,
                                             premiumPrice: category ==
                                                     'Single Room'
                                                 ? 80

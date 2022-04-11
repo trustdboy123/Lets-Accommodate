@@ -134,13 +134,11 @@ class _LoginTenantState extends State<LoginTenant> {
               ),
               SizedBox(
                 width: MediaQuery.of(context).size.width,
-                child:
-                    // _isLoading
-                    //     ? const Center(
-                    //         child: CircularProgressIndicator.adaptive(),
-                    //       )
-                    //     :
-                    TextButton(
+                child: _authManager.isLoading == true
+                    ? const Center(
+                        child: CircularProgressIndicator.adaptive(),
+                      )
+                    : TextButton(
                         onPressed: () async {
                           if (_globalKey.currentState!.validate()) {
                             String email = _emailController.text.trim();

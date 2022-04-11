@@ -172,7 +172,7 @@ class _ViewUploadsState extends State<ViewUploads> {
                             Text(
                               snapshot.data!.data()!['washroom'],
                               style: TextStyle(
-                                  fontSize: 15.sp, fontWeight: FontWeight.w600),
+                                  fontSize: 12.sp, fontWeight: FontWeight.w600),
                             )
                           ],
                         ),
@@ -347,8 +347,7 @@ class _ViewUploadsState extends State<ViewUploads> {
                             Text(
                               snapshot.data!.data()!['digital Address'],
                               style: TextStyle(
-                                  fontSize: 152.sp,
-                                  fontWeight: FontWeight.w600),
+                                  fontSize: 12.sp, fontWeight: FontWeight.w600),
                             )
                           ],
                         ),
@@ -387,7 +386,7 @@ class _ViewUploadsState extends State<ViewUploads> {
                             child: Text(
                               'Edit Details',
                               style: TextStyle(
-                                  color: Colors.white, fontSize: 15.h),
+                                  color: Colors.white, fontSize: 15.sp),
                             ),
                           ),
                         )

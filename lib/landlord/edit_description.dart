@@ -647,7 +647,7 @@ class _EditDescription extends State<EditDescription> {
                                           hintText: 'Enter new price of rent',
                                           prefixStyle:
                                               TextStyle(fontSize: 12.sp),
-                                          prefix: Text('GHC'))),
+                                          prefix: Text('   GHC/month    '))),
                                 ),
                                 SizedBox(
                                   height: 5.h,
@@ -672,7 +672,7 @@ class _EditDescription extends State<EditDescription> {
                                               TextStyle(fontSize: 12.sp),
                                           hintStyle: TextStyle(fontSize: 12.sp),
                                           hintText: 'Enter new size of room',
-                                          prefix: Text('Sqft'))),
+                                          prefix: Text('Sqft  '))),
                                 ),
                                 SizedBox(height: 5.h),
                                 Card(
@@ -742,9 +742,10 @@ class _EditDescription extends State<EditDescription> {
                                             borderRadius:
                                                 BorderRadius.circular(20),
                                           ),
-                                          labelText: 'city',
-                                          labelStyle:
-                                              TextStyle(fontSize: 12.sp),
+                                          labelText: 'City/Town',
+                                          labelStyle: TextStyle(
+                                              fontSize: 12.sp,
+                                              fontWeight: FontWeight.w600),
                                           hintText: 'Enter new city',
                                           hintStyle:
                                               TextStyle(fontSize: 12.sp))),
@@ -768,9 +769,10 @@ class _EditDescription extends State<EditDescription> {
                                             borderRadius:
                                                 BorderRadius.circular(20),
                                           ),
-                                          labelText: "digitalAddress",
-                                          labelStyle:
-                                              TextStyle(fontSize: 12.sp),
+                                          labelText: "Digital Address",
+                                          labelStyle: TextStyle(
+                                              fontSize: 12.sp,
+                                              fontWeight: FontWeight.w600),
                                           hintText: 'Enter digital address',
                                           hintStyle:
                                               TextStyle(fontSize: 12.sp))),
@@ -793,9 +795,10 @@ class _EditDescription extends State<EditDescription> {
                                             borderRadius:
                                                 BorderRadius.circular(20),
                                           ),
-                                          labelText: 'houseNumber',
-                                          labelStyle:
-                                              TextStyle(fontSize: 12.sp),
+                                          labelText: 'House Number',
+                                          labelStyle: TextStyle(
+                                              fontSize: 12.sp,
+                                              fontWeight: FontWeight.w600),
                                           hintStyle: TextStyle(fontSize: 12.sp),
                                           hintText: 'Enter new house number')),
                                 ),

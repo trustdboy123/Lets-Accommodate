@@ -146,7 +146,37 @@ class _MomoPaymentViewState extends State<MomoPaymentView> {
                               backgroundColor:
                                   Color.fromARGB(255, 59, 112, 155)),
                         ),
-                      )
+                      ),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'To make payments for Vodafone Cash',
+                            style: TextStyle(
+                                fontSize: 14.sp, fontWeight: FontWeight.w600),
+                          ),
+                          Text(
+                            'Follow the steps below:',
+                            style: TextStyle(
+                                fontSize: 13.sp, fontWeight: FontWeight.w600),
+                          ),
+                          Text('1. Dial *110#',
+                              style: TextStyle(fontSize: 12.sp)),
+                          Text('2. Select option 4 "make payment"',
+                              style: TextStyle(fontSize: 12.sp)),
+                          Text('3. Select option 4 "Generate voucher"',
+                              style: TextStyle(fontSize: 12.sp)),
+                          Text('4. Enter pin',
+                              style: TextStyle(fontSize: 12.sp)),
+                          Text('5. Press Pay to proceed',
+                              style: TextStyle(fontSize: 12.sp)),
+                          Text('6. Enter generated voucher to make payment',
+                              style: TextStyle(fontSize: 12.sp)),
+                        ],
+                      ),
                     ],
                   ),
                 ),
