@@ -389,6 +389,51 @@ class _ViewUploadsState extends State<ViewUploads> {
                                   color: Colors.white, fontSize: 15.sp),
                             ),
                           ),
+                        ),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          child: TextButton(
+                            onPressed: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      content: Text('Rented out?',
+                                          style: TextStyle(
+                                              fontSize: 12.sp,
+                                              fontWeight: FontWeight.w600)),
+                                      actions: [
+                                        TextButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                              _postManager.rentedroom(
+                                                  docID: docID);
+                                            },
+                                            child: Text(
+                                              'yes',
+                                              style: TextStyle(fontSize: 12.sp),
+                                            )),
+                                        TextButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: Text(
+                                              'No',
+                                              style: TextStyle(fontSize: 12.sp),
+                                            ))
+                                      ],
+                                    );
+                                  });
+                            },
+                            style: TextButton.styleFrom(
+                                backgroundColor:
+                                    Color.fromARGB(255, 4, 82, 146)),
+                            child: Text(
+                              'Rented out?',
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 15.sp),
+                            ),
+                          ),
                         )
                       ],
                     ),

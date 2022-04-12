@@ -87,7 +87,8 @@ class PostManager with ChangeNotifier {
       "favorite": {userUid: false},
       "createdAt": timestamp,
       "user_id": userUid,
-      "has_payed": false
+      "has_payed": false,
+      "rented_out": false
     }).then((_) {
       isSubmited = true;
       setMessage('Post successfully submited');
@@ -267,7 +268,21 @@ class PostManager with ChangeNotifier {
       return value;
     }).catchError((error) {
       setMessage('Failed to update room details: $error');
-      print(error);
+    });
+    return isUpdated;
+  }
+
+// rented out
+  Future<bool> rentedroom({
+    required String docID,
+  }) async {
+    Map<String, dynamic> data = <String, dynamic>{"rented_out": true};
+    bool isUpdated = false;
+    await _uploadsCollection.doc(docID).update(data).then((value) {
+      isUpdated = true;
+      return value;
+    }).catchError((error) {
+      setMessage('Failed to update: $error');
     });
     return isUpdated;
   }

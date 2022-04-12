@@ -80,15 +80,18 @@ class _AddImageState extends State<AddImage> {
                                     children: [
                                       Center(
                                         child: IconButton(
-                                            icon: Icon(Icons.add_a_photo),
+                                            icon: Icon(
+                                              Icons.add_a_photo,
+                                              color: Colors.blueAccent,
+                                            ),
                                             onPressed: () => chooseImage()),
                                       ),
                                       Text(
                                         'Tap to add photos',
                                         style: TextStyle(
-                                            fontSize: 12.sp,
+                                            fontSize: 8.sp,
                                             fontWeight: FontWeight.w600,
-                                            color: Colors.blue),
+                                            color: Colors.black),
                                       )
                                     ],
                                   )

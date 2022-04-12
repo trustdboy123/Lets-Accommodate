@@ -154,7 +154,7 @@ class _MomoPaymentViewState extends State<MomoPaymentView> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'To make payments for Vodafone Cash',
+                            'To make payments with Vodafone Cash',
                             style: TextStyle(
                                 fontSize: 14.sp, fontWeight: FontWeight.w600),
                           ),
