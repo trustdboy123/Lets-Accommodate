@@ -400,7 +400,7 @@ class _ViewUploadsState extends State<ViewUploads> {
                                     return AlertDialog(
                                       content: Text('Rented out?',
                                           style: TextStyle(
-                                              fontSize: 12.sp,
+                                              fontSize: 15.sp,
                                               fontWeight: FontWeight.w600)),
                                       actions: [
                                         TextButton(
@@ -410,7 +410,7 @@ class _ViewUploadsState extends State<ViewUploads> {
                                                   docID: docID);
                                             },
                                             child: Text(
-                                              'yes',
+                                              'Yes',
                                               style: TextStyle(fontSize: 12.sp),
                                             )),
                                         TextButton(
