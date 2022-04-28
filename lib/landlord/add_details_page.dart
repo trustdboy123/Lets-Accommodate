@@ -24,14 +24,14 @@ class _AddImageState extends State<AddImage> {
   String dropdownValue = 'Select option';
 
   String dropdownValueType = 'Select option';
-  String dropdownValueKitchen = 'Select option';
-  String dropdownValueWashRoom = 'Select option';
-  String dropdownValueStoreRoom = 'Select option';
-  String dropdownValuePorch = 'Select option';
-  String dropdownValueWaledHouse = 'Select option';
-  String dropdownValueTiledHouse = 'Select option';
-  String dropdownValueElectricity = 'Select option';
-  String dropdownValueWaterAvailability = 'Select option';
+  String dropdownValueKitchen = 'Unavailable';
+  String dropdownValueWashRoom = 'Unavailable';
+  String dropdownValueStoreRoom = 'Unavailable';
+  String dropdownValuePorch = 'Unavailable';
+  String dropdownValueWaledHouse = 'Unavailable';
+  String dropdownValueTiledHouse = 'Unavailable';
+  String dropdownValueElectricity = 'Unavailable';
+  String dropdownValueWaterAvailability = 'Unavailable';
   final TextEditingController _priceController = TextEditingController();
   final TextEditingController _sizeController = TextEditingController();
   String dropdownValueRegion = 'Select option';
@@ -60,6 +60,8 @@ class _AddImageState extends State<AddImage> {
             child: Form(
               key: _formKey,
               child: GridView(
+                  physics: ScrollPhysics(),
+                  scrollDirection: Axis.vertical,
                   shrinkWrap: true,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 1),
@@ -68,6 +70,7 @@ class _AddImageState extends State<AddImage> {
                       decoration: BoxDecoration(),
                       padding: const EdgeInsets.all(4),
                       child: GridView.builder(
+                          physics: ScrollPhysics(),
                           scrollDirection: Axis.horizontal,
                           itemCount: _image.length + 1,
                           gridDelegate:
@@ -122,6 +125,12 @@ class _AddImageState extends State<AddImage> {
                                         TextStyle(fontWeight: FontWeight.w600),
                                   ),
                                   DropdownButtonFormField(
+                                    validator: (value) {
+                                      if (value == 'Select option') {
+                                        return 'Please select an option';
+                                      }
+                                      return null;
+                                    },
                                     value: dropdownValue,
                                     icon: const Icon(Icons.arrow_drop_down),
                                     elevation: 16,
@@ -164,6 +173,12 @@ class _AddImageState extends State<AddImage> {
                                           fontWeight: FontWeight.w600,
                                           fontSize: 12.sp)),
                                   DropdownButtonFormField(
+                                    validator: (value) {
+                                      if (value == 'Select option') {
+                                        return 'Please select an option';
+                                      }
+                                      return null;
+                                    },
                                     value: dropdownValueType,
                                     icon: const Icon(Icons.arrow_drop_down),
                                     elevation: 16,
@@ -180,6 +195,7 @@ class _AddImageState extends State<AddImage> {
                                       'Flat',
                                       'Compound House',
                                       'Self Contained',
+                                      'Hostel'
                                     ].map<DropdownMenuItem<String>>(
                                         (String value) {
                                       return DropdownMenuItem<String>(
@@ -204,6 +220,12 @@ class _AddImageState extends State<AddImage> {
                                           fontWeight: FontWeight.w600,
                                           fontSize: 12.sp)),
                                   DropdownButtonFormField(
+                                    validator: (value) {
+                                      if (value == 'Select option') {
+                                        return 'Please select an option';
+                                      }
+                                      return null;
+                                    },
                                     value: dropdownValueKitchen,
                                     icon: const Icon(Icons.arrow_drop_down),
                                     elevation: 16,
@@ -242,6 +264,12 @@ class _AddImageState extends State<AddImage> {
                                           fontWeight: FontWeight.w600,
                                           fontSize: 12.sp)),
                                   DropdownButtonFormField(
+                                    validator: (value) {
+                                      if (value == 'Select option') {
+                                        return 'Please select an option';
+                                      }
+                                      return null;
+                                    },
                                     value: dropdownValueWashRoom,
                                     icon: const Icon(Icons.arrow_drop_down),
                                     elevation: 16,
@@ -280,6 +308,12 @@ class _AddImageState extends State<AddImage> {
                                           fontWeight: FontWeight.w600,
                                           fontSize: 12.sp)),
                                   DropdownButtonFormField(
+                                    validator: (value) {
+                                      if (value == 'Select option') {
+                                        return 'Please select an option';
+                                      }
+                                      return null;
+                                    },
                                     value: dropdownValueStoreRoom,
                                     icon: const Icon(
                                       Icons.arrow_drop_down,
@@ -320,6 +354,12 @@ class _AddImageState extends State<AddImage> {
                                           fontWeight: FontWeight.w600,
                                           fontSize: 12.sp)),
                                   DropdownButtonFormField(
+                                    validator: (value) {
+                                      if (value == 'Select option') {
+                                        return 'Please select an option';
+                                      }
+                                      return null;
+                                    },
                                     value: dropdownValuePorch,
                                     icon: const Icon(Icons.arrow_drop_down),
                                     elevation: 16,
@@ -358,6 +398,12 @@ class _AddImageState extends State<AddImage> {
                                           fontWeight: FontWeight.w600,
                                           fontSize: 12.sp)),
                                   DropdownButtonFormField(
+                                    validator: (value) {
+                                      if (value == 'Select option') {
+                                        return 'Please select an option';
+                                      }
+                                      return null;
+                                    },
                                     value: dropdownValueWaledHouse,
                                     icon: const Icon(Icons.arrow_drop_down),
                                     elevation: 16,
@@ -396,6 +442,12 @@ class _AddImageState extends State<AddImage> {
                                           fontWeight: FontWeight.w600,
                                           fontSize: 12.sp)),
                                   DropdownButtonFormField(
+                                    validator: (value) {
+                                      if (value == 'Select option') {
+                                        return 'Please select an option';
+                                      }
+                                      return null;
+                                    },
                                     value: dropdownValueTiledHouse,
                                     icon: const Icon(Icons.arrow_drop_down),
                                     elevation: 16,
@@ -434,6 +486,12 @@ class _AddImageState extends State<AddImage> {
                                           fontWeight: FontWeight.w600,
                                           fontSize: 12.sp)),
                                   DropdownButtonFormField(
+                                    validator: (value) {
+                                      if (value == 'Select option') {
+                                        return 'Please select an option';
+                                      }
+                                      return null;
+                                    },
                                     value: dropdownValueElectricity,
                                     icon: const Icon(Icons.arrow_drop_down),
                                     elevation: 16,
@@ -475,6 +533,12 @@ class _AddImageState extends State<AddImage> {
                                           fontWeight: FontWeight.w600,
                                           fontSize: 12.sp)),
                                   DropdownButtonFormField(
+                                    validator: (value) {
+                                      if (value == 'Select option') {
+                                        return 'Please select an option';
+                                      }
+                                      return null;
+                                    },
                                     value: dropdownValueWaterAvailability,
                                     icon: const Icon(Icons.arrow_drop_down),
                                     elevation: 16,
@@ -550,6 +614,12 @@ class _AddImageState extends State<AddImage> {
                                       style: TextStyle(
                                           fontWeight: FontWeight.w600)),
                                   DropdownButtonFormField(
+                                    validator: (value) {
+                                      if (value == 'Select option') {
+                                        return 'Please select an option';
+                                      }
+                                      return null;
+                                    },
                                     value: dropdownValueRegion,
                                     icon: const Icon(Icons.arrow_drop_down),
                                     elevation: 16,
@@ -654,28 +724,102 @@ class _AddImageState extends State<AddImage> {
                                       style: TextButton.styleFrom(
                                           backgroundColor:
                                               Color.fromARGB(255, 4, 82, 146)),
-                                      onPressed: () {
+                                      onPressed: () async {
                                         var category = dropdownValue.toString();
+                                        if (_formKey.currentState!.validate()) {
+                                          setState(() {
+                                            isLoading = true;
+                                          });
+                                          bool isSubmited =
+                                              await _postManager.submitPost(
+                                            postImage: _image,
+                                            category: dropdownValue.toString(),
+                                            type: dropdownValueType.toString(),
+                                            electricity:
+                                                dropdownValueElectricity
+                                                    .toString(),
+                                            waterAvailability:
+                                                dropdownValueWaterAvailability
+                                                    .toString(),
+                                            price: _priceController.text,
+                                            size: _sizeController.text,
+                                            region:
+                                                dropdownValueRegion.toString(),
+                                            citytown: _cityController.text,
+                                            houseNumber:
+                                                _houseNumberController.text,
+                                            washroom: dropdownValueWashRoom
+                                                .toString(),
+                                            storeRoom: dropdownValueStoreRoom
+                                                .toString(),
+                                            porch:
+                                                dropdownValuePorch.toString(),
+                                            walledHouse: dropdownValueWaledHouse
+                                                .toString(),
+                                            kitchen:
+                                                dropdownValueKitchen.toString(),
+                                            tiled: dropdownValueTiledHouse
+                                                .toString(),
+                                            digitalAddress:
+                                                _digitalAddressController.text,
+                                          );
+                                          if (isSubmited) {
+                                            Fluttertoast.showToast(
+                                                msg:
+                                                    "House Uploaded successfully",
+                                                toastLength: Toast.LENGTH_SHORT,
+                                                gravity: ToastGravity.BOTTOM,
+                                                timeInSecForIosWeb: 1,
+                                                backgroundColor:
+                                                    const Color.fromARGB(
+                                                        255, 94, 196, 97),
+                                                textColor: Colors.white,
+                                                fontSize: 16.0);
+
+                                            Navigator.of(context)
+                                                .pushAndRemoveUntil(
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            DashboardView()),
+                                                    (route) => false);
+                                          } else {
+                                            Fluttertoast.showToast(
+                                                msg: _postManager.message,
+                                                toastLength: Toast.LENGTH_SHORT,
+                                                gravity: ToastGravity.CENTER,
+                                                timeInSecForIosWeb: 1,
+                                                backgroundColor: Colors.red,
+                                                textColor: Colors.white,
+                                                fontSize: 16.0);
+                                          }
+                                        } else {
+                                          // validation failed
+                                          Fluttertoast.showToast(
+                                              msg: " Please Check all fields",
+                                              toastLength: Toast.LENGTH_LONG,
+                                              gravity: ToastGravity.CENTER,
+                                              timeInSecForIosWeb: 1,
+                                              backgroundColor: Color.fromARGB(
+                                                  255, 237, 72, 72),
+                                              textColor: Colors.white,
+                                              fontSize: 16.0);
+                                        }
 
                                         Navigator.of(context).push(
                                             MaterialPageRoute(
                                                 builder: (context) {
                                           return PayDecision(
-                                            price: category == 'Single Room'
-                                                ? 40
-                                                : category == 'Chamber and Hall'
-                                                    ? 60
-                                                    : category == 'Two Bedroom'
-                                                        ? 80
-                                                        : 100,
-                                            premiumPrice: category ==
-                                                    'Single Room'
-                                                ? 80
-                                                : category == 'Chamber and Hall'
-                                                    ? 100
-                                                    : category == 'Two Bedroom'
-                                                        ? 140
-                                                        : 180,
+                                            price: category == 'Hostel'
+                                                ? 30
+                                                : category == 'Single Room'
+                                                    ? 40
+                                                    : category ==
+                                                            'Chamber and Hall'
+                                                        ? 60
+                                                        : category ==
+                                                                'Two Bedroom'
+                                                            ? 80
+                                                            : 100,
                                           );
                                         }));
                                       },
@@ -684,116 +828,10 @@ class _AddImageState extends State<AddImage> {
                                             fontSize: 15.sp,
                                             color: Colors.white,
                                           )),
-                                    ))
-
-                                //     SizedBox(
-                                //   width: MediaQuery.of(context).size.width,
-                                //   child: isLoading
-                                //       ? const Center(
-                                //           child: CircularProgressIndicator
-                                //               .adaptive(),
-                                //         )
-                                //       : TextButton(
-                                //           onPressed: () async {
-                                //             if (_formKey.currentState!
-                                //                 .validate()) {
-                                //               setState(() {
-                                //                 isLoading = true;
-                                //               });
-                                //               bool isSubmited =
-                                //                   await _postManager.submitPost(
-                                //                 postImage: _image,
-                                //                 category:
-                                //                     dropdownValue.toString(),
-                                //                 type:
-                                //                     dropdownValueType.toString(),
-                                //                 electricity:
-                                //                     dropdownValueElectricity
-                                //                         .toString(),
-                                //                 waterAvailability:
-                                //                     dropdownValueWaterAvailability
-                                //                         .toString(),
-                                //                 price: _priceController.text,
-                                //                 size: _sizeController.text,
-                                //                 region: dropdownValueRegion
-                                //                     .toString(),
-                                //                 citytown: _cityController.text,
-                                //                 houseNumber:
-                                //                     _houseNumberController.text,
-                                //                 washroom: dropdownValueWashRoom
-                                //                     .toString(),
-                                //                 storeRoom: dropdownValueStoreRoom
-                                //                     .toString(),
-                                //                 porch:
-                                //                     dropdownValuePorch.toString(),
-                                //                 walledHouse:
-                                //                     dropdownValueWaledHouse
-                                //                         .toString(),
-                                //                 kitchen: dropdownValueKitchen
-                                //                     .toString(),
-                                //                 tiled: dropdownValueTiledHouse
-                                //                     .toString(),
-                                //                 digitalAddress:
-                                //                     _digitalAddressController
-                                //                         .text,
-                                //               );
-                                //               if (isSubmited) {
-                                //                 Fluttertoast.showToast(
-                                //                     msg:
-                                //                         "House Uploaded successfully",
-                                //                     toastLength:
-                                //                         Toast.LENGTH_SHORT,
-                                //                     gravity: ToastGravity.BOTTOM,
-                                //                     timeInSecForIosWeb: 1,
-                                //                     backgroundColor:
-                                //                         const Color.fromARGB(
-                                //                             255, 94, 196, 97),
-                                //                     textColor: Colors.white,
-                                //                     fontSize: 16.0);
-
-                                //                 Navigator.of(context)
-                                //                     .pushAndRemoveUntil(
-                                //                         MaterialPageRoute(
-                                //                             builder: (context) =>
-                                //                                 DashboardView()),
-                                //                         (route) => false);
-                                //               } else {
-                                //                 Fluttertoast.showToast(
-                                //                     msg: _postManager.message,
-                                //                     toastLength:
-                                //                         Toast.LENGTH_SHORT,
-                                //                     gravity: ToastGravity.CENTER,
-                                //                     timeInSecForIosWeb: 1,
-                                //                     backgroundColor: Colors.red,
-                                //                     textColor: Colors.white,
-                                //                     fontSize: 16.0);
-                                //               }
-                                //             } else {
-                                //               // validation failed
-                                //               Fluttertoast.showToast(
-                                //                   msg: " Please Check all fields",
-                                //                   toastLength: Toast.LENGTH_SHORT,
-                                //                   gravity: ToastGravity.CENTER,
-                                //                   timeInSecForIosWeb: 1,
-                                //                   backgroundColor:
-                                //                       const Color.fromARGB(
-                                //                           255, 94, 196, 97),
-                                //                   textColor: Colors.white,
-                                //                   fontSize: 16.0);
-                                //             }
-                                //           },
-                                //           child: const Text(
-                                //             'Upload',
-                                //             style: TextStyle(color: Colors.white),
-                                //           ),
-                                //           style: TextButton.styleFrom(
-                                //               backgroundColor: Colors.blue),
-                                //         ),
-                                // ),
-                                ),
-                            SizedBox(
-                              height: 100.h,
-                            )
+                                    ))),
+                            // SizedBox(
+                            //   height: .h,
+                            // )
                           ],
                         ),
                       ],

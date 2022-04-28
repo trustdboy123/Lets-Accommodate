@@ -9,10 +9,9 @@ import 'momo_payment_view.dart';
 class PayDecision extends StatelessWidget {
   // ignore: prefer_typing_uninitialized_variables
   double price;
-  double premiumPrice;
+  //double premiumPrice;
 
-  PayDecision({Key? key, required this.price, required this.premiumPrice})
-      : super(key: key);
+  PayDecision({Key? key, required this.price}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

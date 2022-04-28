@@ -232,35 +232,36 @@ class PostManager with ChangeNotifier {
   }
 
   //update room info
-  Future<bool> updateRoomDetails(
-      {required String docID,
-      String? kitchen,
-      String? washroom,
-      String? storeRoom,
-      String? walledHouse,
-      String? tiled,
-      String? porch,
-      String? electricity,
-      String? waterAvailability,
-      String? price,
-      String? size,
-      String? region,
-      String? citytown,
-      String? digitalAddress,
-      String? houseNumber}) async {
+  Future<bool> updateRoomDetails({
+    required String docID,
+    // String? kitchen,
+    // String? washroom,
+    // String? storeRoom,
+    // String? walledHouse,
+    // String? tiled,
+    // String? porch,
+    // String? electricity,
+    // String? waterAvailability,
+    String? price,
+    // String? size,
+    // String? region,
+    // String? citytown,
+    // String? digitalAddress,
+    //String? houseNumber
+  }) async {
     Map<String, dynamic> data = <String, dynamic>{
-      "porch": porch,
-      "washroom": washroom,
-      "store Room": storeRoom,
-      "walled House": walledHouse,
-      "tiled": tiled,
-      "electricity": electricity,
-      "water Availability": waterAvailability,
-      "kitchen": kitchen,
-      "digital Address": digitalAddress,
+      // "porch": porch,
+      // "washroom": washroom,
+      // "store Room": storeRoom,
+      // "walled House": walledHouse,
+      // "tiled": tiled,
+      // "electricity": electricity,
+      // "water Availability": waterAvailability,
+      // "kitchen": kitchen,
+      // "digital Address": digitalAddress,
       "price": price,
-      "size": size,
-      "house Number": houseNumber,
+      // "size": size,
+      // "house Number": houseNumber,
     };
     bool isUpdated = false;
     await _uploadsCollection.doc(docID).update(data).then((value) {

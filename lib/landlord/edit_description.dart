@@ -279,6 +279,7 @@ class _EditDescription extends State<EditDescription> {
                                           'Flat',
                                           'Compound House',
                                           'Self Contained',
+                                          'Hostel'
                                         ].map<DropdownMenuItem<String>>(
                                             (String value) {
                                           return DropdownMenuItem<String>(
@@ -830,37 +831,37 @@ class _EditDescription extends State<EditDescription> {
                                                           await _postManager
                                                               .updateRoomDetails(
                                                         docID: widget.docId,
-                                                        electricity:
-                                                            dropdownValueElectricity
-                                                                .toString(),
-                                                        waterAvailability:
-                                                            dropdownValueWaterAvailability
-                                                                .toString(),
+                                                        // electricity:
+                                                        //     dropdownValueElectricity
+                                                        //         .toString(),
+                                                        // waterAvailability:
+                                                        //     dropdownValueWaterAvailability
+                                                        //         .toString(),
                                                         price: price.toString(),
-                                                        size: size.toString(),
-                                                        houseNumber:
-                                                            hn.toString(),
-                                                        washroom:
-                                                            dropdownValueWashRoom
-                                                                .toString(),
-                                                        storeRoom:
-                                                            dropdownValueStoreRoom
-                                                                .toString(),
-                                                        porch:
-                                                            dropdownValuePorch
-                                                                .toString(),
-                                                        walledHouse:
-                                                            dropdownValueWaledHouse
-                                                                .toString(),
-                                                        kitchen:
-                                                            dropdownValueKitchen
-                                                                .toString(),
-                                                        tiled:
-                                                            dropdownValueTiledHouse
-                                                                .toString(),
-                                                        digitalAddress:
-                                                            digitalAddress
-                                                                .toString(),
+                                                        //size: size.toString(),
+                                                        // houseNumber:
+                                                        //     hn.toString(),
+                                                        // washroom:
+                                                        //     dropdownValueWashRoom
+                                                        //         .toString(),
+                                                        // storeRoom:
+                                                        //     dropdownValueStoreRoom
+                                                        //         .toString(),
+                                                        // porch:
+                                                        //     dropdownValuePorch
+                                                        //         .toString(),
+                                                        // walledHouse:
+                                                        //     dropdownValueWaledHouse
+                                                        //         .toString(),
+                                                        // kitchen:
+                                                        //     dropdownValueKitchen
+                                                        //         .toString(),
+                                                        // tiled:
+                                                        //     dropdownValueTiledHouse
+                                                        //         .toString(),
+                                                        // digitalAddress:
+                                                        //     digitalAddress
+                                                        //         .toString(),
                                                       );
                                                       if (isUpadted) {
                                                         Navigator.of(context)
