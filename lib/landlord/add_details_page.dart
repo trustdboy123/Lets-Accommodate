@@ -24,14 +24,14 @@ class _AddImageState extends State<AddImage> {
   String dropdownValue = 'Select option';
 
   String dropdownValueType = 'Select option';
-  String dropdownValueKitchen = 'Unavailable';
-  String dropdownValueWashRoom = 'Unavailable';
-  String dropdownValueStoreRoom = 'Unavailable';
-  String dropdownValuePorch = 'Unavailable';
-  String dropdownValueWaledHouse = 'Unavailable';
-  String dropdownValueTiledHouse = 'Unavailable';
-  String dropdownValueElectricity = 'Unavailable';
-  String dropdownValueWaterAvailability = 'Unavailable';
+  String dropdownValueKitchen = 'Select option';
+  String dropdownValueWashRoom = 'Select option';
+  String dropdownValueStoreRoom = 'Select option';
+  String dropdownValuePorch = 'Select option';
+  String dropdownValueWaledHouse = 'Select option';
+  String dropdownValueTiledHouse = 'Select option';
+  String dropdownValueElectricity = 'Select option';
+  String dropdownValueWaterAvailability = 'Select option';
   final TextEditingController _priceController = TextEditingController();
   final TextEditingController _sizeController = TextEditingController();
   String dropdownValueRegion = 'Select option';
@@ -770,9 +770,8 @@ class _AddImageState extends State<AddImage> {
                                                 toastLength: Toast.LENGTH_SHORT,
                                                 gravity: ToastGravity.BOTTOM,
                                                 timeInSecForIosWeb: 1,
-                                                backgroundColor:
-                                                    const Color.fromARGB(
-                                                        255, 94, 196, 97),
+                                                backgroundColor: Color.fromARGB(
+                                                    255, 89, 93, 89),
                                                 textColor: Colors.white,
                                                 fontSize: 16.0);
 
@@ -788,7 +787,8 @@ class _AddImageState extends State<AddImage> {
                                                 toastLength: Toast.LENGTH_SHORT,
                                                 gravity: ToastGravity.CENTER,
                                                 timeInSecForIosWeb: 1,
-                                                backgroundColor: Colors.red,
+                                                backgroundColor: Color.fromARGB(
+                                                    255, 85, 82, 82),
                                                 textColor: Colors.white,
                                                 fontSize: 16.0);
                                           }
@@ -800,7 +800,7 @@ class _AddImageState extends State<AddImage> {
                                               gravity: ToastGravity.CENTER,
                                               timeInSecForIosWeb: 1,
                                               backgroundColor: Color.fromARGB(
-                                                  255, 237, 72, 72),
+                                                  255, 99, 95, 95),
                                               textColor: Colors.white,
                                               fontSize: 16.0);
                                         }
@@ -830,7 +830,7 @@ class _AddImageState extends State<AddImage> {
                                           )),
                                     ))),
                             // SizedBox(
-                            //   height: .h,
+                            //   height: 20.h,
                             // )
                           ],
                         ),

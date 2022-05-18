@@ -70,7 +70,7 @@ class AuthManager with ChangeNotifier {
       }
     }).catchError((onError) {
       setMesage('$onError');
-    }).timeout(const Duration(seconds: 60), onTimeout: () {
+    }).timeout(const Duration(seconds: 45), onTimeout: () {
       setMesage('Check your internet connection');
       isCreated;
 
@@ -183,6 +183,7 @@ class AuthManager with ChangeNotifier {
           "uid": userCredential.user!.uid
         });
         isCreated = true;
+        await userCredential.user!.sendEmailVerification();
       } else {
         setMesage('Image Upload failed');
         isCreated = false;
@@ -191,7 +192,7 @@ class AuthManager with ChangeNotifier {
     }).catchError((onError) {
       setMesage('$onError');
       setIsLoading(false);
-    }).timeout(const Duration(seconds: 60), onTimeout: () {
+    }).timeout(const Duration(seconds: 45), onTimeout: () {
       setMesage('Check your internet connection');
       isCreated;
       setIsLoading(false);

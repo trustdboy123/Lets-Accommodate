@@ -149,7 +149,7 @@ class _LoginLandlordState extends State<LoginLandlord> {
                                 gravity: ToastGravity.BOTTOM,
                                 timeInSecForIosWeb: 1,
                                 backgroundColor:
-                                    Color.fromARGB(255, 94, 196, 97),
+                                    Color.fromARGB(255, 95, 96, 95),
                                 textColor: Colors.white,
                                 fontSize: 16.0);
 
@@ -164,7 +164,8 @@ class _LoginLandlordState extends State<LoginLandlord> {
                                 toastLength: Toast.LENGTH_SHORT,
                                 gravity: ToastGravity.BOTTOM,
                                 timeInSecForIosWeb: 1,
-                                backgroundColor: Colors.red,
+                                backgroundColor:
+                                    Color.fromARGB(255, 92, 91, 91),
                                 textColor: Colors.white,
                                 fontSize: 16.0);
                           }
@@ -174,7 +175,7 @@ class _LoginLandlordState extends State<LoginLandlord> {
                               toastLength: Toast.LENGTH_SHORT,
                               gravity: ToastGravity.BOTTOM,
                               timeInSecForIosWeb: 1,
-                              backgroundColor: Colors.red,
+                              backgroundColor: Color.fromARGB(255, 85, 83, 83),
                               textColor: Colors.white,
                               fontSize: 16.0);
                         }

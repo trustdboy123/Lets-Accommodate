@@ -160,6 +160,17 @@ class _LoginTenantState extends State<LoginTenant> {
                                   MaterialPageRoute(
                                       builder: (_) => IndexView()),
                                   (route) => false);
+                            }
+                            if (isSuccessful) {
+                              Fluttertoast.showToast(
+                                  msg: "Welcome back to Lets Accommodate",
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  gravity: ToastGravity.BOTTOM,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor:
+                                      Color.fromARGB(255, 95, 96, 95),
+                                  textColor: Colors.white,
+                                  fontSize: 16.0);
                             } else {
                               //failure
                               Fluttertoast.showToast(
@@ -167,7 +178,8 @@ class _LoginTenantState extends State<LoginTenant> {
                                   toastLength: Toast.LENGTH_SHORT,
                                   gravity: ToastGravity.BOTTOM,
                                   timeInSecForIosWeb: 1,
-                                  backgroundColor: Colors.red,
+                                  backgroundColor:
+                                      Color.fromARGB(255, 81, 80, 80),
                                   textColor: Colors.white,
                                   fontSize: 16.0);
                             }
@@ -177,7 +189,8 @@ class _LoginTenantState extends State<LoginTenant> {
                                 toastLength: Toast.LENGTH_SHORT,
                                 gravity: ToastGravity.BOTTOM,
                                 timeInSecForIosWeb: 1,
-                                backgroundColor: Colors.red,
+                                backgroundColor:
+                                    Color.fromARGB(255, 92, 90, 90),
                                 textColor: Colors.white,
                                 fontSize: 16.0);
                           }

@@ -26,7 +26,7 @@ class Decision extends StatelessWidget {
                 height: 80.h,
               ),
               Text(
-                'Let\'s get started',
+                'LET\'S GET STARTED',
                 style: TextStyle(
                     fontSize: 30.sp,
                     fontWeight: FontWeight.w600,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lets_accommodate/auth/decision.dart';
 import 'package:lets_accommodate/auth/login_tenant.dart';
 
 import 'package:lets_accommodate/landlord/landlord_dashboard.dart';
@@ -117,7 +118,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
                             Navigator.of(context).pushAndRemoveUntil(
                                 MaterialPageRoute(
-                                    builder: (context) => DashboardView()),
+                                    builder: (context) => Decision()),
                                 (route) => false);
                           } else {
                             //failure
